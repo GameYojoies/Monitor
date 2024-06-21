@@ -6,23 +6,33 @@ import { useState } from "react";
 const SolarEnergyFlow = () => {
     const [count, setCount] = useState("Load");
     const [textHead, setTextHead] = useState("Load");
+    const [colorText, setColorText] = useState("#E9F0FC");
 
   const handleClick = (position) => {
     setCount(position)
     if(position === 'Inverter'){
         setTextHead('Output active power')
+        setColorText("#FF9F9F")
     }
     if(position === 'PV'){
         setTextHead('Photovoltaic power')
+        setColorText("#F2CD97")
+
     }
     if(position === 'Load'){
         setTextHead(position)
+        setColorText("#E9F0FC")
+
     }
     if(position === 'Grid'){
         setTextHead(position)
+        setColorText("#D496FB")
+
     }
     if(position === 'Battery'){
         setTextHead(position)
+        setColorText("#00C6C6")
+
     }
   };
   return (
@@ -46,9 +56,9 @@ const SolarEnergyFlow = () => {
           </div>
         </div>
         <div className="h-2"></div>
-        <div className="w-full flex flex-col lg:flex-row h-full">
+        <div className="w-[100%] flex flex-col lg:flex-row h-[auto] m-auto">
           <div className="h-auto lg:h-[] w-full lg:w-[50%] relative">
-            <img src={icons2} alt="" className="w-[100%] h-[100%]" />
+            <img src={icons2} alt="" className="w-[100%] h-[650px] m-auto" />
             {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
             <div
               className="h-[30%] w-48 absolute top-1/2 left-0 right-0 transform -translate-y-1/2 mx-auto"
@@ -74,10 +84,10 @@ const SolarEnergyFlow = () => {
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
-          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[] rounded-md shadow-lg">
+          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md shadow-lg">
             <div className="h-4"></div>
-            <div className="w-[90%] m-auto h-16 flex items-center bg-[#E9F0FC] justify-between shadow-md">
-              <span className="ml-5 font-bold">{textHead}</span>
+            <div className={`w-[90%] m-auto h-16 flex items-center bg-[${colorText}] justify-between shadow-md`}>
+            <span className="ml-5 font-bold text-4xl	">{textHead}</span>
               <div className="mr-5 font-bold">
                 <span className="text-base mr-2">0</span>
                 <span className="text-base">w</span>

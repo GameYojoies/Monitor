@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import icons3 from '../images/Monitor/monitorIcon3.png'
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
+import { toast } from 'react-toastify';
 
 
 const SolarPowerChart = () => {
@@ -89,23 +90,35 @@ const SolarPowerChart = () => {
           'Authorization': 'Bearer ' + getAccessToken
         }
       });
-      const pvPowerGenerations = response.data.result.map(data => data.pvPowerGeneration);
-      const currentPv = response.data.result.map(data => data.currentLoadPower);
-      const allHours = response.data.records
+      console.log()
 
-      let collectHours = []
-      for (let i = 1; i <= allHours; i++){
-        collectHours.push(i)
+      const getData = response.data
+
+      if (getData.code == 0) {
+
+        const pvPowerGenerations = response.data.result.map(data => data.pvPowerGeneration);
+        const currentPv = response.data.result.map(data => data.currentLoadPower);
+        const allHours = response.data.records
+
+        let collectHours = []
+        for (let i = 1; i <= allHours; i++) {
+          collectHours.push(i)
+        }
+
+        setHour(collectHours)
+        setPvPower(pvPowerGenerations);
+        setCurrentPv(currentPv)
+        console.log(pvPowerGenerations, currentPv, collectHours);
+        
+      } else {
+
+        toast.error(getData.code)
       }
 
-      setHour(collectHours)
-      setPvPower(pvPowerGenerations);
-      setCurrentPv(currentPv)
-      console.log(pv,currentPv,hour);
+    } catch (err) {
 
-    } catch (error) {
-
-      console.log(error);
+      console.log("err:", err)
+      toast.error(err.response?.data.message)
     }
 
   }
