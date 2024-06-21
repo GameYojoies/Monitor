@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react"
+import {Link} from "react-router-dom"
 
 function Header() {
   return (
@@ -20,9 +21,12 @@ function Header() {
           <button className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
             Change Language
           </button>
-          <button className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
-            Logout
-          </button>
+
+          <Link to="/login">
+            <button className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
+              Logout
+            </button>
+          </Link>
         </div>
       </header>
     </>

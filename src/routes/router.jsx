@@ -1,16 +1,21 @@
 /** @format */
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
 import Layout from "../layouts/layout"
 import MonitorPage from "../pages/monitorPage"
 import ReportPage from "../pages/report"
 import NotificationPage from "../pages/notification"
 import UserPage from "../pages/user"
+import LoginPage from "../pages/loginPage"
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     path: "/",
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/monitor" />,
+      },
       {
         path: "/monitor",
         element: <MonitorPage />,
@@ -28,6 +33,11 @@ const router = createBrowserRouter([
         element: <UserPage />,
       },
     ],
+  },
+
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
 ])
 
