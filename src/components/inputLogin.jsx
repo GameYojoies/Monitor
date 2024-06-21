@@ -1,6 +1,13 @@
 /** @format */
 
-export default function InputLogin({src, name, placeholder}) {
+export default function InputLogin({
+  src,
+  name,
+  placeholder,
+  onChange,
+  value,
+  type,
+}) {
   return (
     <>
       <div className="border-[1px] border-[#0072D6] w-3/4 h-[50px] rounded-xl flex items-center gap-2 overflow-hidden">
@@ -13,10 +20,12 @@ export default function InputLogin({src, name, placeholder}) {
 
         <input
           id={name}
-          type="text"
+          type={type ? type : "text"}
           name={name}
           className="w-full h-full focus:outline-none"
           placeholder={placeholder}
+          onChange={onChange}
+          value={value}
         />
       </div>
     </>
