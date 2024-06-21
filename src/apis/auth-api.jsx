@@ -12,3 +12,5 @@ export const login = async (credentials) => {
     throw error
   }
 }
+
+export const getMe = () => axios.get("/v1/account/profile")
