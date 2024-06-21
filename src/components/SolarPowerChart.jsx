@@ -2,16 +2,23 @@
 import ReactECharts from 'echarts-for-react';
 import icons1 from '../images/Monitor/monitorIcon1.png'
 import icons2 from '../images/Monitor/monitorIcon2.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import icons3 from '../images/Monitor/monitorIcon3.png'
+import axios from 'axios';
+import { getAccessToken } from '../utils/local-storage';
 
 
 const SolarPowerChart = () => {
 
   const [select, setSelect] = useState("select1")
 
+  const [currentPv, setCurrentPv] = useState([])
+  const [pvPower, setPvPower] = useState([])
+  const [hour, setHour] = useState([])
+
   const handleSelect = (e) => {
     setSelect(e)
+    getAPI()
   }
 
   // content 1
@@ -39,7 +46,7 @@ const SolarPowerChart = () => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      data: hour,
       splitLine: {  // เพิ่มเส้นกริดทั้งแนวนอน
         show: true,
         lineStyle: {
@@ -59,17 +66,54 @@ const SolarPowerChart = () => {
         type: 'line',
         stack: null,
         color: '#23D37F',
-        data: [120, 132, 101, 134, 90, 230, 210, 232, 122, 123, 231, 433, 146, 221]
+        data: currentPv
       },
       {
         name: 'PV power on the day',
         type: 'line',
         stack: null,
         color: '#F6841B',
-        data: [220, 182, 191, 234, 290, 330, 310, 231, 144, 221, 196, 132, 141, 212]
+        data: pvPower
       }
     ]
   };
+
+  const getAPI = async () => {
+
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `${import.meta.env.VITE_API_TEST}/reportData/powerChart?devicePn=402A8FD7707C&type=20&year=2024&month=06`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + getAccessToken
+        }
+      });
+      const pvPowerGenerations = response.data.result.map(data => data.pvPowerGeneration);
+      const currentPv = response.data.result.map(data => data.currentLoadPower);
+      const allHours = response.data.records
+
+      let collectHours = []
+      for (let i = 1; i <= allHours; i++){
+        collectHours.push(i)
+      }
+
+      setHour(collectHours)
+      setPvPower(pvPowerGenerations);
+      setCurrentPv(currentPv)
+      console.log(pv,currentPv,hour);
+
+    } catch (error) {
+
+      console.log(error);
+    }
+
+  }
+
+  useEffect(() => {
+    getAPI()
+
+  }, [])
 
 
 
@@ -175,7 +219,7 @@ const SolarPowerChart = () => {
               </div>
             </div>
 
-            <div className="relative w-40 h-40">
+            {/* <div className="relative w-40 h-40">
               <svg className="w-full h-full" viewBox="0 0 100 100">
 
                 <circle
@@ -202,7 +246,7 @@ const SolarPowerChart = () => {
                 <text x="50" y="50" font-size="14" text-anchor="middle" alignment-baseline="middle" className='font-bold'>70%</text>
 
               </svg>
-            </div>
+            </div> */}
 
 
 
