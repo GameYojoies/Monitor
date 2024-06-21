@@ -5,8 +5,8 @@ import { getAccessToken } from "../utils/local-storage";
 
 const MyDevice = () => {
   const [deviceOptions, setDeviceOptions] = useState([]);
-  const [selectedDeviceId, setSelectedDeviceId] = useState("");
   const token = getAccessToken();
+  const [selectedDeviceId, setSelectedDeviceId] = useState('');
   const axiosInstance = axios.create({
     baseURL: "http://18.143.194.72/solar/v1",
     headers: {
@@ -36,10 +36,6 @@ const MyDevice = () => {
     fetchDeviceOptions();
   }, []);
 
-  const handleDeviceChange = (e) => {
-    setSelectedDeviceId(e.target.value);
-  };
-
   return (
     <div className="py-2">
       <div className="flex flex-col md:flex-row items-center justify-between">
@@ -55,15 +51,11 @@ const MyDevice = () => {
                   id="device"
                   className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
                   style={{ backgroundImage: "none" }}
-                  onChange={handleDeviceChange}
-                  value={selectedDeviceId}
+                    onChange={(e) => setSelectedDeviceId(e.target.value)}
                 >
+                  
                   {deviceOptions.map((device) => (
-                    <option
-                      className="text-black"
-                      key={device.id}
-                      value={device.id}
-                    >
+                    <option className="text-black" key={device.id} value={device.id}>
                       {device.name}
                     </option>
                   ))}
@@ -79,9 +71,7 @@ const MyDevice = () => {
                 {/* Displaying PN (part number) */}
                 <span className="text-xl">
                   {deviceOptions.length > 0 &&
-                    deviceOptions.find(
-                      (device) => device.id === selectedDeviceId
-                    )?.pn}
+                    deviceOptions.find((device) => device.id === selectedDeviceId)?.pn}
                 </span>
               </div>
             </div>
@@ -97,9 +87,8 @@ const MyDevice = () => {
             className="w-[24px] h-[24px] mb-4 md:mb-0"
           />
           <div className="text-sm">
-            {deviceOptions.length > 0 &&
-              deviceOptions.find((device) => device.id === selectedDeviceId)
-                ?.address}
+            159/190 M.5 North Pattaya Rd., Naklua Sub-district, Banglamung
+            District, Chonburi 20150
           </div>
         </div>
       </div>
