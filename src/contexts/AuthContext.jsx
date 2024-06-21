@@ -16,6 +16,7 @@ export default function AuthContextProvider({children}) {
     getAccessToken() ? true : null
   )
   // console.log("authenticateUser", authenticateUser)
+  console.log("getAccessToken", getAccessToken)
 
   useEffect(() => {
     const fetchAuthUser = async () => {
@@ -27,9 +28,8 @@ export default function AuthContextProvider({children}) {
         removeAccessToken()
       }
     }
-    console.log("true----------")
+    console.log("getAccessToken", getAccessToken())
     if (getAccessToken()) {
-      console.log("getAccessToken", getAccessToken())
       fetchAuthUser()
     }
   }, [])
