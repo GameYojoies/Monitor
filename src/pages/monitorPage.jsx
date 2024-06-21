@@ -1,6 +1,7 @@
 
 import SolarPowerChart from "../components/SolarPowerChart";
 
+import Device from "../components/Device";
 import MyDevice from "../components/MyDevice";
 export default function MonitorPage() {
 
@@ -8,6 +9,7 @@ export default function MonitorPage() {
     <div className="w-full">
   
       <MyDevice />
+    <Device/>
       <SolarPowerChart />
     </div>
   );
