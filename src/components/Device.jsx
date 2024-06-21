@@ -37,7 +37,7 @@ const Device = () => {
       ))}
 
       {showPopup && selectedDevice && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-40">
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <h2 className="text-lg font-semibold">{selectedDevice.name} Detail</h2>
             <p>Additional details or data related to {selectedDevice.name}.</p>

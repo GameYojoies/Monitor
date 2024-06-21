@@ -1,36 +1,44 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import { drop, map } from "../images/Mydevice";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { getAccessToken } from "../utils/local-storage";
+
 const MyDevice = () => {
   const [deviceOptions, setDeviceOptions] = useState([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState("");
   const token = getAccessToken();
   const axiosInstance = axios.create({
-    baseURL: 'http://18.143.194.72/solar/v1',  // เปลี่ยนตาม URL ของ API ที่ต้องการใช้
+    baseURL: "http://18.143.194.72/solar/v1",
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
+
   useEffect(() => {
     const fetchDeviceOptions = async () => {
       try {
-        const response = await axiosInstance.get('/solarDevice');
-        console.log('Data:', response.data);
+        const response = await axiosInstance.get("/solarDevice");
+        console.log("Data:", response.data);
 
-        if (Array.isArray(response.data)) {
-          setDeviceOptions(response.data);
-          console.log(response.data);
+        if (response.data && Array.isArray(response.data.result)) {
+          setDeviceOptions(response.data.result);
         } else {
-          console.error('Expected an array from API, but received:', response.data);
+          console.error(
+            "Expected an array from API, but received:",
+            response.data
+          );
         }
       } catch (error) {
-        console.error('Error fetching device options:', error);
+        console.error("Error fetching device options:", error);
       }
     };
 
     fetchDeviceOptions();
   }, []);
+
+  const handleDeviceChange = (e) => {
+    setSelectedDeviceId(e.target.value);
+  };
 
   return (
     <div className="py-2">
@@ -47,13 +55,20 @@ const MyDevice = () => {
                   id="device"
                   className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
                   style={{ backgroundImage: "none" }}
+                  onChange={handleDeviceChange}
+                  value={selectedDeviceId}
                 >
-                  {deviceOptions.map(device => (
-                    <option key={device.id} value={device.id}>
+                  {deviceOptions.map((device) => (
+                    <option
+                      className="text-black"
+                      key={device.id}
+                      value={device.id}
+                    >
                       {device.name}
                     </option>
                   ))}
                 </select>
+                {/* Assuming 'drop' is an imported image */}
                 <span className="absolute top-3 flex items-center right-0 pointer-events-none">
                   <img className="w-[24px]" src={drop} alt="Dropdown Icon" />
                 </span>
@@ -61,7 +76,13 @@ const MyDevice = () => {
               <div className="border-r-2 border-gray-300 h-12"></div>
               <div className="flex flex-col w-[170px]">
                 <label className="font-semibold text-xs">Device's PN</label>
-                <span className="text-xl">A1234567890888</span>
+                {/* Displaying PN (part number) */}
+                <span className="text-xl">
+                  {deviceOptions.length > 0 &&
+                    deviceOptions.find(
+                      (device) => device.id === selectedDeviceId
+                    )?.pn}
+                </span>
               </div>
             </div>
           </div>
@@ -69,9 +90,16 @@ const MyDevice = () => {
 
         {/* Box 2 */}
         <div className="w-full md:w-1/4 bg-white p-4 gap-1 flex">
-          <img src={map} alt="Device" className="w-[24px] h-[24px] mb-4 md:mb-0" />
+          {/* Assuming 'map' is an imported image */}
+          <img
+            src={map}
+            alt="Device"
+            className="w-[24px] h-[24px] mb-4 md:mb-0"
+          />
           <div className="text-sm">
-            159/190 M.5 North Pattaya Rd., Naklua Sub-district, Banglamung District, Chonburi 20150
+            {deviceOptions.length > 0 &&
+              deviceOptions.find((device) => device.id === selectedDeviceId)
+                ?.address}
           </div>
         </div>
       </div>
