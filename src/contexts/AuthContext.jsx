@@ -20,15 +20,16 @@ export default function AuthContextProvider({children}) {
   useEffect(() => {
     const fetchAuthUser = async () => {
       try {
-        console.log("--------------------")
         const res = await getMe()
-        console.log("res---", res)
+        console.log("res", res)
         setAuthenticatedUser(res?.data?.result)
       } catch (err) {
         removeAccessToken()
       }
     }
-    if (getAccessToken) {
+    console.log("true----------")
+    if (getAccessToken()) {
+      console.log("getAccessToken", getAccessToken())
       fetchAuthUser()
     }
   }, [])
