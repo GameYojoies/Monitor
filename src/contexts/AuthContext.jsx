@@ -28,8 +28,7 @@ export default function AuthContextProvider({children}) {
         removeAccessToken()
       }
     }
-    console.log("getAccessToken", getAccessToken())
-    if (getAccessToken()) {
+    if (authenticateUser) {
       fetchAuthUser()
     }
   }, [])
