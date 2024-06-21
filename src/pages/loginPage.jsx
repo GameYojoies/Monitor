@@ -3,21 +3,57 @@ import bgLogin from "../images/login/loginBg.png"
 import iconEmail from "../images/login/iconEmail.png"
 import iconPassword from "../images/login/iconPassword.png"
 import InputLogin from "../components/inputLogin"
-import {Link} from "react-router-dom"
+import {Link, Navigate, useNavigate} from "react-router-dom"
 import {useState} from "react"
+import useAuth from "../hook/useAuth"
+import {toast} from "react-toastify"
+import validateLogin from "../validators/validate-login"
 
 export default function LoginPage() {
   const [login, setLogin] = useState({
-    username: "",
+    name: "",
     password: "",
   })
   // console.log("login", login)
+  const [error, setError] = useState({})
+  const navigate = useNavigate()
 
   const handleChangeInput = (e) => {
     setLogin({...login, [e.target.name]: e.target.value})
   }
+
+  const {userLogin, authenticateUser} = useAuth()
+  // console.log("authenticateUser", authenticateUser)
+
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault()
+
+      const name = login.name
+      const password = login.password
+
+      const result = validateLogin(login)
+      if (result) {
+        setError(result)
+      } else {
+        setError({})
+        await userLogin(name, password)
+        toast.success("login success")
+      }
+
+      setLogin({
+        name: "",
+        password: "",
+      })
+      navigate("/")
+    } catch (err) {
+      console.log("err:", err)
+      toast.error(err.response?.data.message)
+    }
+  }
+
   return (
-    <div className="w-full">
+    <div className="w-full h-[950px]">
       <div className="relative z-0 w-full h-full">
         <img
           src={bgLogin}
@@ -28,7 +64,8 @@ export default function LoginPage() {
       <div className="absolute z-1 w-full h-full top-0 flex items-center justify-center">
         <form
           className="bg-white w-[500px] flex flex-col items-center rounded-2xl gap-4"
-          action="#">
+          action="#"
+          onSubmit={handleSubmitForm}>
           <div>
             <p className="text-[#001647] font-bold text-4xl mt-8">
               <span className="text-[#F4A344]">SOLAR</span> MONITOR
@@ -37,10 +74,11 @@ export default function LoginPage() {
 
           <InputLogin
             src={iconEmail}
-            name="username"
+            name="name"
             placeholder="Usernam, or email"
             onChange={handleChangeInput}
-            value={login.username}
+            value={login.name}
+            error={error.name}
           />
           <InputLogin
             src={iconPassword}
@@ -49,6 +87,7 @@ export default function LoginPage() {
             placeholder="Enter your password"
             onChange={handleChangeInput}
             value={login.password}
+            error={error.password}
           />
 
           <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
@@ -57,7 +96,7 @@ export default function LoginPage() {
             </button>
 
             <Link
-              to="/monitor"
+              to="/"
               className="w-full flex items-center justify-center">
               <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
                 Visit Monitor Demo

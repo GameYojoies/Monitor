@@ -7,6 +7,7 @@ export default function InputLogin({
   onChange,
   value,
   type,
+  error,
 }) {
   return (
     <>
@@ -28,6 +29,10 @@ export default function InputLogin({
           value={value}
         />
       </div>
+
+      {error && (
+        <div className="text-red-600 text-[12px] border-2">{error}</div>
+      )}
     </>
   )
 }

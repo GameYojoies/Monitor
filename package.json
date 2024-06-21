@@ -10,15 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^1.7.2",
-    "joi": "^17.13.3",
-=======
     "echarts-for-react": "^3.0.2",
->>>>>>> d0bca617646b1f64b549c747720d0fff7dd61030
+    "joi": "^17.13.3",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
