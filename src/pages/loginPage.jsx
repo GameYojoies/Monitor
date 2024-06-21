@@ -3,11 +3,10 @@ import bgLogin from "../images/login/loginBg.png"
 import iconEmail from "../images/login/iconEmail.png"
 import iconPassword from "../images/login/iconPassword.png"
 import InputLogin from "../components/inputLogin"
-import {Link, Navigate, useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {useState} from "react"
 import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
-import validateLogin from "../validators/validate-login"
 
 export default function LoginPage() {
   const [login, setLogin] = useState({
@@ -15,7 +14,6 @@ export default function LoginPage() {
     password: "",
   })
   // console.log("login", login)
-  const [error, setError] = useState({})
   const navigate = useNavigate()
 
   const handleChangeInput = (e) => {
@@ -32,14 +30,8 @@ export default function LoginPage() {
       const name = login.name
       const password = login.password
 
-      const result = validateLogin(login)
-      if (result) {
-        setError(result)
-      } else {
-        setError({})
-        await userLogin(name, password)
-        toast.success("login success")
-      }
+      await userLogin(name, password)
+      toast.success("login success")
 
       setLogin({
         name: "",
@@ -78,7 +70,6 @@ export default function LoginPage() {
             placeholder="Usernam, or email"
             onChange={handleChangeInput}
             value={login.name}
-            error={error.name}
           />
           <InputLogin
             src={iconPassword}
@@ -87,7 +78,6 @@ export default function LoginPage() {
             placeholder="Enter your password"
             onChange={handleChangeInput}
             value={login.password}
-            error={error.password}
           />
 
           <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
