@@ -2,11 +2,19 @@
 import ReactECharts from 'echarts-for-react';
 import icons1 from '../images/Monitor/monitorIcon1.png'
 import icons2 from '../images/Monitor/monitorIcon2.png'
-// import icons3  from '../images/Monitor/monitorIcon3.png'
+import { useState } from 'react';
+import icons3 from '../images/Monitor/monitorIcon3.png'
 
 
 const SolarPowerChart = () => {
 
+  const [select, setSelect] = useState("select1")
+
+  const handleSelect = (e) => {
+    setSelect(e)
+  }
+
+  // content 1
   const option = {
     // title: {
     //   text: 'Stacked Line'
@@ -64,6 +72,7 @@ const SolarPowerChart = () => {
   };
 
 
+
   return (
     <div className="w-full flex justify-center mt-10">
       <div className="w-[95%] flex justify-between">
@@ -106,11 +115,98 @@ const SolarPowerChart = () => {
         </div>
 
         {/* content bill */}
-        <div>
+        <div className='flex flex-col items-center'>
 
           <div className='flex items-center gap-2'>
             <img src={icons2} alt="" className='h-[40px]' />
             <h1 className='text-[#001647] font-semibold text-2xl'>Earn Pofit Energy Bill</h1>
+          </div>
+
+          <div className='mt-8'>
+
+            <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[250px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
+              <div
+                onClick={() => handleSelect("select1")}
+                className={`w-[33.33%] h-[100%] flex items-center justify-center border-r-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
+              >
+                <span>Total</span>
+              </div>
+              <div
+                onClick={() => handleSelect("select2")}
+                className={`w-[33.33%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
+              >
+                <span>Day</span>
+              </div>
+              <div
+                onClick={() => handleSelect("select3")}
+                className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
+              >
+                <span>Month</span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div className='flex flex-col justify-center gap-2 mt-5'>
+
+            <div className='h-[1px] w-[200px] border-b-2 border-[#4F6785]'></div>
+            <div className='flex justify-center items-center gap-3'>
+              <img src={icons3} alt="" className='h-[25px]' />
+              <span> 22 June, 2024  </span>
+            </div>
+            <div className='h-[1px] w-[200px] border-b-2 border-[#4F6785]'></div>
+
+          </div>
+
+          <div className='text-lg flex flex-col items-center mt-5 w-[300px] h-[300px] shadow-lg rounded-xl gap-2'>
+            <div className='w-[90%] flex justify-between pt-2'>
+              <span>Unit</span>
+              <div>
+                <span className='font-semibold'>2639.1</span>
+                <span>kWh</span>
+              </div>
+            </div>
+            <div className='w-[90%] flex justify-between'>
+              <span>Save</span>
+              <div>
+                <span className='font-semibold'>7999.9</span>
+                <span>THB</span>
+              </div>
+            </div>
+
+            <div className="relative w-40 h-40">
+              <svg className="w-full h-full" viewBox="0 0 100 100">
+
+                <circle
+                  className="text-[#D3F7E6] stroke-current"
+                  stroke-width="15"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  fill="transparent"
+                ></circle>
+
+                <circle
+                  className="text-[#23D37F]  progress-ring__circle stroke-current"
+                  stroke-width="15"
+                  stroke-linecap="round"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  fill="transparent"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="calc(251.2 - (251.2 * 72) / 100)"
+                ></circle>
+
+                <text x="50" y="50" font-size="14" text-anchor="middle" alignment-baseline="middle" className='font-bold'>70%</text>
+
+              </svg>
+            </div>
+
+
+
+
           </div>
 
         </div>
