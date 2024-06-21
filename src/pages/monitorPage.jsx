@@ -6,7 +6,7 @@ export default function MonitorPage() {
 
   return (
     <div className="w-full">
-      <p>MonitorPage</p>
+  
       <MyDevice />
       <SolarPowerChart />
     </div>
