@@ -2,6 +2,7 @@
 
 import React, {useState} from "react"
 import Sidebar from "./components/Sidebar"
+import LoginPage from "./pages/loginPage"
 
 function App() {
   const [activeLink, setActiveLink] = useState("Monitor")
@@ -12,6 +13,8 @@ function App() {
 
   const renderContent = () => {
     switch (activeLink) {
+      case "Login":
+        return <LoginPage />
       case "Monitor":
         return <div className="p-4">This is the Monitor page.</div>
       case "Report":
