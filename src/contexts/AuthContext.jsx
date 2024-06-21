@@ -15,11 +15,12 @@ export default function AuthContextProvider({children}) {
   const [authenticateUser, setAuthenticatedUser] = useState(
     getAccessToken() ? true : null
   )
-
+  // console.log("authenticateUser", authenticateUser)
   const userLogin = async (name, password) => {
     const res = await login({name, password})
     // console.log("res", res)
     setAccessToken(res.result.token)
+    setAuthenticatedUser(res.result.token)
   }
 
   const logout = () => {

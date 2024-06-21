@@ -1,9 +1,13 @@
 /** @format */
 
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import useAuth from "../hook/useAuth"
 
 function Header() {
+  const navigate = useNavigate()
+  const {logout, authenticateUser} = useAuth()
+  
   return (
     <>
       <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
@@ -22,11 +26,13 @@ function Header() {
             Change Language
           </button>
 
-          <Link to="/login">
-            <button className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
-              Logout
-            </button>
-          </Link>
+          <button
+            onClick={() => {
+              logout()
+            }}
+            className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
+            Logout
+          </button>
         </div>
       </header>
     </>

@@ -6,6 +6,7 @@ import ReportPage from "../pages/report"
 import NotificationPage from "../pages/notification"
 import UserPage from "../pages/user"
 import LoginPage from "../pages/loginPage"
+import ProtectedRout from "../utils/protectedRout"
 
 const router = createBrowserRouter([
   {
@@ -18,19 +19,36 @@ const router = createBrowserRouter([
       },
       {
         path: "/monitor",
-        element: <MonitorPage />,
+
+        element: (
+          <ProtectedRout>
+            <MonitorPage />
+          </ProtectedRout>
+        ),
       },
       {
         path: "/report",
-        element: <ReportPage />,
+        element: (
+          <ProtectedRout>
+            <ReportPage />
+          </ProtectedRout>
+        ),
       },
       {
         path: "/notification",
-        element: <NotificationPage />,
+        element: (
+          <ProtectedRout>
+            <NotificationPage />
+          </ProtectedRout>
+        ),
       },
       {
         path: "/user",
-        element: <UserPage />,
+        element: (
+          <ProtectedRout>
+            <UserPage />
+          </ProtectedRout>
+        ),
       },
     ],
   },
