@@ -10,8 +10,8 @@ export default function MonitorPage() {
   return (
     <div className="w-full">
       <MyDevice />
-      <SolarEnergyFlow />
       <Device/>
+      <SolarEnergyFlow />
       <SolarPowerChart />
     </div>
   );
