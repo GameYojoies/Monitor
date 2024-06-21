@@ -1,5 +1,8 @@
 
 import ReactECharts from 'echarts-for-react';
+import icons1 from '../images/Monitor/monitorIcon1.png'
+import icons2 from '../images/Monitor/monitorIcon2.png'
+// import icons3  from '../images/Monitor/monitorIcon3.png'
 
 
 const SolarPowerChart = () => {
@@ -65,14 +68,18 @@ const SolarPowerChart = () => {
     <div className="w-full flex justify-center mt-10">
       <div className="w-[95%] flex justify-between">
 
+        {/* content graph */}
         <div className="w-[70%] flex flex-col">
-          <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
+          <div className='flex items-center gap-2'>
+            <img src={icons1} alt="" className='h-[40px]' />
+            <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
+          </div>
 
           {/* <div className='mt-20'>
 
           </div> */}
 
-          <div className='flex gap-2 p-2 items-center shadow-lg rounded-xl h-[400px] w-[100%] mt-10'>
+          <div className='flex gap-2 p-2 items-center justify-center shadow-lg rounded-xl h-[400px] w-[100%] mt-10'>
 
             <div className='flex items-center h-[400px] w-[77%] relative'>
 
@@ -98,8 +105,13 @@ const SolarPowerChart = () => {
 
         </div>
 
+        {/* content bill */}
         <div>
-          <h1>Earn Pofit Energy Bill</h1>
+
+          <div className='flex items-center gap-2'>
+            <img src={icons2} alt="" className='h-[40px]' />
+            <h1 className='text-[#001647] font-semibold text-2xl'>Earn Pofit Energy Bill</h1>
+          </div>
 
         </div>
       </div>
