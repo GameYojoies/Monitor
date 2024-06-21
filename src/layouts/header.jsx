@@ -1,13 +1,13 @@
 /** @format */
 
-import React from "react"
-import {Link, useNavigate} from "react-router-dom"
-import useAuth from "../hook/useAuth"
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hook/useAuth";
 
 function Header() {
-  const navigate = useNavigate()
-  const {logout, authenticateUser} = useAuth()
-  console.log("authenticateUser", authenticateUser)
+  const navigate = useNavigate();
+  const { logout, authenticateUser } = useAuth();
+  console.log("authenticateUser", authenticateUser);
 
   return (
     <>
@@ -29,15 +29,16 @@ function Header() {
 
           <button
             onClick={() => {
-              logout()
+              logout();
             }}
-            className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded">
+            className="ml-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded"
+          >
             Logout
           </button>
         </div>
       </header>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

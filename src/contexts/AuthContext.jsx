@@ -1,49 +1,53 @@
 /** @format */
 
-import {createContext, useEffect, useState} from "react"
-import {login, getMe} from "../apis/auth-api"
+import { createContext, useEffect, useState } from "react";
+import { login, getMe } from "../apis/auth-api";
 
 import {
-  getAccessToken,
   removeAccessToken,
   setAccessToken,
-} from "../utils/local-storage"
+  getAccessToken,
+} from "../utils/local-storage";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
-export default function AuthContextProvider({children}) {
+export default function AuthContextProvider({ children }) {
   const [authenticateUser, setAuthenticatedUser] = useState(
     getAccessToken() ? true : null
-  )
-  // console.log("authenticateUser", authenticateUser)
-  console.log("getAccessToken", getAccessToken)
+  );
+  // console.log("authenticateUser", authenticateUser);
 
   useEffect(() => {
     const fetchAuthUser = async () => {
       try {
-        const res = await getMe()
-        console.log("res", res)
-        setAuthenticatedUser(res?.data?.result)
+        const res = await getMe();
+        console.log("fetchAuthUser: success", res.data.result);
+        setAuthenticatedUser(res.data.result);
       } catch (err) {
-        removeAccessToken()
+        console.log("fetchAuthUser: error", err);
+        removeAccessToken();
       }
-    }
+    };
+
     if (getAccessToken()) {
-      fetchAuthUser()
+      console.log("=== true ===");
+      fetchAuthUser();
+    } else {
+      console.log("=== false ===");
     }
-  }, [])
+  }, []);
 
   const userLogin = async (name, password) => {
-    const res = await login({name, password})
+    const res = await login({ name, password });
     // console.log("res", res)
-    setAccessToken(res.result.token)
-    setAuthenticatedUser(res.result.token)
-  }
+    setAccessToken(res?.result?.token);
+    setAuthenticatedUser(res?.result?.token);
+  };
 
   const logout = () => {
-    removeAccessToken()
-    setAuthenticatedUser(null)
-  }
+    removeAccessToken();
+    setAuthenticatedUser(null);
+  };
 
   return (
     <AuthContext.Provider
@@ -51,8 +55,9 @@ export default function AuthContextProvider({children}) {
         authenticateUser,
         userLogin,
         logout,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
