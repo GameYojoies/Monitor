@@ -23,6 +23,8 @@ export default function AuthContextProvider({children}) {
 
   const [selecteLanguage, setSelecteLanguage] = useState("EN")
 
+  
+  const [dataFlow, setDataFlow] = useState(null);
   useEffect(() => {
     const fetchAuthUser = async () => {
       try {
@@ -69,6 +71,7 @@ export default function AuthContextProvider({children}) {
         logout,
         userLoginCode,
         selecteLanguage,
+        dataFlow, setDataFlow,
         setSelecteLanguage,
       }}>
       {children}
