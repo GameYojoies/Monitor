@@ -12,43 +12,58 @@ import useAuth from "../hook/useAuth";
 const SolarEnergyFlow = () => {
   const [count, setCount] = useState("Load");
   const [textHead, setTextHead] = useState("Load");
-  const [colorText, setColorText] = useState("#E9F0FC");
+  const [colorText, setColorText] = useState(3);
   const [data, setData] = useState(null);
-  const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [error, setError] = useState(null);
   const token = getAccessToken();
+  const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
+  const [devicePn, setDevicePn] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=402A8FD7707C&date=2024-06-22&page=1&limit=10`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-        setData(response.data.result[0]);
-      } catch (error) {
-        setError(error);
-      }
+    const fetchData = async (date, pin) => {
+        try {
+            if (pin == null) {
+                setDevicePn(null);
+            } else {
+                setDevicePn(pin.devicePn);
+            }
+
+            const response = await axios.get(
+                `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=${
+                    pin ? pin.devicePn : ''
+                }&date=${date}&page=1&limit=10`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            if(response.data.result != null){
+              setData(response.data.result[0]);
+
+            }else{
+              setData(0);
+
+            }
+            console.log(response,'response');
+        } catch (error) {
+            setError(error);
+        }
     };
 
-    fetchData();
-  }, [token]); // Include any 
+    if (solarDate && token) {
+        fetchData(solarDate, pin);
+    }
+}, [solarDate, token, pin]);
+
 
   useEffect(() => {
     if (data) {
-      console.log(data, "data after setData");
-      console.log(solarDate, "get Data");
-      console.log(pin, "get pin");
     }
-  }, [data, solarDate,pin]);
+  }, [data, solarDate, pin]);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
   }
   const handleClick = (position) => {
     setCount(position);
@@ -120,25 +135,30 @@ const SolarEnergyFlow = () => {
               onClick={() => handleClick("Battery")}
             ></div>
             <div className="absolute bottom-48 left-[15%] font-bold text-2xl text-[#133261]">
-              <span>{ dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;<span>A</span>
+              <span>{dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;
+              <span>A</span>
             </div>
             <div className="absolute bottom-[180px] right-[14%] font-bold text-2xl text-[#133261]">
-              <span>{ dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
+              <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
             </div>
             <div className="absolute top-40 right-[15%] font-bold text-2xl text-[#133261]">
-              <span>{ dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
+              <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
             </div>
             <div className="absolute top-40 left-[13%] font-bold text-2xl text-[#133261]">
-              <span>{ dataFlow?.outputActivePower || 0}</span>&nbsp;<span>W</span>
+              <span>{dataFlow?.outputActivePower || 0}</span>&nbsp;
+              <span>W</span>
             </div>
             <div className=" pointer-events-none absolute top-[45%] left-0 right-0 transform -translate-y-1/2 mx-auto font-bold text-2xl text-[#133261] flex justify-center">
-              <span>{ dataFlow?.currentLoadPower || 0}</span>&nbsp;<span>W</span>
+              <span>{dataFlow?.currentLoadPower || 0}</span>&nbsp;<span>W</span>
             </div>
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
-          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md" style={{ boxShadow: '2px 2px 15px 0px #00000026' }}>
-          <div className="h-10"></div>
+          <div
+            className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md"
+            style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
+          >
+            <div className="h-10"></div>
             <div
               className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
                 colorText === 1
@@ -156,20 +176,25 @@ const SolarEnergyFlow = () => {
                 {textHead}
               </span>
               <div className="mr-5 font-bold">
-                <span className="text-base mr-2"> {count === "Load" ? (dataFlow?.currentLoadPower || 0) : count === "PV" ? (dataFlow?.powerCharging || 0) : count === "Inverter" ? (dataFlow?.outputActivePower || 0) : count === "Grid" ? (dataFlow?.gridFrequency || 0) : count === "Battery" ? (dataFlow?.batteryDischargeCurrent || 0) : null}</span>
+                <span className="text-base mr-2">
+                  {" "}
+                  {count === "Load"
+                    ? dataFlow?.currentLoadPower || 0
+                    : count === "PV"
+                    ? dataFlow?.powerCharging || 0
+                    : count === "Inverter"
+                    ? dataFlow?.outputActivePower || 0
+                    : count === "Grid"
+                    ? dataFlow?.gridFrequency || 0
+                    : count === "Battery"
+                    ? dataFlow?.batteryDischargeCurrent || 0
+                    : null}
+                </span>
                 <span className="text-base">w</span>
               </div>
             </div>
             <div className="h-2"></div>
-            <PopupFlow count={count}  data={data}/>
-            {/* <div className='w-[90%] m-auto h-16 flex items-center  justify-between '>
-        <span className='ml-5 '>Load percentage</span>
-        <div className='mr-5'>
-          <span className='text-base mr-5'>0</span>
-          <span className='text-base text-[#A6A6A6]'>%</span>
-        </div>
-    
-      </div> */}
+            <PopupFlow count={count} data={data} />
           </div>
         </div>
       </div>
