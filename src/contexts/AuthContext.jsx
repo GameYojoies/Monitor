@@ -26,9 +26,6 @@ export default function AuthContextProvider({children}) {
   const [dataFlow, setDataFlow] = useState(null)
 
   useEffect(() => {
-    const token = getAccessToken()
-    console.log("token inside useEffect:", token)
-
     const fetchAuthUser = async () => {
       try {
         const res = await getMe()
@@ -48,9 +45,17 @@ export default function AuthContextProvider({children}) {
     const res = await login({name, password})
     // console.log("res", res)
     const token = res?.data.result?.token
+    // console.log("token", token)
+    const code = res?.data.code
+    // console.log("code:", code)
+
+    if (code === 4010) {
+      throw new Error(`Mobile or password not correct: ${code}`)
+    }
+
     setAccessToken(token)
     setAuthenticatedUser(token)
-    setUserLoginCode(res?.data?.code)
+    setUserLoginCode(code)
     setFetch(true)
   }
 
@@ -78,8 +83,8 @@ export default function AuthContextProvider({children}) {
         pin,
         setPin,
         solarDate,
+        setAuthenticatedUser,
         setSolarDate,
-     
       }}>
       {children}
     </AuthContext.Provider>

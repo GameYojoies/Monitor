@@ -11,6 +11,7 @@ import iconLogout from "../images/header/iconLogout.png"
 import iconThailand from "../images/header/TH - Thailand.png"
 import iconEng from "../images/header/US - United States.png"
 import ModalLang from "../components/modalLang"
+import {getAccessToken, removeAccessToken} from "../utils/local-storage"
 
 function Header() {
   const languageData = [
