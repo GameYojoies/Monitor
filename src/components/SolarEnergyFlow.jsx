@@ -6,27 +6,38 @@ import icons2 from "../images/Monitor/energyFlow.png";
 import PopupFlow from "./popupFlow/popupFlow";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getAccessToken } from "../utils/local-storage";
+import useAuth from "../hook/useAuth";
 
 const SolarEnergyFlow = () => {
   const [count, setCount] = useState("Load");
   const [textHead, setTextHead] = useState("Load");
   const [colorText, setColorText] = useState("#E9F0FC");
   const [data, setData] = useState(null);
+  const { dataFlow, setDataFlow } = useAuth();
   const [error, setError] = useState(null);
-   
+  const token = getAccessToken();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=402A8FD7707C&date=2024-06-22&page=1&limit=10`
+          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=402A8FD7707C&date=2024-06-22&page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
         setData(response.data.result[0]);
       } catch (error) {
         setError(error);
       }
     };
+
     fetchData();
-  }, []);
+  }, [token]); // Include any 
 
   useEffect(() => {
     if (data) {
@@ -41,23 +52,23 @@ const SolarEnergyFlow = () => {
     setCount(position);
     if (position === "Inverter") {
       setTextHead("Output active power");
-      setColorText("#FF9F9F");
+      setColorText(1);
     }
     if (position === "PV") {
       setTextHead("Photovoltaic power");
-      setColorText("#F2CD97");
+      setColorText(2);
     }
     if (position === "Load") {
       setTextHead(position);
-      setColorText("#E9F0FC");
+      setColorText(3);
     }
     if (position === "Grid") {
       setTextHead(position);
-      setColorText("#D496FB");
+      setColorText(4);
     }
     if (position === "Battery") {
       setTextHead(position);
-      setColorText("#00C6C6");
+      setColorText(5);
     }
   };
   return (
@@ -107,33 +118,43 @@ const SolarEnergyFlow = () => {
               onClick={() => handleClick("Battery")}
             ></div>
             <div className="absolute bottom-48 left-[15%] font-bold text-2xl text-[#133261]">
-              <span>0</span>&nbsp;<span>A</span>
+              <span>{ dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;<span>A</span>
             </div>
-            <div className="absolute bottom-[180px] right-[12%] font-bold text-2xl text-[#133261]">
-              <span>0</span>&nbsp;<span>Hz</span>
+            <div className="absolute bottom-[180px] right-[14%] font-bold text-2xl text-[#133261]">
+              <span>{ dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
             </div>
             <div className="absolute top-40 right-[15%] font-bold text-2xl text-[#133261]">
-              <span>0</span>&nbsp;<span>W</span>
+              <span>{ dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
             </div>
             <div className="absolute top-40 left-[13%] font-bold text-2xl text-[#133261]">
-              <span>0</span>&nbsp;<span>W</span>
+              <span>{ dataFlow?.outputActivePower || 0}</span>&nbsp;<span>W</span>
             </div>
             <div className=" pointer-events-none absolute top-[45%] left-0 right-0 transform -translate-y-1/2 mx-auto font-bold text-2xl text-[#133261] flex justify-center">
-              <span>0</span>&nbsp;<span>W</span>
+              <span>{ dataFlow?.currentLoadPower || 0}</span>&nbsp;<span>W</span>
             </div>
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
-          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md shadow-lg">
-            <div className="h-4"></div>
+          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md" style={{ boxShadow: '2px 2px 15px 0px #00000026' }}>
+          <div className="h-10"></div>
             <div
-              className={`w-[90%] m-auto h-16 flex items-center bg-[${colorText}] justify-between shadow-md`}
+              className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
+                colorText === 1
+                  ? "bg-[#F2CD97]"
+                  : colorText === 2
+                  ? "bg-[#FF9F9F]"
+                  : colorText === 3
+                  ? "bg-[#E9F0FC]"
+                  : colorText === 4
+                  ? "bg-[#D496FB]"
+                  : "bg-[#00C6C6]"
+              } justify-between shadow-md`}
             >
               <span className="ml-5 font-bold text-4xl text-[#133261]	">
                 {textHead}
               </span>
               <div className="mr-5 font-bold">
-                <span className="text-base mr-2">0</span>
+                <span className="text-base mr-2"> {count === "Load" ? (dataFlow?.currentLoadPower || 0) : count === "PV" ? (dataFlow?.powerCharging || 0) : count === "Inverter" ? (dataFlow?.outputActivePower || 0) : count === "Grid" ? (dataFlow?.gridFrequency || 0) : count === "Battery" ? (dataFlow?.batteryDischargeCurrent || 0) : null}</span>
                 <span className="text-base">w</span>
               </div>
             </div>

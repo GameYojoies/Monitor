@@ -2,7 +2,6 @@
 
 import { createContext, useEffect, useState } from "react";
 import { login, getMe } from "../apis/auth-api";
-
 import {
   removeAccessToken,
   setAccessToken,
@@ -15,8 +14,7 @@ export default function AuthContextProvider({ children }) {
   const [authenticateUser, setAuthenticatedUser] = useState(
     getAccessToken() ? true : null
   );
-  // console.log("authenticateUser", authenticateUser);
-
+  const [dataFlow, setDataFlow] = useState(null);
   useEffect(() => {
     const fetchAuthUser = async () => {
       try {
@@ -55,6 +53,7 @@ export default function AuthContextProvider({ children }) {
         authenticateUser,
         userLogin,
         logout,
+        dataFlow, setDataFlow
       }}
     >
       {children}
