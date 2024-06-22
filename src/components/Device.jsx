@@ -8,11 +8,9 @@ import useAuth from "../hook/useAuth";
 const Device = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [data, setData] = useState(null);
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
-
-  const { fetch, setFetch,setPin } = useAuth();
+  const { fetch, setFetch,setPin,dataFlow ,setDataFlow} = useAuth();
   console.log(fetch);
 
   const fetchData = async () => {
@@ -23,7 +21,7 @@ const Device = () => {
           "Content-Type": "application/json",
         },
       });
-      setData(response.data.result);
+      setDataFlow(response.data.result);
       setFetch(false); // Reset fetch state
       setPin(response.data.result? response.data.result : null)
       
@@ -42,23 +40,23 @@ const Device = () => {
     {
       id: 1,
       name: "Load",
-      power: data ? data.currentLoadPower + " W" : "0"+ " W" ,
+      power: dataFlow ? dataFlow.currentLoadPower + " W" : "0"+ " W" ,
       image: load,
     },
     {
       id: 2,
       name: "Inverter",
-      power: data ? data.outputActivePower + " W" : "0"+ " W" ,
+      power: dataFlow ? dataFlow.outputActivePower + " W" : "0"+ " W" ,
       image: inverter,
     },
-    { id: 3, name: "PV", power: data ? data.powerCharging + " W" : "0"+ " W" , image: pv },
+    { id: 3, name: "PV", power: dataFlow ? dataFlow.powerCharging + " W" : "0"+ " W" , image: pv },
     {
       id: 4,
       name: "Battery",
-      power: data ? data.batteryDischargeCurrent + " A" : "0"+ " A",
+      power: dataFlow ? dataFlow.batteryDischargeCurrent + " A" : "0"+ " A",
       image: battery,
     },
-    { id: 5, name: "Grid", power: data ? data.gridFrequency + " Hz" : "0"+ " Hz" , image: grid },
+    { id: 5, name: "Grid", power: dataFlow ? dataFlow.gridFrequency + " Hz" : "0"+ " Hz" , image: grid },
   ];
 
   const togglePopup = (device) => {
@@ -105,7 +103,7 @@ const Device = () => {
                 <span className="block text-center">{device.power}</span>
                 <div className="border-t-2  w-[60px]">
                   <span className="block text-center">
-                    {data ? data.batteryCapacity + " %" : "0"+ " %"}
+                    {dataFlow ? dataFlow.batteryCapacity + " %" : "0"+ " %"}
                   </span>
                 </div>
               </div>

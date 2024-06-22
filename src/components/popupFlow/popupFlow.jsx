@@ -1,6 +1,6 @@
 import React from "react";
 const PopupFlow = ({ count, data }) => {
-  console.log(count, data);
+  console.log(data,"data");
   return (
     <>
       <div>
