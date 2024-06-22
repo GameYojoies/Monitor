@@ -61,7 +61,7 @@ export default function LoginPage() {
     setSelecteLanguage,
   } = useAuth()
 
-  console.log("userLoginCode", userLoginCode)
+  // console.log("userLoginCode", userLoginCode)
 
   const handleSubmitForm = async (e) => {
     try {
