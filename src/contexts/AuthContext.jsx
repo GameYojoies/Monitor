@@ -45,9 +45,17 @@ export default function AuthContextProvider({children}) {
     const res = await login({name, password})
     // console.log("res", res)
     const token = res?.data.result?.token
+    // console.log("token", token)
+    const code = res?.data.code
+    // console.log("code:", code)
+
+    if (code !== 0) {
+      throw new Error(`Login failed with code: ${code}`)
+    }
+
     setAccessToken(token)
     setAuthenticatedUser(token)
-    setUserLoginCode(res?.data?.code)
+    setUserLoginCode(code)
     setFetch(true)
   }
 

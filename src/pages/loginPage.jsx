@@ -72,24 +72,15 @@ export default function LoginPage() {
 
       await userLogin(name, password)
 
-      if (userLoginCode === 4010) {
-        toast.error("Mobile or password not correct")
-      } else {
-        navigate("/")
-
-        toast.success("login Success")
-
-        setLogin({
-          name: "",
-          password: "",
-        })
-      }
-
-      // toast.success("login Success")
-      // navigate("/")
+      toast.success("Login Success")
+      setLogin({
+        name: "",
+        password: "",
+      })
+      navigate("/")
     } catch (err) {
       console.log("err:", err)
-      toast.error(err)
+      toast.error("Login failed. Please check your credentials and try again.")
     }
   }
 
