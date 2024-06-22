@@ -52,23 +52,23 @@ const SolarEnergyFlow = () => {
     setCount(position);
     if (position === "Inverter") {
       setTextHead("Output active power");
-      setColorText("#FF9F9F");
+      setColorText(1);
     }
     if (position === "PV") {
       setTextHead("Photovoltaic power");
-      setColorText("#F2CD97");
+      setColorText(2);
     }
     if (position === "Load") {
       setTextHead(position);
-      setColorText("#E9F0FC");
+      setColorText(3);
     }
     if (position === "Grid") {
       setTextHead(position);
-      setColorText("#D496FB");
+      setColorText(4);
     }
     if (position === "Battery") {
       setTextHead(position);
-      setColorText("#00C6C6");
+      setColorText(5);
     }
   };
   return (
@@ -135,16 +135,26 @@ const SolarEnergyFlow = () => {
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
-          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md shadow-lg">
-            <div className="h-4"></div>
+          <div className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md" style={{ boxShadow: '2px 2px 15px 0px #00000026' }}>
+          <div className="h-10"></div>
             <div
-              className={`w-[90%] m-auto h-16 flex items-center bg-[${colorText}] justify-between shadow-md`}
+              className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
+                colorText === 1
+                  ? "bg-[#F2CD97]"
+                  : colorText === 2
+                  ? "bg-[#FF9F9F]"
+                  : colorText === 3
+                  ? "bg-[#E9F0FC]"
+                  : colorText === 4
+                  ? "bg-[#D496FB]"
+                  : "bg-[#00C6C6]"
+              } justify-between shadow-md`}
             >
               <span className="ml-5 font-bold text-4xl text-[#133261]	">
                 {textHead}
               </span>
               <div className="mr-5 font-bold">
-                <span className="text-base mr-2">0</span>
+                <span className="text-base mr-2"> {count === "Load" ? (dataFlow?.currentLoadPower || 0) : count === "PV" ? (dataFlow?.powerCharging || 0) : count === "Inverter" ? (dataFlow?.outputActivePower || 0) : count === "Grid" ? (dataFlow?.gridFrequency || 0) : count === "Battery" ? (dataFlow?.batteryDischargeCurrent || 0) : null}</span>
                 <span className="text-base">w</span>
               </div>
             </div>
