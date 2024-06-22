@@ -1,9 +1,7 @@
-
 import ReactECharts from 'echarts-for-react';
-import icons1 from '../images/Monitor/monitorIcon1.png'
-import icons2 from '../images/Monitor/monitorIcon2.png'
+import icons1 from '../images/Monitor/monitorIcon1.png';
+import icons2 from '../images/Monitor/monitorIcon2.png';
 import { useEffect, useState } from 'react';
-import icons3 from '../images/Monitor/monitorIcon3.png'
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -11,24 +9,28 @@ import { toast } from 'react-toastify';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
-
+import { TextField } from '@mui/material';
 
 const SolarPowerChart = () => {
-
-
   const [select, setSelect] = useState("select1");
   const [currentPv, setCurrentPv] = useState([]);
   const [pvPower, setPvPower] = useState([]);
   const [hour, setHour] = useState([]);
   const [allDay, setAllDay] = useState("");
-
+  const [selectdate, setSelectdate] = useState("");
+  const [selectmonth, setSelectmonth] = useState("");
+  const [selectyear, setSelectyear] = useState("");
 
   useEffect(() => {
     if (select === 'select1') {
       setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=40");
+    } else if (select === "select2") {
+      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${selectdate}`);
+
+    } else if (select == 'select3') {
+      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=20&${selectmonth}`);
     } else {
-      // setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=20&year=2024&month=06");
+      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=30&${selectyear}`);
     }
   }, [select]);
 
@@ -58,12 +60,10 @@ const SolarPowerChart = () => {
         setHour(collectHours);
         setPvPower(pvPowerGenerations);
         setCurrentPv(currentPv);
-        console.log(pvPowerGenerations, currentPv, collectHours);
       } else {
         toast.error(getData.code);
       }
     } catch (err) {
-      console.log("err:", err);
       toast.error(err.response?.data.message);
     }
   };
@@ -76,15 +76,24 @@ const SolarPowerChart = () => {
     setSelect(e);
   };
 
+  // select tap events date
   const handleSelectDate = (e) => {
-    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${e.$y}-${(e.$M + 1) <= 10 ? "0" + (e.$M + 1) : (e.$M + 1)}-${e.$D <= 10 ? "0" + e.$D : e.$D}`);
-  
-  }
+    const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
+    setSelectdate(date);
+    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${date}`);
+  };
 
-  const handleSelectMonth= (e) => {
-    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=20&year=${e.$y}&month=${(e.$M + 1) <= 10? "0" + (e.$M + 1) : (e.$M + 1)}`);
+  const handleSelectMonth = (e) => {
+    const month = `year=${e.$y}&month=${(e.$M + 1).toString().padStart(2, '0')}`;
+    setSelectmonth(month);
+    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=20&${month}`);
+  };
 
-  }
+  const handleSelectYear = (e) => {
+    const year = `year=${e.$y}`;
+    setSelectyear(year);
+    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=30&${year}`);
+  };
 
   const option = {
     tooltip: {
@@ -130,26 +139,70 @@ const SolarPowerChart = () => {
     ]
   };
 
-
   return (
-    <div className="w-full flex justify-center mt-10">
+    <div className="w-full flex justify-center mt-10 mb-10">
       <div className="w-[95%] flex justify-between">
-
-        {/* content graph */}
         <div className="w-[70%] flex flex-col">
           <div className='flex items-center gap-2'>
             <img src={icons1} alt="" className='h-[40px]' />
             <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
           </div>
 
-          {/* <div className='mt-20'>
+          <div className='flex flex-col gap-2 p-2 items-center justify-center shadow-lg rounded-xl h-[500px] w-[100%] mt-10'>
+            <div className='w-[90%] mt-8 flex items-center justify-end gap-4'>
+              <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[350px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
+                <div
+                  onClick={() => handleSelect("select2")}
+                  className={`w-[25%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
+                >
+                  <span>Day</span>
+                </div>
+                <div
+                  onClick={() => handleSelect("select3")}
+                  className={`w-[25%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
+                >
+                  <span>Month</span>
+                </div>
+                <div
+                  onClick={() => handleSelect("select4")}
+                  className={`w-[25%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select4" ? 'bg-[#0072D6] text-white' : ''}`}
+                >
+                  <span>Years</span>
+                </div>
+                <div
+                  onClick={() => handleSelect("select1")}
+                  className={`w-[25%] h-[100%] flex items-center justify-center border-r-2 border-l-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
+                >
+                  <span>Total</span>
+                </div>
+              </div>
 
-          </div> */}
+              <div className='flex flex-col items-center justify-center gap-2 h-[45px]'>
+                <div className='flex justify-center items-center gap-3 w-[200px] h-[45px]'>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {select === "select3" ?
+                      <DatePicker
+                        views={['year', 'month']}
+                        onChange={(newValue) => handleSelectMonth(newValue)}
+                        renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                      /> :
+                      select === "select4" ?
+                        <DatePicker
+                          views={['year']}
+                          onChange={(newValue) => handleSelectYear(newValue)}
+                          renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                        /> :
+                        <DatePicker
+                          onChange={(newValue) => handleSelectDate(newValue)}
+                          renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                        />
+                    }
+                  </LocalizationProvider>
+                </div>
+              </div>
+            </div>
 
-          <div className='flex gap-2 p-2 items-center justify-center shadow-lg rounded-xl h-[400px] w-[100%] mt-10'>
-
-            <div className='flex items-center h-[400px] w-[77%] relative'>
-
+            <div className='mt-6 flex items-center h-[400px] w-[95%] relative'>
               <span className='inline-block transform -rotate-90 absolute left-[-30px]'>Power (kWh)</span>
               <ReactECharts
                 option={option}
@@ -158,71 +211,15 @@ const SolarPowerChart = () => {
                 style={{ height: '95%', width: '100%' }}
                 className='react_for_echarts ml-5'
               />
-              <span className='absolute bottom-8 -right-10'>Time (H)</span>
-
+              <span className='absolute bottom-8 -right-1'>H</span>
             </div>
-
-            <div className='flex flex-col gap-1'>
-              <span>Energy consumption: </span>
-              <span className='font-semibold'>137.23 kWh/Day</span>
-
-            </div>
-
           </div>
-
         </div>
 
-        {/* content bill */}
         <div className='flex flex-col items-center'>
-
           <div className='flex items-center gap-2'>
             <img src={icons2} alt="" className='h-[40px]' />
-            <h1 className='text-[#001647] font-semibold text-2xl'>Earn Pofit Energy Bill</h1>
-          </div>
-
-          <div className='mt-8'>
-
-            <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[250px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
-              <div
-                onClick={() => handleSelect("select1")}
-                className={`w-[33.33%] h-[100%] flex items-center justify-center border-r-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
-              >
-                <span>Total</span>
-              </div>
-              <div
-                onClick={() => handleSelect("select2")}
-                className={`w-[33.33%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
-              >
-                <span>Day</span>
-              </div>
-              <div
-                onClick={() => handleSelect("select3")}
-                className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
-              >
-                <span>Month</span>
-              </div>
-            </div>
-
-          </div>
-
-
-          <div className='flex flex-col items-center justify-center gap-2 mt-5'>
-
-            <div className='h-[1px] w-[250px] border-b-2 border-[#4F6785]'></div>
-            <div className='flex justify-center items-center gap-3 w-[200px]'>
-              {/* <img src={icons3} alt="" className='h-[25px]' />
-              <span> 22 June, 2024  </span> */}
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {select == "select3" ?
-                  <DatePicker views={['month', 'year']} onChange={(newValue) => handleSelectMonth(newValue)} />:
-                  <DatePicker onChange={(newValue) => handleSelectDate(newValue)} /> 
-                }
-              </LocalizationProvider>
-
-
-            </div>
-            <div className='h-[1px] w-[250px] border-b-2 border-[#4F6785]'></div>
-
+            <h1 className='text-[#001647] font-semibold text-2xl'>Earn Profit Energy Bill</h1>
           </div>
 
           <div className='text-lg flex flex-col items-center mt-5 w-[300px] h-[300px] shadow-lg rounded-xl gap-2'>
@@ -240,48 +237,11 @@ const SolarPowerChart = () => {
                 <span>THB</span>
               </div>
             </div>
-
-            {/* <div className="relative w-40 h-40">
-              <svg className="w-full h-full" viewBox="0 0 100 100">
-
-                <circle
-                  className="text-[#D3F7E6] stroke-current"
-                  stroke-width="15"
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  fill="transparent"
-                ></circle>
-
-                <circle
-                  className="text-[#23D37F]  progress-ring__circle stroke-current"
-                  stroke-width="15"
-                  stroke-linecap="round"
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  fill="transparent"
-                  stroke-dasharray="251.2"
-                  stroke-dashoffset="calc(251.2 - (251.2 * 72) / 100)"
-                ></circle>
-
-                <text x="50" y="50" font-size="14" text-anchor="middle" alignment-baseline="middle" className='font-bold'>70%</text>
-
-              </svg>
-            </div> */}
-
-
-
-
-
-
           </div>
-
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default SolarPowerChart
+export default SolarPowerChart;
