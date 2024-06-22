@@ -35,7 +35,7 @@ const SolarPowerChart = () => {
 
   useEffect(() => {
     if (select === 'select1') {
-      setAllDay("/reportData/powerChart?devicePn=${getPin}&type=40");
+      setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=40`);
     } else if (select === "select2") {
       setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=10&date=${selectdate}`);
       setSolarDate(selectdate)
