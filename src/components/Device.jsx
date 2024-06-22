@@ -73,7 +73,7 @@ const Device = () => {
           className="flex flex-col bg-white shadow-md"
         >
           <div
-            className={`rounded-sm text-center cursor-pointer ${
+            className={`rounded-sm  text-center cursor-pointer ${
               device.id === 1
                 ? "bg-green-400"
                 : device.id === 2
