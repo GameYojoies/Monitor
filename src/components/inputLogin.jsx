@@ -8,6 +8,10 @@ export default function InputLogin({
   value,
   type,
   error,
+  iconClose,
+  setOpenPasswrod,
+  openPassword,
+  iconeyeopen,
 }) {
   return (
     <>
@@ -21,13 +25,25 @@ export default function InputLogin({
 
         <input
           id={name}
-          type={type ? type : "text"}
+          type={openPassword ? "text" : type ? type : "text"}
           name={name}
           className="w-full h-full focus:outline-none"
           placeholder={placeholder}
           onChange={onChange}
           value={value}
         />
+
+        {iconClose && (
+          <button
+            type="button"
+            onClick={() => setOpenPasswrod(!openPassword)}
+            className="mr-2">
+            <img
+              src={openPassword === false ? iconClose : iconeyeopen}
+              className="w-[20px]"
+            />
+          </button>
+        )}
       </div>
 
       {error && (

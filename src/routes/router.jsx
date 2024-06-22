@@ -1,16 +1,12 @@
 /** @format */
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
-import Layout from "../layouts/layout";
-import MonitorPage from "../pages/monitorPage";
-import ReportPage from "../pages/report";
-import NotificationPage from "../pages/notification";
-import UserPage from "../pages/user";
-import LoginPage from "../pages/loginPage";
-import ProtectedRout from "../utils/protectedRout";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom"
+import Layout from "../layouts/layout"
+import MonitorPage from "../pages/monitorPage"
+import ReportPage from "../pages/report"
+import NotificationPage from "../pages/notification"
+import UserPage from "../pages/user"
+import LoginPage from "../pages/loginPage"
+import ProtectedRout from "../utils/protectedRout"
 
 const router = createBrowserRouter([
   {
@@ -61,8 +57,8 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-]);
+])
 
 export default function Router() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
