@@ -25,21 +25,21 @@ export default function AuthContextProvider({children}) {
 
   const [dataFlow, setDataFlow] = useState(null)
 
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      try {
-        const res = await getMe()
-        setAuthenticatedUser(res.data.result)
-      } catch (err) {
-        removeAccessToken()
-        setAuthenticatedUser(null)
-      }
+  const fetchAuthUser = async () => {
+    try {
+      const res = await getMe()
+      setAuthenticatedUser(res.data.result)
+    } catch (err) {
+      removeAccessToken()
+      setAuthenticatedUser(null)
     }
+  }
 
+  useEffect(() => {
     if (getAccessToken()) {
       fetchAuthUser()
     }
-  }, [])
+  }, [getAccessToken()])
 
   const userLogin = async (name, password) => {
     const res = await login({name, password})
