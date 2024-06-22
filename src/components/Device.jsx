@@ -3,11 +3,12 @@ import axios from "axios";
 import { inverter, load, grid, pv, battery } from "../images/Mydevice";
 import { getAccessToken } from "../utils/local-storage";
 import useAuth from "../hook/useAuth";
-import useAuth from "../hook/useAuth";
+
 
 const Device = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [data, setData] = useState(null);
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
 
