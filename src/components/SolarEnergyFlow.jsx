@@ -14,7 +14,7 @@ const SolarEnergyFlow = () => {
   const [textHead, setTextHead] = useState("Load");
   const [colorText, setColorText] = useState("#E9F0FC");
   const [data, setData] = useState(null);
-  const { dataFlow, setDataFlow } = useAuth();
+  const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [error, setError] = useState(null);
   const token = getAccessToken();
 
@@ -42,8 +42,10 @@ const SolarEnergyFlow = () => {
   useEffect(() => {
     if (data) {
       console.log(data, "data after setData");
+      console.log(solarDate, "get Data");
+      console.log(pin, "get pin");
     }
-  }, [data]);
+  }, [data, solarDate,pin]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
