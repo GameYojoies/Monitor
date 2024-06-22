@@ -80,7 +80,7 @@ export default function LoginPage() {
       navigate("/")
     } catch (err) {
       console.log("err:", err)
-      toast.error("Login failed. Please check your credentials and try again.")
+      toast.error(err.message)
     }
   }
 
