@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
 import icons1 from '../images/Monitor/monitorIcon1.png';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -11,7 +11,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
 
+
 import EarnProfit from './EarnProfit';
+import useAuth from "../hook/useAuth";
+
 
 const SolarPowerChart = () => {
   const [select, setSelect] = useState("select2");
@@ -26,18 +29,26 @@ const SolarPowerChart = () => {
   const [selectmonth, setSelectmonth] = useState("");
   const [selectyear, setSelectyear] = useState("");
 
+  const {pin, setSolarDate} = useAuth();
+  const getPin = pin? pin.devicePn : "402A8FD7707C"
+
+
   useEffect(() => {
     if (select === 'select1') {
-      setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=40");
+      setAllDay("/reportData/powerChart?devicePn=${getPin}&type=40");
     } else if (select === "select2") {
-      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${selectdate}`);
+      setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=10&date=${selectdate}`);
+      setSolarDate(selectdate)
 
     } else if (select == 'select3') {
-      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=20&${selectmonth}`);
+      setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=20&${selectmonth}`);
     } else {
-      setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=30&${selectyear}`);
+      setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=30&${selectyear}`);
     }
-  }, [select]);
+  
+
+  
+  }, [select, pin]);
 
   const getAPI = async () => {
     try {
@@ -85,19 +96,20 @@ const SolarPowerChart = () => {
   const handleSelectDate = (e) => {
     const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
     setSelectdate(date);
-    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${date}`);
+    setSolarDate(date)
+    setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=10&date=${date}`);
   };
 
   const handleSelectMonth = (e) => {
     const month = `year=${e.$y}&month=${(e.$M + 1).toString().padStart(2, '0')}`;
     setSelectmonth(month);
-    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=20&${month}`);
+    setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=20&${month}`);
   };
 
   const handleSelectYear = (e) => {
     const year = `year=${e.$y}`;
     setSelectyear(year);
-    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=30&${year}`);
+    setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=30&${year}`);
   };
 
   const option = {

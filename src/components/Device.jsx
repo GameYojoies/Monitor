@@ -12,7 +12,7 @@ const Device = () => {
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
 
-  const { fetch, setFetch } = useAuth();
+  const { fetch, setFetch,setPin } = useAuth();
   console.log(fetch);
 
   const fetchData = async () => {
@@ -25,6 +25,8 @@ const Device = () => {
       });
       setData(response.data.result);
       setFetch(false); // Reset fetch state
+      setPin(response.data.result? response.data.result : null)
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -73,7 +75,7 @@ const Device = () => {
           className="flex flex-col bg-white shadow-md"
         >
           <div
-            className={`rounded-sm text-center cursor-pointer ${
+            className={`rounded-sm  text-center cursor-pointer ${
               device.id === 1
                 ? "bg-green-400"
                 : device.id === 2

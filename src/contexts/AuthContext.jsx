@@ -15,6 +15,8 @@ export default function AuthContextProvider({children}) {
     getAccessToken() ? true : null
   )
   const [fetch, setFetch] = useState(false)
+  const [pin, setPin] = useState([])
+  const [solarDate, setSolarDate] = useState()
 
   const [userLoginCode, setUserLoginCode] = useState("")
   // console.log("userLoginCode", userLoginCode)
@@ -73,6 +75,11 @@ export default function AuthContextProvider({children}) {
         fetch,
         setUserLoginCode,
         setFetch,
+        pin,
+        setPin,
+        solarDate,
+        setSolarDate,
+     
       }}>
       {children}
     </AuthContext.Provider>

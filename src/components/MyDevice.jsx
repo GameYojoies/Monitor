@@ -98,7 +98,7 @@ const MyDevice = () => {
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
           <h1 className="text-2xl font-bold text-[#001647]">MyDevice</h1>
-          <div className="bg-[#001647] px-[50px] py-1 rounded-[30px] shadow-md flex items-center text-white relative">
+          <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] px-12 py-1 rounded-[30px] shadow-md flex items-center text-white relative">
             <div className="flex gap-2 items-center">
               <div className="flex flex-col w-[200px] relative">
                 <label className="font-semibold text-xs">Device Name</label>
