@@ -1,6 +1,5 @@
 import ReactECharts from 'echarts-for-react';
 import icons1 from '../images/Monitor/monitorIcon1.png';
-import icons2 from '../images/Monitor/monitorIcon2.png';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
@@ -12,8 +11,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
 
+import EarnProfit from './EarnProfit';
+
 const SolarPowerChart = () => {
-  const [select, setSelect] = useState("select1");
+  const [select, setSelect] = useState("select2");
   const [currentPv, setCurrentPv] = useState([]);
   const [pvPower, setPvPower] = useState([]);
   const [hour, setHour] = useState([]);
@@ -186,6 +187,7 @@ const SolarPowerChart = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     {select === "select3" ?
                       <DatePicker
+                        label={"MM-YYYY"}
                         value={currentDay}
                         views={['month', 'year']}
                         onChange={(newValue) => handleSelectMonth(newValue)}
@@ -193,16 +195,19 @@ const SolarPowerChart = () => {
                       /> :
                       select === "select4" ?
                         <DatePicker
+                          label={"YYYY"}
                           value={currentDay}
                           views={['year']}
                           onChange={(newValue) => handleSelectYear(newValue)}
                           renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                         /> :
-                        <DatePicker
-                          value={currentDay}
-                          onChange={(newValue) => handleSelectDate(newValue)}
-                          renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
-                        />
+                        select === "select2" ?
+                          <DatePicker
+                            label={"MM-DD-YYYY"}
+                            value={currentDay}
+                            onChange={(newValue) => handleSelectDate(newValue)}
+                            renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                          /> : ""
                     }
                   </LocalizationProvider>
                 </div>
@@ -223,29 +228,7 @@ const SolarPowerChart = () => {
           </div>
         </div>
 
-        <div className='flex flex-col items-center'>
-          <div className='flex items-center gap-2'>
-            <img src={icons2} alt="" className='h-[40px]' />
-            <h1 className='text-[#001647] font-semibold text-2xl'>Earn Profit Energy Bill</h1>
-          </div>
-
-          <div className='text-lg flex flex-col items-center mt-5 w-[300px] h-[300px] shadow-lg rounded-xl gap-2'>
-            <div className='w-[90%] flex justify-between pt-2'>
-              <span>Unit</span>
-              <div>
-                <span className='font-semibold'>2639.1</span>
-                <span>kWh</span>
-              </div>
-            </div>
-            <div className='w-[90%] flex justify-between'>
-              <span>Save</span>
-              <div>
-                <span className='font-semibold'>7999.9</span>
-                <span>THB</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <EarnProfit/>
       </div>
     </div>
   );
