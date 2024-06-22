@@ -8,6 +8,10 @@ import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 
 const SolarPowerChart = () => {
@@ -18,13 +22,14 @@ const SolarPowerChart = () => {
   const [pvPower, setPvPower] = useState([]);
   const [hour, setHour] = useState([]);
   const [allDay, setAllDay] = useState("");
+  const [selectDate, setSelectDate] = useState("");
 
-  
+
   useEffect(() => {
     if (select === 'select1') {
       setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=40");
     } else {
-      setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=20&year=2024&month=06");
+      // setAllDay("/reportData/powerChart?devicePn=402A8FD7707C&type=20&year=2024&month=06");
     }
   }, [select]);
 
@@ -71,6 +76,13 @@ const SolarPowerChart = () => {
   const handleSelect = (e) => {
     setSelect(e);
   };
+
+  const handleSelectDate = (e) => {
+    setSelectDate(e);
+    setAllDay(`/reportData/powerChart?devicePn=402A8FD7707C&type=10&date=${e.$y}-${ (e.$M + 1) <= 10? "0" + (e.$M + 1) : (e.$M + 1) }-${e.$D <= 10 ? "0"+e.$D: e.$D}`);
+    console.log(e,e.$D, e.$M, e.$y );
+
+  }
 
   const option = {
     tooltip: {
@@ -196,9 +208,11 @@ const SolarPowerChart = () => {
 
             <div className='h-[1px] w-[200px] border-b-2 border-[#4F6785]'></div>
             <div className='flex justify-center items-center gap-3'>
-              <img src={icons3} alt="" className='h-[25px]' />
-              <span> 22 June, 2024  </span>
-
+              {/* <img src={icons3} alt="" className='h-[25px]' />
+              <span> 22 June, 2024  </span> */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker  onChange={(newValue) => handleSelectDate(newValue)} />
+              </LocalizationProvider>
 
 
 
