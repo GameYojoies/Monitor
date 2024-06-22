@@ -47,7 +47,7 @@ export default function AuthContextProvider({children}) {
     const token = res?.data.result?.token
     // console.log("token", token)
     const code = res?.data.code
-    console.log("code:", code)
+    // console.log("code:", code)
 
     if (code === 4010) {
       throw new Error(`Mobile or password not correct: ${code}`)

@@ -79,7 +79,7 @@ export default function LoginPage() {
       })
       navigate("/")
     } catch (err) {
-      console.log("err:", err)
+      // console.log("err:", err)
       toast.error(err.message)
     }
   }
