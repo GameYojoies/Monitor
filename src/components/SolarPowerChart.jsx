@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
+import dayjs from 'dayjs';
 
 const SolarPowerChart = () => {
   const [select, setSelect] = useState("select1");
@@ -17,7 +18,10 @@ const SolarPowerChart = () => {
   const [pvPower, setPvPower] = useState([]);
   const [hour, setHour] = useState([]);
   const [allDay, setAllDay] = useState("");
-  const [selectdate, setSelectdate] = useState("");
+
+  const [currentDay, setCurrentDay] = useState(dayjs())
+
+  const [selectdate, setSelectdate] = useState(dayjs().format('YYYY-MM-DD'));
   const [selectmonth, setSelectmonth] = useState("");
   const [selectyear, setSelectyear] = useState("");
 
@@ -182,17 +186,20 @@ const SolarPowerChart = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     {select === "select3" ?
                       <DatePicker
-                        views={['year', 'month']}
+                        value={currentDay}
+                        views={['month', 'year']}
                         onChange={(newValue) => handleSelectMonth(newValue)}
                         renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                       /> :
                       select === "select4" ?
                         <DatePicker
+                          value={currentDay}
                           views={['year']}
                           onChange={(newValue) => handleSelectYear(newValue)}
                           renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                         /> :
                         <DatePicker
+                          value={currentDay}
                           onChange={(newValue) => handleSelectDate(newValue)}
                           renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                         />
