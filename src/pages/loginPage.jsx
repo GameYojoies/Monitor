@@ -74,14 +74,14 @@ export default function LoginPage() {
       if (userLoginCode === 4010) {
         toast.error("Mobile or password not correct")
       } else {
+        navigate("/")
+
         toast.success("login Success")
 
         setLogin({
           name: "",
           password: "",
         })
-
-        navigate("/")
       }
 
       // toast.success("login Success")
