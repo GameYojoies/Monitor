@@ -26,9 +26,6 @@ export default function AuthContextProvider({children}) {
   const [dataFlow, setDataFlow] = useState(null)
 
   useEffect(() => {
-    const token = getAccessToken()
-    console.log("token inside useEffect:", token)
-
     const fetchAuthUser = async () => {
       try {
         const res = await getMe()
@@ -78,8 +75,8 @@ export default function AuthContextProvider({children}) {
         pin,
         setPin,
         solarDate,
+        setAuthenticatedUser,
         setSolarDate,
-     
       }}>
       {children}
     </AuthContext.Provider>
