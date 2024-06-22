@@ -2,13 +2,14 @@ import { drop, map } from "../images/Mydevice";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getAccessToken } from "../utils/local-storage";
+import useAuth from "../hook/useAuth";
 
 const MyDevice = () => {
   const [Pn, setPn] = useState(null);
-  const [address, setAddress] = useState(""); // State เก็บที่อยู่ของอุปกรณ์ที่ถูกเลือก
+  const [address, setAddress] = useState(""); 
   const [deviceOptions, setDeviceOptions] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  // box2
+  const { fetch, setFetch } = useAuth();
 
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
@@ -42,14 +43,14 @@ const MyDevice = () => {
 
   const handleDevices = (devices) => {
     setDeviceOptions(devices);
-  
 
     if (devices.length > 0) {
       const mainDevice = devices.find((device) => device.main === true);
       if (mainDevice) {
         setSelectedDevice(mainDevice);
         setPn(mainDevice.pn);
-        setAddress(mainDevice.address); // ตั้งค่าที่อยู่ของอุปกรณ์ที่ถูกเลือก
+        setAddress(mainDevice.address); 
+        setFetch(true);
       }
     }
   };
@@ -59,9 +60,7 @@ const MyDevice = () => {
   };
 
   const handleDeviceSelect = async (deviceId) => {
-  
     let parts = deviceId.split(",");
-
     let part1 = parts[0];
     let part2 = parts[1];
     let part3 = parts[2];
@@ -85,41 +84,18 @@ const MyDevice = () => {
       );
 
       if (response.data.code === 0) {
-        fetchDevices(); // Fetch devices again to get updated data
-        // Call your function to get data monitor
-        // getDataMonitor(); // Uncomment this if you have a function to fetch data monitor
+        setFetch(true); // Fetch devices again to get updated data
       } else {
-        console.error(`Error: ${getStatusCode(response.data.code)}`);
+        console.error(`Error: ${response.data.code}`);
       }
     } catch (error) {
       console.error("Error updating main device:", error);
     }
   };
 
- 
-
-
-  // ฟังก์ชันที่คืนค่าหมายเลขอุปกรณ์ (Device's PN) ที่ถูกเลือก
-  const getSelectedDevicePn = () => {
-    return selectedDevice ? selectedDevice.pn : "No device selected";
-  };
-
-  // ฟังก์ชันที่คืนค่าชื่ออุปกรณ์ที่ถูกเลือก
-  const getSelectedDeviceName = () => {
-    return selectedDevice ? selectedDevice.name : "No device selected";
-  };
-
-  // ฟังก์ชันที่จะใช้สำหรับดึงข้อมูล monitor จากอุปกรณ์ที่ถูกเลือก
-  const getDataMonitor = () => {
-    // Implement the logic to get data monitor here
-  };
-
-; // ตรงนี้ใส่ dep
-
   return (
     <div className="py-2">
       <div className="flex flex-col md:flex-row items-center justify-between">
-        {/* Box 1 */}
         <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
           <h1 className="text-2xl font-bold text-[#001647]">MyDevice</h1>
           <div className="bg-[#001647] px-[50px] py-1 rounded-[30px] shadow-md flex items-center text-white relative">
@@ -157,7 +133,6 @@ const MyDevice = () => {
           </div>
         </div>
 
-        {/* Box 2 */}
         <div className="w-full md:w-1/4 bg-white p-4 gap-1 flex">
           <img
             src={map}
