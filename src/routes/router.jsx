@@ -8,6 +8,7 @@ import UserPage from "../pages/user"
 import LoginPage from "../pages/loginPage"
 import ProtectedRout from "../utils/protectedRout"
 
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -57,8 +58,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-])
+], {
+  basename: import.meta.env.VITE_BASE_URL || "/"
+})
 
 export default function Router() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router}  />
 }
