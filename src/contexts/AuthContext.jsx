@@ -2,20 +2,13 @@
 
 import { createContext, useEffect, useState } from "react";
 import { login, getMe } from "../apis/auth-api";
-
-import {
-  removeAccessToken,
-  setAccessToken,
-  getAccessToken,
-} from "../utils/local-storage";
+import { removeAccessToken, setAccessToken, getAccessToken } from "../utils/local-storage";
 
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-  const [authenticateUser, setAuthenticatedUser] = useState(
-    getAccessToken() ? true : null
-  );
-  // console.log("authenticateUser", authenticateUser);
+  const [authenticateUser, setAuthenticatedUser] = useState(getAccessToken() ? true : null);
+  const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
     const fetchAuthUser = async () => {
@@ -39,24 +32,19 @@ export default function AuthContextProvider({ children }) {
 
   const userLogin = async (name, password) => {
     const res = await login({ name, password });
-    // console.log("res", res)
     setAccessToken(res?.result?.token);
     setAuthenticatedUser(res?.result?.token);
+    setFetch(true);  // Trigger fetch after login
   };
 
   const logout = () => {
     removeAccessToken();
     setAuthenticatedUser(null);
+    setFetch(false);  // Reset fetch state on logout
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        authenticateUser,
-        userLogin,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ authenticateUser, userLogin, logout, setFetch, fetch }}>
       {children}
     </AuthContext.Provider>
   );

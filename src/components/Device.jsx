@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { inverter, load, grid, pv, battery } from "../images/Mydevice";
 import { getAccessToken } from "../utils/local-storage";
+import useAuth from "../hook/useAuth";
 
 const Device = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -10,46 +11,51 @@ const Device = () => {
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
 
+  const { fetch, setFetch } = useAuth();
+  console.log(fetch);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${API_SERVER}/solarDevice/data`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      setData(response.data.result);
+      setFetch(false); // Reset fetch state
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_SERVER}/solarDevice/data`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        setData(response.data.result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    if (fetch) {
+      fetchData();
+    }
+  }, [fetch, API_SERVER, token]);
 
-    fetchData();
-  }, [API_SERVER, token]); // ต้องเพิ่ม token เป็น dependency ของ useEffect เพื่อให้เรียก API ใหม่เมื่อ token เปลี่ยน
-
-  // ปรับ devices array ให้ใช้ข้อมูลจาก data ที่ได้จาก API
   const devices = [
     {
       id: 1,
       name: "Load",
-      power: data ? data.currentLoadPower + " W" : "",
+      power: data ? data.currentLoadPower + " W" : "0"+ " W" ,
       image: load,
     },
     {
       id: 2,
       name: "Inverter",
-      power: data ? data.outputActivePower + " W" : "",
+      power: data ? data.outputActivePower + " W" : "0"+ " W" ,
       image: inverter,
     },
-    { id: 3, name: "PV", power: data ? data.powerCharging+ " W" : "", image: pv },
+    { id: 3, name: "PV", power: data ? data.powerCharging + " W" : "0"+ " W" , image: pv },
     {
       id: 4,
       name: "Battery",
-      power: data ? data.batteryDischargeCurrent+ " A" : "",
+      power: data ? data.batteryDischargeCurrent + " A" : "0"+ " A",
       image: battery,
     },
-    { id: 5, name: "Grid", power: data ? data.gridFrequency+ " Hz" : "", image: grid },
+    { id: 5, name: "Grid", power: data ? data.gridFrequency + " Hz" : "0"+ " Hz" , image: grid },
   ];
 
   const togglePopup = (device) => {
@@ -96,7 +102,7 @@ const Device = () => {
                 <span className="block text-center">{device.power}</span>
                 <div className="border-t-2  w-[60px]">
                   <span className="block text-center">
-                    {data ? data.batteryCapacity + "%" : ""}
+                    {data ? data.batteryCapacity + " %" : "0"+ " %"}
                   </span>
                 </div>
               </div>
