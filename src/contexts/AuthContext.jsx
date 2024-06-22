@@ -72,6 +72,7 @@ export default function AuthContextProvider({children}) {
         setSelecteLanguage,
         fetch,
         setUserLoginCode,
+        setFetch,
       }}>
       {children}
     </AuthContext.Provider>
