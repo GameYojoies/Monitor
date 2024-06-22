@@ -1,12 +1,16 @@
-const ACCESS_TOKEN = "ACCESS_TOKEN";
+/** @format */
 
-export const getAccessToken = () => {
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  console.log("getAccessToken:", token);
-  return token;
-};
+const ACCESS_TOKEN = "ACCESS_TOKEN"
 
-export const setAccessToken = accessToken =>
-  localStorage.setItem(ACCESS_TOKEN, accessToken);
+// export const getAccessToken = () => {
+//   const token = localStorage.getItem(ACCESS_TOKEN)
+//   console.log("getAccessToken:", token)
+//   return token
+// }
 
-export const removeAccessToken = () => localStorage.removeItem(ACCESS_TOKEN);
+export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN)
+
+export const setAccessToken = (accessToken) =>
+  localStorage.setItem(ACCESS_TOKEN, accessToken)
+
+export const removeAccessToken = () => localStorage.removeItem(ACCESS_TOKEN)
