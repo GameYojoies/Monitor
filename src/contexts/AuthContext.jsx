@@ -24,30 +24,30 @@ export default function AuthContextProvider({children}) {
   const [dataFlow, setDataFlow] = useState(null)
 
   useEffect(() => {
+    const token = getAccessToken()
+    console.log("token inside useEffect:", token)
+
     const fetchAuthUser = async () => {
       try {
         const res = await getMe()
-        console.log("getMe :", res.data.result)
         setAuthenticatedUser(res.data.result)
       } catch (err) {
-        console.log("fetchAuthUser: error", err)
         removeAccessToken()
+        setAuthenticatedUser(null)
       }
     }
 
     if (getAccessToken()) {
-      console.log("=== true ===")
       fetchAuthUser()
-    } else {
-      console.log("=== false ===")
     }
   }, [])
 
   const userLogin = async (name, password) => {
     const res = await login({name, password})
-    console.log("res", res)
-    setAccessToken(res?.data.result?.token)
-    setAuthenticatedUser(res?.data.result?.token)
+    // console.log("res", res)
+    const token = res?.data.result?.token
+    setAccessToken(token)
+    setAuthenticatedUser(token)
     setUserLoginCode(res?.data?.code)
     setFetch(true)
   }
