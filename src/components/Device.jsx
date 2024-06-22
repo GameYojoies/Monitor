@@ -33,23 +33,23 @@ const Device = () => {
     {
       id: 1,
       name: "Load",
-      power: data ? data.currentLoadPower : "",
+      power: data ? data.currentLoadPower + " W" : "",
       image: load,
     },
     {
       id: 2,
       name: "Inverter",
-      power: data ? data.outputActivePower : "",
+      power: data ? data.outputActivePower + " W" : "",
       image: inverter,
     },
-    { id: 3, name: "PV", power: data ? data.currentLoadPower : "", image: pv },
+    { id: 3, name: "PV", power: data ? data.powerCharging+ " W" : "", image: pv },
     {
       id: 4,
       name: "Battery",
-      power: data ? data.batteryDischargeCurrent : "",
+      power: data ? data.batteryDischargeCurrent+ " A" : "",
       image: battery,
     },
-    { id: 5, name: "Grid", power: data ? data.gridFrequency : "", image: grid },
+    { id: 5, name: "Grid", power: data ? data.gridFrequency+ " Hz" : "", image: grid },
   ];
 
   const togglePopup = (device) => {
@@ -91,7 +91,18 @@ const Device = () => {
                   : "w-55 h-[55px]"
               } `}
             />
-            <span className="block text-center">{device.power}</span>
+            {device.id === 4 ? (
+              <div className="flex flex-col">
+                <span className="block text-center">{device.power}</span>
+                <div className="border-t-2  w-[60px]">
+                  <span className="block text-center">
+                    {data ? data.batteryCapacity + "%" : ""}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <span className="block text-center">{device.power}</span>
+            )}
           </div>
         </div>
       ))}
