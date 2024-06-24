@@ -13,6 +13,7 @@ import {
 } from "../images"
 import ModalLang from "../components/modalLang"
 import {useTranslation} from "react-i18next"
+import {Link} from "react-router-dom"
 
 function Header() {
   const languageData = [
@@ -74,11 +75,15 @@ function Header() {
     <>
       <header className="h-[98px] flex justify-between items-center p-4 bg-[#00216B] text-white">
         <div className="h-full text-xl font-bold flex items-center gap-20">
-          <img
-            src={iconLogo}
-            className="h-full cursor-pointer"
-            alt="iconLogo"
-          />
+          <Link
+            to="/"
+            className="h-full">
+            <img
+              src={iconLogo}
+              className="h-full cursor-pointer"
+              alt="iconLogo"
+            />
+          </Link>
 
           <p className="text-2xl h-full flex items-end">
             {t("Welcome to Your Monitoring")}
