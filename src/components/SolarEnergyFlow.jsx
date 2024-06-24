@@ -115,7 +115,7 @@ const SolarEnergyFlow = () => {
   return (
     <div>
       <div className="h-10"></div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ml-14">
         <img src={solar1} alt="" className="h-[25px]" />
         <h1 className="text-[#001647] font-semibold text-2xl">
           Solar Energy Flow
