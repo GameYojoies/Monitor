@@ -9,9 +9,11 @@ import {
   iconDown,
   iconLogout,
   iconThailand,
-  iconEng
+  iconEng,
 } from "../images"
 import ModalLang from "../components/modalLang"
+import {useTranslation} from "react-i18next"
+import Avatar from "../components/Avatar"
 
 function Header() {
   const languageData = [
@@ -38,6 +40,7 @@ function Header() {
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
   const languageRef = useRef()
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,6 +61,11 @@ function Header() {
     setOpenModal(!openModal)
   }
 
+  const handleClickSelecteLanguage = (name) => {
+    // console.log("name", name)
+    i18n.changeLanguage(name)
+  }
+
   return (
     <>
       <header className="h-[98px] flex justify-between items-center p-4 bg-[#00216B] text-white">
@@ -69,17 +77,16 @@ function Header() {
           />
 
           <p className="text-2xl h-full flex items-end">
-            Welcome to Your Monitoring
+            {t("Welcome to Your Monitoring")}
           </p>
         </div>
 
         <div className="flex items-center gap-5 mr-10">
           {/* profile user */}
           <div className="flex items-center gap-2">
-            <img
+            <Avatar
               src={authenticateUser?.avatar || defaultProfile}
-              alt="User"
-              className="w-14 h-14 rounded-full cursor-pointer"
+              size="56px"
             />
 
             <div className="flex flex-col items-center">
@@ -122,6 +129,7 @@ function Header() {
                 setSelecteLanguage={setSelecteLanguage}
                 setOpenModal={setOpenModal}
                 selecteLanguage={selecteLanguage}
+                handleClickSelecteLanguage={handleClickSelecteLanguage}
               />
             )}
           </div>

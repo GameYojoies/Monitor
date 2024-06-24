@@ -120,8 +120,8 @@ const EarnProfit = () => {
                 </LocalizationProvider>
             </div>
 
-            <div className="text-lg flex flex-col items-center mt-5 w-[65%] lg:w-[95%] h-[300px] shadow-lg rounded-xl gap-2">
-                <div className="w-[90%] flex justify-between pt-2">
+            <div className="text-lg flex flex-col items-center mt-5 w-[65%] lg:w-[95%] h-[418px] shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2">
+                <div className="w-[90%] flex justify-between pt-10">
                     <span>Unit</span>
                     <div>
                         <span className="font-semibold">{unit}</span>
@@ -136,7 +136,7 @@ const EarnProfit = () => {
                     </div>
                 </div>
 
-                <div className="relative w-40 h-40">
+                <div className="relative w-40 h-40 mt-6">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                         <circle className="text-gray-200 stroke-current" strokeWidth="14" cx="50" cy="50" r="40" fill="transparent" />
                         <circle className="text-[#107c4ad5] progress-ring__circle stroke-current" strokeWidth="14" strokeLinecap="round" cx="50" cy="50" r="40" fill="transparent" strokeDasharray="251.2" strokeDashoffset={`calc(251.2 - (251.2 * ${percentage}) / 100)`} />
