@@ -9,7 +9,7 @@ import {initReactI18next} from "react-i18next"
 const resources = {
   th: {
     translation: {
-      "Usernam, or email": "กรอกชื่อผู้ใช้ หรือ อีเมล",
+      "Username or email": "กรอกชื่อผู้ใช้ หรือ อีเมล",
       "Enter your password": "กรอกรหัสผ่าน",
       "Login now": "ลงชื่อเข้าใช้",
       "Visit Monitor Demo": "เดโมมอนิเตอร์",
@@ -29,7 +29,7 @@ const resources = {
   },
   en: {
     translation: {
-      "Usernam, or email": "Usernam, or email",
+      "Username or email": "Username or email",
       "Enter your password": "Enter your password",
       "Login now": "Login now",
       "Visit Monitor Demo": "Visit Monitor Demo",
