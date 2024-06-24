@@ -1,7 +1,7 @@
 /** @format */
 
-import {createContext, useEffect, useState} from "react"
-import {login, getMe} from "../apis/auth-api"
+import { createContext, useEffect, useState } from "react"
+import { login, getMe } from "../apis/auth-api"
 import {
   removeAccessToken,
   setAccessToken,
@@ -10,7 +10,7 @@ import {
 
 export const AuthContext = createContext()
 
-export default function AuthContextProvider({children}) {
+export default function AuthContextProvider({ children }) {
   const [authenticateUser, setAuthenticatedUser] = useState(
     getAccessToken() ? true : null
   )
@@ -18,7 +18,7 @@ export default function AuthContextProvider({children}) {
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
 
-  const [selecteLanguage, setSelecteLanguage] = useState("EN")
+  const [selecteLanguage, setSelecteLanguage] = useState(localStorage.getItem("Language"))
   const viteApiTest = "http://18.143.194.72/solar"
 
   const [dataFlow, setDataFlow] = useState(null)
@@ -39,8 +39,25 @@ export default function AuthContextProvider({children}) {
     }
   }, [getAccessToken()])
 
+  useEffect(() => {
+    checkLanguage()
+  }, [selecteLanguage])
+
+  const checkLanguage = () => {
+
+    const getLang = localStorage.getItem("Language");
+
+    if (!getLang) {
+      localStorage.setItem("Language", "EN");
+      setSelecteLanguage("EN");
+    } else {
+      localStorage.setItem("Language", selecteLanguage);
+    }
+
+  }
+
   const userLogin = async (name, password) => {
-    const res = await login({name, password})
+    const res = await login({ name, password })
     // console.log("res", res)
     const token = res?.data.result?.token
     // console.log("token", token)
