@@ -176,11 +176,11 @@ const SolarEnergyFlow = () => {
                   
                   }
                   alt=""
-                  className="w-[30%] h-[18%] m-auto pointer-events-none	 top-[37px]  right-[37%] absolute"
+                  className={`w-[30%] h-[18%] m-auto pointer-events-none	 top-[37px]  right-[37%] absolute`}
                 />
-                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[30%] absolute">
+                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[31%] absolute">
                   {" "}
-                  {dataFlow?.batteryCapacity} %
+                  {dataFlow?.batteryCapacity || 0 } %
                 </div>
               </div>
             </div>
