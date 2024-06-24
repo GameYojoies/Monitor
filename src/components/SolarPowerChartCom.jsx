@@ -12,8 +12,11 @@ import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
 
 import useAuth from "../hook/useAuth";
+import { useTranslation } from 'react-i18next';
 
 const SolarPwerChartCom = () => {
+
+    const {t, i18n} = useTranslation()
 
     const [select, setSelect] = useState("select2");
     const [currentPv, setCurrentPv] = useState([]);
@@ -117,7 +120,7 @@ const SolarPwerChartCom = () => {
             trigger: 'axis'
         },
         legend: {
-            data: ['Current load power', 'PV power on the day'],
+            data: [t("ChartSpan9"), t("ChartSpan10")],
         },
         grid: {
             left: '3%',
@@ -142,13 +145,13 @@ const SolarPwerChartCom = () => {
         },
         series: [
             {
-                name: 'Current load power',
+                name: t("ChartSpan9"),
                 type: 'line',
                 color: '#23D37F',
                 data: currentPv
             },
             {
-                name: 'PV power on the day',
+                name: t("ChartSpan10"),
                 type: 'line',
                 color: '#F6841B',
                 data: pvPower
@@ -159,36 +162,36 @@ const SolarPwerChartCom = () => {
         <div>
             <div className='flex items-center gap-2'>
                 <img src={solarIcon} alt="" className='h-[40px]' />
-                <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
+                <h1 className='text-[#001647] font-semibold text-2xl'>{t("ChartSpan1")}</h1>
             </div>
 
             <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
-                    <span className='font-semibold'>Selected Type</span>
+                    <span className='font-semibold'>{t("ChartSpan2")}</span>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[350px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
                         <div
                             onClick={() => handleSelect("select2")}
                             className={`w-[25%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
                         >
-                            <span>Day</span>
+                            <span>{t("ChartSpan3")}</span>
                         </div>
                         <div
                             onClick={() => handleSelect("select3")}
                             className={`w-[25%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
                         >
-                            <span>Month</span>
+                            <span>{t("ChartSpan4")}</span>
                         </div>
                         <div
                             onClick={() => handleSelect("select4")}
                             className={`w-[25%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select4" ? 'bg-[#0072D6] text-white' : ''}`}
                         >
-                            <span>Years</span>
+                            <span>{t("ChartSpan5")}</span>
                         </div>
                         <div
                             onClick={() => handleSelect("select1")}
                             className={`w-[25%] h-[100%] flex items-center justify-center border-r-2 border-l-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
                         >
-                            <span>Total</span>
+                            <span>{t("ChartSpan6")}</span>
                         </div>
                     </div>
 
@@ -225,7 +228,7 @@ const SolarPwerChartCom = () => {
                 </div>
 
                 <div className='mt-6 flex items-center h-[400px] w-[95%] relative'>
-                    <span className='inline-block transform -rotate-90 absolute left-[-30px]'>Power (kWh)</span>
+                    <span className='inline-block transform -rotate-90 absolute left-[-30px]'>{t("ChartSpan7")}</span>
                     <ReactECharts
                         option={option}
                         notMerge={true}
@@ -233,7 +236,7 @@ const SolarPwerChartCom = () => {
                         style={{ height: '95%', width: '100%' }}
                         className='react_for_echarts ml-5'
                     />
-                    <span className='absolute bottom-8 -right-1'>H</span>
+                    <span className='absolute bottom-8 -right-1'>{t("ChartSpan8")}</span>
                 </div>
             </div>
         </div>

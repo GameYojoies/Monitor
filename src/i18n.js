@@ -1,7 +1,7 @@
 /** @format */
 
 import i18n from "i18next"
-import {initReactI18next} from "react-i18next"
+import { initReactI18next } from "react-i18next"
 
 // the translations
 // (tip move them in a JSON file and import them,
@@ -22,9 +22,27 @@ const resources = {
       "User Information": "ข้อมูลผู้ใช้",
       Username: "ชื่อผู้ใช้",
       "Birth Date": "วันเกิด",
-      "Gender":"เพศ",
-      "Phone Number":"เบอร์โทรศัพท์",
-      "E-mail":"อีเมล",
+      "Gender": "เพศ",
+      "Phone Number": "เบอร์โทรศัพท์",
+      "E-mail": "อีเมล",
+      // Chart
+      "ChartSpan1": "แผนภูมิพลังงาน",
+      "ChartSpan2": "เลือกประเภท",
+      "ChartSpan3": "วัน",
+      "ChartSpan4": "เดือน",
+      "ChartSpan5": "ปี",
+      "ChartSpan6": "รวม",
+      "ChartSpan7": "พลังงาน (kWh)",
+      "ChartSpan8": "H",
+      "ChartSpan9": "ค่าโหลดกำลังไฟฟ้าที่ใช้จริง",
+      "ChartSpan10": "การผลิตไฟฟ้าโซลาร์เซลล์ ทั้งหมดในวันนั้น",
+
+       // Bill
+       "BillSpan1": "ผลกำไรค่าไฟ",
+       "BillSpan2": "ยูนิตที่ใช้",
+       "BillSpan3": "ผลกำไรค่าไฟ",
+       "BillSpan4": "บาท",
+       "BillSpan5": "",
     },
   },
   en: {
@@ -41,9 +59,29 @@ const resources = {
       "User Information": "User Information",
       Username: "Username",
       "Birth Date": "Birth Date",
-      "Gender":"Gender",
-      "Phone Number":"Phone Number",
-      "E-mail":"E-mail",
+      "Gender": "Gender",
+      "Phone Number": "Phone Number",
+      "E-mail": "E-mail",
+
+      // Chart
+      "ChartSpan1": "Solar Power Chart",
+      "ChartSpan2": "Selected Type",
+      "ChartSpan3": "Day",
+      "ChartSpan4": "Month",
+      "ChartSpan5": "Years",
+      "ChartSpan6": "Total",
+      "ChartSpan7": "Power (kWh)",
+      "ChartSpan8": "H",
+      "ChartSpan9": "Current load power",
+      "ChartSpan10": "PV power on the day",
+      "ChartSpan11": "",
+
+      // Bill
+      "BillSpan1": "Earn Profit Energy Bill",
+      "BillSpan2": "Unit",
+      "BillSpan3": "Saved",
+      "BillSpan4": "THB",
+      "BillSpan5": "",
     },
   },
 }
@@ -54,7 +92,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: getLang=="EN" ? "en" : "th",
+    lng: getLang == "EN" ? "en" : "th",
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

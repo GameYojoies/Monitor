@@ -8,8 +8,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { earnIcon } from '../images';
 import { getAccessToken } from '../utils/local-storage';
+import { useTranslation } from 'react-i18next';
 
 const EarnProfit = () => {
+
+    const { t, i18n } = useTranslation();
     const [select, setSelect] = useState("select1");
     const [percentage, setPercentage] = useState(100);
 
@@ -76,7 +79,7 @@ const EarnProfit = () => {
         <div className="flex flex-col items-center">
             <div className="flex items-center gap-2">
                 <img src={earnIcon} alt="" className="h-[40px]" />
-                <h1 className="text-[#001647] font-semibold text-2xl">Earn Profit Energy Bill</h1>
+                <h1 className="text-[#001647] font-semibold text-2xl">{t("BillSpan1")}</h1>
             </div>
 
             <div className='mt-10 flex lg:flex-col justify-center items-center gap-6 lg:gap-6'>
@@ -86,19 +89,19 @@ const EarnProfit = () => {
                         onClick={() => handleSelect("select1")}
                         className={`w-[33.3%] h-[100%] flex items-center justify-center border-r-2 border-l-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
-                        <span>Total</span>
+                        <span>{t("ChartSpan6")}</span>
                     </div>
                     <div
                         onClick={() => handleSelect("select2")}
                         className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
-                        <span>Day</span>
+                        <span>{t("ChartSpan3")}</span>
                     </div>
                     <div
                         onClick={() => handleSelect("select3")}
                         className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
-                        <span>Month</span>
+                        <span>{t("ChartSpan4")}</span>
                     </div>
                 </div>
 
@@ -128,17 +131,17 @@ const EarnProfit = () => {
 
             <div className={`${select == "select1" ? "h-[430px]" : "h-[361px]"} bg-white text-lg flex flex-col items-center mt-6 w-[65%] lg:w-[95%]  shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2`}>
                 <div className="w-[90%] flex justify-between pt-10">
-                    <span>Unit</span>
+                    <span>{t("BillSpan2")}</span>
                     <div>
                         <span className="font-semibold">{unit}</span>
                         <span className="pl-1">kWh</span>
                     </div>
                 </div>
                 <div className="w-[90%] flex justify-between">
-                    <span>Save</span>
+                    <span>{t("BillSpan3")}</span>
                     <div>
                         <span className="font-semibold text-xl">{bill}</span>
-                        <span className="pl-1">THB</span>
+                        <span className="pl-1">{t("BillSpan4")}</span>
                     </div>
                 </div>
 
