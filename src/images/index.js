@@ -16,6 +16,15 @@ import bgLogin from "../images/login/loginBg.png"
 import iconEmail from "../images/login/iconEmail.png"
 import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
+import solar1 from "../images/Monitor/solar1.png";
+import energyFlow from "../images/Monitor/energyFlow.png";
+import battery from "../images/Monitor/bg-battery.png";
+import bg_green from "../images/Monitor/bg-green.png";
+import bg_yellow from "../images/Monitor/bg-yellow.png";
+import bg_red from "../images/Monitor/bg-red.png";
+import bg_green_per from "../images/Monitor/bg-green-per.png";
+import bg_yellow_per from "../images/Monitor/bg-yellow-per.png";
+import bg_red_per from "../images/Monitor/bg-red-per.png";
 
 export {
   monitor,
@@ -34,4 +43,13 @@ export {
   iconEmail,
   defaultProfile,
   iconLogout,
+  solar1,
+  energyFlow,
+  battery,
+  bg_green,
+  bg_yellow,
+  bg_red,
+  bg_green_per,
+  bg_yellow_per,
+  bg_red_per
 }

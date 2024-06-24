@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { inverter, load, grid, pv, battery } from "../images/Mydevice";
+import { inverter, load, grid, pv, battery, } from "../images/Mydevice";
 import { getAccessToken } from "../utils/local-storage";
 import useAuth from "../hook/useAuth";
 
