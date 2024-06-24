@@ -3,6 +3,7 @@
 import React from "react"
 import {monitor, report, notification, user} from "../images"
 import {Link, useLocation} from "react-router-dom"
+import {useTranslation} from "react-i18next"
 function Sidebar() {
   const navbarData = [
     {
@@ -52,7 +53,7 @@ function Sidebar() {
                 className="w-[24px]"
                 alt="IconMonitor"
               />
-              {el.title}
+              {t(el.title)}
             </Link>
           </li>
         ))}
