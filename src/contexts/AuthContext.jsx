@@ -18,9 +18,6 @@ export default function AuthContextProvider({children}) {
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
 
-  const [userLoginCode, setUserLoginCode] = useState("")
-  // console.log("userLoginCode", userLoginCode)
-
   const [selecteLanguage, setSelecteLanguage] = useState("EN")
 
   const [dataFlow, setDataFlow] = useState(null)
@@ -55,7 +52,6 @@ export default function AuthContextProvider({children}) {
 
     setAccessToken(token)
     setAuthenticatedUser(token)
-    setUserLoginCode(code)
     setFetch(true)
   }
 
@@ -63,7 +59,6 @@ export default function AuthContextProvider({children}) {
     removeAccessToken()
     setAuthenticatedUser(null)
     setFetch(false)
-    setUserLoginCode(null)
   }
 
   return (
@@ -72,13 +67,11 @@ export default function AuthContextProvider({children}) {
         authenticateUser,
         userLogin,
         logout,
-        userLoginCode,
         selecteLanguage,
         dataFlow,
         setDataFlow,
         setSelecteLanguage,
         fetch,
-        setUserLoginCode,
         setFetch,
         pin,
         setPin,

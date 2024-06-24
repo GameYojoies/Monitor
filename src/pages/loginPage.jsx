@@ -47,6 +47,8 @@ export default function LoginPage() {
   const [openPassword, setOpenPasswrod] = useState(false)
   // console.log("openPassword", openPassword)
 
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+
   const languageRef = useRef()
 
   const handleChangeInput = (e) => {
@@ -55,13 +57,10 @@ export default function LoginPage() {
 
   const {
     userLogin,
-    authenticateUser,
-    userLoginCode,
     selecteLanguage,
     setSelecteLanguage,
   } = useAuth()
 
-  // console.log("userLoginCode", userLoginCode)
 
   const handleSubmitForm = async (e) => {
     try {
@@ -85,6 +84,17 @@ export default function LoginPage() {
   }
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight)
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (languageRef.current && !languageRef.current.contains(event.target)) {
         setOpenModal(false)
@@ -104,8 +114,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full h-[945px]">
-      <div className="relative z-0 w-full h-full">
+    <div className="w-full ">
+      <div
+        className="relative z-0 w-full"
+        style={{height: windowHeight}}>
         <img
           src={bgLogin}
           className="w-full h-full "
