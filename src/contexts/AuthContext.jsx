@@ -19,6 +19,7 @@ export default function AuthContextProvider({children}) {
   const [solarDate, setSolarDate] = useState()
 
   const [selecteLanguage, setSelecteLanguage] = useState("EN")
+  const viteApiTest = "http://18.143.194.72/solar"
 
   const [dataFlow, setDataFlow] = useState(null)
 
@@ -78,6 +79,7 @@ export default function AuthContextProvider({children}) {
         solarDate,
         setAuthenticatedUser,
         setSolarDate,
+        viteApiTest,
       }}>
       {children}
     </AuthContext.Provider>
