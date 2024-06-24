@@ -100,7 +100,7 @@ const EarnProfit = () => {
                 </div>
             </div>
 
-            <div className="mt-8 w-[200px]">
+            <div className="mt-8 w-[100%]">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     {select === "select2" ?
                         <DatePicker
@@ -120,7 +120,7 @@ const EarnProfit = () => {
                 </LocalizationProvider>
             </div>
 
-            <div className="text-lg flex flex-col items-center mt-5 w-[300px] h-[300px] shadow-lg rounded-xl gap-2">
+            <div className="text-lg flex flex-col items-center mt-5 w-[65%] lg:w-[95%] h-[300px] shadow-lg rounded-xl gap-2">
                 <div className="w-[90%] flex justify-between pt-2">
                     <span>Unit</span>
                     <div>
