@@ -27,8 +27,25 @@ const SolarEnergyFlow = () => {
   const token = getAccessToken();
   const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [devicePn, setDevicePn] = useState(null);
-  const [test, setTest] = useState(10);
-
+  const timestamp = dataFlow?.time;
+  const date = new Date(timestamp);
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  };
+  
+  let formattedDate = date.toLocaleDateString('en-US', options);
+  if (formattedDate === 'Invalid Date') {
+    formattedDate = '-'
+  } else {
+  }
+  
+  
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
@@ -111,8 +128,7 @@ const SolarEnergyFlow = () => {
       <div className="w-[90%] m-auto lg:flex lg:flex-col">
         <div className="text-[#ADB5BD] font-semibold flex justify-end">
           <div className="flex gap-2">
-            <span>09:00 PM</span>
-            <span>Monday, 22 June, 2024</span>
+          {formattedDate}
           </div>
         </div>
         <div className="h-2"></div>
