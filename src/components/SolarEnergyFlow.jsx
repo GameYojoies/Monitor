@@ -27,7 +27,7 @@ const SolarEnergyFlow = () => {
   const token = getAccessToken();
   const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [devicePn, setDevicePn] = useState(null);
-  const [test, setTest] = useState(39);
+  const [test, setTest] = useState(10);
 
   useEffect(() => {
     const fetchData = async (date, pin) => {
@@ -176,9 +176,10 @@ const SolarEnergyFlow = () => {
                   
                   }
                   alt=""
-                  className={`w-[30%] h-[18%] m-auto pointer-events-none	 top-[37px]  right-[37%] absolute`}
+                   className = { `w-[${dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100 ? '30%' : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40 ? '30%' : '10%'}] h-[18%] m-auto pointer-events-none top-[37px]  absolute`}
+                    style={{right:dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100 ? '37%' : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40 ? '45%' : '56%'}}
                 />
-                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[31%] absolute">
+                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[32%] absolute">
                   {" "}
                   {dataFlow?.batteryCapacity || 0 } %
                 </div>
