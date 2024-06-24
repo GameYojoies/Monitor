@@ -16,6 +16,7 @@ import bgLogin from "../images/login/loginBg.png"
 import iconEmail from "../images/login/iconEmail.png"
 import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
+import iconUser from "../images/user/logo-user.png"
 
 export {
   monitor,
@@ -34,4 +35,5 @@ export {
   iconEmail,
   defaultProfile,
   iconLogout,
+  iconUser
 }

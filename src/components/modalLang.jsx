@@ -5,6 +5,7 @@ export default function ModalLang({
   setSelecteLanguage,
   setOpenModal,
   selecteLanguage,
+  handleClickSelecteLanguage,
 }) {
   return (
     <div className="w-[183px] h-[105px] flex flex-col items-center justify-center bg-[#001647] z-10 absolute -right-10 top-12 rounded-xl">
@@ -19,6 +20,7 @@ export default function ModalLang({
           onClick={() => {
             setSelecteLanguage(el?.abbreviation)
             setOpenModal(false)
+            handleClickSelecteLanguage(el?.key)
           }}>
           <img
             src={el.icon}

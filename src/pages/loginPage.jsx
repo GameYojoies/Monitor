@@ -9,7 +9,7 @@ import {
   iconLanguage,
   iconDown,
   bgLogin,
-  iconEmail
+  iconEmail,
 } from "../images"
 import InputLogin from "../components/inputLogin"
 import {Link, useNavigate} from "react-router-dom"
@@ -17,6 +17,7 @@ import {useEffect, useRef, useState} from "react"
 import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
 import ModalLang from "../components/modalLang"
+import {useTranslation} from "react-i18next"
 
 export default function LoginPage() {
   const languageData = [
@@ -36,13 +37,16 @@ export default function LoginPage() {
     },
   ]
 
-  const navigate = useNavigate()
-
   const [login, setLogin] = useState({
     name: "",
     password: "",
   })
   // console.log("login", login)
+
+  const {userLogin, selecteLanguage, setSelecteLanguage} = useAuth()
+
+  const navigate = useNavigate()
+  const {t, i18n} = useTranslation()
 
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
@@ -57,7 +61,10 @@ export default function LoginPage() {
     setLogin({...login, [e.target.name]: e.target.value})
   }
 
-  const {userLogin, selecteLanguage, setSelecteLanguage} = useAuth()
+  const handleClickSelecteLanguage = (name) => {
+    // console.log("name", name)
+    i18n.changeLanguage(name)
+  }
 
   const handleSubmitForm = async (e) => {
     try {
@@ -152,6 +159,7 @@ export default function LoginPage() {
               setSelecteLanguage={setSelecteLanguage}
               setOpenModal={setOpenModal}
               selecteLanguage={selecteLanguage}
+              handleClickSelecteLanguage={handleClickSelecteLanguage}
             />
           )}
         </div>
@@ -175,7 +183,7 @@ export default function LoginPage() {
           <InputLogin
             src={iconEmail}
             name="name"
-            placeholder="Usernam, or email"
+            placeholder={t("Usernam, or email")}
             onChange={handleChangeInput}
             value={login.name}
           />
@@ -184,7 +192,7 @@ export default function LoginPage() {
             src={iconPassword}
             name="password"
             type="password"
-            placeholder="Enter your password"
+            placeholder={t("Enter your password")}
             onChange={handleChangeInput}
             value={login.password}
             iconClose={iconeyeclose}
@@ -195,14 +203,14 @@ export default function LoginPage() {
 
           <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
             <button className="w-5/6 bg-[#0072D6] text-white h-[50px] rounded-xl">
-              Login now
+              {t("Login now")}
             </button>
 
             <Link
               to="/"
               className="w-full flex items-center justify-center">
               <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
-                Visit Monitor Demo
+                {t("Visit Monitor Demo")}
               </button>
             </Link>
           </div>

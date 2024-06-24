@@ -1,12 +1,10 @@
 /** @format */
 
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {monitor, report, notification, user} from "../images"
 import {Link, useLocation} from "react-router-dom"
+import {useTranslation} from "react-i18next"
 function Sidebar() {
-  const location = useLocation()
-  // console.log("location", location.pathname)
-
   const navbarData = [
     {
       id: 1,
@@ -34,9 +32,13 @@ function Sidebar() {
     },
   ]
 
+  const location = useLocation()
+  // console.log("location", location.pathname)
+  const {t} = useTranslation()
+
   return (
     <nav className="w-[150px] bg-white ">
-      <ul className="space-y-2 text-center shadow-xl  h-screen mr-4">
+      <ul className="space-y-2 text-center shadow-xl mr-4 h-screen">
         {navbarData?.map((el, idx) => (
           <li
             key={idx}
@@ -51,7 +53,7 @@ function Sidebar() {
                 className="w-[24px]"
                 alt="IconMonitor"
               />
-              {el.title}
+              {t(el.title)}
             </Link>
           </li>
         ))}
