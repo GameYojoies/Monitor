@@ -127,7 +127,7 @@ const ChargePower = () => {
                 <h1 className='text-[#001647] font-semibold text-2xl'>Charge Power</h1>
             </div>
 
-            <div className='flex flex-col gap-2 p-2 items-center justify-center shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
+            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
                     <div className='flex gap-1 items-center'>
                         <img src={calendarIcon} alt="" className='h-[20px]' />

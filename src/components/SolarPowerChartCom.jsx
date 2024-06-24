@@ -162,7 +162,7 @@ const SolarPwerChartCom = () => {
                 <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
             </div>
 
-            <div className='flex flex-col gap-2 p-2 items-center justify-center shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
+            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
                     <span className='font-semibold'>Selected Type</span>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[350px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
