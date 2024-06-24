@@ -1,8 +1,17 @@
 /** @format */
 
 import React from "react";
-import icons1 from "../images/Monitor/solar1.png";
-import icons2 from "../images/Monitor/energyFlow.png";
+import {
+  solar1,
+  energyFlow,
+  battery,
+  bg_green,
+  bg_yellow,
+  bg_red,
+  bg_green_per,
+  bg_yellow_per,
+  bg_red_per,
+} from "../images";
 import PopupFlow from "./popupFlow/popupFlow";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -18,45 +27,43 @@ const SolarEnergyFlow = () => {
   const token = getAccessToken();
   const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [devicePn, setDevicePn] = useState(null);
+  const [test, setTest] = useState(39);
 
   useEffect(() => {
     const fetchData = async (date, pin) => {
-        try {
-            if (pin == null) {
-                setDevicePn(null);
-            } else {
-                setDevicePn(pin.devicePn);
-            }
-
-            const response = await axios.get(
-                `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=${
-                    pin ? pin.devicePn : ''
-                }&date=${date}&page=1&limit=10`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            if(response.data.result != null){
-              setData(response.data.result[0]);
-
-            }else{
-              setData(0);
-
-            }
-            console.log(response,'response');
-        } catch (error) {
-            setError(error);
+      try {
+        if (pin == null) {
+          setDevicePn(null);
+        } else {
+          setDevicePn(pin.devicePn);
         }
+
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=${
+            pin ? pin.devicePn : ""
+          }&date=${date}&page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.data.result != null) {
+          setData(response.data.result[0]);
+        } else {
+          setData(0);
+        }
+        console.log(response, "response");
+      } catch (error) {
+        setError(error);
+      }
     };
 
     if (solarDate && token) {
-        fetchData(solarDate, pin);
+      fetchData(solarDate, pin);
     }
-}, [solarDate, token, pin]);
-
+  }, [solarDate, token, pin]);
 
   useEffect(() => {
     if (data) {
@@ -92,7 +99,7 @@ const SolarEnergyFlow = () => {
     <div>
       <div className="h-10"></div>
       <div className="flex items-center gap-2">
-        <img src={icons1} alt="" className="h-[25px]" />
+        <img src={solar1} alt="" className="h-[25px]" />
         <h1 className="text-[#001647] font-semibold text-2xl">
           Solar Energy Flow
         </h1>
@@ -111,7 +118,11 @@ const SolarEnergyFlow = () => {
         <div className="h-2"></div>
         <div className="w-[100%] flex flex-col lg:flex-row h-[auto] m-auto">
           <div className="h-auto lg:h-[] w-full lg:w-[50%] relative">
-            <img src={icons2} alt="" className="w-[100%] h-[650px] m-auto" />
+            <img
+              src={energyFlow}
+              alt=""
+              className="w-[100%] h-[650px] m-auto"
+            />
             {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
             <div
               className="h-[30%] w-48 absolute top-1/2 left-0 right-0 transform -translate-y-1/2 mx-auto"
@@ -131,9 +142,49 @@ const SolarEnergyFlow = () => {
               onClick={() => handleClick("Grid")}
             ></div>
             <div
-              className="h-[20%] w-48 absolute bottom-8 left-[8%]"
+              className="h-[20%] w-[20%] absolute bottom-8 left-[8%] "
               onClick={() => handleClick("Battery")}
-            ></div>
+            >
+              <div>
+                <img
+                  src={battery}
+                  alt=""
+                  className="w-[40%] h-[25%] m-auto pointer-events-none	 top-8  right-[30%] absolute"
+                />
+                <img
+                  src={
+                    dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100
+                    ? bg_green
+                    : dataFlow?.batteryCapacity >10 && dataFlow?.batteryCapacity < 40
+                    ? bg_yellow
+                    : dataFlow?.batteryCapacity >= 0 && dataFlow?.batteryCapacity <= 10
+                    ? bg_red
+                    : bg_red
+                  }
+                  alt=""
+                  className="w-[35%] h-[25%] m-auto pointer-events-none top-8 right-[35%] absolute"
+                />
+
+                <img
+                  src={dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100
+                    ? bg_green_per
+                    : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40
+                    ? bg_yellow_per
+                    : dataFlow?.batteryCapacity >= 0 && dataFlow?.batteryCapacity <= 10
+                    ? bg_red_per
+                    : bg_red_per
+                  
+                  }
+                  alt=""
+                  className="w-[30%] h-[18%] m-auto pointer-events-none	 top-[37px]  right-[37%] absolute"
+                />
+                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[30%] absolute">
+                  {" "}
+                  {dataFlow?.batteryCapacity} %
+                </div>
+              </div>
+            </div>
+
             <div className="absolute bottom-48 left-[15%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;
               <span>A</span>

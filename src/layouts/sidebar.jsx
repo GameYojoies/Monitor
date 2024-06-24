@@ -1,9 +1,8 @@
 /** @format */
 
-import React, {useEffect, useState} from "react"
+import React from "react"
 import {monitor, report, notification, user} from "../images"
 import {Link, useLocation} from "react-router-dom"
-import {useTranslation} from "react-i18next"
 function Sidebar() {
   const navbarData = [
     {
@@ -38,7 +37,7 @@ function Sidebar() {
 
   return (
     <nav className="w-[150px] bg-white ">
-      <ul className="space-y-2 text-center shadow-xl mr-4 h-screen">
+      <ul className="space-y-2 text-center shadow-xl  h-screen mr-4">
         {navbarData?.map((el, idx) => (
           <li
             key={idx}
@@ -53,7 +52,7 @@ function Sidebar() {
                 className="w-[24px]"
                 alt="IconMonitor"
               />
-              {t(el.title)}
+              {el.title}
             </Link>
           </li>
         ))}
