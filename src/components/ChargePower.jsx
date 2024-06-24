@@ -24,7 +24,7 @@ const ChargePower = () => {
 
     const [selectdate, setSelectdate] = useState(dayjs().format('YYYY-MM-DD'));
 
-    const { pin } = useAuth();
+    const { pin , selecteLanguage} = useAuth();
     const getPin = pin ? pin.devicePn : "402A8FD7707C"
 
 
@@ -142,7 +142,8 @@ const ChargePower = () => {
 
                     <div className='flex flex-col items-center justify-center gap-2 h-[45px]'>
                         <div className='flex justify-center items-center gap-3 w-[200px] h-[45px]'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
                                 <DatePicker
                                     label={"MM-DD-YYYY"}
                                     value={currentDay}

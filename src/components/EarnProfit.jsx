@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { earnIcon } from '../images';
 import { getAccessToken } from '../utils/local-storage';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../hook/useAuth';
 
 const EarnProfit = () => {
 
@@ -23,6 +24,9 @@ const EarnProfit = () => {
 
     const [unit, setUnit] = useState("");
     const [bill, setBill] = useState("");
+
+    const { selecteLanguage} = useAuth()
+
 
     useEffect(() => {
         if (select === "select1") {
@@ -107,7 +111,7 @@ const EarnProfit = () => {
 
                 <div className={`${select == "select1" ? "hidden" : ""} h-[80] lg:w-[100%] flex justify-center items-center`}>
                     <div className="w-[200px] h-[45px]">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
                             {select === "select2" ?
                                 <DatePicker
                                     label="DD-MM-YYYY"
