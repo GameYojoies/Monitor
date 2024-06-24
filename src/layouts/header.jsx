@@ -13,7 +13,6 @@ import {
 } from "../images"
 import ModalLang from "../components/modalLang"
 import {useTranslation} from "react-i18next"
-import Avatar from "../components/Avatar"
 
 function Header() {
   const languageData = [
@@ -32,8 +31,13 @@ function Header() {
       abbreviation: "EN",
     },
   ]
-  const {logout, authenticateUser, selecteLanguage, setSelecteLanguage} =
-    useAuth()
+  const {
+    logout,
+    authenticateUser,
+    selecteLanguage,
+    setSelecteLanguage,
+    viteApiTest,
+  } = useAuth()
   // console.log("authenticateUser", authenticateUser)
 
   // console.log("selecteLanguage", selecteLanguage)
@@ -84,9 +88,9 @@ function Header() {
         <div className="flex items-center gap-5 mr-10">
           {/* profile user */}
           <div className="flex items-center gap-2">
-            <Avatar
-              src={authenticateUser?.avatar || defaultProfile}
-              size="56px"
+            <img
+              src={viteApiTest + authenticateUser?.avatar || defaultProfile}
+              className="w-12 h-12 rounded-full cursor-pointer"
             />
 
             <div className="flex flex-col items-center">
