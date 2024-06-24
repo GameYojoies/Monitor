@@ -194,7 +194,7 @@ export default function LoginPage() {
             <InputLogin
               src={iconEmail}
               name="name"
-              placeholder={t("Usernam, or email")}
+              placeholder={t("Username or email")}
               onChange={handleChangeInput}
               value={login.name}
               error={error.name}
