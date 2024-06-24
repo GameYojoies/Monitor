@@ -18,6 +18,7 @@ import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
 import ModalLang from "../components/modalLang"
 import {useTranslation} from "react-i18next"
+import validateLogin from "../validators/validate-login"
 
 export default function LoginPage() {
   const languageData = [
@@ -48,6 +49,8 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const {t, i18n} = useTranslation()
 
+  const [error, setError] = useState({})
+  // console.log("error", error)
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
   const [openPassword, setOpenPasswrod] = useState(false)
@@ -69,6 +72,13 @@ export default function LoginPage() {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault()
+      const result = validateLogin(login)
+
+      if (result) {
+        setError(result)
+      } else {
+        setError({})
+      }
 
       const name = login?.name
       const password = login?.password
@@ -82,7 +92,6 @@ export default function LoginPage() {
       })
       navigate("/")
     } catch (err) {
-      // console.log("err:", err)
       toast.error(err.message)
     }
   }
@@ -186,6 +195,7 @@ export default function LoginPage() {
             placeholder={t("Usernam, or email")}
             onChange={handleChangeInput}
             value={login.name}
+            error={error.name}
           />
 
           <InputLogin
@@ -199,6 +209,7 @@ export default function LoginPage() {
             iconeyeopen={iconeyeopen}
             setOpenPasswrod={setOpenPasswrod}
             openPassword={openPassword}
+            error={error.password}
           />
 
           <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
