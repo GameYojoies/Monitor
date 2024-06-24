@@ -37,29 +37,28 @@ function Sidebar() {
   const {t} = useTranslation()
 
   return (
-    <nav className="w-[150px] bg-white ">
+    <nav className="w-[150px] bg-white">
       <div className="shadow-xl  h-full">
-      <ul className="space-y-2 text-center ">
-        {navbarData?.map((el, idx) => (
-          <li
-            key={idx}
-            className="pt-7">
-            <Link
-              to={el.to}
-              className={`py-2 text-gray-800 hover:bg-gray-200 flex flex-col items-center ${
-                location.pathname === el.to ? "bg-gray-200" : ""
-              }`}>
-              <img
-                src={el.img}
-                className="w-[24px]"
-                alt="IconMonitor"
-              />
-              {t(el.title)}
-            </Link>
-          </li>
-        ))}
-      </ul>
-
+        <ul className="space-y-2 text-center">
+          {navbarData?.map((el, idx) => (
+            <li
+              key={idx}
+              className="pt-7">
+              <Link
+                to={el.to}
+                className={`py-2 text-gray-800 hover:bg-gray-200 flex flex-col items-center ${
+                  location.pathname === el.to ? "bg-gray-200" : ""
+                }`}>
+                <img
+                  src={el.img}
+                  className="w-[24px]"
+                  alt="IconMonitor"
+                />
+                {t(el.title)}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   )

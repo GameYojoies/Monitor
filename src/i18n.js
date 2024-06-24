@@ -16,9 +16,15 @@ const resources = {
       "Welcome to Your Monitoring":
         "ยินดีต้อนรับสู่การเฝ้าติดตามมอนิเตอร์ของคุณ",
       Monitor: "มอนิเตอร์",
-      "Report":"รายงานข้อมูล",
-      "Notification":"การแจ้งเตือน",
-      "User":"ผู้ใช้"
+      Report: "รายงานข้อมูล",
+      Notification: "การแจ้งเตือน",
+      User: "ผู้ใช้",
+      "User Information": "ข้อมูลผู้ใช้",
+      Username: "ชื่อผู้ใช้",
+      "Birth Date": "วันเกิด",
+      "Gender":"เพศ",
+      "Phone Number":"เบอร์โทรศัพท์",
+      "E-mail":"อีเมล",
     },
   },
   en: {
@@ -29,10 +35,15 @@ const resources = {
       "Visit Monitor Demo": "Visit Monitor Demo",
       "Welcome to Your Monitoring": "Welcome to Your Monitoring",
       Monitor: "Monitor",
-      "Report":"Report",
-      "Notification":"Notification",
-      "User":"User"
-
+      Report: "Report",
+      Notification: "Notification",
+      User: "User",
+      "User Information": "User Information",
+      Username: "Username",
+      "Birth Date": "Birth Date",
+      "Gender":"Gender",
+      "Phone Number":"Phone Number",
+      "E-mail":"E-mail",
     },
   },
 }
