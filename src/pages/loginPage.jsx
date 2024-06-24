@@ -1,19 +1,21 @@
 /** @format */
-import bgLogin from "../images/login/loginBg.png"
-import iconEmail from "../images/login/iconEmail.png"
-import iconPassword from "../images/login/iconPassword.png"
-import iconeyeclose from "../images/login/icon-eye-close.png"
-import iconeyeopen from "../images/login/icon-eye-open.png"
+import {
+  iconPassword,
+  iconeyeclose,
+  iconeyeopen,
+  iconThailand,
+  iconEng,
+  iconLogo,
+  iconLanguage,
+  iconDown,
+  bgLogin,
+  iconEmail
+} from "../images"
 import InputLogin from "../components/inputLogin"
 import {Link, useNavigate} from "react-router-dom"
 import {useEffect, useRef, useState} from "react"
 import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
-import iconThailand from "../images/header/TH - Thailand.png"
-import iconEng from "../images/header/US - United States.png"
-import iconLogo from "../images/header/logoSolar.png"
-import iconLanguage from "../images/header/language.png"
-import iconDown from "../images/header/iconDown.png"
 import ModalLang from "../components/modalLang"
 
 export default function LoginPage() {
@@ -55,12 +57,7 @@ export default function LoginPage() {
     setLogin({...login, [e.target.name]: e.target.value})
   }
 
-  const {
-    userLogin,
-    selecteLanguage,
-    setSelecteLanguage,
-  } = useAuth()
-
+  const {userLogin, selecteLanguage, setSelecteLanguage} = useAuth()
 
   const handleSubmitForm = async (e) => {
     try {

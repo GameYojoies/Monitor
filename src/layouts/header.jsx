@@ -1,17 +1,17 @@
 /** @format */
 
 import React, {useEffect, useRef, useState} from "react"
-import {Link, useNavigate} from "react-router-dom"
 import useAuth from "../hook/useAuth"
-import iconLogo from "../images/header/logoSolar.png"
-import defaultProfile from "../images/header/defaultProfile.png"
-import iconLanguage from "../images/header/language.png"
-import iconDown from "../images/header/iconDown.png"
-import iconLogout from "../images/header/iconLogout.png"
-import iconThailand from "../images/header/TH - Thailand.png"
-import iconEng from "../images/header/US - United States.png"
+import {
+  iconLanguage,
+  iconLogo,
+  defaultProfile,
+  iconDown,
+  iconLogout,
+  iconThailand,
+  iconEng
+} from "../images"
 import ModalLang from "../components/modalLang"
-import {getAccessToken, removeAccessToken} from "../utils/local-storage"
 
 function Header() {
   const languageData = [
