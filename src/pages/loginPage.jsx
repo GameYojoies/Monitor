@@ -18,6 +18,7 @@ import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
 import ModalLang from "../components/modalLang"
 import {useTranslation} from "react-i18next"
+import validateLogin from "../validators/validate-login"
 
 export default function LoginPage() {
   const languageData = [
@@ -48,6 +49,8 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const {t, i18n} = useTranslation()
 
+  const [error, setError] = useState({})
+  // console.log("error", error)
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
   const [openPassword, setOpenPasswrod] = useState(false)
@@ -69,6 +72,13 @@ export default function LoginPage() {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault()
+      const result = validateLogin(login)
+
+      if (result) {
+        setError(result)
+      } else {
+        setError({})
+      }
 
       const name = login?.name
       const password = login?.password
@@ -82,7 +92,6 @@ export default function LoginPage() {
       })
       navigate("/")
     } catch (err) {
-      // console.log("err:", err)
       toast.error(err.message)
     }
   }
@@ -173,46 +182,51 @@ export default function LoginPage() {
 
         <form
           onSubmit={handleSubmitForm}
-          className="bg-white w-[500px] flex flex-col items-center rounded-2xl gap-4">
-          <div>
-            <p className="text-[#001647] font-bold text-4xl mt-8">
-              <span className="text-[#F4A344]">SOLAR</span> MONITOR
-            </p>
-          </div>
+          className="relative bg-transparent w-[500px] flex flex-col items-center rounded-2xl gap-4">
+          <div className="absolute inset-0 bg-white opacity-90 rounded-2xl pointer-events-none"></div>
+          <div className="w-full relative z-10 flex flex-col items-center gap-4">
+            <div>
+              <p className="text-[#001647] font-bold text-4xl mt-8">
+                <span className="text-[#F4A344]">SOLAR</span> MONITOR
+              </p>
+            </div>
 
-          <InputLogin
-            src={iconEmail}
-            name="name"
-            placeholder={t("Usernam, or email")}
-            onChange={handleChangeInput}
-            value={login.name}
-          />
+            <InputLogin
+              src={iconEmail}
+              name="name"
+              placeholder={t("Username or email")}
+              onChange={handleChangeInput}
+              value={login.name}
+              error={error.name}
+            />
 
-          <InputLogin
-            src={iconPassword}
-            name="password"
-            type="password"
-            placeholder={t("Enter your password")}
-            onChange={handleChangeInput}
-            value={login.password}
-            iconClose={iconeyeclose}
-            iconeyeopen={iconeyeopen}
-            setOpenPasswrod={setOpenPasswrod}
-            openPassword={openPassword}
-          />
+            <InputLogin
+              src={iconPassword}
+              name="password"
+              type="password"
+              placeholder={t("Enter your password")}
+              onChange={handleChangeInput}
+              value={login.password}
+              iconClose={iconeyeclose}
+              iconeyeopen={iconeyeopen}
+              setOpenPasswrod={setOpenPasswrod}
+              openPassword={openPassword}
+              error={error.password}
+            />
 
-          <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
-            <button className="w-5/6 bg-[#0072D6] text-white h-[50px] rounded-xl">
-              {t("Login now")}
-            </button>
-
-            <Link
-              to="/"
-              className="w-full flex items-center justify-center">
-              <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
-                {t("Visit Monitor Demo")}
+            <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
+              <button className="w-5/6 bg-[#0072D6] text-white h-[50px] rounded-xl">
+                {t("Login now")}
               </button>
-            </Link>
+
+              <Link
+                to="/"
+                className="w-full flex items-center justify-center">
+                <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
+                  {t("Visit Monitor Demo")}
+                </button>
+              </Link>
+            </div>
           </div>
         </form>
       </div>

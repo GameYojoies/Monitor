@@ -12,14 +12,6 @@ const loginSchema = Joi.object({
     "string.alphanum": "password must contain number or alphabet",
     "string.min": "password must have at least 6 characters",
   }),
-  confirmPassword: Joi.string()
-    .valid(Joi.ref("password"))
-    .required()
-    .trim()
-    .messages({
-      "any.only": "password and confirm password did not match",
-      "string.empty": "confirm password is required",
-    }),
 })
 
 const validateLogin = (input) => {
