@@ -102,7 +102,7 @@ const EarnProfit = () => {
                     </div>
                 </div>
 
-                <div className={`${select == "select1" ? "hidden" : ""} lg:w-[100%] flex justify-center items-center`}>
+                <div className={`${select == "select1" ? "hidden" : ""} h-[80] lg:w-[100%] flex justify-center items-center`}>
                     <div className="w-[200px] h-[45px]">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             {select === "select2" ?
@@ -126,7 +126,7 @@ const EarnProfit = () => {
             </div>
 
 
-            <div className="text-lg flex flex-col items-center mt-6 w-[65%] lg:w-[95%] h-[430px] shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2">
+            <div className={`${select == "select1" ? "h-[430px]" : "h-[361px]"} text-lg flex flex-col items-center mt-6 w-[65%] lg:w-[95%]  shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2`}>
                 <div className="w-[90%] flex justify-between pt-10">
                     <span>Unit</span>
                     <div>
