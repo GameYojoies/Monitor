@@ -38,7 +38,8 @@ function Sidebar() {
 
   return (
     <nav className="w-[150px] bg-white ">
-      <ul className="space-y-2 text-center shadow-xl  h-screen mr-4">
+      <div className="shadow-xl  h-full">
+      <ul className="space-y-2 text-center ">
         {navbarData?.map((el, idx) => (
           <li
             key={idx}
@@ -58,6 +59,8 @@ function Sidebar() {
           </li>
         ))}
       </ul>
+
+      </div>
     </nav>
   )
 }
