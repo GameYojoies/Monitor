@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
+import 'dayjs/locale/th';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
