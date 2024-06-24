@@ -1,7 +1,7 @@
 
 
 import EarnProfit from './EarnProfit';
-import SolarPwerChartCom from './SolarPwerChartCom';
+import SolarPowerChartCom from './SolarPowerChartCom';
 
 
 const SolarPowerChart = () => {
@@ -11,7 +11,7 @@ const SolarPowerChart = () => {
     <div className="w-full flex justify-center mt-10 mb-10">
       <div className="w-[90%] flex flex-col lg:flex-row justify-center md:justify-between gap-10">
         <div className="w-[100%] lg:w-[70%] flex flex-col">
-          <SolarPwerChartCom/>
+          <SolarPowerChartCom/>
         </div>
         <div className='w-[100%] lg:w-[30%]' >
         <EarnProfit/>
