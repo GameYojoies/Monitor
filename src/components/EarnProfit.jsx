@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import icons1 from '../images/Monitor/monitorIcon2.png';
+import {earnIcon} from '../images';
 import { getAccessToken } from '../utils/local-storage';
 
 const EarnProfit = () => {
@@ -75,7 +75,7 @@ const EarnProfit = () => {
     return (
         <div className="flex flex-col items-center">
             <div className="flex items-center gap-2">
-                <img src={icons1} alt="" className="h-[40px]" />
+                <img src={earnIcon} alt="" className="h-[40px]" />
                 <h1 className="text-[#001647] font-semibold text-2xl">Earn Profit Energy Bill</h1>
             </div>
 

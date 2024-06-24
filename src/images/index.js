@@ -26,6 +26,11 @@ import bg_red from "../images/Monitor/bg-red.png"
 import bg_green_per from "../images/Monitor/bg-green-per.png"
 import bg_yellow_per from "../images/Monitor/bg-yellow-per.png"
 import bg_red_per from "../images/Monitor/bg-red-per.png"
+import chargIcon from "../images/Report/charge.png"
+import solarIcon from "../images/Monitor/monitorIcon1.png"
+import earnIcon from "../images/Monitor/monitorIcon2.png"
+
+
 
 export {
   monitor,
@@ -54,4 +59,8 @@ export {
   bg_yellow_per,
   bg_red_per,
   iconUser,
+  chargIcon,
+  solarIcon,
+  earnIcon
+
 }

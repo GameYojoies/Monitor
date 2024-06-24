@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
-import icons1 from '../images/Monitor/monitorIcon1.png';
-import { useContext, useEffect, useState } from 'react';
+import {chargIcon} from '../images'
+import {  useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ import useAuth from "../hook/useAuth";
 
 const ChargePower = () => {
     const [select, setSelect] = useState("select2");
-    const [currentPv, setCurrentPv] = useState([]);
+ 
     const [pvPower, setPvPower] = useState([]);
     const [hour, setHour] = useState([]);
     const [allDay, setAllDay] = useState("");
@@ -24,17 +24,12 @@ const ChargePower = () => {
 
     const [selectdate, setSelectdate] = useState(dayjs().format('YYYY-MM-DD'));
 
-    const { pin, setSolarDate } = useAuth();
+    const { pin } = useAuth();
     const getPin = pin ? pin.devicePn : "402A8FD7707C"
 
 
     useEffect(() => {
-
-        setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=40`);
-
-
-
-
+        setAllDay(`/reportData/chargePower?devicePn=${getPin}&date=${selectdate}`);
     }, [select, pin]);
 
     const getAPI = async () => {
@@ -51,8 +46,8 @@ const ChargePower = () => {
             const getData = response.data;
 
             if (getData.code === 0) {
-                const pvPowerGenerations = response.data.result.map(data => data.pvPowerGeneration);
-                const currentPv = response.data.result.map(data => data.currentLoadPower);
+                const pvChargingPower = response.data.result.map(data => data.pvChargingPower);
+               
                 const allHours = response.data.records;
 
                 let collectHours = [];
@@ -61,8 +56,7 @@ const ChargePower = () => {
                 }
 
                 setHour(collectHours);
-                setPvPower(pvPowerGenerations);
-                setCurrentPv(currentPv);
+                setPvPower(pvChargingPower)
             } else {
                 toast.error(getData.code);
             }
@@ -75,16 +69,12 @@ const ChargePower = () => {
         getAPI();
     }, [allDay]);
 
-    const handleSelect = (e) => {
-        setSelect(e);
-    };
 
     // select tap events date
     const handleSelectDate = (e) => {
         const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
         setSelectdate(date);
-        setSolarDate(date)
-        setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=10&date=${date}`);
+        setAllDay(`/reportData/chargePower?devicePn=${getPin}&date=${date}`);
     };
 
 
@@ -94,7 +84,7 @@ const ChargePower = () => {
             trigger: 'axis'
         },
         legend: {
-            data: ['Current load power', 'PV power on the day'],
+            data: ['PV Charging Power'],
         },
         grid: {
             left: '3%',
@@ -118,16 +108,11 @@ const ChargePower = () => {
             type: 'value',
         },
         series: [
+            
             {
-                name: 'Current load power',
+                name: 'PV Charging Power',
                 type: 'line',
-                color: '#23D37F',
-                data: currentPv
-            },
-            {
-                name: 'PV power on the day',
-                type: 'line',
-                color: '#F6841B',
+                color: '#472BF0',
                 data: pvPower
             }
         ]
@@ -135,18 +120,15 @@ const ChargePower = () => {
     return (
         <div>
             <div className='flex items-center gap-2'>
-                <img src={icons1} alt="" className='h-[40px]' />
-                <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
+                <img src={chargIcon} alt="" className='h-[40px]' />
+                <h1 className='text-[#001647] font-semibold text-2xl'>Charge Power</h1>
             </div>
 
             <div className='flex flex-col gap-2 p-2 items-center justify-center shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
                     <span className='font-semibold'>Today</span>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
-                        <div
-                            onClick={() => handleSelect("select2")}
-                            className={`w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
-                        >
+                        <div className={`w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] bg-[#0072D6] text-white`} >
                             <span>Day</span>
                         </div>
 

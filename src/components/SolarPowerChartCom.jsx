@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
-import icons1 from '../images/Monitor/monitorIcon1.png';
-import { useContext, useEffect, useState } from 'react';
+import {solarIcon} from '../images';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -43,7 +43,6 @@ const SolarPwerChartCom = () => {
         } else {
             setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=30&${selectyear}`);
         }
-
 
 
     }, [select, pin]);
@@ -156,7 +155,7 @@ const SolarPwerChartCom = () => {
     return (
         <div>
             <div className='flex items-center gap-2'>
-                <img src={icons1} alt="" className='h-[40px]' />
+                <img src={solarIcon} alt="" className='h-[40px]' />
                 <h1 className='text-[#001647] font-semibold text-2xl'>Solar Power Chart</h1>
             </div>
 
