@@ -48,6 +48,9 @@ const SolarPwerChartCom = () => {
     }, [select, pin]);
 
     const getAPI = async () => {
+
+        if (!allDay) return;
+        
         try {
             const response = await axios({
                 method: 'get',

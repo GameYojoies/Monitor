@@ -29,6 +29,8 @@ import bg_red_per from "../images/Monitor/bg-red-per.png"
 import chargIcon from "../images/Report/charge.png"
 import solarIcon from "../images/Monitor/monitorIcon1.png"
 import earnIcon from "../images/Monitor/monitorIcon2.png"
+import calendarIcon from "../images/Monitor/monitorIcon3.png"
+
 
 
 
@@ -61,6 +63,7 @@ export {
   iconUser,
   chargIcon,
   solarIcon,
-  earnIcon
+  earnIcon,
+  calendarIcon
 
 }

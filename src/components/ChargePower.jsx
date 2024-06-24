@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
-import {chargIcon} from '../images'
-import {  useEffect, useState } from 'react';
+import { chargIcon, calendarIcon } from '../images'
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ import useAuth from "../hook/useAuth";
 
 const ChargePower = () => {
     const [select, setSelect] = useState("select2");
- 
+
     const [pvPower, setPvPower] = useState([]);
     const [hour, setHour] = useState([]);
     const [allDay, setAllDay] = useState("");
@@ -33,6 +33,9 @@ const ChargePower = () => {
     }, [select, pin]);
 
     const getAPI = async () => {
+
+        if (!allDay) return;
+        
         try {
             const response = await axios({
                 method: 'get',
@@ -47,7 +50,7 @@ const ChargePower = () => {
 
             if (getData.code === 0) {
                 const pvChargingPower = response.data.result.map(data => data.pvChargingPower);
-               
+
                 const allHours = response.data.records;
 
                 let collectHours = [];
@@ -108,7 +111,7 @@ const ChargePower = () => {
             type: 'value',
         },
         series: [
-            
+
             {
                 name: 'PV Charging Power',
                 type: 'line',
@@ -126,7 +129,10 @@ const ChargePower = () => {
 
             <div className='flex flex-col gap-2 p-2 items-center justify-center shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
-                    <span className='font-semibold'>Today</span>
+                    <div className='flex gap-1 items-center'>
+                        <img src={calendarIcon} alt="" className='h-[20px]' />
+                        <span className='font-semibold'>Today</span>
+                    </div>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
                         <div className={`w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] bg-[#0072D6] text-white`} >
                             <span>Day</span>
