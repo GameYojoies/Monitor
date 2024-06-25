@@ -4,7 +4,7 @@ import Joi from "joi"
 
 const loginSchema = Joi.object({
   name: Joi.string().trim().required().messages({
-    "string.empty": "first name is required",
+    "string.empty": "user name or email is required",
   }),
 
   password: Joi.string().alphanum().min(6).required().trim().messages({

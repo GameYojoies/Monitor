@@ -55,8 +55,7 @@ export default function LoginPage() {
   const [iconRotate, setIconRotate] = useState(false)
   const [openPassword, setOpenPasswrod] = useState(false)
   // console.log("openPassword", openPassword)
-
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+  const [focusedInput, setFocusedInput] = useState(null)
 
   const languageRef = useRef()
 
@@ -97,17 +96,6 @@ export default function LoginPage() {
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowHeight(window.innerHeight)
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
     const handleClickOutside = (event) => {
       if (languageRef.current && !languageRef.current.contains(event.target)) {
         setOpenModal(false)
@@ -128,16 +116,14 @@ export default function LoginPage() {
 
   return (
     <div className="w-full ">
-      <div
-        className="relative z-0 w-full"
-        style={{height: windowHeight}}>
+      <div className="relative z-0 w-[100vw] h-[100vh]">
         <img
           src={bgLogin}
           className="w-full h-full "
         />
       </div>
 
-      <div className="absolute z-1 w-full h-full top-0 flex flex-col items-center justify-start gap-10">
+      <div className="absolute z-1 w-full h-full top-0 flex flex-col items-center justify-start gap-2">
         {/* selecteLanguage */}
         <div
           ref={languageRef}
@@ -187,7 +173,7 @@ export default function LoginPage() {
           <div className="w-full relative z-10 flex flex-col items-center gap-4">
             <div>
               <p className="text-[#001647] font-bold text-4xl mt-8">
-                <span className="text-[#F4A344]">SOLAR</span> MONITOR
+                <span className="text-[#4EC4EF]">SOLAR</span> MONITOR
               </p>
             </div>
 
@@ -198,6 +184,8 @@ export default function LoginPage() {
               onChange={handleChangeInput}
               value={login.name}
               error={error.name}
+              setFocusedInput={setFocusedInput}
+              focusedInput={focusedInput}
             />
 
             <InputLogin
@@ -212,6 +200,8 @@ export default function LoginPage() {
               setOpenPasswrod={setOpenPasswrod}
               openPassword={openPassword}
               error={error.password}
+              setFocusedInput={setFocusedInput}
+              focusedInput={focusedInput}
             />
 
             <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
