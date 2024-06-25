@@ -2,12 +2,13 @@ import { useState } from "react"
 import SolarPowerChartCom from "../components/SolarPowerChartCom"
 import ChargePower from "../components/ChargePower"
 import { useTranslation } from "react-i18next"
+import SolarDetail from "../components/SolarDetail"
 
 
 export default function ReportPage() {
 
   const [select, setSelect] = useState("select1")
-const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const handleSelect = (e) => {
     setSelect(e)
@@ -56,7 +57,7 @@ const {t} = useTranslation()
               <SolarPowerChartCom /> :
               select == "select2" ?
                 <ChargePower /> :
-                ""
+                < SolarDetail />
             }
           </div>
 

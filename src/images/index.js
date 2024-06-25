@@ -33,6 +33,11 @@ import calendarIcon from "../images/Monitor/monitorIcon3.png"
 import iconsZoomIn from "../images/Report/ZoomIn.png"
 import iconsZoomOut from "../images/Report/ZoomOut.png"
 import iconsReset from "../images/Report/Reset.png"
+import iconsSys from "../images/Report/iconsSys.png"
+import iconsSys1 from "../images/Report/iconsSys1.png"
+import iconsSys2 from "../images/Report/iconsSys2.png"
+import iconsSys3 from "../images/Report/iconsSys3.png"
+
 
 
 export {
@@ -69,5 +74,9 @@ export {
   iconsZoomIn,
   iconsZoomOut,
   iconsReset,
+  iconsSys,
+  iconsSys1,
+  iconsSys2,
+  iconsSys3,
 
 }

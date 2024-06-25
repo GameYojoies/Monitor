@@ -70,8 +70,8 @@ const EarnProfit = () => {
 
             const getData = response.data;
             if (getData.code === 0) {
-                setUnit(getData.result.unit);
-                setBill(Number(getData.result.profitEnergyBill).toFixed(2));
+                setUnit(Number(getData.result.unit).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                setBill(Number(getData.result.profitEnergyBill).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             } else {
                 toast.error(getData.code);
             }
