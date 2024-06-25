@@ -1,6 +1,6 @@
 import ReactECharts from 'echarts-for-react';
-import {solarIcon} from '../images';
-import {useEffect, useState } from 'react';
+import { solarIcon, iconsZoomIn, iconsZoomOut, iconsReset } from '../images';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 const SolarPwerChartCom = () => {
 
-    const {t, i18n} = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [select, setSelect] = useState("select2");
     const [currentPv, setCurrentPv] = useState([]);
@@ -33,6 +33,8 @@ const SolarPwerChartCom = () => {
 
     const { pin, setSolarDate, selecteLanguage } = useAuth();
     const getPin = pin ? pin.devicePn : "402A8FD7707C"
+
+    const echartsRef = useRef(null);
 
 
     useEffect(() => {
@@ -54,7 +56,7 @@ const SolarPwerChartCom = () => {
     const getAPI = async () => {
 
         if (!allDay) return;
-        
+
         try {
             const response = await axios({
                 method: 'get',
@@ -115,6 +117,56 @@ const SolarPwerChartCom = () => {
         setSelectyear(year);
         setAllDay(`/reportData/powerChart?devicePn=${getPin}&type=30&${year}`);
     };
+    // Zoom In function
+    const handleZoomIn = () => {
+        const echartsInstance = echartsRef.current.getEchartsInstance();
+        const zoom = echartsInstance.getOption().dataZoom[0];
+        let start = zoom.start;
+        let end = zoom.end;
+
+        if (end - start > 20) {
+            start += 10;
+            end -= 10;
+        }
+
+        echartsInstance.dispatchAction({
+            type: 'dataZoom',
+            start,
+            end
+        });
+    };
+
+    // Zoom Out function
+    const handleZoomOut = () => {
+        const echartsInstance = echartsRef.current.getEchartsInstance();
+        const zoom = echartsInstance.getOption().dataZoom[0];
+        let start = zoom.start;
+        let end = zoom.end;
+
+        if (start > 0 || end < 100) {
+            start -= 10;
+            end += 10;
+        }
+
+        if (start < 0) start = 0;
+        if (end > 100) end = 100;
+
+        echartsInstance.dispatchAction({
+            type: 'dataZoom',
+            start,
+            end
+        });
+    };
+
+    // Reset Zoom function
+    const handleResetZoom = () => {
+        const echartsInstance = echartsRef.current.getEchartsInstance();
+        echartsInstance.dispatchAction({
+            type: 'dataZoom',
+            start: 0,
+            end: 100
+        });
+    };
 
     const option = {
         tooltip: {
@@ -144,6 +196,20 @@ const SolarPwerChartCom = () => {
         yAxis: {
             type: 'value',
         },
+        dataZoom: [
+            {
+                type: 'inside',
+                xAxisIndex: 0,
+                start: 0,
+                end: 100,
+            },
+            {
+                type: 'inside',
+                xAxisIndex: 0,
+                start: 0,
+                end: 100,
+            }
+        ],
         series: [
             {
                 name: t("ChartSpan9"),
@@ -167,7 +233,7 @@ const SolarPwerChartCom = () => {
             </div>
 
             <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
-                <div className='w-[90%] mt-8 flex items-center justify-center gap-4'>
+                <div className='w-[90%] mt-8 flex items-center justify-center gap-4 relative'>
                     <span className='font-semibold'>{t("ChartSpan2")}</span>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[350px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
                         <div
@@ -201,7 +267,7 @@ const SolarPwerChartCom = () => {
                             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
                                 {select === "select3" ?
                                     <DatePicker
-                                        label={"MM-YYYY"}
+                                        label={t("ChartSpan12")}
                                         value={currentDay}
                                         views={['month', 'year']}
                                         onChange={(newValue) => handleSelectMonth(newValue)}
@@ -209,7 +275,7 @@ const SolarPwerChartCom = () => {
                                     /> :
                                     select === "select4" ?
                                         <DatePicker
-                                            label={"YYYY"}
+                                            label={t("ChartSpan13")}
                                             value={currentDay}
                                             views={['year']}
                                             onChange={(newValue) => handleSelectYear(newValue)}
@@ -217,7 +283,7 @@ const SolarPwerChartCom = () => {
                                         /> :
                                         select === "select2" ?
                                             <DatePicker
-                                                label={"MM-DD-YYYY"}
+                                                label={t("ChartSpan11")}
                                                 value={currentDay}
                                                 onChange={(newValue) => handleSelectDate(newValue)}
                                                 renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
@@ -226,11 +292,26 @@ const SolarPwerChartCom = () => {
                             </LocalizationProvider>
                         </div>
                     </div>
+                    <div className='flex w-[90%] justify-end gap-3 absolute top-14 right-0 text-[12px]'>
+                        <button className='flex' onClick={handleZoomIn}>
+                            <img src={iconsZoomIn} alt="" className='h-[20px]' />
+                            <span className='text-[#3D5A80]' >{t("ChartSpan14")}</span>
+                        </button>
+                        <button className='flex' onClick={handleZoomOut}>
+                            <img src={iconsZoomOut} alt="" className='h-[20px]' />
+                            <span className='text-[#3D5A80]' >{t("ChartSpan15")}</span>
+                        </button>
+                        <button className='flex' onClick={handleResetZoom}>
+                            <img src={iconsReset} alt="" className='h-[20px]' />
+                            <span className='text-[#3D5A80]' >{t("ChartSpan16")}</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div className='mt-6 flex items-center h-[400px] w-[95%] relative'>
                     <span className='inline-block transform -rotate-90 absolute left-[-30px]'>{t("ChartSpan7")}</span>
                     <ReactECharts
+                        ref={echartsRef}
                         option={option}
                         notMerge={true}
                         lazyUpdate={true}

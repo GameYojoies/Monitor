@@ -30,8 +30,9 @@ import chargIcon from "../images/Report/charge.png"
 import solarIcon from "../images/Monitor/monitorIcon1.png"
 import earnIcon from "../images/Monitor/monitorIcon2.png"
 import calendarIcon from "../images/Monitor/monitorIcon3.png"
-
-
+import iconsZoomIn from "../images/Report/ZoomIn.png"
+import iconsZoomOut from "../images/Report/ZoomOut.png"
+import iconsReset from "../images/Report/Reset.png"
 
 
 export {
@@ -64,6 +65,9 @@ export {
   chargIcon,
   solarIcon,
   earnIcon,
-  calendarIcon
+  calendarIcon,
+  iconsZoomIn,
+  iconsZoomOut,
+  iconsReset,
 
 }

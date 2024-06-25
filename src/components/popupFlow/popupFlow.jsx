@@ -1,5 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 const PopupFlow = ({ count, data }) => {
+  const {t} = useTranslation()
+
   console.log(data,"data");
   const dataByCount = {
     Load: [
@@ -60,7 +64,7 @@ const PopupFlow = ({ count, data }) => {
       {selectedData.map(({ label, key, unit }) => (
         <React.Fragment key={label}>
           <div className="w-[90%] m-auto flex items-center justify-between">
-            <span className="ml-5">{label}</span>
+            <span className="ml-5">{t(label) }</span>
             <div className="mr-5 w-12 relative flex items-center">
               <span className="text-base text-right absolute right-[3rem]">
                 {data?.[key] || 0}
