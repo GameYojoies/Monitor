@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 const PopupFlow = ({ count, data }) => {
   const {t} = useTranslation()
 
-  console.log(data,"data");
   const dataByCount = {
     Load: [
       { label: "Load percentage", key: "loadPercentage", unit: "%" },
