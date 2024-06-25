@@ -60,6 +60,13 @@ const resources = {
       "ChartPSpan3": "กำลังไฟชาร์จ PV",
       "ChartPSpan4": "รายละเอียด",
 
+      // system details
+      "SystemDetailsSpan1": "System Components",
+      "SystemDetailsSpan2": "System Metrics",
+      "SystemDetailsSpan3": "Details",
+      "SystemDetailsSpan4": "แผงโซลาร์เซลล์",
+      "SystemDetailsSpan5": "เลือกวันที่",
+
       // Bill
       "BillSpan1": "ผลกำไรค่าไฟ",
       "BillSpan2": "ยูนิตที่ใช้",
@@ -170,6 +177,13 @@ const resources = {
       "ChartPSpan2": "Today",
       "ChartPSpan3": "PV Charging Power",
       "ChartPSpan4": "System Details",
+
+      // system details
+      "SystemDetailsSpan1": "System Components",
+      "SystemDetailsSpan2": "System Metrics",
+      "SystemDetailsSpan3": "Details",
+      "SystemDetailsSpan4": "Photovoltaic",
+      "SystemDetailsSpan5": "Selected Date",
 
       // Bill
       "BillSpan1": "Earn Profit Energy Bill",

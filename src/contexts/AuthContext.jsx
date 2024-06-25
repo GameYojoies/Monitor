@@ -18,6 +18,7 @@ export default function AuthContextProvider({children}) {
   const [fetch, setFetch] = useState(false)
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
+  const [dataStore, setDataStore] = useState([])
 
   const [selecteLanguage, setSelecteLanguage] = useState(
     localStorage.getItem("Language")
@@ -81,14 +82,6 @@ export default function AuthContextProvider({children}) {
     setFetch(false)
   }
 
-  const useScrollToTop = () => {
-    const {pathname} = useLocation()
-
-    useEffect(() => {
-      window.scrollTo({top: 0, behavior: "smooth"})
-    }, [pathname])
-  }
-
   return (
     <AuthContext.Provider
       value={{
@@ -108,7 +101,8 @@ export default function AuthContextProvider({children}) {
         setSolarDate,
         viteApiTest,
         languageMain,
-        useScrollToTop,
+        dataStore,
+        setDataStore,
       }}>
       <div className={languageMain}>{children}</div>
     </AuthContext.Provider>

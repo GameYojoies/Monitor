@@ -41,7 +41,7 @@ const SolarEnergyFlow = () => {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
-    };  
+    };
     const timestamp = dataFlow?.time;
     const date = new Date(timestamp);
     const language = localStorage.getItem("Language") || "en-US";
@@ -106,7 +106,7 @@ const SolarEnergyFlow = () => {
       setColorText(1);
     }
     if (position === "PV") {
-      setTextHead( `${t("Photovoltaic power")}`);
+      setTextHead(`${t("Photovoltaic power")}`);
       setColorText(2);
     }
     if (position === "Load") {
@@ -121,10 +121,8 @@ const SolarEnergyFlow = () => {
       setTextHead(`${t("Battery")}`);
       setColorText(5);
     }
-
   };
- useEffect(() => {
-    console.log(textHead, "textHead");
+  useEffect(() => {
     if (textHead) {
       handleClick(count);
     }
@@ -138,8 +136,7 @@ const SolarEnergyFlow = () => {
           {t("Solar Energy Flow")}
         </h1>
         <div className="bg-gradient-to-r from-[#3DC42D] to-[#31AEE3] shadow-md h-8 w-20 rounded-md  flex justify-center items-center">
-          <span className="text-white"> {t("ON")}
-          </span>
+          <span className="text-white"> {t("ON")}</span>
         </div>
       </div>
       <div className="h-5"></div>

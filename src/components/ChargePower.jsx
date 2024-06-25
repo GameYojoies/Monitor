@@ -34,6 +34,11 @@ const ChargePower = () => {
         setAllDay(`/reportData/chargePower?devicePn=${getPin}&date=${selectdate}`);
     }, [select, pin]);
 
+    useEffect(() => {
+        getAPI();
+    }, [allDay]);
+
+
     const getAPI = async () => {
         if (!allDay) return;
 
@@ -68,10 +73,7 @@ const ChargePower = () => {
         }
     };
 
-    useEffect(() => {
-        getAPI();
-    }, [allDay]);
-
+  
     // select tap events date
     const handleSelectDate = (e) => {
         const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
