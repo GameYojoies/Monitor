@@ -198,7 +198,7 @@ const ChargePower = () => {
                         <span className='font-semibold'>{t("ChartPSpan2")}</span>
                     </div>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
-                        <div className={`w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] bg-[#0072D6] text-white`} >
+                        <div className={`cursor-pointer w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] bg-[#0072D6] text-white`} >
                             <span>{t("ChartSpan3")}</span>
                         </div>
                     </div>

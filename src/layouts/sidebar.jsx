@@ -39,14 +39,14 @@ function Sidebar() {
   return (
     <nav className="w-[150px] bg-white">
       <div className="shadow-xl  h-full">
-        <ul className="space-y-2 text-center">
+        <ul className="space-y-0 text-center">
           {navbarData?.map((el, idx) => (
             <li
               key={idx}
-              className="pt-7">
+              className="pt-0">
               <Link
                 to={el.to}
-                className={`py-2 text-gray-800 hover:bg-gray-200 flex flex-col items-center ${
+                className={`py-7 text-gray-800 hover:bg-gray-200 flex flex-col items-center ${
                   location.pathname === el.to ? "bg-gray-200" : ""
                 }`}>
                 <img

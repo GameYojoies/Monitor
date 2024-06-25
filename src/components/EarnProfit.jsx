@@ -93,19 +93,19 @@ const EarnProfit = () => {
                 <div className="shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[250px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1">
                     <div
                         onClick={() => handleSelect("select1")}
-                        className={`w-[33.3%] h-[100%] flex items-center justify-center border-r-2 border-l-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
+                        className={`cursor-pointer w-[33.3%] h-[100%] flex items-center justify-center border-r-2 border-l-2 border-[#DADADA70] ${select === "select1" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
                         <span>{t("ChartSpan6")}</span>
                     </div>
                     <div
                         onClick={() => handleSelect("select2")}
-                        className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
+                        className={`cursor-pointer w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
                         <span>{t("ChartSpan3")}</span>
                     </div>
                     <div
                         onClick={() => handleSelect("select3")}
-                        className={`w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
+                        className={`cursor-pointer w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
                         <span>{t("ChartSpan4")}</span>
                     </div>
