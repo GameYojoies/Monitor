@@ -26,7 +26,7 @@ const EarnProfit = () => {
     const [unit, setUnit] = useState("");
     const [bill, setBill] = useState("");
 
-    const { selecteLanguage} = useAuth()
+    const { selecteLanguage } = useAuth()
 
 
     useEffect(() => {
@@ -115,14 +115,14 @@ const EarnProfit = () => {
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
                             {select === "select2" ?
                                 <DatePicker
-                                    label="DD-MM-YYYY"
+                                    label={t("ChartSpan11")}
                                     value={dayjs()}
                                     onChange={(newValue) => handleSelectDay(newValue)}
                                     renderInput={(params) => <TextField {...params} />}
                                 /> :
                                 select === "select3" ?
                                     <DatePicker
-                                        label="MM-YYYY"
+                                        label={t("ChartSpan12")}
                                         views={['month', 'year']}
                                         value={dayjs()}
                                         onChange={(newValue) => handleSelectMonth(newValue)}
@@ -152,11 +152,18 @@ const EarnProfit = () => {
 
                 <div className="relative w-40 h-40 mt-6">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
-                        <circle className="text-gray-200 stroke-current" strokeWidth="14" cx="50" cy="50" r="40" fill="transparent" />
-                        <circle className="text-[#107c4ad5] progress-ring__circle stroke-current" strokeWidth="14" strokeLinecap="round" cx="50" cy="50" r="40" fill="transparent" strokeDasharray="251.2" strokeDashoffset={`calc(251.2 - (251.2 * ${percentage}) / 100)`} />
+                        <defs>
+                            <linearGradient id="gradient" gradientTransform="rotate(30)">
+                                <stop offset="0%" stopColor="#21E789" />
+                                <stop offset="100%" stopColor="#097D46" />
+                            </linearGradient>
+                        </defs>
+                        <circle className="text-[#D3F7E6] stroke-current" strokeWidth="18" cx="50" cy="50" r="40" fill="transparent" />
+                        <circle transform="rotate(-90 50 50)" stroke="url(#gradient)" strokeWidth="18" strokeLinecap="round" cx="50" cy="50" r="40" fill="transparent" strokeDasharray="251.2" strokeDashoffset={`calc(251.2 - (251.2 * ${percentage}) / 100)`} />
                         <text x="50" y="50" fill="#107C49" fontSize="18" textAnchor="middle" alignmentBaseline="middle" className="font-extrabold">{percentage}%</text>
                     </svg>
                 </div>
+
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import axios from "axios";
 import { inverter, load, grid, pv, battery, } from "../images/Mydevice";
 import { getAccessToken } from "../utils/local-storage";
 import useAuth from "../hook/useAuth";
+import { useTranslation } from "react-i18next";
 
 
 const Device = () => {
@@ -11,7 +12,7 @@ const Device = () => {
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
   const { fetch, setFetch, setPin, dataFlow, setDataFlow } = useAuth();
-  console.log(fetch);
+ const { t } =  useTranslation()
 
   const fetchData = async () => {
     try {
@@ -39,24 +40,30 @@ const Device = () => {
   const devices = [
     {
       id: 1,
-      name: "Load",
+      name: t("DeviceSpan4"),
       power: dataFlow ? dataFlow.currentLoadPower + " W" : "0" + " W",
       image: load,
     },
     {
       id: 2,
-      name: "Inverter",
+      name: t("DeviceSpan5"),
       power: dataFlow ? dataFlow.outputActivePower + " W" : "0" + " W",
       image: inverter,
     },
-    { id: 3, name: "PV", power: dataFlow ? dataFlow.powerCharging + " W" : "0" + " W", image: pv },
+    { id: 3, 
+      name: t("DeviceSpan6"),
+      power: dataFlow ? dataFlow.powerCharging + " W" : "0" + " W", 
+      image: pv },
     {
       id: 4,
-      name: "Battery",
+      name: t("DeviceSpan7"),
       power: dataFlow ? dataFlow.batteryDischargeCurrent + " A" : "0" + " A",
       image: battery,
     },
-    { id: 5, name: "Grid", power: dataFlow ? dataFlow.gridFrequency + " Hz" : "0" + " Hz", image: grid },
+    { id: 5, 
+      name: t("DeviceSpan8"),
+      power: dataFlow ? dataFlow.gridFrequency + " Hz" : "0" + " Hz", 
+      image: grid },
   ];
 
   const togglePopup = (device) => {
@@ -75,7 +82,7 @@ const Device = () => {
               className="flex flex-col bg-white shadow-md"
             >
               <div
-                className={`rounded-[5px] py-2 text-center cursor-pointer ${device.id === 1
+                className={`rounded-[5px] py-2 text-center cursor-pointer font-bold ${device.id === 1
                   ? "bg-[#BBD6EE]"
                   : device.id === 2
                     ? "bg-[#FF9F9F]"
@@ -114,7 +121,7 @@ const Device = () => {
             </div>
           ))}
 
-          {showPopup && selectedDevice && (
+          {/* {showPopup && selectedDevice && (
             <div
               onClick={() => setShowPopup(false)}
               className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-40"
@@ -132,7 +139,7 @@ const Device = () => {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

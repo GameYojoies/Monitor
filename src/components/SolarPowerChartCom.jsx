@@ -198,7 +198,7 @@ const SolarPwerChartCom = () => {
         },
         dataZoom: [
             {
-                type: 'slider',
+                type: 'inside',
                 xAxisIndex: 0,
                 start: 0,
                 end: 100,
@@ -267,7 +267,7 @@ const SolarPwerChartCom = () => {
                             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
                                 {select === "select3" ?
                                     <DatePicker
-                                        label={"MM-YYYY"}
+                                        label={t("ChartSpan12")}
                                         value={currentDay}
                                         views={['month', 'year']}
                                         onChange={(newValue) => handleSelectMonth(newValue)}
@@ -275,7 +275,7 @@ const SolarPwerChartCom = () => {
                                     /> :
                                     select === "select4" ?
                                         <DatePicker
-                                            label={"YYYY"}
+                                            label={t("ChartSpan13")}
                                             value={currentDay}
                                             views={['year']}
                                             onChange={(newValue) => handleSelectYear(newValue)}
@@ -283,7 +283,7 @@ const SolarPwerChartCom = () => {
                                         /> :
                                         select === "select2" ?
                                             <DatePicker
-                                                label={"DD-MM-YYYY"}
+                                                label={t("ChartSpan11")}
                                                 value={currentDay}
                                                 onChange={(newValue) => handleSelectDate(newValue)}
                                                 renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
@@ -295,15 +295,15 @@ const SolarPwerChartCom = () => {
                     <div className='flex w-[90%] justify-end gap-3 absolute top-14 right-0 text-[12px]'>
                         <button className='flex' onClick={handleZoomIn}>
                             <img src={iconsZoomIn} alt="" className='h-[20px]' />
-                            <span className='text-[#3D5A80]' >Zoom in</span>
+                            <span className='text-[#3D5A80]' >{t("ChartSpan14")}</span>
                         </button>
                         <button className='flex' onClick={handleZoomOut}>
                             <img src={iconsZoomOut} alt="" className='h-[20px]' />
-                            <span className='text-[#3D5A80]' >Zoom out</span>
+                            <span className='text-[#3D5A80]' >{t("ChartSpan15")}</span>
                         </button>
                         <button className='flex' onClick={handleResetZoom}>
                             <img src={iconsReset} alt="" className='h-[20px]' />
-                            <span className='text-[#3D5A80]' >Reset</span>
+                            <span className='text-[#3D5A80]' >{t("ChartSpan16")}</span>
                         </button>
                     </div>
                 </div>

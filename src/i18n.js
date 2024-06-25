@@ -25,6 +25,17 @@ const resources = {
       "Gender": "เพศ",
       "Phone Number": "เบอร์โทรศัพท์",
       "E-mail": "อีเมล",
+
+       // Device
+       "DeviceSpan1" : "อุปกรณ์ของฉัน",
+       "DeviceSpan2" : "ชื่ออุปกรณ์",
+       "DeviceSpan3" : "หมายเลขพินอุปกรณ์",
+       "DeviceSpan4" : "โหลด",
+       "DeviceSpan5" : "อินเวอเตอร์",
+       "DeviceSpan6" : "แผงโซลาร์เซลล์",
+       "DeviceSpan7" : "แบตเตอรี่",
+       "DeviceSpan8" : "การไฟฟ้า",
+
       // Chart
       "ChartSpan1": "แผนภูมิพลังงาน",
       "ChartSpan2": "เลือกประเภท",
@@ -33,9 +44,21 @@ const resources = {
       "ChartSpan5": "ปี",
       "ChartSpan6": "รวม",
       "ChartSpan7": "พลังงาน (kWh)",
-      "ChartSpan8": "H",
+      "ChartSpan8": "ชม",
       "ChartSpan9": "ค่าโหลดกำลังไฟฟ้าที่ใช้จริง",
       "ChartSpan10": "การผลิตไฟฟ้าโซลาร์เซลล์ ทั้งหมดในวันนั้น",
+      "ChartSpan11": "วว-ดด-ปปปปป",
+      "ChartSpan12": "ดด-ปปปป",
+      "ChartSpan13": "ปปปป",
+      "ChartSpan14": "ขยายเข้า",
+      "ChartSpan15": "ขยายออก",
+      "ChartSpan16": "ตั้งค่าอีกครั้ง",
+
+      // Chart Power
+      "ChartPSpan1": "พลังงานชาร์จ",
+      "ChartPSpan2": "วันนี้",
+      "ChartPSpan3": "กำลังไฟชาร์จ PV",
+      "ChartPSpan4": "รายละเอียด",
 
       // Bill
       "BillSpan1": "ผลกำไรค่าไฟ",
@@ -108,6 +131,16 @@ const resources = {
       "Phone Number": "Phone Number",
       "E-mail": "E-mail",
 
+      // Device
+      "DeviceSpan1" : "My Device",
+      "DeviceSpan2" : "Device Name",
+      "DeviceSpan3" : "Device's PN",
+      "DeviceSpan4" : "Load",
+      "DeviceSpan5" : "Inverter",
+      "DeviceSpan6" : "PV",
+      "DeviceSpan7" : "Battery",
+      "DeviceSpan8" : "Grid",
+
       // Chart
       "ChartSpan1": "Solar Power Chart",
       "ChartSpan2": "Selected Type",
@@ -119,7 +152,18 @@ const resources = {
       "ChartSpan8": "H",
       "ChartSpan9": "Current load power",
       "ChartSpan10": "PV power on the day",
-      "ChartSpan11": "",
+      "ChartSpan11": "DD-MM-YYYY",
+      "ChartSpan12": "MM-YYYY",
+      "ChartSpan13": "YYYY",
+      "ChartSpan14": "Zoom in",
+      "ChartSpan15": "Zoom out",
+      "ChartSpan16": "Reset",
+
+      // Chart Power
+      "ChartPSpan1": "Charge Power",
+      "ChartPSpan2": "Today",
+      "ChartPSpan3": "PV Charging Power",
+      "ChartPSpan4": "System Details",
 
       // Bill
       "BillSpan1": "Earn Profit Energy Bill",
