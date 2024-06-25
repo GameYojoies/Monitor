@@ -17,6 +17,7 @@ export default function AuthContextProvider({ children }) {
   const [fetch, setFetch] = useState(false)
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
+  const [dataStore, setDataStore] = useState([])
 
   const [selecteLanguage, setSelecteLanguage] = useState(localStorage.getItem("Language"))
   const viteApiTest = "http://18.143.194.72/solar"
@@ -97,6 +98,8 @@ export default function AuthContextProvider({ children }) {
         setAuthenticatedUser,
         setSolarDate,
         viteApiTest,
+        dataStore,
+        setDataStore,
       }}>
       {children}
     </AuthContext.Provider>

@@ -60,6 +60,7 @@ const EarnProfit = () => {
     };
 
     const getBill = async () => {
+        if (!getAPI) return
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_TEST}${getAPI}`, {
                 headers: {
