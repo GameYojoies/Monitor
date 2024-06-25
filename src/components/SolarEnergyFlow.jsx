@@ -17,8 +17,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getAccessToken } from "../utils/local-storage";
 import useAuth from "../hook/useAuth";
+import { useTranslation } from "react-i18next";
 
 const SolarEnergyFlow = () => {
+  const {t} = useTranslation()
   const [count, setCount] = useState("Load");
   const [textHead, setTextHead] = useState("Load");
   const [colorText, setColorText] = useState(3);
@@ -118,7 +120,7 @@ const SolarEnergyFlow = () => {
       <div className="flex items-center gap-2 ml-14">
         <img src={solar1} alt="" className="h-[25px]" />
         <h1 className="text-[#001647] font-semibold text-2xl">
-          Solar Energy Flow
+          {t("Solar Energy Flow")}
         </h1>
         <div className="bg-gradient-to-r from-[#3DC42D] to-[#31AEE3] shadow-md h-8 w-20 rounded-md  flex justify-center items-center">
           <span className="text-white"> ON </span>
@@ -230,9 +232,9 @@ const SolarEnergyFlow = () => {
             <div
               className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
                 colorText === 1
-                  ? "bg-[#F2CD97]"
-                  : colorText === 2
                   ? "bg-[#FF9F9F]"
+                  : colorText === 2
+                  ? "bg-[#F2CD97]"
                   : colorText === 3
                   ? "bg-[#E9F0FC]"
                   : colorText === 4
