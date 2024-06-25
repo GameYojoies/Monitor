@@ -20,40 +20,56 @@ import useAuth from "../hook/useAuth";
 import { useTranslation } from "react-i18next";
 
 const SolarEnergyFlow = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [count, setCount] = useState("Load");
-  const [textHead, setTextHead] = useState("Load");
+  const [textHead, setTextHead] = useState(`${t("Load")}`);
   const [colorText, setColorText] = useState(3);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const token = getAccessToken();
   const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
   const [devicePn, setDevicePn] = useState(null);
-  const timestamp = dataFlow?.time;
-  const date = new Date(timestamp);
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true
-  };
-  
- 
-  let formattedDate  = date.toLocaleDateString('en-US', options);
-  const ChackDate = localStorage.getItem("Language")
-  if (formattedDate === 'Invalid Date') {
-    formattedDate = '-'
-  } else {
-    if(ChackDate === 'TH'){
-      formattedDate = date.toLocaleDateString('th-TH', options);
-    }else{
-      formattedDate = date.toLocaleDateString('en-US', options);
+  const [formattedDate, setFormattedDate] = useState("-");
+  const [countNumber, setCountNumber] = useState(0);
+
+  const getFormattedDate = () => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };  
+    const timestamp = dataFlow?.time;
+    const date = new Date(timestamp);
+    const language = localStorage.getItem("Language") || "en-US";
+    let formattedDate = date.toLocaleDateString("en-US", options);
+
+    if (formattedDate === "Invalid Date") {
+      formattedDate = "-";
+    } else {
+      if (language === "TH") {
+        formattedDate = date.toLocaleDateString("th-TH", options);
+      } else {
+        formattedDate = date.toLocaleDateString("en-US", options);
+      }
     }
-  }
-  
+    return formattedDate;
+  };
+
+  useEffect(() => {
+    // Update date on component mount
+    setFormattedDate(getFormattedDate());
+
+    const intervalId = setInterval(() => {
+      setFormattedDate(getFormattedDate());
+    }, 1000); // Poll every second
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
@@ -88,9 +104,7 @@ const SolarEnergyFlow = () => {
     if (solarDate && token) {
       fetchData(solarDate, pin);
     }
-  }, [solarDate, token, pin ]);
-
-
+  }, [solarDate, token, pin]);
 
   useEffect(() => {
     if (data) {
@@ -100,28 +114,30 @@ const SolarEnergyFlow = () => {
   if (error) {
   }
   const handleClick = (position) => {
+
     setCount(position);
     if (position === "Inverter") {
-      setTextHead("Output active power");
+      setTextHead(`${t("Output active power")}`);
       setColorText(1);
     }
     if (position === "PV") {
-      setTextHead("Photovoltaic power");
+      setTextHead( `${t("Photovoltaic power")}`);
       setColorText(2);
     }
     if (position === "Load") {
-      setTextHead(position);
+      setTextHead(`${t("Load")}`);
       setColorText(3);
     }
     if (position === "Grid") {
-      setTextHead(position);
+      setTextHead(`${t("Grid")}`);
       setColorText(4);
     }
     if (position === "Battery") {
-      setTextHead(position);
+      setTextHead(`${t("Battery")}`);
       setColorText(5);
     }
   };
+  
   return (
     <div>
       <div className="h-10"></div>
@@ -131,15 +147,14 @@ const SolarEnergyFlow = () => {
           {t("Solar Energy Flow")}
         </h1>
         <div className="bg-gradient-to-r from-[#3DC42D] to-[#31AEE3] shadow-md h-8 w-20 rounded-md  flex justify-center items-center">
-          <span className="text-white"> ON </span>
+          <span className="text-white"> {t("ON")}
+          </span>
         </div>
       </div>
       <div className="h-5"></div>
       <div className="w-[90%] m-auto lg:flex lg:flex-col">
         <div className="text-[#ADB5BD] font-semibold flex justify-end">
-          <div className="flex gap-2">
-          {formattedDate}
-          </div>
+          <div className="flex gap-2">{formattedDate}</div>
         </div>
         <div className="h-2"></div>
         <div className="w-[100%] flex flex-col lg:flex-row h-[auto] m-auto">
@@ -179,35 +194,58 @@ const SolarEnergyFlow = () => {
                 />
                 <img
                   src={
-                    dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100
-                    ? bg_green
-                    : dataFlow?.batteryCapacity >10 && dataFlow?.batteryCapacity < 40
-                    ? bg_yellow
-                    : dataFlow?.batteryCapacity >= 0 && dataFlow?.batteryCapacity <= 10
-                    ? bg_red
-                    : bg_red
+                    dataFlow?.batteryCapacity >= 40 &&
+                    dataFlow?.batteryCapacity <= 100
+                      ? bg_green
+                      : dataFlow?.batteryCapacity > 10 &&
+                        dataFlow?.batteryCapacity < 40
+                      ? bg_yellow
+                      : dataFlow?.batteryCapacity >= 0 &&
+                        dataFlow?.batteryCapacity <= 10
+                      ? bg_red
+                      : bg_red
                   }
                   alt=""
                   className="w-[35%] h-[25%] m-auto pointer-events-none top-8 right-[35%] absolute"
                 />
 
                 <img
-                  src={dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100
-                    ? bg_green_per
-                    : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40
-                    ? bg_yellow_per
-                    : dataFlow?.batteryCapacity >= 0 && dataFlow?.batteryCapacity <= 10
-                    ? bg_red_per
-                    : bg_red_per
-                  
+                  src={
+                    dataFlow?.batteryCapacity >= 40 &&
+                    dataFlow?.batteryCapacity <= 100
+                      ? bg_green_per
+                      : dataFlow?.batteryCapacity > 10 &&
+                        dataFlow?.batteryCapacity < 40
+                      ? bg_yellow_per
+                      : dataFlow?.batteryCapacity >= 0 &&
+                        dataFlow?.batteryCapacity <= 10
+                      ? bg_red_per
+                      : bg_red_per
                   }
                   alt=""
-                   className = { `w-[${dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100 ? '30%' : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40 ? '30%' : '10%'}] h-[18%] m-auto pointer-events-none top-[37px]  absolute`}
-                    style={{right:dataFlow?.batteryCapacity >= 40 && dataFlow?.batteryCapacity <= 100 ? '37%' : dataFlow?.batteryCapacity > 10 && dataFlow?.batteryCapacity < 40 ? '45%' : '56%'}}
+                  className={`w-[${
+                    dataFlow?.batteryCapacity >= 40 &&
+                    dataFlow?.batteryCapacity <= 100
+                      ? "30%"
+                      : dataFlow?.batteryCapacity > 10 &&
+                        dataFlow?.batteryCapacity < 40
+                      ? "30%"
+                      : "10%"
+                  }] h-[18%] m-auto pointer-events-none top-[37px]  absolute`}
+                  style={{
+                    right:
+                      dataFlow?.batteryCapacity >= 40 &&
+                      dataFlow?.batteryCapacity <= 100
+                        ? "37%"
+                        : dataFlow?.batteryCapacity > 10 &&
+                          dataFlow?.batteryCapacity < 40
+                        ? "45%"
+                        : "56%",
+                  }}
                 />
                 <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[32%] absolute">
                   {" "}
-                  {dataFlow?.batteryCapacity || 0 } %
+                  {dataFlow?.batteryCapacity || 0} %
                 </div>
               </div>
             </div>
@@ -250,7 +288,7 @@ const SolarEnergyFlow = () => {
                   : "bg-[#00C6C6]"
               } justify-between shadow-md`}
             >
-              <span className="ml-5 font-bold text-4xl text-[#133261]	">
+              <span className="ml-5 font-bold text-2xl text-[#133261]	">
                 {textHead}
               </span>
               <div className="mr-5 font-bold">

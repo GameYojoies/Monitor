@@ -67,9 +67,15 @@ const resources = {
       "BillSpan4": "บาท",
       "BillSpan5": "",
       //solar energy flow
-
       "Solar Energy Flow": "การไหลของพลังงาน",
+      "ON": "เปิด",
+      "Output active power": "โหลดกำลังไฟฟ้าเอาท์พุตที่ใช้งาน",
+      "Photovoltaic power": "พลังงานไฟฟ้าของโซลาร์เซลล์",
+      "Battery": "แบตเตอรี่",
+      "Grid": "การไฟฟ้า",
+      "Load": "โหลด",
 
+      
       // popup load
       "Load percentage": "เปอร์เซ็นการใช้โหลด",
       "Load apparent power": "ค่าโหลดกำลังไฟฟ้าที่ปรากฎ",
@@ -173,6 +179,12 @@ const resources = {
       "BillSpan5": "",
       // solar energy
       "Solar Energy Flow": "Solar Energy Flow",
+      "ON": "ON",
+      "Output active power": "Output active power",
+      "Photovoltaic power": "Photovoltaic power",
+      "Battery": "Battery",
+      "Grid": "Grid",
+      "Load": "Load",
 
       // popup flow load
       "Load percentage": "Load percentage ",
