@@ -1,16 +1,17 @@
 /** @format */
 
-import { createContext, useEffect, useState } from "react"
-import { login, getMe } from "../apis/auth-api"
+import {createContext, useEffect, useState} from "react"
+import {login, getMe} from "../apis/auth-api"
 import {
   removeAccessToken,
   setAccessToken,
   getAccessToken,
 } from "../utils/local-storage"
+import {useLocation} from "react-router-dom"
 
 export const AuthContext = createContext()
 
-export default function AuthContextProvider({ children }) {
+export default function AuthContextProvider({children}) {
   const [authenticateUser, setAuthenticatedUser] = useState(
     getAccessToken() ? true : null
   )
@@ -18,7 +19,10 @@ export default function AuthContextProvider({ children }) {
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
 
-  const [selecteLanguage, setSelecteLanguage] = useState(localStorage.getItem("Language"))
+  const [selecteLanguage, setSelecteLanguage] = useState(
+    localStorage.getItem("Language")
+  )
+  const languageMain = selecteLanguage === "EN" ? "font-poppins" : "font-prompt"
   const viteApiTest = "http://18.143.194.72/solar"
 
   const [dataFlow, setDataFlow] = useState(null)
@@ -44,20 +48,18 @@ export default function AuthContextProvider({ children }) {
   }, [selecteLanguage])
 
   const checkLanguage = () => {
-
-    const getLang = localStorage.getItem("Language");
+    const getLang = localStorage.getItem("Language")
 
     if (!getLang) {
-      localStorage.setItem("Language", "EN");
-      setSelecteLanguage("EN");
+      localStorage.setItem("Language", "EN")
+      setSelecteLanguage("EN")
     } else {
-      localStorage.setItem("Language", selecteLanguage);
+      localStorage.setItem("Language", selecteLanguage)
     }
-
   }
 
   const userLogin = async (name, password) => {
-    const res = await login({ name, password })
+    const res = await login({name, password})
     // console.log("res", res)
     const token = res?.data.result?.token
     // console.log("token", token)
@@ -79,6 +81,14 @@ export default function AuthContextProvider({ children }) {
     setFetch(false)
   }
 
+  const useScrollToTop = () => {
+    const {pathname} = useLocation()
+
+    useEffect(() => {
+      window.scrollTo({top: 0, behavior: "smooth"})
+    }, [pathname])
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -97,8 +107,10 @@ export default function AuthContextProvider({ children }) {
         setAuthenticatedUser,
         setSolarDate,
         viteApiTest,
+        languageMain,
+        useScrollToTop,
       }}>
-      {children}
+      <div className={languageMain}>{children}</div>
     </AuthContext.Provider>
   )
 }

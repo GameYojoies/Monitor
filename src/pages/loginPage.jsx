@@ -44,7 +44,8 @@ export default function LoginPage() {
   })
   // console.log("login", login)
 
-  const {userLogin, selecteLanguage, setSelecteLanguage} = useAuth()
+  const {userLogin, selecteLanguage, setSelecteLanguage, languageMain} =
+    useAuth()
 
   const navigate = useNavigate()
   const {t, i18n} = useTranslation()
