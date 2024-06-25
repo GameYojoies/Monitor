@@ -19,7 +19,7 @@ export default function ReportPage() {
           {/* select nav */}
           <div className="bg-white h-[45px] w-[100%] border-b-2 border-[#103A5E] mt-6">
 
-            <div className="flex h-[100%] lg:w-[50%]">
+            <div className="flex h-[100%] lg:w-[60%]">
 
               <div onClick={() => { setSelect("select1") }} className={`rounded-md  w-[33.33%] h-[100%] flex items-center justify-center gap-2 ${select == "select1" ? "bg-[#133261] text-white " : ""}`}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
