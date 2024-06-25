@@ -41,12 +41,18 @@ const SolarEnergyFlow = () => {
     hour12: true
   };
   
-  let formattedDate = date.toLocaleDateString('en-US', options);
+ 
+  let formattedDate  = date.toLocaleDateString('en-US', options);
+  const ChackDate = localStorage.getItem("Language")
   if (formattedDate === 'Invalid Date') {
     formattedDate = '-'
   } else {
+    if(ChackDate === 'TH'){
+      formattedDate = date.toLocaleDateString('th-TH', options);
+    }else{
+      formattedDate = date.toLocaleDateString('en-US', options);
+    }
   }
-  
   
   useEffect(() => {
     const fetchData = async (date, pin) => {
@@ -82,7 +88,9 @@ const SolarEnergyFlow = () => {
     if (solarDate && token) {
       fetchData(solarDate, pin);
     }
-  }, [solarDate, token, pin]);
+  }, [solarDate, token, pin ]);
+
+
 
   useEffect(() => {
     if (data) {

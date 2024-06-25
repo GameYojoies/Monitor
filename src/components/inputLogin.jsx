@@ -12,14 +12,20 @@ export default function InputLogin({
   setOpenPasswrod,
   openPassword,
   iconeyeopen,
+  setFocusedInput,
+  focusedInput,
 }) {
   return (
     <div className="w-full flex flex-col items-center gap-1">
       <div
-        className={`border-[1px] bg-white ${
-          error ? "border-red-600" : "border-[#0072D6]"
+        className={`border-2 bg-white ${
+          error
+            ? "border-red-600"
+            : focusedInput === name
+            ? "border-[#0072D6]"
+            : ""
         } w-3/4 h-[50px] rounded-xl flex items-center gap-2 overflow-hidden`}>
-        <div className="bg-[#0072D6] w-1/6 h-[50px] flex items-center justify-center rounded-xl">
+        <div className="bg-[#0072D6] w-1/6 h-[50px] flex items-center justify-center">
           <img
             src={src}
             className="w-[25px] h-[25px]"
@@ -34,6 +40,7 @@ export default function InputLogin({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
+          onClick={() => setFocusedInput(name)}
         />
 
         {iconClose && (
