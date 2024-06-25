@@ -65,7 +65,7 @@ const resources = {
       "SystemDetailsSpan2": "System Metrics",
       "SystemDetailsSpan3": "Details",
       "SystemDetailsSpan4": "แผงโซลาร์เซลล์",
-      "SystemDetailsSpan5": "",
+      "SystemDetailsSpan5": "เลือกวันที่",
 
       // Bill
       "BillSpan1": "ผลกำไรค่าไฟ",
@@ -183,7 +183,7 @@ const resources = {
       "SystemDetailsSpan2": "System Metrics",
       "SystemDetailsSpan3": "Details",
       "SystemDetailsSpan4": "Photovoltaic",
-      "SystemDetailsSpan5": "",
+      "SystemDetailsSpan5": "Selected Date",
 
       // Bill
       "BillSpan1": "Earn Profit Energy Bill",

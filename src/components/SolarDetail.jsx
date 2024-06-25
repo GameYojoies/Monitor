@@ -6,11 +6,20 @@ import { getAccessToken } from '../utils/local-storage';
 import useAuth from '../hook/useAuth';
 import { useTranslation } from 'react-i18next';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TextField } from '@mui/material';
+import dayjs from 'dayjs';
+import 'dayjs/locale/th';
+
 
 const SolarDetail = () => {
 
     const [allDay, setAllDay] = useState("")
-    const { pin, setDataStore, dataStore } = useAuth();
+    const { pin, setDataStore, dataStore, selecteLanguage } = useAuth();
+    const [currentDay, setCurrentDay] = useState(dayjs());
+    const [selectdate, setSelectdate] = useState(dayjs().format('YYYY-MM-DD'));
     const getPin = pin ? pin.devicePn : "402A8FD7707C"
     const { t } = useTranslation();
 
@@ -42,14 +51,19 @@ const SolarDetail = () => {
     }
 
     useEffect(() => {
-        setAllDay(`/reportData/detail?devicePn=${getPin}&date=2024-05-25`)
-        console.log(dataStore);
-    }, [pin, dataStore])
+        setAllDay(`/reportData/detail?devicePn=${getPin}&date=${selectdate}`)
+    }, [pin, pin])
 
     useEffect(() => {
         getDataAPI()
-
     }, [allDay])
+
+    const handleSelectDay = (e) => {
+        const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
+        setSelectdate(date)
+        setAllDay(`/reportData/detail?devicePn=${getPin}&date=${date}`)
+    };
+
 
 
 
@@ -77,7 +91,7 @@ const SolarDetail = () => {
         },
         {
             "id": 4,
-            "name":  t("Load active power"),
+            "name": t("Load active power"),
             "value": dataStore.loadActivePower,
             "unit": "V",
             "des": "Active power consumed by the connected loads, usually measured in watts (W) or kilowatts (kW)."
@@ -125,7 +139,6 @@ const SolarDetail = () => {
             "des": "The cumulative electrical energy outputted by the system throughout the day."
         }
     ];
-
 
     const inverterData = [
 
@@ -176,7 +189,7 @@ const SolarDetail = () => {
         {
             "id": 17,
             "name": t("Number of Battery Cells"),
-            "value": dataStore.numberOfBatteryCells?  dataStore.numberOfBatteryCells : 0 ,
+            "value": dataStore.numberOfBatteryCells ? dataStore.numberOfBatteryCells : 0,
             "unit": "",
             "des": "The quantity of individual battery units connected in series or parallel."
         },
@@ -340,7 +353,24 @@ const SolarDetail = () => {
 
             <div className='w-[100%] py-4 bg-white flex flex-col items-center mt-10 shadow-[2px_2px_15px_0px_#00000026] rounded-xl'>
 
-                <div className='w-[95%] h-[55px] bg-[#133261] flex pl-[20px] rounded-tl-lg rounded-tr-lg'>
+                <div className='w-[95%] flex gap-4 mt-2 items-center justify-end'>
+                    <span className='font-semibold'>{t("SystemDetailsSpan5")}</span>
+                    <div className="w-[200px] h-[45px]">
+                        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
+
+                            <DatePicker
+                                label={t("ChartSpan11")}
+                                value={currentDay}
+                                onChange={(newValue) => handleSelectDay(newValue)}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                    </div>
+
+
+                </div>
+
+                <div className='w-[95%] h-[55px] mt-6 bg-[#133261] flex pl-[20px] rounded-tl-lg rounded-tr-lg'>
                     <div className='text-white flex items-center gap-2 w-[30%]'>
                         <img src={iconsSys1} alt="" className='h-[25px]' />
                         <span className='font-semibold'>System Components</span>
