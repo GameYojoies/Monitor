@@ -50,7 +50,7 @@ const ChargePower = () => {
             const getData = response.data;
 
             if (getData.code === 0) {
-                const pvChargingPower = response.data.result.map(data => data.pvChargingPower);
+                const pvChargingPower = response.data.result.reverse().map(data => data.pvChargingPower);
                 const allHours = response.data.records;
 
                 let collectHours = [];

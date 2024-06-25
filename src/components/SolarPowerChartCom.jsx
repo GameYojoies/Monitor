@@ -70,8 +70,9 @@ const SolarPwerChartCom = () => {
             const getData = response.data;
 
             if (getData.code === 0) {
-                const pvPowerGenerations = response.data.result.map(data => data.pvPowerGeneration);
-                const currentPv = response.data.result.map(data => data.currentLoadPower);
+                const reversedResult = response.data.result.reverse();
+                const pvPowerGenerations = reversedResult.map(data => data.pvPowerGeneration);
+                const currentPv = reversedResult.map(data => data.currentLoadPower);
                 const allHours = response.data.records;
 
                 let collectHours = [];
