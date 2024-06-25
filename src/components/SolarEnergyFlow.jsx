@@ -45,31 +45,17 @@ const SolarEnergyFlow = () => {
     const timestamp = dataFlow?.time;
     const date = new Date(timestamp);
     const language = localStorage.getItem("Language") || "en-US";
-    let formattedDate = date.toLocaleDateString("en-US", options);
-
+    let formattedDate = date.toLocaleDateString(language, options);
     if (formattedDate === "Invalid Date") {
       formattedDate = "-";
-    } else {
-      if (language === "TH") {
-        formattedDate = date.toLocaleDateString("th-TH", options);
-      } else {
-        formattedDate = date.toLocaleDateString("en-US", options);
-      }
     }
     return formattedDate;
   };
 
   useEffect(() => {
-    // Update date on component mount
-    setFormattedDate(getFormattedDate());
-
-    const intervalId = setInterval(() => {
-      setFormattedDate(getFormattedDate());
-    }, 1000); // Poll every second
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, []);
-
+    const newFormattedDate = getFormattedDate();
+    setFormattedDate(newFormattedDate);
+  }, [dataFlow?.time, localStorage.getItem("Language")]); // Include dependencies
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
@@ -114,7 +100,6 @@ const SolarEnergyFlow = () => {
   if (error) {
   }
   const handleClick = (position) => {
-
     setCount(position);
     if (position === "Inverter") {
       setTextHead(`${t("Output active power")}`);
@@ -136,8 +121,14 @@ const SolarEnergyFlow = () => {
       setTextHead(`${t("Battery")}`);
       setColorText(5);
     }
+
   };
-  
+ useEffect(() => {
+    console.log(textHead, "textHead");
+    if (textHead) {
+      handleClick(count);
+    }
+  }, [textHead, handleClick, count]);
   return (
     <div>
       <div className="h-10"></div>
