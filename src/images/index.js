@@ -39,6 +39,13 @@ import iconsSys2 from "../images/Report/iconsSys2.png"
 import iconsSys3 from "../images/Report/iconsSys3.png"
 import iconsConsum from "../images/Report/consum.png"
 
+import icon_notify_1 from "../images/Notify/icon_notify_1.png"
+import icon_notify_2 from "../images/Notify/icon_notify_2.png"
+import icon_notify_3 from "../images/Notify/icon_notify_3.png"
+import icon_notify_4 from "../images/Notify/icon_notify_4.png"
+import img_device from "../images/Notify/img-device.png"
+
+
 
 export {
   monitor,
@@ -79,5 +86,10 @@ export {
   iconsSys2,
   iconsSys3,
   iconsConsum,
+  icon_notify_1,
+  icon_notify_2,
+  icon_notify_3,
+  icon_notify_4,
+  img_device
 
 }

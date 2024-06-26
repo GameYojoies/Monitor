@@ -1,6 +1,5 @@
 
 import SolarPowerChart from "../components/SolarPowerChart";
-
 import Device from "../components/Device";
 import MyDevice from "../components/MyDevice";
 import SolarEnergyFlow from "../components/SolarEnergyFlow";
