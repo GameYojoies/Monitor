@@ -151,7 +151,7 @@ const EarnProfit = () => {
                     </div>
                 </div>
 
-                <div className="relative w-60 h-60 mt-6">
+                <div className="relative w-[260px] h-[260px] mt-6">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                         <defs>
                             <linearGradient id="gradient" gradientTransform="rotate(30)">
@@ -161,7 +161,7 @@ const EarnProfit = () => {
                         </defs>
                         <circle className="text-[#D3F7E6] stroke-current" strokeWidth="18" cx="50" cy="50" r="40" fill="transparent" />
                         <circle transform="rotate(-90 50 50)" stroke="url(#gradient)" strokeWidth="18" strokeLinecap="round" cx="50" cy="50" r="40" fill="transparent" strokeDasharray="251.2" strokeDashoffset={`calc(251.2 - (251.2 * ${percentage}) / 100)`} />
-                        <text x="50" y="50" fill="#107C49" fontSize="18" textAnchor="middle" alignmentBaseline="middle" className="font-extrabold">{percentage}%</text>
+                        <text x="50" y="50" fill="#107C49" fontSize="14" textAnchor="middle" alignmentBaseline="middle" className="font-extrabold">{percentage}%</text>
                     </svg>
                 </div>
 

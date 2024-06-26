@@ -132,7 +132,7 @@ const SolarDetail = () => {
             <div className='w-[100%] py-4 bg-white flex flex-col items-center mt-10 shadow-[2px_2px_15px_0px_#00000026] rounded-xl'>
 
                 <div className='w-[95%] flex gap-4 mt-2 items-center justify-end'>
-                    <span className='font-semibold'>{t("SystemDetailsSpan5")}</span>
+                    <span>{t("SystemDetailsSpan5")}</span>
                     <div className="w-[200px] h-[45px]">
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
 
