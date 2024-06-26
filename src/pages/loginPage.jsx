@@ -125,8 +125,9 @@ export default function LoginPage() {
         />
 
       </div>
-      
-      <img src={bgLoginHand} alt="" className="absolute h-[75%] z-1 bottom-0 right-0" />
+
+      <img src={bgLoginHand} alt="" className="absolute h-[75%] z-1 bottom-0 left-[65%]" />
+
 
       <div className="absolute z-1 w-full h-full top-0 flex flex-col items-center justify-start gap-2">
         {/* selecteLanguage */}
