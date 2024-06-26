@@ -66,55 +66,55 @@ const SolarDetail = () => {
 
 
     const loadData = [
-        { "id": 1, "name": t("Load percentage"), "value": dataStore.loadPercentage || 0, "unit": "%", "des": "The rate of power consumption by the load, often expressed as a percentage of the total capacity." },
-        { "id": 2, "name": "Load Half Ratio", "value": dataStore.loadHalf || 0, "unit": "%", "des": "The ratio of the load currently in use to the total load capacity is typically expressed as a percentage." },
-        { "id": 3, "name": t("Load apparent power"), "value": dataStore.loadApparentPower || 0, "unit": "VA", "des": "The total power consumed by the load, considering both active and reactive components." },
-        { "id": 4, "name": t("Load active power"), "value": dataStore.loadActivePower || 0, "unit": "V", "des": "Active power consumed by the connected loads, usually measured in watts (W) or kilowatts (kW)." },
-        { "id": 5, "name": t("Output voltage"), "value": dataStore.opVol || 0, "unit": "V", "des": "Output voltage, typically measured in volts (V)." },
-        { "id": 6, "name": t("Output frequency"), "value": dataStore.opFrequency || 0, "unit": "Hz", "des": "Output frequency, often measured in hertz (Hz)." },
-        { "id": 7, "name": t("Output current"), "value": dataStore.opCurrent || 0, "unit": "A", "des": "The electric current supplied by the system or component." },
-        { "id": 8, "name": t("Output active power"), "value": dataStore.opActivePower || 0, "unit": "W", "des": "The real power output of the system is typically measured in watts (W)." },
-        { "id": 9, "name": t("Output apparent power"), "value": dataStore.opApparentPower || 0, "unit": "Ah", "des": "The product of the voltage and current in an AC circuit, typically measured in volt-amperes (VA)." },
-        { "id": 10, "name": t("Total power output on the day"), "value": dataStore.tpOutputDay || 0, "unit": "kWh", "des": "The cumulative electrical energy outputted by the system throughout the day." }
+        { "id": 1, "name": t("Load percentage"), "value": dataStore.loadPercentage || 0, "unit": "%", "des": t("load_percentage_des") },
+        { "id": 2, "name": t("Load Half Ratio"), "value": dataStore.loadHalf || 0, "unit": "%", "des": t("load_half_ratio_des")  },
+        { "id": 3, "name": t("Load apparent power"), "value": dataStore.loadApparentPower || 0, "unit": "VA", "des":  t("load_apparent_power_des") },
+        { "id": 4, "name": t("Load active power"), "value": dataStore.loadActivePower || 0, "unit": "V", "des":  t("load_active_power_des") },
+        { "id": 5, "name": t("Output voltage"), "value": dataStore.opVol || 0, "unit": "V", "des":  t("output_voltage_des")  },
+        { "id": 6, "name": t("Output frequency"), "value": dataStore.opFrequency || 0, "unit": "Hz", "des": t("output_frequency_des") },
+        { "id": 7, "name": t("Output current"), "value": dataStore.opCurrent || 0, "unit": "A", "des": t("output_current_des") },
+        { "id": 8, "name": t("Output active power"), "value": dataStore.opActivePower || 0, "unit": "W", "des": t("output_active_power_des") },
+        { "id": 9, "name": t("Output apparent power"), "value": dataStore.opApparentPower || 0, "unit": "Ah", "des": t("output_apparent_power_des") },
+        { "id": 10, "name": t("Total power output on the day"), "value": dataStore.tpOutputDay || 0, "unit": "kWh", "des": t("total_power_output_day_des") }
     ];
     
     const inverterData = [
-        { "id": 11, "name": t("Inverter voltage"), "value": dataStore.inverterVol || 0, "unit": "V", "des": "The Voltage is supplied by the inverter, which converts DC power to AC power." },
-        { "id": 12, "name": t("Inverter frequency"), "value": dataStore.inverterFrequency || 0, "unit": "Hz", "des": "Inverter current, representing the electric current output from the inverter." },
-        { "id": 13, "name": t("Inverter current"), "value": dataStore.inverterCurrent || 0, "unit": "A", "des": "The electrical current flows through the inverter, which is a device that converts direct current (DC) from solar panels into alternating current (AC) that can be used to power electrical devices in a solar power system." }
+        { "id": 11, "name": t("Inverter voltage"), "value": dataStore.inverterVol || 0, "unit": "V", "des": t("inverter_voltage_des") },
+        { "id": 12, "name": t("Inverter frequency"), "value": dataStore.inverterFrequency || 0, "unit": "Hz", "des": t("inverter_frequency_des") },
+        { "id": 13, "name": t("Inverter current"), "value": dataStore.inverterCurrent || 0, "unit": "A", "des": t("inverter_current_des") }
     ];
     
     const batteryData = [
-        { "id": 14, "name": t("Battery Voltage"), "value": dataStore.batVol || 0, "unit": "V", "des": "Short for Battery Voltage: the voltage level of the connected battery in the system." },
-        { "id": 15, "name": t("Battery Discharge Current"), "value": dataStore.batDischargeCurrent || 0, "unit": "A", "des": "Amount of energy discharged from the battery during the current day." },
-        { "id": 16, "name": t("Charging Voltage"), "value": dataStore.chargingVol || 0, "unit": "V", "des": "The voltage is applied to charge batteries or other energy storage systems." },
-        { "id": 17, "name": t("Number of Battery Cells"), "value": dataStore.numberOfBatteryCells ? dataStore.numberOfBatteryCells : 0, "unit": "", "des": "The quantity of individual battery units connected in series or parallel." },
-        { "id": 18, "name": t("Charging Current"), "value": dataStore.chargingCurrent || 0, "unit": "A", "des": "The electric current used to charge the battery, typically measured in amperes (A) or kiloamperes (kA)." },
-        { "id": 19, "name": t("Charging Power"), "value": dataStore.TotalPower || 0, "unit": "W", "des": "The power used to charge the battery, typically measured in watts (W) or kilowatts (kW)." },
-        { "id": 20, "name": t("Battery Capacity (Battery SOC)"), "value": dataStore.batCapacity || 0, "unit": "%", "des": "Capacity of the battery, often expressed as State of Charge (SOC)." },
-        { "id": 21, "name": t("Battery Capacity Query"), "value": dataStore.batCapacityQuery || 0, "unit": "Ah", "des": "Short for Battery State of Charge: the remaining capacity of the battery as a percentage of its total capacity" },
-        { "id": 22, "name": t("Battery Current"), "value": dataStore.batCurrent || 0, "unit": "A", "des": "The flow of electric charge within the battery is typically measured in amperes (A)." }
+        { "id": 14, "name": t("Battery Voltage"), "value": dataStore.batVol || 0, "unit": "V", "des": t("battery_voltage_des") },
+        { "id": 15, "name": t("Battery Discharge Current"), "value": dataStore.batDischargeCurrent || 0, "unit": "A", "des": t("battery_discharge_current_des") },
+        { "id": 16, "name": t("Charging Voltage"), "value": dataStore.chargingVol || 0, "unit": "V", "des":  t("charging_voltage_des") },
+        { "id": 17, "name": t("Number of Battery Cells"), "value": dataStore.numberOfBatteryCells ? dataStore.numberOfBatteryCells : 0, "unit": "", "des": t("battery_cells_id_des")},
+        { "id": 18, "name": t("Charging Current"), "value": dataStore.chargingCurrent || 0, "unit": "A", "des": t("charging_current_des") },
+        { "id": 19, "name": t("Charging Power"), "value": dataStore.TotalPower || 0, "unit": "W", "des":  t("charging_power_des") },
+        { "id": 20, "name": t("Battery Capacity (Battery SOC)"), "value": dataStore.batCapacity || 0, "unit": "%", "des": t("battery_capacity_soc_des") },
+        { "id": 21, "name": t("Battery Capacity Query"), "value": dataStore.batCapacityQuery || 0, "unit": "Ah", "des": t("battery_capacity_query_des") },
+        { "id": 22, "name": t("Battery Current"), "value": dataStore.batCurrent || 0, "unit": "A", "des": t("battery_current_des") }
     ];
     
     const photovolData = [
-        { "id": 23, "name": t("Photovoltaic voltage"), "value": dataStore.pvVol || 0, "unit": "V", "des": "Short for Photovoltaic Input Voltage, it represents the voltage level of the solar panels or photovoltaic system input." },
-        { "id": 24, "name": t("Photovoltaic charging current"), "value": dataStore.pvChargingCurrent || 0, "unit": "A", "des": "Current generated by the photovoltaic (PV) system, usually measured in amperes (A)." },
-        { "id": 25, "name": t("Photovoltaic current"), "value": dataStore.pvCurrent || 0, "unit": "A", "des": "The flow of electric current generated by a photovoltaic (PV) solar panel when exposed to sunlight. It is the direct current (DC) produced by the solar cells in the PV panel as a result of the photovoltaic effect." },
-        { "id": 26, "name": t("Total photovoltaic power"), "value": dataStore.tppPower || 0, "unit": "W", "des": "The total power generated by the photovoltaic system, typically measured in watts (W) or kilowatts (kW)." },
-        { "id": 27, "name": t("Total photovoltaic power generation on that day"), "value": dataStore.tppGenerationDay || 0, "unit": "kWh", "des": "The total amount of energy generated by the solar panels in a solar power system during a specific period of the day." },
-        { "id": 28, "name": t("Total photovoltaic power generations"), "value": dataStore.tppGenerations || 0, "unit": null, "des": "Represents the cumulative energy production of the photovoltaic panels." },
-        { "id": 29, "name": t("Total photovoltaic power generation"), "value": dataStore.tppGeneration || 0, "unit": "kWh", "des": "The total amount of electrical energy produced by photovoltaic (PV) solar panels over a specific period." }
+        { "id": 23, "name": t("Photovoltaic voltage"), "value": dataStore.pvVol || 0, "unit": "V", "des": t("pv_voltage_des")},
+        { "id": 24, "name": t("Photovoltaic charging current"), "value": dataStore.pvChargingCurrent || 0, "unit": "A", "des": t("pv_charging_current_des") },
+        { "id": 25, "name": t("Photovoltaic current"), "value": dataStore.pvCurrent || 0, "unit": "A", "des": t("pv_current_des") },
+        { "id": 26, "name": t("Total photovoltaic power"), "value": dataStore.tppPower || 0, "unit": "W", "des": t("total_pv_power_des") },
+        { "id": 27, "name": t("Total photovoltaic power generation on that day"), "value": dataStore.tppGenerationDay || 0, "unit": "kWh", "des": t("total_pv_power_generation_day_des") },
+        { "id": 28, "name": t("Total photovoltaic power generations"), "value": dataStore.tppGenerations || 0, "unit": null, "des": t("total_pv_power_generations_des") },
+        { "id": 29, "name": t("Total photovoltaic power generation"), "value": dataStore.tppGeneration || 0, "unit": "kWh", "des": t("total_pv_power_generation_des") }
     ];
 
     const gridData = [
-        { "id": 30, "name": t("Grid Input voltage"), "value": dataStore.gridInputVol || 0, "unit": "V", "des": "The Voltage is supplied to the system from the electrical grid." },
-        { "id": 31, "name": t("Grid  Frequency"), "value": dataStore.gridFrequency || 0, "unit": "Hz", "des": "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected" },
-        { "id": 32, "name": t("Total power generated by the Grid on that day"), "value": dataStore.tgpGenerationDay || 0, "unit": "kWh", "des": "The sum of all electrical energy generated by the grid throughout the day." },
-        { "id": 33, "name": t("Total Grid power generation"), "value": dataStore.tgpGeneration || 0, "unit": "kWh", "des": "The overall electrical energy produced by the grid." },
-        { "id": 34, "name": t("Grid voltage"), "value": dataStore.gridOutputVol || 0, "unit": "V", "des": "AC Input Voltage: the current flowing between the system and the electrical grid" },
-        { "id": 35, "name": t("Grid frequency"), "value": dataStore.gridOutputFrequency || 0, "unit": "Hz", "des": "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected" },
-        { "id": 36, "name": t("Grid current output"), "value": dataStore.gridCurrentOutput || 0, "unit": "V", "des": "Indicates the amount of current being supplied by the grid to the system." },
-        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": "The frequency of alternating current (AC) electricity produced by a power generation system or electrical device. It is measured in Hertz (Hz) and indicates the id of complete cycles per second." }
+        { "id": 30, "name": t("Grid Input voltage"), "value": dataStore.gridInputVol || 0, "unit": "V", "des": t("grid_input_voltage_des")  },
+        { "id": 31, "name": t("Grid  Frequency"), "value": dataStore.gridFrequency || 0, "unit": "Hz", "des": t("grid_frequency_des") },
+        { "id": 32, "name": t("Total power generated by the Grid on that day"), "value": dataStore.tgpGenerationDay || 0, "unit": "kWh", "des": t("total_grid_power_generation_day_des") },
+        { "id": 33, "name": t("Total Grid power generation"), "value": dataStore.tgpGeneration || 0, "unit": "kWh", "des": t("total_grid_power_generation_des") },
+        { "id": 34, "name": t("Grid voltage"), "value": dataStore.gridOutputVol || 0, "unit": "V", "des": t("grid_voltage_des") },
+        { "id": 35, "name": t("Grid frequency"), "value": dataStore.gridOutputFrequency || 0, "unit": "Hz", "des": t("grid_output_frequency_des") },
+        { "id": 36, "name": t("Grid current output"), "value": dataStore.gridCurrentOutput || 0, "unit": "V", "des": t("grid_current_output_des")  },
+        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": t("output_frequency_des") }
     ];
 
 
