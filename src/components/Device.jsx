@@ -79,7 +79,7 @@ const Device = () => {
             <div
               key={device.id}
               onClick={() => togglePopup(device)}
-              className="flex flex-col bg-white shadow-md"
+              className="flex flex-col bg-white shadow-md rounded-md"
             >
               <div
                 className={`rounded-[5px] py-2 text-center cursor-pointer font-bold ${device.id === 1

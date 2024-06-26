@@ -199,7 +199,7 @@ const ChargePower = () => {
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4 relative'>
                     <div className='flex gap-1 items-center'>
                         <img src={calendarIcon} alt="" className='h-[20px]' />
-                        <span className='font-semibold'>{t("ChartPSpan2")}</span>
+                        <span>{t("ChartPSpan2")}</span>
                     </div>
                     <div className='shadow-lg font-semibold flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden'>
                         <div className={`cursor-pointer w-[100%] h-[100%] flex items-center justify-center bg-[#0072D6] text-white`} >
