@@ -51,7 +51,7 @@ function Sidebar() {
                 }`}>
                 <img
                   src={el.img}
-                  className="w-[24px]"
+                  className="w-[30px]"
                   alt="IconMonitor"
                 />
                 {t(el.title)}
