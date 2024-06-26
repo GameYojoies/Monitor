@@ -1,9 +1,11 @@
-/** @format */
+import Notifications from "../components/Notitications";
+
 
 export default function NotificationPage() {
   return (
-    <div className="w-full bg-red-200 ">
-      <p>NotificationPage</p>
+    <div className="w-full">
+      <Notifications/>
     </div>
-  )
+  );
 }
+

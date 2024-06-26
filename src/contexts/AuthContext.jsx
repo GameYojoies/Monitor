@@ -19,6 +19,7 @@ export default function AuthContextProvider({children}) {
   const [pin, setPin] = useState([])
   const [solarDate, setSolarDate] = useState()
   const [dataStore, setDataStore] = useState([])
+  const [datanotifydeivece, setDatanotifydeivece] = useState([])
 
   const [selecteLanguage, setSelecteLanguage] = useState(
     localStorage.getItem("Language")
@@ -103,6 +104,8 @@ export default function AuthContextProvider({children}) {
         languageMain,
         dataStore,
         setDataStore,
+        datanotifydeivece,
+        setDatanotifydeivece
       }}>
       <div className={languageMain}>{children}</div>
     </AuthContext.Provider>

@@ -10,7 +10,7 @@ const MyDevice = () => {
   const [address, setAddress] = useState("");
   const [deviceOptions, setDeviceOptions] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const { fetch, setFetch } = useAuth();
+  const { fetch, setFetch ,datanotifydeivece,setDatanotifydeivece} = useAuth();
   const { t } = useTranslation();
 
   const token = getAccessToken();
@@ -37,7 +37,7 @@ const MyDevice = () => {
     };
 
     fetchDevices();
-  }, [API_SERVER, token]);
+  }, [API_SERVER, token,Pn]);
 
   const handleNoDevices = () => {
     console.log("No devices available");
@@ -53,6 +53,7 @@ const MyDevice = () => {
         setPn(mainDevice.pn);
         setAddress(mainDevice.address);
         setFetch(true);
+        setDatanotifydeivece(devices)
       }
     }
   };
@@ -87,6 +88,7 @@ const MyDevice = () => {
 
       if (response.data.code === 0) {
         setFetch(true); // Fetch devices again to get updated data
+        
       } else {
         console.error(`Error: ${response.data.code}`);
       }
@@ -99,9 +101,9 @@ const MyDevice = () => {
     <div className="w-[100%] items-center justify-center flex mt-6">
 
       <div className="w-[95%] ">
-        <div className="flex flex-col lg:flex-row lg:gap-0 gap-4 items-center justify-between">
-          <div className="flex items-center gap-4 mb-4 md:mb-0 lg:w-3/4">
-            <h1 className="text-2xl font-bold text-[#001647] drop-shadow-xl">{t("DeviceSpan1")}</h1>
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
+            <h1 className="text-2xl font-bold text-[#001647]">{t("DeviceSpan1")}</h1>
             <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] px-12 py-1 rounded-[30px] shadow-md flex items-center text-white relative">
               <div className="flex gap-2 ">
                 <div className="flex flex-col w-[200px] relative">
@@ -137,7 +139,7 @@ const MyDevice = () => {
             </div>
           </div>
 
-          <div className="w-3/4 lg:w-1/4 bg-white p-4 gap-1 flex rounded-lg">
+          <div className="w-full md:w-1/4 bg-white p-4 gap-1 flex">
             <img
               src={map}
               alt="Device"

@@ -27,11 +27,17 @@ const SolarEnergyFlow = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const token = getAccessToken();
-  const { dataFlow, setDataFlow, solarDate, pin } = useAuth();
+  const { dataFlow, setDataFlow, solarDate, pin ,datanotifydeivece} = useAuth();
   const [devicePn, setDevicePn] = useState(null);
   const [formattedDate, setFormattedDate] = useState("-");
   const [countNumber, setCountNumber] = useState(0);
-
+  const [mainDevice, setMainDevice] = useState(null);
+  useEffect(() => {
+    const foundDevice = datanotifydeivece.find(
+      (device) => device.main === true
+    );
+    setMainDevice(foundDevice);
+  }, [datanotifydeivece]);
   const getFormattedDate = () => {
     const options = {
       weekday: "long",
@@ -136,7 +142,7 @@ const SolarEnergyFlow = () => {
           {t("Solar Energy Flow")}
         </h1>
         <div className="bg-gradient-to-r from-[#3DC42D] to-[#31AEE3] shadow-md h-8 w-20 rounded-md  flex justify-center items-center">
-          <span className="text-white"> {t("ON")}</span>
+          <span className="text-white"> {mainDevice?.status === 10 ? t("ON") : t("OFF")}</span>
         </div>
       </div>
       <div className="h-5"></div>
