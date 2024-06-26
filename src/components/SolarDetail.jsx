@@ -151,15 +151,15 @@ const SolarDetail = () => {
                 <div className='w-[95%] h-[55px] mt-6 bg-[#133261] flex pl-[20px] rounded-tl-lg rounded-tr-lg'>
                     <div className='text-white flex items-center gap-2 w-[30%]'>
                         <img src={iconsSys1} alt="" className='h-[25px]' />
-                        <span className='font-semibold'>System Components</span>
+                        <span className='font-semibold'>{t("SystemDetailsSpan1")}</span>
                     </div>
                     <div className='text-white flex items-center gap-2 w-[30%]'>
                         <img src={iconsSys2} alt="" className='h-[25px]' />
-                        <span className='font-semibold'>System Metrics</span>
+                        <span className='font-semibold'>{t("SystemDetailsSpan2")}</span>
                     </div>
                     <div className='text-white flex items-center gap-2 w-[35%]'>
                         <img src={iconsSys3} alt="" className='h-[20px]' />
-                        <span className='font-semibold'>Details</span>
+                        <span className='font-semibold'>{t("SystemDetailsSpan3")}</span>
                     </div>
                 </div>
                 <div className='w-[95%] h-[65px] bg-[#F1F1F1] flex pl-[50px] items-center font-semibold'>{t("DeviceSpan4")}</div>

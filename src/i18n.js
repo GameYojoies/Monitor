@@ -64,11 +64,11 @@ const resources = {
       
 
       // system details
-      "SystemDetailsSpan1": "System Components",
-      "SystemDetailsSpan2": "System Metrics",
-      "SystemDetailsSpan3": "Details",
+      "SystemDetailsSpan1": "ส่วนประกอบของระบบ",
+      "SystemDetailsSpan2": "ตัวชี้วัดของระบบ",
+      "SystemDetailsSpan3": "รายละเอียด",
       "SystemDetailsSpan4": "แผงโซลาร์เซลล์",
-      "SystemDetailsSpan5": "เลือกวันที่",
+      "SystemDetailsSpan5": "วันที่เลือก",
 
       // Bill
       "BillSpan1": "ผลกำไรค่าไฟ",
