@@ -1,7 +1,7 @@
 /** @format */
 
 import i18n from "i18next"
-import { initReactI18next } from "react-i18next"
+import {initReactI18next} from "react-i18next"
 
 // the translations
 // (tip move them in a JSON file and import them,
@@ -22,116 +22,152 @@ const resources = {
       "User Information": "ข้อมูลผู้ใช้",
       Username: "ชื่อผู้ใช้",
       "Birth Date": "วันเกิด",
-      "Gender": "เพศ",
+      Gender: "เพศ",
       "Phone Number": "เบอร์โทรศัพท์",
       "E-mail": "อีเมล",
+      "user name or email is required": "กรุณากรอกชื่อผู้ใช้หรืออีเมล",
+      "password is required": "กรุณากรอกรหัสผ่าน",
+      "password must contain number or alphabet":
+        "รหัสผ่านจะต้องมีตัวเลขหรือตัวอักษร",
+      "password must have at least 6 characters":
+        "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
 
       // Device
-      "DeviceSpan1": "อุปกรณ์ของฉัน",
-      "DeviceSpan2": "ชื่ออุปกรณ์",
-      "DeviceSpan3": "หมายเลขพินอุปกรณ์",
-      "DeviceSpan4": "โหลด",
-      "DeviceSpan5": "อินเวอเตอร์",
-      "DeviceSpan6": "แผงโซลาร์เซลล์",
-      "DeviceSpan7": "แบตเตอรี่",
-      "DeviceSpan8": "การไฟฟ้า",
+      DeviceSpan1: "อุปกรณ์ของฉัน",
+      DeviceSpan2: "ชื่ออุปกรณ์",
+      DeviceSpan3: "หมายเลขพินอุปกรณ์",
+      DeviceSpan4: "โหลด",
+      DeviceSpan5: "อินเวอเตอร์",
+      DeviceSpan6: "แผงโซลาร์เซลล์",
+      DeviceSpan7: "แบตเตอรี่",
+      DeviceSpan8: "การไฟฟ้า",
 
       // Chart
-      "ChartSpan1": "แผนภูมิพลังงาน",
-      "ChartSpan2": "เลือกประเภท",
-      "ChartSpan3": "วัน",
-      "ChartSpan4": "เดือน",
-      "ChartSpan5": "ปี",
-      "ChartSpan6": "รวม",
-      "ChartSpan7": "พลังงาน (kWh)",
-      "ChartSpan8": "ชม",
-      "ChartSpan9": "ค่าโหลดกำลังไฟฟ้าที่ใช้จริง",
-      "ChartSpan10": "การผลิตไฟฟ้าโซลาร์เซลล์ ทั้งหมดในวันนั้น",
-      "ChartSpan11": "วว-ดด-ปปปปป",
-      "ChartSpan12": "ดด-ปปปป",
-      "ChartSpan13": "ปปปป",
-      "ChartSpan14": "ขยายเข้า",
-      "ChartSpan15": "ขยายออก",
-      "ChartSpan16": "ตั้งค่าอีกครั้ง",
-      "ChartSpan17": "การใช้พลังงาน : ",
+      ChartSpan1: "แผนภูมิพลังงาน",
+      ChartSpan2: "เลือกประเภท",
+      ChartSpan3: "วัน",
+      ChartSpan4: "เดือน",
+      ChartSpan5: "ปี",
+      ChartSpan6: "รวม",
+      ChartSpan7: "พลังงาน (kWh)",
+      ChartSpan8: "ชม",
+      ChartSpan9: "ค่าโหลดกำลังไฟฟ้าที่ใช้จริง",
+      ChartSpan10: "การผลิตไฟฟ้าโซลาร์เซลล์ ทั้งหมดในวันนั้น",
+      ChartSpan11: "วว-ดด-ปปปปป",
+      ChartSpan12: "ดด-ปปปป",
+      ChartSpan13: "ปปปป",
+      ChartSpan14: "ขยายเข้า",
+      ChartSpan15: "ขยายออก",
+      ChartSpan16: "ตั้งค่าอีกครั้ง",
+      ChartSpan17: "การใช้พลังงาน : ",
 
       // Chart Power
-      "ChartPSpan1": "พลังงานชาร์จ",
-      "ChartPSpan2": "วันนี้",
-      "ChartPSpan3": "กำลังไฟชาร์จ PV",
-      "ChartPSpan4": "รายละเอียด",
-      "ChartPSpan5": "กำลังไฟชาร์จ PV : ",
-
+      ChartPSpan1: "พลังงานชาร์จ",
+      ChartPSpan2: "วันนี้",
+      ChartPSpan3: "กำลังไฟชาร์จ PV",
+      ChartPSpan4: "รายละเอียด",
+      ChartPSpan5: "กำลังไฟชาร์จ PV : ",
 
       // system details
-      "SystemDetailsSpan1": "ส่วนประกอบของระบบ",
-      "SystemDetailsSpan2": "ตัวชี้วัดของระบบ",
-      "SystemDetailsSpan3": "รายละเอียด",
-      "SystemDetailsSpan4": "แผงโซลาร์เซลล์",
-      "SystemDetailsSpan5": "วันที่เลือก",
+      SystemDetailsSpan1: "ส่วนประกอบของระบบ",
+      SystemDetailsSpan2: "ตัวชี้วัดของระบบ",
+      SystemDetailsSpan3: "รายละเอียด",
+      SystemDetailsSpan4: "แผงโซลาร์เซลล์",
+      SystemDetailsSpan5: "วันที่เลือก",
 
       // load data
-      "load_percentage_des": "อัตราการใช้พลังงานโดยโหลด มักจะแสดงเป็นเปอร์เซ็นต์ของความจุทั้งหมด",
-      "load_half_ratio_des": "อัตราส่วนของโหลดที่ใช้งานอยู่กับความจุโหลดทั้งหมด มักจะแสดงเป็นเปอร์เซ็นต์",
-      "load_apparent_power_des": "พลังงานทั้งหมดที่โหลดใช้ คำนึงถึงทั้งองค์ประกอบพลังงานที่ใช้งานและไม่ใช้งาน",
-      "load_active_power_des": "พลังงานที่ใช้งานโดยโหลดที่เชื่อมต่อ มักจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
-      "output_voltage_des": "แรงดันเอาท์พุท ซึ่งมักจะวัดเป็นโวลต์ (V)",
-      "output_frequency_des": "ความถี่เอาท์พุท โดยทั่วไปจะวัดเป็นเฮิร์ตซ์ (Hz)",
-      "output_current_des": "กระแสไฟฟ้าที่ระบบหรือองค์ประกอบจ่ายไฟ",
-      "output_active_power_des": "พลังงานจริงเอาท์พุทของระบบมักจะวัดเป็นวัตต์ (W)",
-      "output_apparent_power_des": "ผลคูณของแรงดันและกระแสในวงจร AC ซึ่งมักจะวัดเป็นโวลต์-แอมป์ (VA)",
-      "total_power_output_day_des": "พลังงานไฟฟ้ารวมที่ระบบผลิตตลอดทั้งวัน",
+      load_percentage_des:
+        "อัตราการใช้พลังงานโดยโหลด มักจะแสดงเป็นเปอร์เซ็นต์ของความจุทั้งหมด",
+      load_half_ratio_des:
+        "อัตราส่วนของโหลดที่ใช้งานอยู่กับความจุโหลดทั้งหมด มักจะแสดงเป็นเปอร์เซ็นต์",
+      load_apparent_power_des:
+        "พลังงานทั้งหมดที่โหลดใช้ คำนึงถึงทั้งองค์ประกอบพลังงานที่ใช้งานและไม่ใช้งาน",
+      load_active_power_des:
+        "พลังงานที่ใช้งานโดยโหลดที่เชื่อมต่อ มักจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
+      output_voltage_des: "แรงดันเอาท์พุท ซึ่งมักจะวัดเป็นโวลต์ (V)",
+      output_frequency_des: "ความถี่เอาท์พุท โดยทั่วไปจะวัดเป็นเฮิร์ตซ์ (Hz)",
+      output_current_des: "กระแสไฟฟ้าที่ระบบหรือองค์ประกอบจ่ายไฟ",
+      output_active_power_des:
+        "พลังงานจริงเอาท์พุทของระบบมักจะวัดเป็นวัตต์ (W)",
+      output_apparent_power_des:
+        "ผลคูณของแรงดันและกระแสในวงจร AC ซึ่งมักจะวัดเป็นโวลต์-แอมป์ (VA)",
+      total_power_output_day_des: "พลังงานไฟฟ้ารวมที่ระบบผลิตตลอดทั้งวัน",
 
       // inverter data details
-      "inverter_voltage_des": "แรงดันที่จ่ายโดยอินเวอร์เตอร์ซึ่งแปลงพลังงานจากกระแสตรงเป็นกระแสสลับ",
-      "inverter_frequency_des": "กระแสอินเวอร์เตอร์ แทนการส่งออกกระแสไฟฟ้าจากอินเวอร์เตอร์",
-      "inverter_current_des": "กระแสไฟฟ้าไหลผ่านอินเวอร์เตอร์ ซึ่งเป็นอุปกรณ์ที่แปลงกระแสตรง (DC) จากแผงโซลาร์เซลล์เป็นกระแสสลับ (AC) ที่สามารถใช้ในการจ่ายพลังงานให้กับอุปกรณ์ไฟฟ้าในระบบพลังงานแสงอาทิตย์",
+      inverter_voltage_des:
+        "แรงดันที่จ่ายโดยอินเวอร์เตอร์ซึ่งแปลงพลังงานจากกระแสตรงเป็นกระแสสลับ",
+      inverter_frequency_des:
+        "กระแสอินเวอร์เตอร์ แทนการส่งออกกระแสไฟฟ้าจากอินเวอร์เตอร์",
+      inverter_current_des:
+        "กระแสไฟฟ้าไหลผ่านอินเวอร์เตอร์ ซึ่งเป็นอุปกรณ์ที่แปลงกระแสตรง (DC) จากแผงโซลาร์เซลล์เป็นกระแสสลับ (AC) ที่สามารถใช้ในการจ่ายพลังงานให้กับอุปกรณ์ไฟฟ้าในระบบพลังงานแสงอาทิตย์",
 
       // battery data details
-      "battery_voltage_des": "ย่อมาจากแรงดันไฟฟ้าของแบตเตอรี่: ระดับแรงดันไฟฟ้าของแบตเตอรี่ที่เชื่อมต่อในระบบ",
-      "battery_discharge_current_des": "ปริมาณพลังงานที่ถูกปล่อยจากแบตเตอรี่ในวันนี้",
-      "charging_voltage_des": "แรงดันที่ใช้ในการชาร์จแบตเตอรี่หรือระบบเก็บพลังงานอื่น ๆ",
-      "battery_cells_id_des": "ปริมาณของหน่วยแบตเตอรี่ที่เชื่อมต่อในอนุกรมหรือแบบขนาน",
-      "charging_current_des": "กระแสไฟฟ้าที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นแอมแปร์ (A) หรือกิโลแอมแปร์ (kA)",
-      "charging_power_des": "พลังงานที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
-      "battery_capacity_soc_des": "ความจุของแบตเตอรี่ มักจะแสดงเป็นสถานะการชาร์จ (State of Charge หรือ SOC)",
-      "battery_capacity_query_des": "ย่อมาจากสถานะการชาร์จแบตเตอรี่: ความจุที่เหลือของแบตเตอรี่เป็นเปอร์เซ็นต์ของความจุรวมของมัน",
-      "battery_current_des": "การไหลของกระแสไฟฟ้าภายในแบตเตอรี่มักจะวัดเป็นแอมป์ (A)",
+      battery_voltage_des:
+        "ย่อมาจากแรงดันไฟฟ้าของแบตเตอรี่: ระดับแรงดันไฟฟ้าของแบตเตอรี่ที่เชื่อมต่อในระบบ",
+      battery_discharge_current_des:
+        "ปริมาณพลังงานที่ถูกปล่อยจากแบตเตอรี่ในวันนี้",
+      charging_voltage_des:
+        "แรงดันที่ใช้ในการชาร์จแบตเตอรี่หรือระบบเก็บพลังงานอื่น ๆ",
+      battery_cells_id_des:
+        "ปริมาณของหน่วยแบตเตอรี่ที่เชื่อมต่อในอนุกรมหรือแบบขนาน",
+      charging_current_des:
+        "กระแสไฟฟ้าที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นแอมแปร์ (A) หรือกิโลแอมแปร์ (kA)",
+      charging_power_des:
+        "พลังงานที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
+      battery_capacity_soc_des:
+        "ความจุของแบตเตอรี่ มักจะแสดงเป็นสถานะการชาร์จ (State of Charge หรือ SOC)",
+      battery_capacity_query_des:
+        "ย่อมาจากสถานะการชาร์จแบตเตอรี่: ความจุที่เหลือของแบตเตอรี่เป็นเปอร์เซ็นต์ของความจุรวมของมัน",
+      battery_current_des:
+        "การไหลของกระแสไฟฟ้าภายในแบตเตอรี่มักจะวัดเป็นแอมป์ (A)",
 
       // pv data details
-      "pv_voltage_des": "ย่อมาจากแรงดันเข้าของโซลาร์เซลล์แทนระดับแรงดันของแผงโซลาร์เซลล์หรือระบบโซลาร์เซลล์",
-      "pv_charging_current_des": "กระแสที่สร้างขึ้นโดยระบบโซลาร์เซลล์ (PV) ซึ่งโดยทั่วไปจะวัดเป็นแอมป์ (A)",
-      "pv_current_des": "กระแสไฟฟ้าที่ไหลผ่านโซลาร์เซลล์ (PV) เมื่อได้รับแสงแดด นั้นเป็นกระแสตรง (DC) ที่ถูกผลิตขึ้นโดยเซลล์โซลาร์ในแผงโซลาร์เซลล์ ผลมาจากเอฟเฟกต์โพโตโวลต์",
-      "total_pv_power_des": "พลังงานรวมที่ผลิตโดยระบบโซลาร์เซลล์โฟโตโวลตาอิก โดยทั่วไปจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
-      "total_pv_power_generation_day_des": "พลังงานรวมที่ผลิตโดยแผงโซลาร์เซลล์ในระบบพลังงานแสงอาทิตย์ในช่วงเวลาที่กำหนดของวัน",
-      "total_pv_power_generations_des": "แสดงถึงการผลิตพลังงานสะสมของแผงโซลาร์เซลล์โฟโตโวลตาอิก (PV)",
-      "total_pv_power_generation_des": "ปริมาณพลังงานไฟฟ้ารวมที่ผลิตโดยแผงโซลาร์เซลล์โฟโตโวลตาอิก (PV) ในช่วงเวลาที่กำหนด",
+      pv_voltage_des:
+        "ย่อมาจากแรงดันเข้าของโซลาร์เซลล์แทนระดับแรงดันของแผงโซลาร์เซลล์หรือระบบโซลาร์เซลล์",
+      pv_charging_current_des:
+        "กระแสที่สร้างขึ้นโดยระบบโซลาร์เซลล์ (PV) ซึ่งโดยทั่วไปจะวัดเป็นแอมป์ (A)",
+      pv_current_des:
+        "กระแสไฟฟ้าที่ไหลผ่านโซลาร์เซลล์ (PV) เมื่อได้รับแสงแดด นั้นเป็นกระแสตรง (DC) ที่ถูกผลิตขึ้นโดยเซลล์โซลาร์ในแผงโซลาร์เซลล์ ผลมาจากเอฟเฟกต์โพโตโวลต์",
+      total_pv_power_des:
+        "พลังงานรวมที่ผลิตโดยระบบโซลาร์เซลล์โฟโตโวลตาอิก โดยทั่วไปจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
+      total_pv_power_generation_day_des:
+        "พลังงานรวมที่ผลิตโดยแผงโซลาร์เซลล์ในระบบพลังงานแสงอาทิตย์ในช่วงเวลาที่กำหนดของวัน",
+      total_pv_power_generations_des:
+        "แสดงถึงการผลิตพลังงานสะสมของแผงโซลาร์เซลล์โฟโตโวลตาอิก (PV)",
+      total_pv_power_generation_des:
+        "ปริมาณพลังงานไฟฟ้ารวมที่ผลิตโดยแผงโซลาร์เซลล์โฟโตโวลตาอิก (PV) ในช่วงเวลาที่กำหนด",
 
       // grid data details
-      "grid_input_voltage_des": "แรงดันไฟฟ้าจะถูกจ่ายให้กับระบบจากระบบกริดไฟฟ้า",
-      "grid_frequency_des": 'ย่อมาจากคำว่า "ความถี่กริด" หมายถึงความถี่ของกริดไฟฟ้าที่ระบบเชื่อมต่อกัน',
-      "total_grid_power_generation_day_des": "ผลรวมของพลังงานไฟฟ้าทั้งหมดที่ถูกสร้างขึ้นโดยกริดไฟฟ้าตลอดวัน",
-      "total_grid_power_generation_des": "พลังงานไฟฟ้าทั้งหมดที่ถูกผลิตโดยกริดไฟฟ้า",
-      "grid_voltage_des": "แรงดันเข้า AC: กระแสไฟฟ้าที่ไหลระหว่างระบบและเครือข่ายไฟฟ้า",
-      "grid_output_frequency_des": 'ย่อมาจากคำว่า "ความถี่กริด" หมายถึงความถี่ของกริดไฟฟ้าที่ระบบเชื่อมต่อไปยังสายพันธ์ไฟ',
-      "grid_current_output_des": "บ่งชี้ถึงปริมาณกระแสไฟฟ้าที่ได้รับจากระบบกริดไปยังระบบ",
-      "output_frequency_des": "ความถี่ของกระแสไฟฟ้าสลับ (AC) ที่ถูกผลิตโดยระบบการผลิตพลังงานหรืออุปกรณ์ไฟฟ้า มีการวัดเป็นเฮิร์ตซ์ (Hz) และแสดงถึงจำนวนวงจรเปรียบเทียบต่อวินาที",
+      grid_input_voltage_des: "แรงดันไฟฟ้าจะถูกจ่ายให้กับระบบจากระบบกริดไฟฟ้า",
+      grid_frequency_des:
+        'ย่อมาจากคำว่า "ความถี่กริด" หมายถึงความถี่ของกริดไฟฟ้าที่ระบบเชื่อมต่อกัน',
+      total_grid_power_generation_day_des:
+        "ผลรวมของพลังงานไฟฟ้าทั้งหมดที่ถูกสร้างขึ้นโดยกริดไฟฟ้าตลอดวัน",
+      total_grid_power_generation_des:
+        "พลังงานไฟฟ้าทั้งหมดที่ถูกผลิตโดยกริดไฟฟ้า",
+      grid_voltage_des:
+        "แรงดันเข้า AC: กระแสไฟฟ้าที่ไหลระหว่างระบบและเครือข่ายไฟฟ้า",
+      grid_output_frequency_des:
+        'ย่อมาจากคำว่า "ความถี่กริด" หมายถึงความถี่ของกริดไฟฟ้าที่ระบบเชื่อมต่อไปยังสายพันธ์ไฟ',
+      grid_current_output_des:
+        "บ่งชี้ถึงปริมาณกระแสไฟฟ้าที่ได้รับจากระบบกริดไปยังระบบ",
+      output_frequency_des:
+        "ความถี่ของกระแสไฟฟ้าสลับ (AC) ที่ถูกผลิตโดยระบบการผลิตพลังงานหรืออุปกรณ์ไฟฟ้า มีการวัดเป็นเฮิร์ตซ์ (Hz) และแสดงถึงจำนวนวงจรเปรียบเทียบต่อวินาที",
 
       // Bill
-      "BillSpan1": "ผลกำไรค่าไฟ",
-      "BillSpan2": "ยูนิตที่ใช้",
-      "BillSpan3": "ผลกำไรค่าไฟ",
-      "BillSpan4": "บาท",
-      "BillSpan5": "",
+      BillSpan1: "ผลกำไรค่าไฟ",
+      BillSpan2: "ยูนิตที่ใช้",
+      BillSpan3: "ผลกำไรค่าไฟ",
+      BillSpan4: "บาท",
+      BillSpan5: "",
       //solar energy flow
       "Solar Energy Flow": "การไหลของพลังงาน",
-      "ON": "เปิด",
+      ON: "เปิด",
       "Output active power": "โหลดกำลังไฟฟ้าเอาท์พุตที่ใช้งาน",
       "Photovoltaic power": "พลังงานไฟฟ้าของโซลาร์เซลล์",
-      "Battery": "แบตเตอรี่",
-      "Grid": "การไฟฟ้า",
-      "Load": "โหลด",
-
+      Battery: "แบตเตอรี่",
+      Grid: "การไฟฟ้า",
+      Load: "โหลด",
 
       // popup load
       "Load percentage": "เปอร์เซ็นการใช้โหลด",
@@ -143,7 +179,8 @@ const resources = {
       "Output current": "ค่ากระแสเอาท์พุต",
       "Output active power": "โหลดกำลังไฟฟ้าเอาท์พุตที่ใช้งาน",
       "Output apparent power": "ค่าโหลดกำลังไฟฟ้าเอาท์พุตที่ปรากฎ",
-      "Total power output on the day": "ค่าพลังงานเอาท์พุตที่ใช้ทั้งหมดในวันนี้",
+      "Total power output on the day":
+        "ค่าพลังงานเอาท์พุตที่ใช้ทั้งหมดในวันนี้",
       // popup invert
       "Inverter voltage": "ค่าแรงดันของเครื่องอินเวอร์เตอร์",
       "Inverter frequency": "ค่าความถี่ของเครื่องอินเวอร์เตอร์",
@@ -153,12 +190,14 @@ const resources = {
       "Photovoltaic charging current": "ค่ากระแสชาร์จไฟฟ้าของโซลาร์เซลล์",
       "Photovoltaic current": "ค่ากระแสไฟฟ้าของโซลาร์เซลล์ปัจจุบัน",
       "Total photovoltaic power": "พลังงานไฟฟ้าของโซลาร์เซลล์",
-      "Total photovoltaic power generation on that day": "การผลิตไฟฟ้าโซลาร์เซลล์ทั้งหมดในวันนี้",
+      "Total photovoltaic power generation on that day":
+        "การผลิตไฟฟ้าโซลาร์เซลล์ทั้งหมดในวันนี้",
       "Total photovoltaic power generations": "การผลิตไฟฟ้าโซลาร์เซลล์ทั้งหมด",
       "Total photovoltaic power generation": "การผลิตไฟฟ้าโซลาร์เซลล์ทั้งหมด",
       // popup battery
       "Battery Voltage": "ค่าแรงดันแบตเตอรี่",
-      "Battery Discharge Current": "ค่ากระแสไฟฟ้าขาออกจากแบตเตอรี่ที่จ่ายให้กับโหลด",
+      "Battery Discharge Current":
+        "ค่ากระแสไฟฟ้าขาออกจากแบตเตอรี่ที่จ่ายให้กับโหลด",
       "Charging Voltage": "ค่าแรงดันไฟฟ้าในการชาร์จ",
       "Number of Battery Cells": "จำนวนเซลล์แบตเตอรี่",
       "Charging Current": "ค่ากระแสการชาร์จ",
@@ -166,15 +205,17 @@ const resources = {
       "Battery Capacity (Battery SOC)": "ค่าความจุของแบตเตอรี่",
       "Battery Capacity Query": "รุ่นความจุของแบตเตอรี่",
       "Battery Current": "ค่ากระแสไฟฟ้าของแบตเตอรี่",
-      // popup gird 
+      // popup gird
       "Grid Input voltage": "ค่าแรงดันไฟฟ้าเข้าอินเวอเตอร์",
       "Grid  Frequency": "ค่าความถี่ไฟฟ้าเข้าอินเวอเตอร์อินพุต",
-      "Total power generated by the Grid on that day": "จำนวนไฟฟ้าที่ผลิตจากพลังงานโซลาร์เซลล์ทั้งหมดของวันนี้",
-      "Total Grid power generation": "จำนวนไฟฟ้าที่ผลิตจากพลังงานโซลาร์เซลล์ทั้งหมด",
+      "Total power generated by the Grid on that day":
+        "จำนวนไฟฟ้าที่ผลิตจากพลังงานโซลาร์เซลล์ทั้งหมดของวันนี้",
+      "Total Grid power generation":
+        "จำนวนไฟฟ้าที่ผลิตจากพลังงานโซลาร์เซลล์ทั้งหมด",
       "Grid voltage": "แรงดันไฟฟ้ากริด",
       "Grid frequency": "ค่าความถี่ไฟฟ้าเข้าอินเวอเตอร์อินพุต",
       "Grid current output": "เอาท์พุตกระแสกริด",
-      "Output frequency": "ค่าความถี่เอาท์พุต"
+      "Output frequency": "ค่าความถี่เอาท์พุต",
     },
   },
   en: {
@@ -191,115 +232,155 @@ const resources = {
       "User Information": "User Information",
       Username: "Username",
       "Birth Date": "Birth Date",
-      "Gender": "Gender",
+      Gender: "Gender",
       "Phone Number": "Phone Number",
       "E-mail": "E-mail",
+      "user name or email is required": "user name or email is required",
+      "password is required": "password is required",
+      "password must contain number or alphabet":
+        "password must contain number or alphabet",
+      "password must have at least 6 characters":
+        "password must have at least 6 characters",
 
       // Device
-      "DeviceSpan1": "My Device",
-      "DeviceSpan2": "Device Name",
-      "DeviceSpan3": "Device's PN",
-      "DeviceSpan4": "Load",
-      "DeviceSpan5": "Inverter",
-      "DeviceSpan6": "PV",
-      "DeviceSpan7": "Battery",
-      "DeviceSpan8": "Grid",
+      DeviceSpan1: "My Device",
+      DeviceSpan2: "Device Name",
+      DeviceSpan3: "Device's PN",
+      DeviceSpan4: "Load",
+      DeviceSpan5: "Inverter",
+      DeviceSpan6: "PV",
+      DeviceSpan7: "Battery",
+      DeviceSpan8: "Grid",
 
       // Chart
-      "ChartSpan1": "Solar Power Chart",
-      "ChartSpan2": "Selected Type",
-      "ChartSpan3": "Day",
-      "ChartSpan4": "Month",
-      "ChartSpan5": "Year",
-      "ChartSpan6": "Total",
-      "ChartSpan7": "Power (kWh)",
-      "ChartSpan8": "H",
-      "ChartSpan9": "Current load power",
-      "ChartSpan10": "PV power on the day",
-      "ChartSpan11": "DD-MM-YYYY",
-      "ChartSpan12": "MM-YYYY",
-      "ChartSpan13": "YYYY",
-      "ChartSpan14": "Zoom in",
-      "ChartSpan15": "Zoom out",
-      "ChartSpan16": "Reset",
-      "ChartSpan17": "Power consumption :",
-
+      ChartSpan1: "Solar Power Chart",
+      ChartSpan2: "Selected Type",
+      ChartSpan3: "Day",
+      ChartSpan4: "Month",
+      ChartSpan5: "Year",
+      ChartSpan6: "Total",
+      ChartSpan7: "Power (kWh)",
+      ChartSpan8: "H",
+      ChartSpan9: "Current load power",
+      ChartSpan10: "PV power on the day",
+      ChartSpan11: "DD-MM-YYYY",
+      ChartSpan12: "MM-YYYY",
+      ChartSpan13: "YYYY",
+      ChartSpan14: "Zoom in",
+      ChartSpan15: "Zoom out",
+      ChartSpan16: "Reset",
+      ChartSpan17: "Power consumption :",
 
       // Chart Power
-      "ChartPSpan1": "Charge Power",
-      "ChartPSpan2": "Today",
-      "ChartPSpan3": "PV Charging Power",
-      "ChartPSpan4": "System Details",
-      "ChartPSpan5": "Charging PV : ",
+      ChartPSpan1: "Charge Power",
+      ChartPSpan2: "Today",
+      ChartPSpan3: "PV Charging Power",
+      ChartPSpan4: "System Details",
+      ChartPSpan5: "Charging PV : ",
 
       // system details
-      "SystemDetailsSpan1": "System Components",
-      "SystemDetailsSpan2": "System Metrics",
-      "SystemDetailsSpan3": "Details",
-      "SystemDetailsSpan4": "Photovoltaic",
-      "SystemDetailsSpan5": "Selected Date",
+      SystemDetailsSpan1: "System Components",
+      SystemDetailsSpan2: "System Metrics",
+      SystemDetailsSpan3: "Details",
+      SystemDetailsSpan4: "Photovoltaic",
+      SystemDetailsSpan5: "Selected Date",
 
-      // load data details 
-      "load_percentage_des": "The rate of power consumption by the load, often expressed as a percentage of the total capacity.",
-      "load_half_ratio_des": "The ratio of the load currently in use to the total load capacity is typically expressed as a percentage.",
-      "load_apparent_power_des": "The total power consumed by the load, considering both active and reactive components.",
-      "load_active_power_des": "Active power consumed by the connected loads, usually measured in watts (W) or kilowatts (kW).",
-      "output_voltage_des": "Output voltage, typically measured in volts (V).",
-      "output_frequency_des": "Output frequency, often measured in hertz (Hz).",
-      "output_current_des": "The electric current supplied by the system or component.",
-      "output_active_power_des": "The real power output of the system is typically measured in watts (W).",
-      "output_apparent_power_des": "The product of the voltage and current in an AC circuit, typically measured in volt-amperes (VA).",
-      "total_power_output_day_des": "The cumulative electrical energy outputted by the system throughout the day.",
-      
+      // load data details
+      load_percentage_des:
+        "The rate of power consumption by the load, often expressed as a percentage of the total capacity.",
+      load_half_ratio_des:
+        "The ratio of the load currently in use to the total load capacity is typically expressed as a percentage.",
+      load_apparent_power_des:
+        "The total power consumed by the load, considering both active and reactive components.",
+      load_active_power_des:
+        "Active power consumed by the connected loads, usually measured in watts (W) or kilowatts (kW).",
+      output_voltage_des: "Output voltage, typically measured in volts (V).",
+      output_frequency_des: "Output frequency, often measured in hertz (Hz).",
+      output_current_des:
+        "The electric current supplied by the system or component.",
+      output_active_power_des:
+        "The real power output of the system is typically measured in watts (W).",
+      output_apparent_power_des:
+        "The product of the voltage and current in an AC circuit, typically measured in volt-amperes (VA).",
+      total_power_output_day_des:
+        "The cumulative electrical energy outputted by the system throughout the day.",
+
       // inverter data details
-      "inverter_voltage_des": "The Voltage is supplied by the inverter, which converts DC power to AC power.",
-      "inverter_frequency_des": "Inverter current, representing the electric current output from the inverter.",
-      "inverter_current_des": "The electrical current flows through the inverter, which is a device that converts direct current (DC) from solar panels into alternating current (AC) that can be used to power electrical devices in a solar power system.",
-      
+      inverter_voltage_des:
+        "The Voltage is supplied by the inverter, which converts DC power to AC power.",
+      inverter_frequency_des:
+        "Inverter current, representing the electric current output from the inverter.",
+      inverter_current_des:
+        "The electrical current flows through the inverter, which is a device that converts direct current (DC) from solar panels into alternating current (AC) that can be used to power electrical devices in a solar power system.",
+
       // battery data details
-      "battery_voltage_des": "Short for Battery Voltage: the voltage level of the connected battery in the system.",
-      "battery_discharge_current_des": "Amount of energy discharged from the battery during the current day.",
-      "charging_voltage_des": "The voltage is applied to charge batteries or other energy storage systems.",
-      "battery_cells_id_des": "The quantity of individual battery units connected in series or parallel.",
-      "charging_current_des": "The electric current used to charge the battery, typically measured in amperes (A) or kiloamperes (kA).",
-      "charging_power_des": "The power used to charge the battery, typically measured in watts (W) or kilowatts (kW).",
-      "battery_capacity_soc_des": "Capacity of the battery, often expressed as State of Charge (SOC).",
-      "battery_capacity_query_des": "Short for Battery State of Charge: the remaining capacity of the battery as a percentage of its total capacity.",
-      "battery_current_des": "The flow of electric charge within the battery is typically measured in amperes (A).",
-      
+      battery_voltage_des:
+        "Short for Battery Voltage: the voltage level of the connected battery in the system.",
+      battery_discharge_current_des:
+        "Amount of energy discharged from the battery during the current day.",
+      charging_voltage_des:
+        "The voltage is applied to charge batteries or other energy storage systems.",
+      battery_cells_id_des:
+        "The quantity of individual battery units connected in series or parallel.",
+      charging_current_des:
+        "The electric current used to charge the battery, typically measured in amperes (A) or kiloamperes (kA).",
+      charging_power_des:
+        "The power used to charge the battery, typically measured in watts (W) or kilowatts (kW).",
+      battery_capacity_soc_des:
+        "Capacity of the battery, often expressed as State of Charge (SOC).",
+      battery_capacity_query_des:
+        "Short for Battery State of Charge: the remaining capacity of the battery as a percentage of its total capacity.",
+      battery_current_des:
+        "The flow of electric charge within the battery is typically measured in amperes (A).",
+
       // pv data details
-      "pv_voltage_des": "Short for Photovoltaic Input Voltage, it represents the voltage level of the solar panels or photovoltaic system input.",
-      "pv_charging_current_des": "Current generated by the photovoltaic (PV) system, usually measured in amperes (A).",
-      "pv_current_des": "The flow of electric current generated by a photovoltaic (PV) solar panel when exposed to sunlight. It is the direct current (DC) produced by the solar cells in the PV panel as a result of the photovoltaic effect.",
-      "total_pv_power_des": "The total power generated by the photovoltaic system, typically measured in watts (W) or kilowatts (kW).",
-      "total_pv_power_generation_day_des": "The total amount of energy generated by the solar panels in a solar power system during a specific period of the day.",
-      "total_pv_power_generations_des": "Represents the cumulative energy production of the photovoltaic panels.",
-      "total_pv_power_generation_des": "The total amount of electrical energy produced by photovoltaic (PV) solar panels over a specific period.",
-      
+      pv_voltage_des:
+        "Short for Photovoltaic Input Voltage, it represents the voltage level of the solar panels or photovoltaic system input.",
+      pv_charging_current_des:
+        "Current generated by the photovoltaic (PV) system, usually measured in amperes (A).",
+      pv_current_des:
+        "The flow of electric current generated by a photovoltaic (PV) solar panel when exposed to sunlight. It is the direct current (DC) produced by the solar cells in the PV panel as a result of the photovoltaic effect.",
+      total_pv_power_des:
+        "The total power generated by the photovoltaic system, typically measured in watts (W) or kilowatts (kW).",
+      total_pv_power_generation_day_des:
+        "The total amount of energy generated by the solar panels in a solar power system during a specific period of the day.",
+      total_pv_power_generations_des:
+        "Represents the cumulative energy production of the photovoltaic panels.",
+      total_pv_power_generation_des:
+        "The total amount of electrical energy produced by photovoltaic (PV) solar panels over a specific period.",
+
       // grid data details
-      "grid_input_voltage_des": "The Voltage is supplied to the system from the electrical grid.",
-      "grid_frequency_des": "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected.",
-      "total_grid_power_generation_day_des": "The sum of all electrical energy generated by the grid throughout the day.",
-      "total_grid_power_generation_des": "The overall electrical energy produced by the grid.",
-      "grid_voltage_des": "AC Input Voltage: the current flowing between the system and the electrical grid.",
-      "grid_output_frequency_des": "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected.",
-      "grid_current_output_des": "Indicates the amount of current being supplied by the grid to the system.",
-      "output_frequency_des": "The frequency of alternating current (AC) electricity produced by a power generation system or electrical device. It is measured in Hertz (Hz) and indicates the id of complete cycles per second.",
+      grid_input_voltage_des:
+        "The Voltage is supplied to the system from the electrical grid.",
+      grid_frequency_des:
+        "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected.",
+      total_grid_power_generation_day_des:
+        "The sum of all electrical energy generated by the grid throughout the day.",
+      total_grid_power_generation_des:
+        "The overall electrical energy produced by the grid.",
+      grid_voltage_des:
+        "AC Input Voltage: the current flowing between the system and the electrical grid.",
+      grid_output_frequency_des:
+        "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected.",
+      grid_current_output_des:
+        "Indicates the amount of current being supplied by the grid to the system.",
+      output_frequency_des:
+        "The frequency of alternating current (AC) electricity produced by a power generation system or electrical device. It is measured in Hertz (Hz) and indicates the id of complete cycles per second.",
 
       // Bill
-      "BillSpan1": "Earn Profit Energy Bill",
-      "BillSpan2": "Unit",
-      "BillSpan3": "Saved",
-      "BillSpan4": "THB",
-      "BillSpan5": "",
+      BillSpan1: "Earn Profit Energy Bill",
+      BillSpan2: "Unit",
+      BillSpan3: "Saved",
+      BillSpan4: "THB",
+      BillSpan5: "",
       // solar energy
       "Solar Energy Flow": "Solar Energy Flow",
-      "ON": "ON",
+      ON: "ON",
       "Output active power": "Output active power",
       "Photovoltaic power": "Photovoltaic power",
-      "Battery": "Battery",
-      "Grid": "Grid",
-      "Load": "Load",
+      Battery: "Battery",
+      Grid: "Grid",
+      Load: "Load",
 
       // popup flow load
       "Load percentage": "Load percentage ",
@@ -321,9 +402,12 @@ const resources = {
       "Photovoltaic charging current": "Photovoltaic charging current",
       "Photovoltaic current": "Photovoltaic current",
       "Total photovoltaic power": "Total photovoltaic power",
-      "Total photovoltaic power generation on that day": "Total photovoltaic power generation on that day",
-      "Total photovoltaic power generations": "Total photovoltaic power generations",
-      "Total photovoltaic power generation": "Total photovoltaic power generation",
+      "Total photovoltaic power generation on that day":
+        "Total photovoltaic power generation on that day",
+      "Total photovoltaic power generations":
+        "Total photovoltaic power generations",
+      "Total photovoltaic power generation":
+        "Total photovoltaic power generation",
       // popup flow battery
       "Battery Voltage": "Battery Voltage",
       "Battery Discharge Current": "Battery Discharge Current",
@@ -337,17 +421,18 @@ const resources = {
       // popup gird
       "Grid Input voltage": "Grid Input voltage",
       "Grid  Frequency": "Grid Frequency",
-      "Total power generated by the Grid on that day": "Total power generated by the Grid on that day",
+      "Total power generated by the Grid on that day":
+        "Total power generated by the Grid on that day",
       "Total Grid power generation": "Total Grid power generation",
       "Grid voltage": "Grid voltage",
       "Grid frequency": "Grid frequency",
       "Grid current output": "Grid current output",
-      "Output frequency": "Output frequency"
+      "Output frequency": "Output frequency",
     },
   },
 }
 
-const getLang = localStorage.getItem('Language');
+const getLang = localStorage.getItem("Language")
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next

@@ -2,20 +2,24 @@
 
 import Joi from "joi"
 
-const loginSchema = Joi.object({
-  name: Joi.string().trim().required().messages({
-    "string.empty": "user name or email is required",
-  }),
+const loginSchema = (t) =>
+  Joi.object({
+    name: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": t("user name or email is required"),
+      }),
 
-  password: Joi.string().alphanum().min(6).required().trim().messages({
-    "string.empty": "password is required",
-    "string.alphanum": "password must contain number or alphabet",
-    "string.min": "password must have at least 6 characters",
-  }),
-})
+    password: Joi.string().alphanum().min(6).required().trim().messages({
+      "string.empty": t("password is required"),
+      "string.alphanum": t("password must contain number or alphabet"),
+      "string.min": t("password must have at least 6 characters"),
+    }),
+  })
 
-const validateLogin = (input) => {
-  const {error} = loginSchema.validate(input, {
+const validateLogin = (input, t) => {
+  const {error} = loginSchema(t).validate(input, {
     abortEarly: false,
   })
 

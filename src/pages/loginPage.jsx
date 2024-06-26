@@ -72,7 +72,7 @@ export default function LoginPage() {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault()
-      const result = validateLogin(login)
+      const result = validateLogin(login, t)
 
       if (result) {
         setError(result)
