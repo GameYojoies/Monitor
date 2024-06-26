@@ -163,6 +163,8 @@ const resources = {
       //solar energy flow
       "Solar Energy Flow": "การไหลของพลังงาน",
       ON: "เปิด",
+      OFF: "ปิด",
+
       "Output active power": "โหลดกำลังไฟฟ้าเอาท์พุตที่ใช้งาน",
       "Photovoltaic power": "พลังงานไฟฟ้าของโซลาร์เซลล์",
       Battery: "แบตเตอรี่",
@@ -376,6 +378,7 @@ const resources = {
       // solar energy
       "Solar Energy Flow": "Solar Energy Flow",
       ON: "ON",
+      OFF:"OFF",
       "Output active power": "Output active power",
       "Photovoltaic power": "Photovoltaic power",
       Battery: "Battery",

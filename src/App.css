@@ -4,3 +4,6 @@
   padding: 8px 12px; /* Adjust the padding values as needed */
   color: black;
 }
+.active {
+  background-color: #E4EBFB;
+}

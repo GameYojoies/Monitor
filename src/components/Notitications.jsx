@@ -8,6 +8,7 @@ import {
 } from "../images";
 import useAuth from "../hook/useAuth";
 import React, { useState, useEffect } from "react";
+import Alert from "./popupFlow/alert";
 
 function Notifications() {
   const { pin, datanotifydeivece } = useAuth();
@@ -88,6 +89,11 @@ function Notifications() {
           </div>
         </div>
       </div>
+      <div className="h-5"></div>
+        <div className="w-[90%] m-auto flex items-center">
+          <Alert/>
+
+        </div>
     </>
   );
 }
