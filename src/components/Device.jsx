@@ -73,7 +73,7 @@ const Device = () => {
 
   return (
     <div className="w-[100%] items-center justify-center flex mt-8">
-      <div className="w-[90%]">
+      <div className="w-[95%]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {devices.map((device) => (
             <div

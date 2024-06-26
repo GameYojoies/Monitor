@@ -98,7 +98,7 @@ const MyDevice = () => {
   return (
     <div className="w-[100%] items-center justify-center flex mt-6">
 
-      <div className="w-[90%] ">
+      <div className="w-[95%] ">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
             <h1 className="text-2xl font-bold text-[#001647]">{t("DeviceSpan1")}</h1>

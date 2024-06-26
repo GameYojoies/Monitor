@@ -8,7 +8,7 @@ import SolarEnergyFlow from "../components/SolarEnergyFlow";
 export default function MonitorPage() {
 
   return (
-    <div className="w-full h-[calc(100vh-98px)] overflow-auto">
+    <div className="w-[calc(100vw-110px)] h-[calc(100vh-98px)] overflow-auto">
       <MyDevice />
       <Device/>
       <SolarEnergyFlow />

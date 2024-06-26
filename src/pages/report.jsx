@@ -15,10 +15,10 @@ export default function ReportPage() {
   }
 
   return (
-    <div className="w-[calc(100vw-160px)] h-[calc(100vh-98px)] overflow-auto">
+    <div className="w-[calc(100vw-110px)] h-[calc(100vh-98px)] overflow-auto">
       <div className="w-full flex justify-center items-center">
 
-        <div className="w-[90%] flex flex-col justify-start items-center gap-10 mb-10">
+        <div className="w-[95%] flex flex-col justify-start items-center gap-10 mb-10">
           {/* select nav */}
           <div className="bg-white h-[45px] w-[100%] border-b-2 border-[#103A5E] mt-6">
 

@@ -37,7 +37,7 @@ function Sidebar() {
   const {t} = useTranslation()
 
   return (
-    <nav className="w-[150px] bg-white">
+    <nav className="w-[110px] bg-white">
       <div className="shadow-xl  h-full">
         <ul className="space-y-0 text-center">
           {navbarData?.map((el, idx) => (
@@ -47,7 +47,7 @@ function Sidebar() {
               <Link
                 to={el.to}
                 className={`py-7 text-gray-800 hover:bg-gray-200 flex flex-col items-center ${
-                  location.pathname === el.to ? "bg-gray-200" : ""
+                  location.pathname === el.to ? "bg-gray-200 font-semibold" : ""
                 }`}>
                 <img
                   src={el.img}

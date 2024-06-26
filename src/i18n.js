@@ -137,7 +137,7 @@ const resources = {
       "Visit Monitor Demo": "Visit Monitor Demo",
       "Welcome to Your Monitoring": "Welcome to Your Monitoring",
       Monitor: "Monitor",
-      Report: "Report",
+      Report: "Report Data",
       Notification: "Notification",
       User: "User",
       "User Information": "User Information",
