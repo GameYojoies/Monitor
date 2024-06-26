@@ -10,14 +10,15 @@ import {
   iconDown,
   bgLogin,
   iconEmail,
+  bgLoginHand
 } from "../images"
 import InputLogin from "../components/inputLogin"
-import {Link, useNavigate} from "react-router-dom"
-import {useEffect, useRef, useState} from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
 import useAuth from "../hook/useAuth"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import ModalLang from "../components/modalLang"
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next"
 import validateLogin from "../validators/validate-login"
 
 export default function LoginPage() {
@@ -44,11 +45,11 @@ export default function LoginPage() {
   })
   // console.log("login", login)
 
-  const {userLogin, selecteLanguage, setSelecteLanguage, languageMain} =
+  const { userLogin, selecteLanguage, setSelecteLanguage, languageMain } =
     useAuth()
 
   const navigate = useNavigate()
-  const {t, i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const [error, setError] = useState({})
   // console.log("error", error)
@@ -61,7 +62,7 @@ export default function LoginPage() {
   const languageRef = useRef()
 
   const handleChangeInput = (e) => {
-    setLogin({...login, [e.target.name]: e.target.value})
+    setLogin({ ...login, [e.target.name]: e.target.value })
   }
 
   const handleClickSelecteLanguage = (name) => {
@@ -122,7 +123,10 @@ export default function LoginPage() {
           src={bgLogin}
           className="w-full h-full "
         />
+
       </div>
+      
+      <img src={bgLoginHand} alt="" className="absolute h-[75%] z-1 bottom-0 right-0" />
 
       <div className="absolute z-1 w-full h-full top-0 flex flex-col items-center justify-start gap-2">
         {/* selecteLanguage */}
@@ -141,11 +145,10 @@ export default function LoginPage() {
             className="mb-1 ml-3">
             <img
               src={iconDown}
-              className={`transition-transform duration-300 transform x] ${
-                iconRotate
+              className={`transition-transform duration-300 transform x] ${iconRotate
                   ? "rotate-180 w-[14px] h-[14px]"
                   : "w-[14px] h-[14px]"
-              }`}
+                }`}
             />
           </button>
 
@@ -221,6 +224,7 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
+
     </div>
   )
 }

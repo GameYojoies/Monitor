@@ -13,6 +13,7 @@ import iconLogo from "../images/header/logoSolar.png"
 import iconLanguage from "../images/header/language.png"
 import iconDown from "../images/header/iconDown.png"
 import bgLogin from "../images/login/loginBg.png"
+import bgLoginHand from "../images/login/loginBgHand.png"
 import iconEmail from "../images/login/iconEmail.png"
 import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
@@ -90,6 +91,7 @@ export {
   icon_notify_2,
   icon_notify_3,
   icon_notify_4,
-  img_device
+  img_device,
+  bgLoginHand
 
 }
