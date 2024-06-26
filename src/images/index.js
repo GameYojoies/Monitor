@@ -37,7 +37,7 @@ import iconsSys from "../images/Report/iconsSys.png"
 import iconsSys1 from "../images/Report/iconsSys1.png"
 import iconsSys2 from "../images/Report/iconsSys2.png"
 import iconsSys3 from "../images/Report/iconsSys3.png"
-
+import iconsConsum from "../images/Report/consum.png"
 
 
 export {
@@ -78,5 +78,6 @@ export {
   iconsSys1,
   iconsSys2,
   iconsSys3,
+  iconsConsum,
 
 }

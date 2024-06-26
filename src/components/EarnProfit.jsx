@@ -135,8 +135,8 @@ const EarnProfit = () => {
             </div>
 
 
-            <div className={`${select == "select1" ? "h-[430px]" : "h-[361px]"} bg-white text-lg flex flex-col items-center mt-6 w-[65%] lg:w-[95%]  shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2`}>
-                <div className="w-[90%] flex justify-between pt-10">
+            <div className={`${select == "select1" ? "h-[530px]" : "h-[461px]"} bg-white text-lg flex flex-col items-center justify-center mt-6 w-[65%] lg:w-[95%]  shadow-[2px_2px_15px_0px_#00000026] rounded-xl gap-2`}>
+                <div className="w-[90%] flex justify-between">
                     <span>{t("BillSpan2")}</span>
                     <div>
                         <span className="font-semibold">{unit}</span>
@@ -151,7 +151,7 @@ const EarnProfit = () => {
                     </div>
                 </div>
 
-                <div className="relative w-40 h-40 mt-6">
+                <div className="relative w-60 h-60 mt-6">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                         <defs>
                             <linearGradient id="gradient" gradientTransform="rotate(30)">

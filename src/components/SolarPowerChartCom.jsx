@@ -1,5 +1,5 @@
 import ReactECharts from 'echarts-for-react';
-import { solarIcon, iconsZoomIn, iconsZoomOut, iconsReset } from '../images';
+import { solarIcon, iconsZoomIn, iconsZoomOut, iconsReset, iconsConsum } from '../images';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
@@ -22,6 +22,7 @@ const SolarPwerChartCom = () => {
     const [select, setSelect] = useState("select2");
     const [currentPv, setCurrentPv] = useState([]);
     const [pvPower, setPvPower] = useState([]);
+    const [sumPv, setSumPv] = useState(0);
     const [hour, setHour] = useState([]);
     const [allDay, setAllDay] = useState("");
 
@@ -80,9 +81,13 @@ const SolarPwerChartCom = () => {
                     collectHours.push(i);
                 }
 
+                let sum = (currentPv.reduce((accumulator, currentValue) => accumulator + currentValue, 0)) / 1000;
+
+
                 setHour(collectHours);
                 setPvPower(pvPowerGenerations);
                 setCurrentPv(currentPv);
+                setSumPv(sum.toLocaleString())
             } else {
                 toast.error(getData.code);
             }
@@ -93,6 +98,7 @@ const SolarPwerChartCom = () => {
 
     useEffect(() => {
         getAPI();
+
     }, [allDay]);
 
     const handleSelect = (e) => {
@@ -233,9 +239,9 @@ const SolarPwerChartCom = () => {
                 <h1 className='text-[#001647] font-semibold text-2xl'>{t("ChartSpan1")}</h1>
             </div>
 
-            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
+            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-auto w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4 relative'>
-                    <span className='font-semibold'>{t("ChartSpan2")}</span>
+                    <span>{t("ChartSpan2")}</span>
                     <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[350px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
                         <div
                             onClick={() => handleSelect("select2")}
@@ -293,7 +299,7 @@ const SolarPwerChartCom = () => {
                             </LocalizationProvider>
                         </div>
                     </div>
-                    <div className='flex w-[90%] justify-end gap-3 absolute top-14 right-0 text-[12px]'>
+                    <div className='flex w-[90%] justify-end gap-3 absolute top-16 right-0 text-[12px]'>
                         <button className='flex' onClick={handleZoomIn}>
                             <img src={iconsZoomIn} alt="" className='h-[20px]' />
                             <span className='text-[#3D5A80]' >{t("ChartSpan14")}</span>
@@ -309,8 +315,8 @@ const SolarPwerChartCom = () => {
                     </div>
                 </div>
 
-                <div className='mt-6 flex items-center h-[400px] w-[95%] relative'>
-                    <span className='inline-block transform -rotate-90 absolute left-[-30px]'>{t("ChartSpan7")}</span>
+                <div className='mt-12 flex items-center h-[400px] w-[95%] relative'>
+                    <span className='inline-block transform -rotate-90 absolute left-[-30px] font-semibold'>{t("ChartSpan7")}</span>
                     <ReactECharts
                         ref={echartsRef}
                         option={option}
@@ -319,9 +325,28 @@ const SolarPwerChartCom = () => {
                         style={{ height: '95%', width: '100%' }}
                         className='react_for_echarts ml-5'
                     />
-                    <span className='absolute bottom-8 -right-1'>{t("ChartSpan8")}</span>
+                    <span className='absolute bottom-8 -right-1 font-semibold'>{t("ChartSpan8")}</span>
                 </div>
+
+                <div className='flex items-center gap-2'>
+                    <img src={iconsConsum} alt="" className='h-[24px] ' />
+                    <span>{t("ChartSpan17")} </span>
+                    <span className='font-semibold'>{sumPv}</span>
+                    <span className='font-semibold'>kWh<span>{
+                        select == "select1" ? "" :
+                            select == "select2" ? "/"+ t("ChartSpan3") :
+                                select == "select3" ? "/"+ t("ChartSpan4") :
+                                    select == "select4" ? "/"+ t("ChartSpan5") : ""
+                    }</span></span>
+
+
+                </div>
+
+                <div className='h-[10px]'></div>
+
             </div>
+
+
         </div>
     )
 }

@@ -106,7 +106,7 @@ const Device = () => {
                     } `}
                 />
                 {device.id === 4 ? (
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-xl">
                     <span className="block text-center">{device.power}</span>
                     <div className="border-t-2  w-[60px]">
                       <span className="block text-center">
@@ -115,7 +115,7 @@ const Device = () => {
                     </div>
                   </div>
                 ) : (
-                  <span className="block text-center">{device.power}</span>
+                  <span className="block text-center text-xl">{device.power}</span>
                 )}
               </div>
             </div>

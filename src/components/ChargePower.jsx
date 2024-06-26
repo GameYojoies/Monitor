@@ -1,5 +1,5 @@
 import ReactECharts from 'echarts-for-react';
-import { chargIcon, calendarIcon, iconsZoomIn, iconsZoomOut, iconsReset } from '../images';
+import { chargIcon, calendarIcon, iconsZoomIn, iconsZoomOut, iconsReset,iconsConsum } from '../images';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { getAccessToken } from '../utils/local-storage';
@@ -21,12 +21,13 @@ const ChargePower = () => {
     const [pvPower, setPvPower] = useState([]);
     const [hour, setHour] = useState([]);
     const [allDay, setAllDay] = useState("");
+    const [ sumPv, setSumPv] = useState(0)
     const [currentDay, setCurrentDay] = useState(dayjs());
     const [selectdate, setSelectdate] = useState(dayjs().format('YYYY-MM-DD'));
 
     const { pin, selecteLanguage } = useAuth();
     const getPin = pin ? pin.devicePn : "402A8FD7707C";
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const echartsRef = useRef(null); // Create a ref to access the ECharts instance
 
@@ -58,6 +59,8 @@ const ChargePower = () => {
                 const pvChargingPower = response.data.result.reverse().map(data => data.pvChargingPower);
                 const allHours = response.data.records;
 
+                let sum = (pvChargingPower.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
+
                 let collectHours = [];
                 for (let i = 1; i <= allHours; i++) {
                     collectHours.push(i);
@@ -65,6 +68,7 @@ const ChargePower = () => {
 
                 setHour(collectHours);
                 setPvPower(pvChargingPower);
+                setSumPv(sum)
             } else {
                 toast.error(getData.code);
             }
@@ -73,7 +77,7 @@ const ChargePower = () => {
         }
     };
 
-  
+
     // select tap events date
     const handleSelectDate = (e) => {
         const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, '0')}-${e.$D.toString().padStart(2, '0')}`;
@@ -191,14 +195,14 @@ const ChargePower = () => {
                 <h1 className='text-[#001647] font-semibold text-2xl'>{t("ChartPSpan1")}</h1>
             </div>
 
-            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-[500px] w-[100%] mt-10'>
+            <div className='flex flex-col gap-2 p-2 items-center justify-center bg-white shadow-[2px_2px_15px_0px_#00000026] rounded-xl h-auto w-[100%] mt-10'>
                 <div className='w-[90%] mt-8 flex items-center justify-center gap-4 relative'>
                     <div className='flex gap-1 items-center'>
                         <img src={calendarIcon} alt="" className='h-[20px]' />
                         <span className='font-semibold'>{t("ChartPSpan2")}</span>
                     </div>
-                    <div className='shadow-lg font-semibold text-[#7B94B5] border-2 border-[#DADADA70] flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden bg-[#DADADA50] border-1'>
-                        <div className={`cursor-pointer w-[100%] h-[100%] flex items-center justify-center border-x-2 border-[#DADADA70] bg-[#0072D6] text-white`} >
+                    <div className='shadow-lg font-semibold flex justify-between items-center h-[45px] w-[90px] rounded-2xl overflow-hidden'>
+                        <div className={`cursor-pointer w-[100%] h-[100%] flex items-center justify-center bg-[#0072D6] text-white`} >
                             <span>{t("ChartSpan3")}</span>
                         </div>
                     </div>
@@ -235,7 +239,7 @@ const ChargePower = () => {
 
 
                 <div className='mt-6 flex items-center h-[400px] w-[95%] relative'>
-                    <span className='inline-block transform -rotate-90 absolute left-[-30px]'>{t("ChartSpan7")}</span>
+                    <span className='inline-block transform -rotate-90 absolute left-[-30px] font-semibold'>{t("ChartSpan7")}</span>
                     <ReactECharts
                         ref={echartsRef}
                         option={option}
@@ -244,8 +248,19 @@ const ChargePower = () => {
                         style={{ height: '95%', width: '100%' }}
                         className='react_for_echarts ml-5'
                     />
-                    <span className='absolute bottom-8 -right-1'>{t("ChartSpan8")}</span>
+                    <span className='absolute bottom-8 -right-1 font-semibold'>{t("ChartSpan8")}</span>
                 </div>
+
+                <div className='flex items-center gap-2'>
+                    <img src={iconsConsum} alt="" className='h-[24px] ' />
+                    <span>{t("ChartPSpan5")} </span>
+                    <span className='font-semibold'>{sumPv}</span>
+                    <span className='font-semibold'>kWh/<span>{t("ChartSpan3")}</span></span>
+
+                </div>
+
+                <div className='h-[10px]'></div>
+
             </div>
         </div>
     )

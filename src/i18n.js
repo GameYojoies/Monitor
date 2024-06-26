@@ -53,12 +53,15 @@ const resources = {
       "ChartSpan14": "ขยายเข้า",
       "ChartSpan15": "ขยายออก",
       "ChartSpan16": "ตั้งค่าอีกครั้ง",
+      "ChartSpan17": "การใช้พลังงาน : ",
 
       // Chart Power
       "ChartPSpan1": "พลังงานชาร์จ",
       "ChartPSpan2": "วันนี้",
       "ChartPSpan3": "กำลังไฟชาร์จ PV",
       "ChartPSpan4": "รายละเอียด",
+      "ChartPSpan5": "กำลังไฟชาร์จ PV : ",
+      
 
       // system details
       "SystemDetailsSpan1": "System Components",
@@ -159,7 +162,7 @@ const resources = {
       "ChartSpan2": "Selected Type",
       "ChartSpan3": "Day",
       "ChartSpan4": "Month",
-      "ChartSpan5": "Years",
+      "ChartSpan5": "Year",
       "ChartSpan6": "Total",
       "ChartSpan7": "Power (kWh)",
       "ChartSpan8": "H",
@@ -171,12 +174,15 @@ const resources = {
       "ChartSpan14": "Zoom in",
       "ChartSpan15": "Zoom out",
       "ChartSpan16": "Reset",
+      "ChartSpan17": "Power consumption :",
+     
 
       // Chart Power
       "ChartPSpan1": "Charge Power",
       "ChartPSpan2": "Today",
       "ChartPSpan3": "PV Charging Power",
       "ChartPSpan4": "System Details",
+      "ChartPSpan5": "Charging PV : ",
 
       // system details
       "SystemDetailsSpan1": "System Components",
