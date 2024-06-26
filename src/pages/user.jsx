@@ -13,7 +13,7 @@ export default function UserPage() {
   return (
 
     <div className="w-full h-[calc(100vh-98px)] overflow-auto">
-      <div className="w-11/12 h-screen m-auto flex flex-col gap-12">
+      <div className="w-[95%] h-screen m-auto flex flex-col gap-12">
         <div className="flex items-center gap-4 border-b-2 border-[#001647] p-4">
           <img
             src={iconUser}
@@ -25,8 +25,8 @@ export default function UserPage() {
           </p>
         </div>
 
-        <div className="flex-none lg:flex items-center bg-white py-14 px-4 rounded-xl shadow-[2px_2px_15px_0px_#00000026]">
-          <div className="w-full lg:w-1/4  flex flex-col items-center">
+        <div className="flex-none lg:flex items-center bg-white py-14 px-8 rounded-xl shadow-[2px_2px_15px_0px_#00000026]">
+          <div className="w-full lg:w-[30%]  flex flex-col items-center">
             <img
               src={viteApiTest + authenticateUser?.avatar || iconUser}
               className="w-[242px] h-[242px] border-2 border-white rounded-full cursor-pointer shadow-2xl"
@@ -41,7 +41,7 @@ export default function UserPage() {
             </p>
           </div>
 
-          <div className="w-full lg:w-3/4 flex flex-col gap-5 pl-20">
+          <div className="w-full lg:w-[70%] flex flex-col gap-5 px-14">
             <div className="flex flex-col gap-2">
               <UserInfoSection
                 header="Username"
