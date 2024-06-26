@@ -130,7 +130,7 @@ const SolarEnergyFlow = () => {
   return (
     <div>
       <div className="h-10"></div>
-      <div className="flex items-center gap-2 ml-14">
+      <div className="flex items-center gap-2 ml-9">
         <img src={solar1} alt="" className="h-[25px]" />
         <h1 className="text-[#001647] font-semibold text-2xl">
           {t("Solar Energy Flow")}
@@ -140,7 +140,7 @@ const SolarEnergyFlow = () => {
         </div>
       </div>
       <div className="h-5"></div>
-      <div className="w-[90%] m-auto lg:flex lg:flex-col">
+      <div className="w-[95%] m-auto lg:flex lg:flex-col">
         <div className="text-[#ADB5BD] font-semibold flex justify-end">
           <div className="flex gap-2">{formattedDate}</div>
         </div>
