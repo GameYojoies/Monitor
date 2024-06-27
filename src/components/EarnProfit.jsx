@@ -122,7 +122,7 @@ const EarnProfit = () => {
                                     onChange={(newValue) => handleSelectDay(newValue)}
                                     shouldDisableDate={(date) => date.isAfter(dayjs())}
                                     renderInput={(params) => <TextField {...params} />}
-                                    format='LL'
+                                    format='ll'
                                 /> :
                                 select === "select3" ?
                                     <DatePicker
