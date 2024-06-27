@@ -104,8 +104,8 @@ const MyDevice = () => {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
             <h1 className="text-2xl font-bold text-[#001647]">{t("DeviceSpan1")}</h1>
-            <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] px-12 py-1 rounded-[30px] shadow-md flex items-center text-white relative">
-              <div className="flex gap-2 ">
+            <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d]  px-12 py-1 rounded-[30px] shadow-md  flex items-center text-white relative">
+              <div className="fexl-col gap-2 lg:flex ">
                 <div className="flex flex-col w-[200px] relative">
                   <label className="font-semibold text-xs">{t("DeviceSpan2")}</label>
                   <select
@@ -130,7 +130,7 @@ const MyDevice = () => {
                     <img className="w-[24px]" src={drop} alt="Dropdown Icon" />
                   </span>
                 </div>
-                <div className="border-r-2 border-gray-300 h-12"></div>
+                <div className="border-r-2 border-gray-300 lg:h-12"></div>
                 <div className="flex flex-col w-[170px]">
                   <label className="font-semibold text-xs">{t("DeviceSpan3")}</label>
                   <span className="text-xl">{Pn}</span>
@@ -139,7 +139,7 @@ const MyDevice = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-1/4 bg-white p-4 gap-1 flex">
+          <div className="w-full md:w-1/4 bg-transparent p-4 gap-1 flex">
             <img
               src={map}
               alt="Device"
