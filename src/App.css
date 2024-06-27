@@ -7,3 +7,6 @@
 .active {
   background-color: #E4EBFB;
 }
+.option-padding {
+  padding: 10px; /* Adjust the padding value as needed */
+}

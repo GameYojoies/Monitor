@@ -159,7 +159,7 @@ const Device = () => {
                             : "56%",
                       }}
                     />
-                    <div className="w-[30%]  m-auto pointer-events-none top-[25%] text-[#FFF] text-xs right-[32%] absolute">
+                    <div className="w-[30%]   pointer-events-none  text-[#FFF] text-xs lg:text-md lg:right-[32%] lg:top-[25%] absolute">
                       {dataFlow?.batteryCapacity || 0} %
                     </div>
                   </div>

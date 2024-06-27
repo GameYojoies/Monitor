@@ -48,7 +48,14 @@ import icon_notify_3 from "../images/Notify/icon_notify_3.png"
 import icon_notify_4 from "../images/Notify/icon_notify_4.png"
 import img_device from "../images/Notify/img-device.png"
 
+import err from "../images/Notify/error.png"
+import warning from "../images/Notify/warning.png"
+import reset from "../images/Notify/reset.png"
+
 export {
+  warning,
+  err,
+  reset,
   monitor,
   report,
   notification,
