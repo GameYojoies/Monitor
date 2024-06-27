@@ -10,9 +10,9 @@ const MyDevice = () => {
   const [address, setAddress] = useState("");
   const [deviceOptions, setDeviceOptions] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const { fetch, setFetch ,datanotifydeivece,setDatanotifydeivece} = useAuth();
+  const { fetch, setFetch, datanotifydeivece, setDatanotifydeivece } = useAuth();
   const { t } = useTranslation();
-
+  const [isOpen, setIsOpen] = useState(false);
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
 
@@ -37,7 +37,7 @@ const MyDevice = () => {
     };
 
     fetchDevices();
-  }, [API_SERVER, token,Pn]);
+  }, [API_SERVER, token, Pn]);
 
   const handleNoDevices = () => {
     console.log("No devices available");
@@ -53,7 +53,7 @@ const MyDevice = () => {
         setPn(mainDevice.pn);
         setAddress(mainDevice.address);
         setFetch(true);
-        setDatanotifydeivece(devices)
+        setDatanotifydeivece(devices);
       }
     }
   };
@@ -97,6 +97,12 @@ const MyDevice = () => {
     }
   };
 
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  const selectDevice = (deviceValue) => {
+    handleDeviceSelect(deviceValue);
+    setIsOpen(false);
+  };
+
   return (
     <div className="w-[100%] items-center justify-center flex mt-6">
 
@@ -106,29 +112,33 @@ const MyDevice = () => {
             <h1 className="text-2xl font-bold text-[#001647]">{t("DeviceSpan1")}</h1>
             <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] py-3  px-5   lg:px-12 lg:py-1 rounded-[30px] shadow-md  flex items-center text-white relative">
               <div className="fexl-col gap-2 lg:flex ">
-                <div className="flex flex-col w-[200px] relative">
+                <div className="flex flex-col w-[200px] relative ">
                   <label className="font-semibold text-xs">{t("DeviceSpan2")}</label>
-                  <select
-                    name="device"
-                    id="device"
-                    className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
-                    style={{ backgroundImage: "none" }}
-                    onChange={(e) => handleDeviceSelect(e.target.value)}
-                  >
-                    {deviceOptions.map((device) => (
-                      <option
-                        className="text-black"
-                        key={device.id}
-                        value={`${device.id},${device.pn},${device.address}`}
-                        selected={device.main === true}
-                      >
-                        {device.name}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="absolute top-3 flex items-center right-0 pointer-events-none">
-                    <img className="w-[24px]" src={drop} alt="Dropdown Icon" />
-                  </span>
+                  <div className="relative">
+                    <div
+                      className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent"
+                      onClick={toggleDropdown}
+                    >
+                      {selectedDevice ? selectedDevice.name : "Select Device"}
+                      <span className="absolute top-0 flex items-center right-0 pointer-events-none">
+                        <img className="w-[24px] inline-block ml-2" src={drop} alt="Dropdown Icon" />
+                      </span>
+                    </div>
+                    
+                    {isOpen && (
+                      <div className="absolute mt-2 text-black bg-white rounded-md shadow-lg z-10 w-full">
+                        {deviceOptions.map((device) => (
+                          <div
+                            className={`px-4 py-2 cursor-pointer ${device.main ? 'bg-gray-200' : ''} hover:bg-gray-100`}
+                            key={device.id}
+                            onClick={() => selectDevice(`${device.id},${device.pn},${device.address}`)}
+                          >
+                            {device.name}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="border-r-2 border-gray-300 lg:h-12"></div>
                 <div className="flex flex-col w-[170px]">
