@@ -37,7 +37,7 @@ const resources = {
       DeviceSpan2: "ชื่ออุปกรณ์",
       DeviceSpan3: "หมายเลขพินอุปกรณ์",
       DeviceSpan4: "โหลด",
-      DeviceSpan5: "อินเวอเตอร์",
+      DeviceSpan5: "อินเวอร์เตอร์",
       DeviceSpan6: "แผงโซลาร์เซลล์",
       DeviceSpan7: "แบตเตอรี่",
       DeviceSpan8: "การไฟฟ้า",
