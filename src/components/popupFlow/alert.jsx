@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAccessToken } from "../../utils/local-storage";
+
 import axios from "axios";
 import { err, warning, reset } from "../../images";
 const TabContent = ({ content, datanotity }) => {
   console.log(datanotity, "datanotity");
+
+  const[detail, setDetail] = useState([])
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleDateString("en-GB", {
@@ -74,9 +77,12 @@ const TabContent = ({ content, datanotity }) => {
     const alerts = codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
+
     }));
 
-    console.log("Alerts:", alerts);
+    setDetail(alerts)
+
+    console.log("Alerts:", detail);
   };
   return (
     <>
@@ -188,12 +194,12 @@ const TabContent = ({ content, datanotity }) => {
               <div className="w-[80%] m-auto flex flex-col">
                 <div className="flex">
                 <div className="flex-col flex text-sm">
-                  <li >Failure to start the Battery in Cold Conditions</li>
+                  <li >{detail[0]?.message}</li>
                 </div>
                 </div>
              
                 <div className="flex-col flex text-sm">
-                  <li>Failure to start the Battery in Cold Conditions</li>
+                  <li>{detail[0]?.message}</li>
                 </div>
               </div>
             </div>
