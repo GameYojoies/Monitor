@@ -31,14 +31,14 @@ const ModalConfirm = ({onClose, onSave, text, header, titleButtom, icon}) => {
                     onClick={() => {
                       onClose()
                     }}
-                    className="w-[143px] h-[48px] inline-flex justify-center items-center h-full py-2 px-8 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                    className="w-[143px] h-[48px] inline-flex justify-center items-center py-2 px-8 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
                     Cancel
                   </button>
                   <button
                     onClick={() => {
                       onSave()
                     }}
-                    className="h-[48px] inline-flex justify-center items-center h-full py-2 px-8 bg-[#0072D6] border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-text-red hover:bg-[#0074bd] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
+                    className="h-[48px] inline-flex justify-center items-center py-2 px-8 bg-[#0072D6] border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-text-red hover:bg-[#0074bd] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
                     {titleButtom}
                   </button>
                 </div>
