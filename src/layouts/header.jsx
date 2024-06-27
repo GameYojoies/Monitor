@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useEffect, useRef, useState} from "react"
+import React, { useEffect, useRef, useState } from "react"
 import useAuth from "../hook/useAuth"
 import {
   iconLanguage,
@@ -12,8 +12,8 @@ import {
   iconEng,
 } from "../images"
 import ModalLang from "../components/modalLang"
-import {useTranslation} from "react-i18next"
-import {Link} from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 function Header() {
   const languageData = [
@@ -45,7 +45,7 @@ function Header() {
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
   const languageRef = useRef()
-  const {t, i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -94,7 +94,7 @@ function Header() {
           {/* profile user */}
           <div className="flex items-center gap-2">
             <img
-              src={viteApiTest + authenticateUser?.avatar || defaultProfile}
+              src={authenticateUser?.avatar ? viteApiTest + authenticateUser.avatar : defaultProfile}
               className="w-12 h-12 rounded-full cursor-pointer"
             />
 
@@ -124,11 +124,10 @@ function Header() {
               className="mb-1 ml-3">
               <img
                 src={iconDown}
-                className={`transition-transform duration-300 transform x] ${
-                  iconRotate
-                    ? "rotate-180 w-[14px] h-[14px]"
-                    : "w-[14px] h-[14px]"
-                }`}
+                className={`transition-transform duration-300 transform x] ${iconRotate
+                  ? "rotate-180 w-[14px] h-[14px]"
+                  : "w-[14px] h-[14px]"
+                  }`}
               />
             </button>
 

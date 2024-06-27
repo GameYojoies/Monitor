@@ -114,7 +114,7 @@ const SolarDetail = () => {
         { "id": 34, "name": t("Grid voltage"), "value": dataStore.gridOutputVol || 0, "unit": "V", "des": t("grid_voltage_des") },
         { "id": 35, "name": t("Grid frequency"), "value": dataStore.gridOutputFrequency || 0, "unit": "Hz", "des": t("grid_output_frequency_des") },
         { "id": 36, "name": t("Grid current output"), "value": dataStore.gridCurrentOutput || 0, "unit": "V", "des": t("grid_current_output_des")  },
-        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": t("output_frequency_des") }
+        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": t("output_frequency_des2") }
     ];
 
 
@@ -132,15 +132,17 @@ const SolarDetail = () => {
             <div className='w-[100%] py-4 bg-white flex flex-col items-center mt-10 shadow-[2px_2px_15px_0px_#00000026] rounded-xl'>
 
                 <div className='w-[95%] flex gap-4 mt-2 items-center justify-end'>
-                    <span>{t("SystemDetailsSpan5")}</span>
+                    <span className='pt-2'>{t("SystemDetailsSpan5")}</span>
                     <div className="w-[200px] h-[45px]">
                         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={selecteLanguage == "EN" ? "en" : "th"}>
 
                             <DatePicker
                                 label={t("ChartSpan11")}
                                 value={currentDay}
+                                shouldDisableDate={(date) => date.isAfter(currentDay)}
                                 onChange={(newValue) => handleSelectDay(newValue)}
                                 renderInput={(params) => <TextField {...params} />}
+                                format='ll'
                             />
                         </LocalizationProvider>
                     </div>

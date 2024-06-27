@@ -278,6 +278,7 @@ const SolarPwerChartCom = () => {
                                         value={currentDay}
                                         views={['month', 'year']}
                                         onChange={(newValue) => handleSelectMonth(newValue)}
+                                        shouldDisableDate={(date) => dayjs(date).isAfter(dayjs(), 'year')}
                                         renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                                     /> :
                                     select === "select4" ?
@@ -286,6 +287,7 @@ const SolarPwerChartCom = () => {
                                             value={currentDay}
                                             views={['year']}
                                             onChange={(newValue) => handleSelectYear(newValue)}
+                                            shouldDisableDate={(date) => dayjs(date).isAfter(dayjs(), 'year')}
                                             renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                                         /> :
                                         select === "select2" ?
@@ -293,7 +295,9 @@ const SolarPwerChartCom = () => {
                                                 label={t("ChartSpan11")}
                                                 value={currentDay}
                                                 onChange={(newValue) => handleSelectDate(newValue)}
+                                                shouldDisableDate={(date) => date.isAfter(currentDay)}
                                                 renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                                                format='ll'
                                             /> : ""
                                 }
                             </LocalizationProvider>
@@ -334,9 +338,9 @@ const SolarPwerChartCom = () => {
                     <span className='font-semibold'>{sumPv}</span>
                     <span className='font-semibold'>kWh<span>{
                         select == "select1" ? "" :
-                            select == "select2" ? "/"+ t("ChartSpan3") :
-                                select == "select3" ? "/"+ t("ChartSpan4") :
-                                    select == "select4" ? "/"+ t("ChartSpan5") : ""
+                            select == "select2" ? "/" + t("ChartSpan3") :
+                                select == "select3" ? "/" + t("ChartSpan4") :
+                                    select == "select4" ? "/" + t("ChartSpan5") : ""
                     }</span></span>
 
 
