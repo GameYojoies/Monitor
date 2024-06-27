@@ -216,6 +216,7 @@ const ChargePower = () => {
                                     onChange={(newValue) => handleSelectDate(newValue)}
                                     shouldDisableDate={(date) => date.isAfter(currentDay)}
                                     renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
+                                    format='ll'
                                 />
                             </LocalizationProvider>
                         </div>
