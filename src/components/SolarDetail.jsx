@@ -114,7 +114,7 @@ const SolarDetail = () => {
         { "id": 34, "name": t("Grid voltage"), "value": dataStore.gridOutputVol || 0, "unit": "V", "des": t("grid_voltage_des") },
         { "id": 35, "name": t("Grid frequency"), "value": dataStore.gridOutputFrequency || 0, "unit": "Hz", "des": t("grid_output_frequency_des") },
         { "id": 36, "name": t("Grid current output"), "value": dataStore.gridCurrentOutput || 0, "unit": "V", "des": t("grid_current_output_des")  },
-        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": t("output_frequency_des") }
+        { "id": 37, "name": t("Output frequency"), "value": dataStore.outputFrequency || 0, "unit": "HZ", "des": t("output_frequency_des2") }
     ];
 
 
