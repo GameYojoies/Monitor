@@ -6,7 +6,7 @@ import { err, warning, reset } from "../../images";
 const TabContent = ({ content, datanotity }) => {
   console.log(datanotity, "datanotity");
 
-  const[detail, setDetail] = useState([])
+  const [detail, setDetail] = useState([]);
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleDateString("en-GB", {
@@ -77,10 +77,9 @@ const TabContent = ({ content, datanotity }) => {
     const alerts = codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
-
     }));
 
-    setDetail(alerts)
+    setDetail(alerts);
 
     console.log("Alerts:", detail);
   };
@@ -192,14 +191,18 @@ const TabContent = ({ content, datanotity }) => {
                 <span className="text-base font-medium">Warning</span>
               </div>
               <div className="w-[80%] m-auto flex flex-col">
-                <div className="flex">
-                <div className="flex-col flex text-sm">
-                  <li >{detail[0]?.message}</li>
-                </div>
-                </div>
-             
-                <div className="flex-col flex text-sm">
-                  <li>{detail[0]?.message}</li>
+                <div className="flex justify-center">
+                  <div className="flex-col flex text-sm">
+                    {detail[0]?.message?.length > 0 ? (
+                      <ul>
+                        {detail[0].message.map((msg, index) => (
+                          <li key={index}>{msg}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No messages available</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
