@@ -214,6 +214,7 @@ const ChargePower = () => {
                                     label={t("ChartSpan11")}
                                     value={currentDay}
                                     onChange={(newValue) => handleSelectDate(newValue)}
+                                    shouldDisableDate={(date) => date.isAfter(currentDay)}
                                     renderInput={(params) => <TextField {...params} sx={{ height: '45px' }} />}
                                 />
                             </LocalizationProvider>

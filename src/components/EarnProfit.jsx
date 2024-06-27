@@ -97,17 +97,18 @@ const EarnProfit = () => {
                     >
                         <span>{t("ChartSpan6")}</span>
                     </div>
-                    <div
-                        onClick={() => handleSelect("select2")}
-                        className={`cursor-pointer w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
-                    >
-                        <span>{t("ChartSpan3")}</span>
-                    </div>
+                   
                     <div
                         onClick={() => handleSelect("select3")}
                         className={`cursor-pointer w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select3" ? 'bg-[#0072D6] text-white' : ''}`}
                     >
                         <span>{t("ChartSpan4")}</span>
+                    </div>
+                    <div
+                        onClick={() => handleSelect("select2")}
+                        className={`cursor-pointer w-[33.33%] h-[100%] flex items-center justify-center border-l-2 border-[#DADADA70] ${select === "select2" ? 'bg-[#0072D6] text-white' : ''}`}
+                    >
+                        <span>{t("ChartSpan3")}</span>
                     </div>
                 </div>
 
@@ -119,6 +120,7 @@ const EarnProfit = () => {
                                     label={t("ChartSpan11")}
                                     value={dayjs()}
                                     onChange={(newValue) => handleSelectDay(newValue)}
+                                    shouldDisableDate={(date) => date.isAfter(dayjs())}
                                     renderInput={(params) => <TextField {...params} />}
                                 /> :
                                 select === "select3" ?
@@ -127,6 +129,7 @@ const EarnProfit = () => {
                                         views={['month', 'year']}
                                         value={dayjs()}
                                         onChange={(newValue) => handleSelectMonth(newValue)}
+                                        shouldDisableDate={(date) => dayjs(date).isAfter(dayjs(), 'year')}
                                         renderInput={(params) => <TextField {...params} />}
                                     /> : ""}
                         </LocalizationProvider>

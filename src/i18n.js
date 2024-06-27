@@ -435,7 +435,7 @@ const resources = {
   },
 }
 
-const getLang = localStorage.getItem("Language")
+const getLang = localStorage.getItem("Language") || "EN"
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
