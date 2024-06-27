@@ -11,7 +11,6 @@ import {
   bgLogin,
   iconEmail,
   bgLoginHand,
-  iconLogout2,
 } from "../images"
 import InputLogin from "../components/inputLogin"
 import {Link, useNavigate} from "react-router-dom"

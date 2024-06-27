@@ -1,12 +1,6 @@
 /** @format */
 
 const ModalConfirm = ({onClose, onSave, text, header, titleButtom, icon}) => {
-  const handleClose = (e) => {
-    if (e.target.id === "wrapper") {
-      onClose()
-    }
-  }
-
   return (
     <>
       <div
@@ -15,7 +9,7 @@ const ModalConfirm = ({onClose, onSave, text, header, titleButtom, icon}) => {
         <div className="overflow-y-auto scrollbar cursor-default">
           <div className={`mx-auto min-w-[30em]`}>
             <div className="w-[600px] h-[250px] bg-white rounded-2xl min-w-[50%] overflow-hidden flex flex-col justify-between">
-              <div className="w-full h-[70px] font-bold h-8 w-8 flex items-center pl-8 pt-4 gap-3">
+              <div className="w-full h-[70px] font-bold flex items-center pl-8 pt-4 gap-3">
                 <img
                   src={icon}
                   loading="lazy"
@@ -25,14 +19,14 @@ const ModalConfirm = ({onClose, onSave, text, header, titleButtom, icon}) => {
                 <p className="text-3xl text-[#454D56]"> {header}</p>
               </div>
 
-              <div className="h-[180px] flex flex-col justify-end items-center border-grey-300 gap-4 ">
+              <div className="h-[180px] flex flex-col justify-end items-center border-grey-300 gap-4">
                 <div className="w-full h-[77px] min-w-[50%] flex items-start justify-start mt-5 pl-8">
                   <p className="text-[#454D56] text-[24px] font-semibold">
                     {text}
                   </p>
                 </div>
 
-                <div className="w-full h-[90px] bg-[#F4F4F8] flex justify-end items-center border-grey-300 gap-4 pr-6">
+                <div className="w-full h-[90px] bg-[#F4F4F8] flex justify-end items-center border-grey-300 gap-4 p-4">
                   <button
                     onClick={() => {
                       onClose()

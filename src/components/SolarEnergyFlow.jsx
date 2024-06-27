@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React from "react"
 import {
   solar1,
   energyFlow,
@@ -11,34 +11,32 @@ import {
   bg_green_per,
   bg_yellow_per,
   bg_red_per,
-} from "../images";
-import PopupFlow from "./popupFlow/popupFlow";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { getAccessToken } from "../utils/local-storage";
-import useAuth from "../hook/useAuth";
-import { useTranslation } from "react-i18next";
+  flowEnergy,
+} from "../images"
+import PopupFlow from "./popupFlow/popupFlow"
+import {useState, useEffect} from "react"
+import axios from "axios"
+import {getAccessToken} from "../utils/local-storage"
+import useAuth from "../hook/useAuth"
+import {useTranslation} from "react-i18next"
 
 const SolarEnergyFlow = () => {
-  const { t } = useTranslation();
-  const [count, setCount] = useState("Load");
-  const [textHead, setTextHead] = useState(`${t("Load")}`);
-  const [colorText, setColorText] = useState(3);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const token = getAccessToken();
-  const { dataFlow, setDataFlow, solarDate, pin, datanotifydeivece } =
-    useAuth();
-  const [devicePn, setDevicePn] = useState(null);
-  const [formattedDate, setFormattedDate] = useState("-");
-  const [countNumber, setCountNumber] = useState(0);
-  const [mainDevice, setMainDevice] = useState(null);
+  const {t} = useTranslation()
+  const [count, setCount] = useState("Load")
+  const [textHead, setTextHead] = useState(`${t("Load")}`)
+  const [colorText, setColorText] = useState(3)
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+  const token = getAccessToken()
+  const {dataFlow, setDataFlow, solarDate, pin, datanotifydeivece} = useAuth()
+  const [devicePn, setDevicePn] = useState(null)
+  const [formattedDate, setFormattedDate] = useState("-")
+  const [countNumber, setCountNumber] = useState(0)
+  const [mainDevice, setMainDevice] = useState(null)
   useEffect(() => {
-    const foundDevice = datanotifydeivece.find(
-      (device) => device.main === true
-    );
-    setMainDevice(foundDevice);
-  }, [datanotifydeivece]);
+    const foundDevice = datanotifydeivece.find((device) => device.main === true)
+    setMainDevice(foundDevice)
+  }, [datanotifydeivece])
   const getFormattedDate = () => {
     const options = {
       weekday: "long",
@@ -48,28 +46,28 @@ const SolarEnergyFlow = () => {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
-    };
-    const timestamp = dataFlow?.time;
-    const date = new Date(timestamp);
-    const language = localStorage.getItem("Language") || "en-US";
-    let formattedDate = date.toLocaleDateString(language, options);
-    if (formattedDate === "Invalid Date") {
-      formattedDate = "-";
     }
-    return formattedDate;
-  };
+    const timestamp = dataFlow?.time
+    const date = new Date(timestamp)
+    const language = localStorage.getItem("Language") || "en-US"
+    let formattedDate = date.toLocaleDateString(language, options)
+    if (formattedDate === "Invalid Date") {
+      formattedDate = "-"
+    }
+    return formattedDate
+  }
 
   useEffect(() => {
-    const newFormattedDate = getFormattedDate();
-    setFormattedDate(newFormattedDate);
-  }, [dataFlow?.time, localStorage.getItem("Language")]); // Include dependencies
+    const newFormattedDate = getFormattedDate()
+    setFormattedDate(newFormattedDate)
+  }, [dataFlow?.time, localStorage.getItem("Language")]) // Include dependencies
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
         if (pin == null) {
-          setDevicePn(null);
+          setDevicePn(null)
         } else {
-          setDevicePn(pin.devicePn);
+          setDevicePn(pin.devicePn)
         }
 
         const response = await axios.get(
@@ -82,63 +80,68 @@ const SolarEnergyFlow = () => {
               "Content-Type": "application/json",
             },
           }
-        );
+        )
         if (response.data.result != null) {
-          setData(response.data.result[0]);
+          setData(response.data.result[0])
         } else {
-          setData(0);
+          setData(0)
         }
-        console.log(response, "response");
+        console.log(response, "response")
       } catch (error) {
-        setError(error);
+        setError(error)
       }
-    };
+    }
 
     if (solarDate && token) {
-      fetchData(solarDate, pin);
+      fetchData(solarDate, pin)
     }
-  }, [solarDate, token, pin]);
+  }, [solarDate, token, pin])
 
   useEffect(() => {
     if (data) {
     }
-  }, [data, solarDate, pin]);
+  }, [data, solarDate, pin])
 
   if (error) {
   }
   const handleClick = (position) => {
-    setCount(position);
+    setCount(position)
     if (position === "Inverter") {
-      setTextHead(`${t("Output active power")}`);
-      setColorText(1);
+      setTextHead(`${t("Output active power")}`)
+      setColorText(1)
     }
     if (position === "PV") {
-      setTextHead(`${t("Photovoltaic power")}`);
-      setColorText(2);
+      setTextHead(`${t("Photovoltaic power")}`)
+      setColorText(2)
     }
     if (position === "Load") {
-      setTextHead(`${t("Load")}`);
-      setColorText(3);
+      setTextHead(`${t("Load")}`)
+      setColorText(3)
     }
     if (position === "Grid") {
-      setTextHead(`${t("Grid")}`);
-      setColorText(4);
+      setTextHead(`${t("Grid")}`)
+      setColorText(4)
     }
     if (position === "Battery") {
-      setTextHead(`${t("Battery")}`);
-      setColorText(5);
+      setTextHead(`${t("Battery")}`)
+      setColorText(5)
     }
-  };
+  }
   useEffect(() => {
     if (textHead) {
-      handleClick(count);
+      handleClick(count)
     }
-  }, [textHead, handleClick, count]);
+  }, [textHead, handleClick, count])
+
   return (
     <div>
       <div className="h-10"></div>
       <div className="flex items-center gap-2 ml-9">
-        <img src={solar1} alt="" className="h-[25px]" />
+        <img
+          src={solar1}
+          alt=""
+          className="h-[25px]"
+        />
         <h1 className="text-[#001647] font-semibold text-2xl">
           {t("Solar Energy Flow")}
         </h1>
@@ -158,37 +161,37 @@ const SolarEnergyFlow = () => {
         <div className="w-[100%] flex flex-col lg:flex-row h-[auto] m-auto">
           <div className="h-auto lg:h-[] w-full lg:w-[50%] relative">
             <img
-              src={energyFlow}
+              src={flowEnergy}
               alt=""
-              className="w-[100%] h-[650px] m-auto"
+              className="w-[100%] h-full mt-10"
+              style={{
+                clipPath: "inset(11% 20% 14% 20%)",
+                transform: "scale(1.4)",
+              }}
             />
+
             {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
             <div
-              className="h-[30%] w-48 absolute top-1/2 left-0 right-0 transform -translate-y-1/2 mx-auto"
-              onClick={() => handleClick("Load")}
-            ></div>
+              className="h-[30%] w-48 absolute top-1/2 left-0 right-0 transform -translate-y-1/2 mx-auto cursor-pointer"
+              onClick={() => handleClick("Load")}></div>
 
             <div
-              className="h-[20%] w-48 absolute top-2 right-[8%]"
-              onClick={() => handleClick("PV")}
-            ></div>
+              className="h-[20%] w-48 absolute top-14 right-[20%] cursor-pointer"
+              onClick={() => handleClick("PV")}></div>
             <div
-              className="h-[20%] w-48 absolute top-2 left-[8%]"
-              onClick={() => handleClick("Inverter")}
-            ></div>
+              className="h-[20%] w-48 absolute top-14 left-[20%] cursor-pointer"
+              onClick={() => handleClick("Inverter")}></div>
             <div
-              className="h-[20%] w-48 absolute bottom-8 right-[8%]"
-              onClick={() => handleClick("Grid")}
-            ></div>
+              className="h-[20%] w-48 absolute bottom-20 right-[20%] cursor-pointer"
+              onClick={() => handleClick("Grid")}></div>
             <div
-              className="h-[20%] w-[20%] absolute bottom-8 left-[8%] "
-              onClick={() => handleClick("Battery")}
-            >
+              className="h-[20%] w-[20%] absolute bottom-20 left-[23%] cursor-pointer"
+              onClick={() => handleClick("Battery")}>
               <div>
                 <img
                   src={battery}
                   alt=""
-                  className="w-[40%] h-[25%] m-auto pointer-events-none	 top-8  right-[30%] absolute"
+                  className="w-[40%] h-[25%] m-auto pointer-events-none	 top-36 right-[63%] absolute"
                 />
                 <img
                   src={
@@ -204,7 +207,7 @@ const SolarEnergyFlow = () => {
                       : bg_red
                   }
                   alt=""
-                  className="w-[35%] h-[25%] m-auto pointer-events-none top-8 right-[35%] absolute"
+                  className="w-[35%] h-[25%] m-auto pointer-events-none top-36 right-[67%] absolute"
                 />
 
                 <img
@@ -229,36 +232,36 @@ const SolarEnergyFlow = () => {
                         dataFlow?.batteryCapacity < 40
                       ? "30%"
                       : "10%"
-                  }] h-[18%] m-auto pointer-events-none top-[37px]  absolute`}
+                  }] h-[18%] m-auto pointer-events-none top-[149px] absolute`}
                   style={{
                     right:
                       dataFlow?.batteryCapacity >= 40 &&
                       dataFlow?.batteryCapacity <= 100
-                        ? "37%"
+                        ? "70%"
                         : dataFlow?.batteryCapacity > 10 &&
                           dataFlow?.batteryCapacity < 40
                         ? "45%"
                         : "56%",
                   }}
                 />
-                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[40px] text-[#FFF]  text-xs	 right-[32%] absolute">
+                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[155px] text-[#FFF]  text-xs	 right-[62%] absolute">
                   {" "}
                   {dataFlow?.batteryCapacity || 0} %
                 </div>
               </div>
             </div>
 
-            <div className="absolute bottom-48 left-[15%] font-bold text-2xl text-[#133261]">
+            <div className="absolute bottom-36 left-[22%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;
               <span>A</span>
             </div>
-            <div className="absolute bottom-[180px] right-[14%] font-bold text-2xl text-[#133261]">
+            <div className="absolute bottom-36 right-[24.3%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
             </div>
-            <div className="absolute top-40 right-[15%] font-bold text-2xl text-[#133261]">
+            <div className="absolute top-44 right-[22%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
             </div>
-            <div className="absolute top-40 left-[13%] font-bold text-2xl text-[#133261]">
+            <div className="absolute top-44 left-[23%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.outputActivePower || 0}</span>&nbsp;
               <span>W</span>
             </div>
@@ -270,8 +273,7 @@ const SolarEnergyFlow = () => {
 
           <div
             className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md"
-            style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
-          >
+            style={{boxShadow: "2px 2px 15px 0px #00000026"}}>
             <div className="h-10"></div>
             <div
               className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
@@ -284,8 +286,7 @@ const SolarEnergyFlow = () => {
                   : colorText === 4
                   ? "bg-[#D496FB]"
                   : "bg-[#00C6C6]"
-              } justify-between shadow-md`}
-            >
+              } justify-between shadow-md`}>
               <span className="ml-5 font-bold text-2xl text-[#133261]	">
                 {textHead}
               </span>
@@ -308,12 +309,15 @@ const SolarEnergyFlow = () => {
               </div>
             </div>
             <div className="h-2"></div>
-            <PopupFlow count={count} data={data} />
+            <PopupFlow
+              count={count}
+              data={data}
+            />
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SolarEnergyFlow;
+export default SolarEnergyFlow

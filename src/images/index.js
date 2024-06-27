@@ -19,6 +19,7 @@ import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
 import iconLogout2 from "../images/header/iconLogout2.png"
 import iconUser from "../images/user/logo-user.png"
+import flowEnergy from "../images/Monitor/Flow-Energy-Ad.gif"
 import solar1 from "../images/Monitor/solar1.png"
 import energyFlow from "../images/Monitor/energyFlow.png"
 import battery from "../images/Monitor/bg-battery.png"
@@ -93,4 +94,5 @@ export {
   icon_notify_4,
   img_device,
   bgLoginHand,
+  flowEnergy,
 }
