@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react"
+import React, {useEffect, useRef, useState} from "react"
 import useAuth from "../hook/useAuth"
 import {
   iconLanguage,
@@ -10,10 +10,12 @@ import {
   iconLogout,
   iconThailand,
   iconEng,
+  iconLogout2,
 } from "../images"
 import ModalLang from "../components/modalLang"
-import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import {useTranslation} from "react-i18next"
+import {Link} from "react-router-dom"
+import ModalConfirm from "../components/modalConfirm"
 
 function Header() {
   const languageData = [
@@ -44,8 +46,9 @@ function Header() {
   // console.log("selecteLanguage", selecteLanguage)
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
+  const [confirmLogout, setConfirmLogout] = useState(false)
   const languageRef = useRef()
-  const { t, i18n } = useTranslation()
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -94,7 +97,11 @@ function Header() {
           {/* profile user */}
           <div className="flex items-center gap-2">
             <img
-              src={authenticateUser?.avatar ? viteApiTest + authenticateUser.avatar : defaultProfile}
+              src={
+                authenticateUser?.avatar
+                  ? viteApiTest + authenticateUser.avatar
+                  : defaultProfile
+              }
               className="w-12 h-12 rounded-full cursor-pointer"
             />
 
@@ -124,10 +131,11 @@ function Header() {
               className="mb-1 ml-3">
               <img
                 src={iconDown}
-                className={`transition-transform duration-300 transform x] ${iconRotate
-                  ? "rotate-180 w-[14px] h-[14px]"
-                  : "w-[14px] h-[14px]"
-                  }`}
+                className={`transition-transform duration-300 transform x] ${
+                  iconRotate
+                    ? "rotate-180 w-[14px] h-[14px]"
+                    : "w-[14px] h-[14px]"
+                }`}
               />
             </button>
 
@@ -145,7 +153,7 @@ function Header() {
           {/* logout */}
           <button
             onClick={() => {
-              logout()
+              setConfirmLogout(!confirmLogout)
             }}
             className="w-[25px] h-[25px] ">
             <img
@@ -155,6 +163,17 @@ function Header() {
           </button>
         </div>
       </header>
+
+      {confirmLogout && (
+        <ModalConfirm
+          icon={iconLogout2}
+          header="Log Out"
+          text="Are you sure you want to log out?"
+          titleButtom="Log Out"
+          onClose={() => setConfirmLogout(false)}
+          onSave={() => logout()}
+        />
+      )}
     </>
   )
 }

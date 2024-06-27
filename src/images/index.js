@@ -17,6 +17,7 @@ import bgLoginHand from "../images/login/loginBgHand.png"
 import iconEmail from "../images/login/iconEmail.png"
 import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
+import iconLogout2 from "../images/header/iconLogout2.png"
 import iconUser from "../images/user/logo-user.png"
 import solar1 from "../images/Monitor/solar1.png"
 import energyFlow from "../images/Monitor/energyFlow.png"
@@ -46,8 +47,6 @@ import icon_notify_3 from "../images/Notify/icon_notify_3.png"
 import icon_notify_4 from "../images/Notify/icon_notify_4.png"
 import img_device from "../images/Notify/img-device.png"
 
-
-
 export {
   monitor,
   report,
@@ -65,6 +64,7 @@ export {
   iconEmail,
   defaultProfile,
   iconLogout,
+  iconLogout2,
   solar1,
   energyFlow,
   battery,
@@ -92,6 +92,5 @@ export {
   icon_notify_3,
   icon_notify_4,
   img_device,
-  bgLoginHand
-
+  bgLoginHand,
 }
