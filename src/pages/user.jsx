@@ -28,7 +28,7 @@ export default function UserPage() {
         <div className="flex-none lg:flex items-center bg-white py-14 px-8 rounded-xl shadow-[2px_2px_15px_0px_#00000026]">
           <div className="w-full lg:w-[30%]  flex flex-col items-center">
             <img
-              src={viteApiTest + authenticateUser?.avatar || iconUser}
+              src={authenticateUser?.avatar ? viteApiTest + authenticateUser.avatar : iconUser}
               className="w-[242px] h-[242px] border-2 border-white rounded-full cursor-pointer shadow-2xl"
             />
 
