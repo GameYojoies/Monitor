@@ -139,8 +139,10 @@ const SolarDetail = () => {
                             <DatePicker
                                 label={t("ChartSpan11")}
                                 value={currentDay}
+                                shouldDisableDate={(date) => date.isAfter(currentDay)}
                                 onChange={(newValue) => handleSelectDay(newValue)}
                                 renderInput={(params) => <TextField {...params} />}
+                                format='LL'
                             />
                         </LocalizationProvider>
                     </div>
