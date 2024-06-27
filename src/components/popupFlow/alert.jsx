@@ -7,6 +7,8 @@ const TabContent = ({ content, datanotity }) => {
   console.log(datanotity, "datanotity");
 
   const [detail, setDetail] = useState([]);
+  const [status, setStatus] = useState();
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleDateString("en-GB", {
@@ -74,14 +76,14 @@ const TabContent = ({ content, datanotity }) => {
       4717: "Main Frequency is Absent",
       4718: "Mains Voltage has Disappeared",
     };
-    const alerts = codes.map((code) => ({
+    const alerts = codes.codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
     }));
 
     setDetail(alerts);
-
-    console.log("Alerts:", detail);
+    setStatus(codes)
+    console.log("Alerts:", detail,status.status);
   };
   return (
     <>
@@ -125,7 +127,7 @@ const TabContent = ({ content, datanotity }) => {
                       key={item.id}
                       className="flex items-center py-2 w-[90%] mb-1"
                       style={{ boxShadow: "0px 1px 13px 0px #00000014" }}
-                      onClick={() => SystemAlert(item.codes)}
+                      onClick={() => SystemAlert(item)}
                     >
                       <div className="flex ml-[10px] w-[100%] justify-between">
                         <span className="w-[px] text-sm flex mr-[10px]">
@@ -134,8 +136,8 @@ const TabContent = ({ content, datanotity }) => {
                         <span className="w-[100px] text-sm flex">
                           {formatDate(item.alertTime)}
                         </span>
-                        <span className="w-[100px] flex justify-center">
-                          <span>
+                        <span className={`w-[100px] flex justify-center ${item.status === 40 ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]" :  item.status === 50 ?"bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]" :  item.status === 30 ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]":"bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"}   rounded`}>
+                        <span>
                             {item.status === 10
                               ? "Active"
                               : item.status === 20
@@ -178,6 +180,7 @@ const TabContent = ({ content, datanotity }) => {
             >
               <span>System Alert</span>
             </div>
+
             <div
               className="bg-[#FFF] h-[300px] w-[100%]"
               style={{
@@ -185,22 +188,29 @@ const TabContent = ({ content, datanotity }) => {
                 boxShadow: "0px 4px 4px 0px #00000040",
               }}
             >
-              <div className="flex items-center justify-center gap-5 mt-4">
-                <img className="w-[60px]" src={warning} alt=""></img>
+              {detail[0]?.message ? (
+                <div>
+                  <div className="flex items-center justify-center gap-5 mt-4">
+                    <img className="w-[60px]" src={status.status == 40 ? warning :  status.status == 50 ? err : warning} alt=""></img>
 
-                <span className="text-base font-medium">Warning</span>
-              </div>
+                    <span className="text-base font-medium">{status.status == 40 ? "Warning" : status.status == 50 ? "Error" : "Trouble Solved"}</span>
+                  </div>
+                </div>
+              ) : (
+               null
+              )}
+
               <div className="w-[80%] m-auto flex flex-col">
                 <div className="flex justify-center">
                   <div className="flex-col flex text-sm">
-                    {detail[0]?.message?.length > 0 ? (
-                      <ul>
-                        {detail[0].message.map((msg, index) => (
-                          <li key={index}>{msg}</li>
+                    {detail[0]?.message ? (
+                      <div>
+                        {detail.map((msg, index) => (
+                          <li className="text-[#F44336]" key={index}> <span className="text-[#001647]" >{msg.message}</span></li>
                         ))}
-                      </ul>
+                      </div>
                     ) : (
-                      <p>No messages available</p>
+                      <p className="mt-2 text-[#001647]">No messages available</p>
                     )}
                   </div>
                 </div>
