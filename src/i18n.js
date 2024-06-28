@@ -186,6 +186,12 @@ const resources = {
       "Grid frequency": "ค่าความถี่ไฟฟ้าเข้าอินเวอร์เตอร์อินพุต",
       "Grid current output": "เอาท์พุตกระแสกริด",
       "Output frequency": "ค่าความถี่เอาท์พุต",
+
+         // log out
+         logOutSpan1 : "ออกจากระบบ",
+         logOutSpan2 : "ท่านแน่ใจหรือว่าต้องการออกจากระบบ?",
+         logOutSpan3 : "ยกเลิก",
+         logOutSpan4 : "ยืนยัน",
     },
   },
   en: {
@@ -364,6 +370,12 @@ const resources = {
       "Grid frequency": "Grid frequency",
       "Grid current output": "Grid current output",
       "Output frequency": "Output frequency",
+
+      // log out
+      logOutSpan1 : "Log Out",
+      logOutSpan2 : "Are you sure you want to log out?",
+      logOutSpan3 : "Cancel",
+      logOutSpan4 : "Log Out",
     },
   },
 }

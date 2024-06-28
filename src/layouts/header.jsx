@@ -167,9 +167,10 @@ function Header() {
       {confirmLogout && (
         <ModalConfirm
           icon={iconLogout2}
-          header="Log Out"
-          text="Are you sure you want to log out?"
-          titleButtom="Log Out"
+          header={t("logOutSpan1")}
+          text={t("logOutSpan2")}
+          textCancel={t("logOutSpan3")}
+          titleButtom={t("logOutSpan4")}
           onClose={() => setConfirmLogout(false)}
           onSave={() => logout()}
         />
