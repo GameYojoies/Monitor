@@ -219,7 +219,7 @@ const SolarEnergyFlow = () => {
                     ? "30%"
                     : dataFlow?.batteryCapacity > 10 &&
                       dataFlow?.batteryCapacity < 40
-                      ? "30%"
+                      ? "10%"
                       : "30%"
                     }] h-[18%] m-auto pointer-events-none absolute`}
                 style={{
