@@ -1,14 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { getAccessToken } from "../../utils/local-storage";
-
+import useAuth from "../../hook/useAuth";
 import axios from "axios";
-import { err, warning, reset } from "../../images";
-const TabContent = ({ content, datanotity }) => {
-  console.log(datanotity, "datanotity");
-
+import { err, warning, reset, left } from "../../images";
+const TabContent = ({ content, datanotity, record, statusCounts }) => {
+  console.log(datanotity, record, "datanotity");
   const [detail, setDetail] = useState([]);
   const [status, setStatus] = useState();
+  const [maxRecord, setMaxRecord] = useState(null);
+  const { countPage, setCountPage, setShowPage, showPage } = useAuth();
+  if (
+    content === "1" &&
+    statusCounts.Active +
+      statusCounts.Inactive +
+      statusCounts.Normal +
+      statusCounts.Warning +
+      statusCounts.Error !=
+      0
+  ) {
+    setShowPage(true);
+  } else if (content === "2" && statusCounts.Error != 0) {
+    setShowPage(true);
+  } else if (content === "3" && statusCounts.Warning != 0) {
+    setShowPage(true);
+  } else if (content === "4" && statusCounts.Normal != 0) {
+    setShowPage(true);
+  }
+  else{
+    setShowPage(false);
 
+  }
+  useEffect(() => {
+    if (record !== undefined && record !== null) {
+      setMaxRecord(Math.ceil(record / 10));
+    }
+  }, [record]);
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleDateString("en-GB", {
@@ -82,8 +108,17 @@ const TabContent = ({ content, datanotity }) => {
     }));
 
     setDetail(alerts);
-    setStatus(codes)
-    console.log("Alerts:", detail,status.status);
+    setStatus(codes);
+    console.log("Alerts:", detail, status.status);
+  };
+  const PrevPage = () => {
+    setCountPage((prevCount) => Math.max(prevCount - 1, 1));
+  };
+  const NextPage = () => {
+    setCountPage((prevCount) => Math.min(prevCount + 1, maxRecord));
+  };
+  const Rest = () => {
+    setCountPage(1);
   };
   return (
     <>
@@ -100,7 +135,10 @@ const TabContent = ({ content, datanotity }) => {
             <span className="w-[100px] flex justify-center">Alarm Code</span>
           </div>
           <div className="w-[30%] flex justify-end mr-[5%]">
-            <span> Rest</span>
+            <div className="flex items-center gap-2" onClick={Rest}>
+              <img className="h-[20px] " src={reset} alt="" />
+              <span className="cursor-pointer"> Rest</span>
+            </div>
           </div>
         </div>
         <div className="h-5"></div>
@@ -136,8 +174,18 @@ const TabContent = ({ content, datanotity }) => {
                         <span className="w-[100px] text-sm flex">
                           {formatDate(item.alertTime)}
                         </span>
-                        <span className={`w-[100px] flex justify-center ${item.status === 40 ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]" :  item.status === 50 ?"bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]" :  item.status === 30 ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]":"bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"}   rounded`}>
-                        <span>
+                        <span
+                          className={`w-[100px] flex justify-center ${
+                            item.status === 40
+                              ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
+                              : item.status === 50
+                              ? "bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]"
+                              : item.status === 30
+                              ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
+                              : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
+                          }   rounded`}
+                        >
+                          <span>
                             {item.status === 10
                               ? "Active"
                               : item.status === 20
@@ -155,7 +203,9 @@ const TabContent = ({ content, datanotity }) => {
                           {item.devicePn}
                         </span>
                         <span className="w-[100px] flex justify-center">
-                          {item.codes.join(", ")}
+                          {item.codes.length > 2
+                            ? `${item.codes.slice(0, 2).join(", ")}...`
+                            : item.codes.join(", ")}
                         </span>
                       </div>
                       <div className="h-[40px]"></div>
@@ -191,14 +241,28 @@ const TabContent = ({ content, datanotity }) => {
               {detail[0]?.message ? (
                 <div>
                   <div className="flex items-center justify-center gap-5 mt-4">
-                    <img className="w-[60px]" src={status.status == 40 ? warning :  status.status == 50 ? err : warning} alt=""></img>
+                    <img
+                      className="w-[60px]"
+                      src={
+                        status.status == 40
+                          ? warning
+                          : status.status == 50
+                          ? err
+                          : warning
+                      }
+                      alt=""
+                    ></img>
 
-                    <span className="text-base font-medium">{status.status == 40 ? "Warning" : status.status == 50 ? "Error" : "Trouble Solved"}</span>
+                    <span className="text-base font-medium">
+                      {status.status == 40
+                        ? "Warning"
+                        : status.status == 50
+                        ? "Error"
+                        : "Trouble Solved"}
+                    </span>
                   </div>
                 </div>
-              ) : (
-               null
-              )}
+              ) : null}
 
               <div className="w-[80%] m-auto flex flex-col">
                 <div className="flex justify-center">
@@ -206,11 +270,18 @@ const TabContent = ({ content, datanotity }) => {
                     {detail[0]?.message ? (
                       <div>
                         {detail.map((msg, index) => (
-                          <li className="text-[#F44336]" key={index}> <span className="text-[#001647]" >{msg.message}</span></li>
+                          <li className="text-[#F44336]" key={index}>
+                            {" "}
+                            <span className="text-[#001647]">
+                              {msg.message}
+                            </span>
+                          </li>
                         ))}
                       </div>
                     ) : (
-                      <p className="mt-2 text-[#001647]">No messages available</p>
+                      <p className="mt-2 text-[#001647]">
+                        No messages available
+                      </p>
                     )}
                   </div>
                 </div>
@@ -218,6 +289,35 @@ const TabContent = ({ content, datanotity }) => {
             </div>
           </div>
         </div>
+        {datanotity == null || datanotity.length === 0 ? null : showPage ? (
+          <div
+            className="h-[50px] w-[70%] justify-end flex items-center"
+            id="showPage"
+          >
+            <div className="flex gap-5">
+              <div
+                onClick={PrevPage}
+                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center"
+              >
+                <img className="h-[30px] w-[30px]" src={left} alt="" />
+              </div>
+              <div className="flex items-center">
+                {countPage}/{maxRecord}
+              </div>
+              <div
+                onClick={NextPage}
+                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center"
+              >
+                <img
+                  className="h-[30px] w-[30px] transform scale-x-[-1]"
+                  src={left}
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
+
         <div className="h-[200px]"></div>
       </div>
     </>
@@ -227,6 +327,9 @@ const Alert = () => {
   const token = getAccessToken();
   const [activeTab, setActiveTab] = useState(0);
   const [datanotity, setDatanotity] = useState(null);
+  const [record, setRecord] = useState(null);
+  const { countPage, setCountPage, setShowPage, showPage } = useAuth();
+
   let statusCounts = {
     Active: 0,
     Inactive: 0,
@@ -259,13 +362,15 @@ const Alert = () => {
       }
     });
   }
+
+  console.log(showPage, statusCounts);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_TEST
-          }/solarDevice/deviceAlert?page=1&limit=10`,
+          }/solarDevice/deviceAlert?page=${countPage}&limit=10`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -276,8 +381,10 @@ const Alert = () => {
 
         if (response.data.result != null) {
           setDatanotity(response.data.result);
+          setRecord(response.data.records);
         } else {
           setDatanotity([]);
+          setRecord([]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -285,7 +392,7 @@ const Alert = () => {
     };
 
     fetchData();
-  }, [token]);
+  }, [token, countPage]);
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
@@ -364,16 +471,36 @@ const Alert = () => {
 
           <div className="tab-content">
             {activeTab === 0 && (
-              <TabContent content="1" datanotity={datanotity} />
+              <TabContent
+                content="1"
+                datanotity={datanotity}
+                record={record}
+                statusCounts={statusCounts}
+              />
             )}
             {activeTab === 1 && (
-              <TabContent content="2" datanotity={datanotity} />
+              <TabContent
+                content="2"
+                datanotity={datanotity}
+                record={record}
+                statusCounts={statusCounts}
+              />
             )}
             {activeTab === 2 && (
-              <TabContent content="3" datanotity={datanotity} />
+              <TabContent
+                content="3"
+                datanotity={datanotity}
+                record={record}
+                statusCounts={statusCounts}
+              />
             )}
             {activeTab === 3 && (
-              <TabContent content="4" datanotity={datanotity} />
+              <TabContent
+                content="4"
+                datanotity={datanotity}
+                record={record}
+                statusCounts={statusCounts}
+              />
             )}
           </div>
         </div>

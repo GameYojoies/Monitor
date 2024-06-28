@@ -20,6 +20,8 @@ export default function AuthContextProvider({children}) {
   const [solarDate, setSolarDate] = useState()
   const [dataStore, setDataStore] = useState([])
   const [datanotifydeivece, setDatanotifydeivece] = useState([])
+  const [countPage, setCountPage] = useState(1)
+  const [showPage, setShowPage] = useState(true);
 
   const [selecteLanguage, setSelecteLanguage] = useState(
     localStorage.getItem("Language")
@@ -86,6 +88,10 @@ export default function AuthContextProvider({children}) {
   return (
     <AuthContext.Provider
       value={{
+        showPage,
+        setShowPage,
+        countPage,
+        setCountPage,
         authenticateUser,
         userLogin,
         logout,

@@ -51,8 +51,10 @@ import img_device from "../images/Notify/img-device.png"
 import err from "../images/Notify/error.png"
 import warning from "../images/Notify/warning.png"
 import reset from "../images/Notify/reset.png"
+import left from "../images/Notify/left.png"
 
 export {
+  left,
   warning,
   err,
   reset,
