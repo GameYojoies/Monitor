@@ -59,7 +59,7 @@ const PopupFlow = ({ count, data }) => {
     <>
    <div>
     <div className="h-4"></div>
-    <div className="h-[100%] flex flex-col gap-3">
+    <div className="h-[100%] flex flex-col gap-[10px]">
       {selectedData.map(({ label, key, unit }) => (
         <React.Fragment key={label}>
           <div className="w-[90%] m-auto flex items-center justify-between">

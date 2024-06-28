@@ -14,21 +14,21 @@ import {
   flowEnergy,
 } from "../images"
 import PopupFlow from "./popupFlow/popupFlow"
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
-import {getAccessToken} from "../utils/local-storage"
+import { getAccessToken } from "../utils/local-storage"
 import useAuth from "../hook/useAuth"
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next"
 
 const SolarEnergyFlow = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [count, setCount] = useState("Load")
   const [textHead, setTextHead] = useState(`${t("Load")}`)
   const [colorText, setColorText] = useState(3)
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const token = getAccessToken()
-  const {dataFlow, setDataFlow, solarDate, pin, datanotifydeivece} = useAuth()
+  const { dataFlow, setDataFlow, solarDate, pin, datanotifydeivece } = useAuth()
   const [devicePn, setDevicePn] = useState(null)
   const [formattedDate, setFormattedDate] = useState("-")
   const [countNumber, setCountNumber] = useState(0)
@@ -61,6 +61,7 @@ const SolarEnergyFlow = () => {
     const newFormattedDate = getFormattedDate()
     setFormattedDate(newFormattedDate)
   }, [dataFlow?.time, localStorage.getItem("Language")]) // Include dependencies
+
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
@@ -71,8 +72,7 @@ const SolarEnergyFlow = () => {
         }
 
         const response = await axios.get(
-          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=${
-            pin ? pin.devicePn : ""
+          `${import.meta.env.VITE_API_TEST}/reportData/detail?devicePn=${pin ? pin.devicePn : ""
           }&date=${date}&page=1&limit=10`,
           {
             headers: {
@@ -86,7 +86,7 @@ const SolarEnergyFlow = () => {
         } else {
           setData(0)
         }
-        console.log(response, "response")
+        console.log(response.data.result[0], "response")
       } catch (error) {
         setError(error)
       }
@@ -97,13 +97,7 @@ const SolarEnergyFlow = () => {
     }
   }, [solarDate, token, pin])
 
-  useEffect(() => {
-    if (data) {
-    }
-  }, [data, solarDate, pin])
 
-  if (error) {
-  }
   const handleClick = (position) => {
     setCount(position)
     if (position === "Inverter") {
@@ -158,135 +152,129 @@ const SolarEnergyFlow = () => {
           <div className="flex gap-2">{formattedDate}</div>
         </div>
         <div className="h-2"></div>
-        <div className="w-[100%] flex flex-col lg:flex-row h-[auto] m-auto">
-          <div className="h-auto lg:h-[] w-full lg:w-[50%] relative">
-            <img
-              src={flowEnergy}
-              alt=""
-              className="w-[100%] h-full mt-10"
-              style={{
-                clipPath: "inset(11% 20% 14% 20%)",
-                transform: "scale(1.4)",
-              }}
-            />
+        <div className="w-[100%] flex flex-col items-center justify-center gap-14 flex-wrap lg:flex-row h-auto  m-auto p-10 bg-white rounded-lg" style={{ boxShadow: "2px 2px 15px 0px #00000026" }}>
+
+          <div className="flex justify-center items-center h-[600px] w-[600px] relative">
+            <div className="lg:h-[600px] lg:w-[600px] absolute">
+              <img src={flowEnergy} className="h-[100%] w-[100%]" />
+            </div>
 
             {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
+
             <div
               className="h-[30%] w-48 absolute top-1/2 left-0 right-0 transform -translate-y-1/2 mx-auto cursor-pointer"
               onClick={() => handleClick("Load")}></div>
 
             <div
-              className="h-[20%] w-48 absolute top-14 right-[20%] cursor-pointer"
+              className="h-[20%] w-[130px] absolute top-10 right-[20px] cursor-pointer"
               onClick={() => handleClick("PV")}></div>
             <div
-              className="h-[20%] w-48 absolute top-14 left-[20%] cursor-pointer"
+              className="h-[20%] w-[130px] absolute top-10 left-[20px] cursor-pointer"
               onClick={() => handleClick("Inverter")}></div>
             <div
-              className="h-[20%] w-48 absolute bottom-20 right-[20%] cursor-pointer"
+              className="h-[20%] w-[130px] absolute bottom-10 right-[20px] cursor-pointer"
               onClick={() => handleClick("Grid")}></div>
             <div
-              className="h-[20%] w-[20%] absolute bottom-20 left-[23%] cursor-pointer"
+              className="h-[20%] w-[130px] absolute bottom-10 left-[20px] cursor-pointer flex justify-center items-center"
               onClick={() => handleClick("Battery")}>
-              <div>
+              <div className=" flex justify-center items-center">
                 <img
                   src={battery}
                   alt=""
-                  className="w-[40%] h-[25%] m-auto pointer-events-none	 top-36 right-[63%] absolute"
+                  className="w-[40%] h-[25%] pointer-events-none absolute"
                 />
                 <img
                   src={
                     dataFlow?.batteryCapacity >= 40 &&
-                    dataFlow?.batteryCapacity <= 100
+                      dataFlow?.batteryCapacity <= 100
                       ? bg_green
                       : dataFlow?.batteryCapacity > 10 &&
                         dataFlow?.batteryCapacity < 40
-                      ? bg_yellow
-                      : dataFlow?.batteryCapacity >= 0 &&
-                        dataFlow?.batteryCapacity <= 10
-                      ? bg_red
-                      : bg_red
+                        ? bg_yellow
+                        : dataFlow?.batteryCapacity >= 0 &&
+                          dataFlow?.batteryCapacity <= 10
+                          ? bg_red
+                          : bg_red
                   }
                   alt=""
-                  className="w-[35%] h-[25%] m-auto pointer-events-none top-36 right-[67%] absolute"
+                  className="w-[35%] h-[25%] m-auto pointer-events-none absolute"
                 />
 
                 <img
                   src={
                     dataFlow?.batteryCapacity >= 40 &&
-                    dataFlow?.batteryCapacity <= 100
+                      dataFlow?.batteryCapacity <= 100
                       ? bg_green_per
                       : dataFlow?.batteryCapacity > 10 &&
                         dataFlow?.batteryCapacity < 40
-                      ? bg_yellow_per
-                      : dataFlow?.batteryCapacity >= 0 &&
-                        dataFlow?.batteryCapacity <= 10
-                      ? bg_red_per
-                      : bg_red_per
+                        ? bg_yellow_per
+                        : dataFlow?.batteryCapacity >= 0 &&
+                          dataFlow?.batteryCapacity <= 10
+                          ? bg_red_per
+                          : bg_red_per
                   }
                   alt=""
-                  className={`w-[${
-                    dataFlow?.batteryCapacity >= 40 &&
+                  className={`w-[${dataFlow?.batteryCapacity >= 40 &&
                     dataFlow?.batteryCapacity <= 100
-                      ? "30%"
-                      : dataFlow?.batteryCapacity > 10 &&
-                        dataFlow?.batteryCapacity < 40
+                    ? "30%"
+                    : dataFlow?.batteryCapacity > 10 &&
+                      dataFlow?.batteryCapacity < 40
                       ? "30%"
                       : "10%"
-                  }] h-[18%] m-auto pointer-events-none top-[149px] absolute`}
-                  style={{
-                    right:
-                      dataFlow?.batteryCapacity >= 40 &&
-                      dataFlow?.batteryCapacity <= 100
-                        ? "70%"
-                        : dataFlow?.batteryCapacity > 10 &&
-                          dataFlow?.batteryCapacity < 40
-                        ? "45%"
-                        : "56%",
-                  }}
+                    }] h-[18%] m-auto pointer-events-none absolute`}
+                // style={{
+                //   right:
+                //     data?.batteryCapacity >= 40 &&
+                //       data?.batteryCapacity <= 100
+                //       ? "70%"
+                //       : data?.batteryCapacity > 10 &&
+                //         data?.batteryCapacity < 40
+                //         ? "45%"
+                //         : "56%",
+                // }}
                 />
-                <div className="w-[30%] h-[18%] m-auto pointer-events-none  top-[155px] text-[#FFF]  text-xs	 right-[62%] absolute">
+                <div className="w-[30%] h-[18%] m-auto pointer-events-none text-[#FFF]  text-xs absolute">
                   {" "}
                   {dataFlow?.batteryCapacity || 0} %
                 </div>
               </div>
             </div>
 
-            <div className="absolute bottom-36 left-[22%] font-bold text-2xl text-[#133261]">
+            <div className="absolute bottom-[160px] left-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.batteryDischargeCurrent || 0}</span>&nbsp;
               <span>A</span>
             </div>
-            <div className="absolute bottom-36 right-[24.3%] font-bold text-2xl text-[#133261]">
+            <div className="absolute bottom-[160px] right-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
             </div>
-            <div className="absolute top-44 right-[22%] font-bold text-2xl text-[#133261]">
+            <div className="absolute top-[160px] right-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
             </div>
-            <div className="absolute top-44 left-[23%] font-bold text-2xl text-[#133261]">
+            <div className="absolute top-[160px] left-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.outputActivePower || 0}</span>&nbsp;
               <span>W</span>
             </div>
-            <div className=" pointer-events-none absolute top-[45%] left-0 right-0 transform -translate-y-1/2 mx-auto font-bold text-2xl text-[#133261] flex justify-center">
+            <div className=" pointer-events-none absolute top-[47%] left-0 right-0 transform -translate-y-1/2 mx-auto font-bold text-2xl text-[#133261] flex justify-center">
               <span>{dataFlow?.currentLoadPower || 0}</span>&nbsp;<span>W</span>
             </div>
+
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
-          <div
-            className="bg-white w-full lg:w-[50%] h-auto lg:h-[650px] rounded-md"
-            style={{boxShadow: "2px 2px 15px 0px #00000026"}}>
+          <div className="bg-white w-[90%] lg:w-[550px] h-[560px] rounded-lg"
+            style={{ boxShadow: "2px 2px 15px 0px #00000026" }}>
             <div className="h-10"></div>
             <div
-              className={`w-[90%] m-auto h-16 flex items-center rounded-md ${
-                colorText === 1
-                  ? "bg-[#FF9F9F]"
-                  : colorText === 2
+              className={`w-[90%] m-auto h-16 flex items-center rounded-md ${colorText === 1
+                ? "bg-[#FF9F9F]"
+                : colorText === 2
                   ? "bg-[#F2CD97]"
                   : colorText === 3
-                  ? "bg-[#E9F0FC]"
-                  : colorText === 4
-                  ? "bg-[#D496FB]"
-                  : "bg-[#00C6C6]"
-              } justify-between shadow-md`}>
+                    ? "bg-[#E9F0FC]"
+                    : colorText === 4
+                      ? "bg-[#D496FB]"
+                      : "bg-[#00C6C6]"
+                } justify-between shadow-md`}>
               <span className="ml-5 font-bold text-2xl text-[#133261]	">
                 {textHead}
               </span>
@@ -296,14 +284,14 @@ const SolarEnergyFlow = () => {
                   {count === "Load"
                     ? dataFlow?.currentLoadPower || 0
                     : count === "PV"
-                    ? dataFlow?.powerCharging || 0
-                    : count === "Inverter"
-                    ? dataFlow?.outputActivePower || 0
-                    : count === "Grid"
-                    ? dataFlow?.gridFrequency || 0
-                    : count === "Battery"
-                    ? dataFlow?.batteryDischargeCurrent || 0
-                    : null}
+                      ? dataFlow?.powerCharging || 0
+                      : count === "Inverter"
+                        ? dataFlow?.outputActivePower || 0
+                        : count === "Grid"
+                          ? dataFlow?.gridFrequency || 0
+                          : count === "Battery"
+                            ? dataFlow?.batteryDischargeCurrent || 0
+                            : null}
                 </span>
                 <span className="text-base">w</span>
               </div>
@@ -314,6 +302,7 @@ const SolarEnergyFlow = () => {
               data={data}
             />
           </div>
+
         </div>
       </div>
     </div>
