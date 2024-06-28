@@ -220,18 +220,18 @@ const SolarEnergyFlow = () => {
                     : dataFlow?.batteryCapacity > 10 &&
                       dataFlow?.batteryCapacity < 40
                       ? "30%"
-                      : "10%"
+                      : "30%"
                     }] h-[18%] m-auto pointer-events-none absolute`}
-                // style={{
-                //   right:
-                //     data?.batteryCapacity >= 40 &&
-                //       data?.batteryCapacity <= 100
-                //       ? "70%"
-                //       : data?.batteryCapacity > 10 &&
-                //         data?.batteryCapacity < 40
-                //         ? "45%"
-                //         : "56%",
-                // }}
+                style={{
+                  right:
+                    data?.batteryCapacity >= 40 &&
+                      data?.batteryCapacity <= 100
+                      ? "0%"
+                      : data?.batteryCapacity > 10 &&
+                        data?.batteryCapacity < 40
+                        ? "45%"
+                        : "",
+                }}
                 />
                 <div className="w-[30%] h-[18%] m-auto pointer-events-none text-[#FFF]  text-xs absolute">
                   {" "}
