@@ -233,9 +233,10 @@ const SolarEnergyFlow = () => {
                         : "",
                 }}
                 />
-                <div className="w-[30%] h-[18%] m-auto pointer-events-none text-[#FFF]  text-xs absolute">
-                  {" "}
-                  {dataFlow?.batteryCapacity || 0} %
+                <div className="w-[30%] h-[18%]  pointer-events-none text-[#FFF]  text-xs absolute flex justify-center items-center">
+                  <span >  {" "}
+                  {dataFlow?.batteryCapacity || 0} %</span>
+                
                 </div>
               </div>
             </div>
