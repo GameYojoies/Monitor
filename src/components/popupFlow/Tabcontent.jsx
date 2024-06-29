@@ -42,7 +42,7 @@ export default function TabContent({
   }
   useEffect(() => {
     if (record !== undefined && record !== null) {
-      setMaxRecord(Math.ceil(record / 10))
+      setMaxRecord(Math.ceil(record / rowsPerPage))
     }
   }, [record])
   const formatDate = (timestamp) => {
