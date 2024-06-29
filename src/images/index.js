@@ -52,8 +52,10 @@ import err from "../images/Notify/error.png"
 import warning from "../images/Notify/warning.png"
 import reset from "../images/Notify/reset.png"
 import left from "../images/Notify/left.png"
+import icondown from "../images/Notify/icondown.png"
 
 export {
+  icondown,
   left,
   warning,
   err,

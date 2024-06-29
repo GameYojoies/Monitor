@@ -1,8 +1,8 @@
 /** @format */
 
-import {useEffect, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import useAuth from "../../hook/useAuth"
-import {err, warning, reset, left} from "../../images"
+import {err, warning, reset, left, icondown} from "../../images"
 
 export default function TabContent({
   content,
@@ -10,11 +10,13 @@ export default function TabContent({
   record,
   statusCounts,
 }) {
-  console.log(datanotity, record, "datanotity")
+  console.log("datanotity--", datanotity)
   const [detail, setDetail] = useState([])
   const [status, setStatus] = useState()
   const [maxRecord, setMaxRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
+  const [open, setOpen] = useState(false)
+
   if (
     content === "1" &&
     statusCounts.Active +
@@ -300,8 +302,20 @@ export default function TabContent({
 
         {datanotity == null || datanotity.length === 0 ? null : showPage ? (
           <div
-            className="h-[50px] w-[70%] justify-end flex items-center"
+            className="h-[50px] w-[70%] justify-end flex items-center gap-5"
             id="showPage">
+            <div className="">
+              <button
+                className="flex items-center gap-1 text-xs text-[#687182]"
+                onClick={() => setOpen(!open)}>
+                Rows per page: 10{" "}
+                <img
+                  src={icondown}
+                  className="w-4 h-4"
+                />
+              </button>
+            </div>
+
             <div className="flex gap-5">
               <div
                 onClick={PrevPage}
@@ -328,6 +342,19 @@ export default function TabContent({
           </div>
         ) : null}
 
+        {open && (
+          <div className=" bg-red-200 w-full flex justify-center items-center">
+            <div className="bg-red-300 w-[5%]">
+              <p>5</p>
+              <p>10</p>
+              <p>15</p>
+              <p>20</p>
+              <p>30</p>
+              <p>40</p>
+              <p>50</p>
+            </div>
+          </div>
+        )}
         <div className="h-[200px]"></div>
       </div>
     </>
