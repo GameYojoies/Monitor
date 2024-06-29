@@ -2,7 +2,7 @@
 
 import {useEffect, useRef, useState} from "react"
 import useAuth from "../../hook/useAuth"
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next"
 import {err, warning, reset, left, icondown} from "../../images"
 
 export default function TabContent({
@@ -16,6 +16,8 @@ export default function TabContent({
   const [status, setStatus] = useState()
   const [maxRecord, setMaxRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
+  const [open, setOpen] = useState(false)
+  const {t} = useTranslation()
   if (
     content === "1" &&
     statusCounts.Active +
@@ -49,10 +51,10 @@ export default function TabContent({
     })
   }
   const SystemAlert = (codes) => {
-    const language = localStorage.getItem("Language");
-    var  statusCodesNotification 
+    const language = localStorage.getItem("Language")
+    var statusCodesNotification
     if (language === "TH") {
-       statusCodesNotification = {
+      statusCodesNotification = {
         4500: "ข้อผิดพลาดในการเริ่มต้นทำงาน",
         4501: "แรงดันไฟฟ้าขาเข้าสูง",
         4502: "แรงดันไฟฟ้าขาเข้าต่ำ",
@@ -109,10 +111,9 @@ export default function TabContent({
         4716: "โอเวอร์โหลด",
         4717: "ความถี่หลักหายไป",
         4718: "แรงดันไฟฟ้าหลักหายไป",
-      };
-
-    }else{
-       statusCodesNotification = {
+      }
+    } else {
+      statusCodesNotification = {
         4500: "Error Starting Work",
         4501: "High Voltage Input",
         4502: "Low Voltage Input",
@@ -172,7 +173,6 @@ export default function TabContent({
       }
     }
 
-
     const alerts = codes.codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
@@ -196,16 +196,18 @@ export default function TabContent({
       <div>
         <div className="w-[100%] h-[50px] bg-[#133261] rounded-md text-white flex items-center">
           <div className="w-[60%] flex ml-[100px] justify-between">
-            <span className="w-[100px] flex justify-center items-center">{t("Date")}</span>
+            <span className="w-[100px] flex justify-center items-center">
+              {t("Date")}
+            </span>
             <span className="w-[150px] flex justify-center  items-center ml-[10px]">
-            {t("Status")} 
+              {t("Status")}
             </span>
             <span className="w-[200px] flex justify-center items-center ">
-            {t("Serial number")} 
-            
+              {t("Serial number")}
             </span>
-            <span className="w-[100px] flex justify-center items-center">{t("Alarm Code")} 
-           </span>
+            <span className="w-[100px] flex justify-center items-center">
+              {t("Alarm Code")}
+            </span>
           </div>
           <div className="w-[30%] flex justify-end mr-[5%]">
             <div
@@ -225,7 +227,10 @@ export default function TabContent({
         <div className="flex">
           <div className="flex justify-center flex-col w-[75%] cursor-pointer relative">
             {datanotity == null || datanotity.length == 0 ? (
-              <div className="absolute flex top-0 right-[50%]"> {t("Nodata")}</div>
+              <div className="absolute flex top-0 right-[50%]">
+                {" "}
+                {t("Nodata")}
+              </div>
             ) : datanotity[0].list.some(
                 (item) =>
                   content === "1" ||
@@ -265,15 +270,15 @@ export default function TabContent({
                           }   rounded`}>
                           <span>
                             {item.status === 10
-                              ?  `${t("Active")}`
+                              ? `${t("Active")}`
                               : item.status === 20
-                              ?  `${t("Inactive")}`
+                              ? `${t("Inactive")}`
                               : item.status === 30
-                              ?   `${t("Normal")}`
+                              ? `${t("Normal")}`
                               : item.status === 40
-                              ?  `${t("Warning")}` 
+                              ? `${t("Warning")}`
                               : item.status === 50
-                              ?  `${t("Error")}`  
+                              ? `${t("Error")}`
                               : ""}
                           </span>
                         </span>
@@ -294,7 +299,9 @@ export default function TabContent({
                 }
               })
             ) : (
-              <div className="absolute flex top-0 right-[50%]">{t("Nodata")}</div>
+              <div className="absolute flex top-0 right-[50%]">
+                {t("Nodata")}
+              </div>
             )}
           </div>
 
@@ -305,7 +312,7 @@ export default function TabContent({
                 borderRadius: "15px 15px 0px 0px",
                 boxShadow: "0px 4px 4px 0px #00000040",
               }}>
-              <span>{t('System Alert')}</span>
+              <span>{t("System Alert")}</span>
             </div>
 
             <div
@@ -332,8 +339,8 @@ export default function TabContent({
                       {status.status == 40
                         ? `${t("Warning")}`
                         : status.status == 50
-                        ?  `${t("Error")}`
-                        :  `${t("Trouble Solved")}`}
+                        ? `${t("Error")}`
+                        : `${t("Trouble Solved")}`}
                     </span>
                   </div>
                 </div>
