@@ -13,7 +13,7 @@ const PopupFlow = ({ count, data }) => {
       { label: "Output frequency", key: "opFrequency", unit: "Hz" },
       { label: "Output current", key: "opCurrent", unit: "A" },
       { label: "Output active power", key: "opActivePower", unit: "W" },
-      { label: "Output apparent power", key: "opApparentPower", unit: "kWh" },
+      { label: "Output apparent power", key: "opApparentPower", unit: "Ah" },
       { label: "Total power output on the day", key: "tpOutputDay", unit: "kWh" },
     ],
     Inverter: [
