@@ -47,11 +47,23 @@ export default function TabContent({
   }, [record])
   const formatDate = (timestamp) => {
     const date = new Date(timestamp)
-    return date.toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
+    const language = localStorage.getItem("Language")
+    if (language === "TH") {
+      return date.toLocaleDateString("th-TH", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    }
+    else{
+      return date.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    }
+
+
   }
   const SystemAlert = (codes) => {
     const language = localStorage.getItem("Language")
