@@ -9,10 +9,13 @@ import {
 import useAuth from "../hook/useAuth";
 import React, { useState, useEffect } from "react";
 import Alert from "./popupFlow/alert";
+import { useTranslation } from "react-i18next";
 
 function Notifications() {
   const { pin, datanotifydeivece } = useAuth();
   const [mainDevice, setMainDevice] = useState(null);
+  const { t } = useTranslation();
+
   useEffect(() => {
     const foundDevice = datanotifydeivece.find(
       (device) => device.main === true
@@ -25,7 +28,7 @@ function Notifications() {
       <div className="h-5"></div>
       <div className="w-[90%] m-auto flex items-center">
         <img src={notification} className="h-8 "></img>
-        <span>Notifications</span>
+        <span> {t("Notifications")}</span>
       </div>
       <div className="h-5"></div>
       <div
@@ -40,7 +43,7 @@ function Notifications() {
             <div className="w-[80%] ml-[10%]">
               <div className="flex  gap-5">
                 <img src={icon_notify_4} className="h-6"></img>
-                <span className="w-[200px]">Device Name</span>
+                <span className="w-[200px]"> {t("Device Name")}</span>
                 <div className="w-[80%]">
                   <span className="text-[#959AA4]">{mainDevice?.name}</span>
                   <hr></hr>
@@ -52,7 +55,7 @@ function Notifications() {
             <div className="w-[80%] ml-[10%]">
               <div className="flex  gap-5">
                 <img src={icon_notify_3} className="h-6"></img>
-                <span className="w-[200px]">Device Pin</span>
+                <span className="w-[200px]"> {t("Device Pin")}</span>
                 <div className="w-[80%]">
                   <span className="text-[#959AA4]">{mainDevice?.pn} </span>
                   <hr></hr>
@@ -64,7 +67,7 @@ function Notifications() {
             <div className="w-[80%] ml-[10%]">
               <div className="flex  gap-5">
                 <img src={icon_notify_1} className="h-6"></img>
-                <span className="w-[200px]">Device Type</span>
+                <span className="w-[200px]"> {t("Device Type")}</span>
                 <div className="w-[80%]">
                   <span className="text-[#959AA4]">All In-one Inverter</span>
                   <hr></hr>
@@ -76,14 +79,14 @@ function Notifications() {
             <div className="w-[80%] ml-[10%]">
               <div className="flex  gap-5">
                 <img src={icon_notify_2} className="h-6"></img>
-                <span className="w-[200px]">Device Status</span>
+                <span className="w-[200px]"> {t("Device Status")} </span>
                 <div className="w-[80%]">
                   <div className={ ` ${
             mainDevice?.status === 10
               ? "text-[#2264E5] bg-[#EBF0FA] "
               : "text-[#E52222] bg-[#FFECEF] "
           }w-[100px] rounded-lg h-[80%] flex justify-center items-center`}>
-                    <span>{mainDevice?.status === 10 ? "Active" : "OFF"}</span>
+                    <span>{mainDevice?.status === 10 ? `${t("Active")}` :  `${t("Inactive")}`}</span>
                   </div>{" "}
                   <div className="h-2"></div>
                   <hr></hr>

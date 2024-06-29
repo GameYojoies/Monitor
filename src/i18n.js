@@ -9,6 +9,33 @@ import {initReactI18next} from "react-i18next"
 const resources = {
   th: {
     translation: {
+      // notify
+      "Notifications":"การแจ้งเตือน",
+      "Device Name":"ชื่ออุปกรณ์",
+      "Device Pin":"หมายเลขอุปกรณ์",
+      "Device Type":"ประเภทอุปกรณ์",
+      "Device Status":"สถานะอุปกรณ์",
+      "Active":"ใช้งานอยู่",
+      "Show All":"ทั้งหมด",
+      "Error":"ข้อผิดพลาด",
+      "Warning":"เตือนภัย",
+      "Trouble Solved":"ได้รับการแก้ไข",
+      "Date":"วันเวลา",
+      "Status":"สถานะแจ้งเตือน",
+      "Serial number":"หมายเลขอุปกรณ์",
+      "Alarm Code":"รหัสแจ้งเตือน",
+      "Reset":"รีเซ็ต",
+      "Nodata":"ไม่มีข้อมูล",
+      "Active":"ใช้งานอยู่",
+      "Inactive":"ไม่ได้ใช้งานอยู่",
+      "Normal":"ปรกติ",
+      "Warning":"แจ้งเตือน",
+      "Error":"ผิดพลาด",
+      "System Alert":"แจ้งเตือนระบบ",
+      "No Messages Available":"ไม่มีแจ้งเตือนระบบ",
+
+      
+
       "Username or email": "กรอกชื่อผู้ใช้ หรือ อีเมล",
       "Enter your password": "กรอกรหัสผ่าน",
       "Login now": "ลงชื่อเข้าใช้",
@@ -196,6 +223,39 @@ const resources = {
   },
   en: {
     translation: {
+      //notify
+      "Notifications":"Notifications",
+      "Device Name":"Device Name",
+      "Device Pin":"Device Pin",
+      "Device Type":"Device Type",
+      "Device Status":"Device Status",
+      "Active":"Active",
+      "Inactive":"Inactive",
+      "Show All":"Show All",
+      "Error":"Error",
+      "Warning":"Warning",
+      "Trouble Solved":"Trouble Solved",
+      "Nodata":"No data",
+      "Active":"Active",
+      "Inactive":"Inactive",
+      "Normal":"Normal",
+      "Warning":"Warning",
+      "Error":"Error",
+      "System Alert":"System Alert",
+      "No Messages Available":"No Messages Available",
+
+      
+      
+      
+      "Date":"Date",
+      "Status":"Status",
+      "Serial number":"Serial number",
+      "Alarm Code":"Alarm Code",
+      "Reset":"Reset",
+
+
+
+      ////
       "Username or email": "Username or email",
       "Enter your password": "Enter your password",
       "Login now": "Login now",
