@@ -17,7 +17,8 @@ export default function TabContent({
   const [detail, setDetail] = useState([]);
   const [status, setStatus] = useState();
   const [maxRecord, setMaxRecord] = useState(null);
-  const { countPage, setCountPage, setShowPage, showPage } = useAuth();
+  const { countPage, setCountPage, setShowPage, showPage, selecteLanguage } =
+    useAuth();
   const { t } = useTranslation();
   const rowsPerPageDaata = ["5", "10", "15", "20", "30", "40", "50"];
 
@@ -42,13 +43,12 @@ export default function TabContent({
   }
   useEffect(() => {
     if (record !== undefined && record !== null) {
-      setMaxRecord(Math.ceil(record / rowsPerPage))
+      setMaxRecord(Math.ceil(record / rowsPerPage));
     }
-  }, [record, rowsPerPage])
+  }, [record, rowsPerPage]);
   const formatDate = (timestamp) => {
-    
     const date = new Date(timestamp);
-    const language = localStorage.getItem("Language");
+    const language = selecteLanguage;
     if (language === "TH") {
       return date.toLocaleDateString("th-TH", {
         day: "numeric",
@@ -62,12 +62,11 @@ export default function TabContent({
         year: "numeric",
       });
     }
-
   };
 
   const SystemAlert = (codes) => {
-    const language = localStorage.getItem("Language");
-    var statusCodesNotification;
+    const language = selecteLanguage;
+    var statusCodesNotification = {};
     if (language === "TH") {
       statusCodesNotification = {
         4500: "ข้อผิดพลาดในการเริ่มต้นทำงาน",
@@ -197,6 +196,7 @@ export default function TabContent({
     setStatus(codes);
     // console.log("Alerts:", detail, status.status)
   };
+
   const PrevPage = () => {
     setCountPage((prevCount) => Math.max(prevCount - 1, 1));
   };
@@ -260,7 +260,10 @@ export default function TabContent({
                       key={item.id}
                       className="flex items-center py-2 w-[90%] mb-1"
                       style={{ boxShadow: "0px 1px 13px 0px #00000014" }}
-                      onClick={() => SystemAlert(item)}
+                      onClick={() => {
+                        SystemAlert(item);
+                       
+                      }}
                     >
                       <div className="flex ml-[10px] w-[100%] justify-between">
                         <span className="w-[px] text-sm flex mr-[10px]">
@@ -394,11 +397,11 @@ export default function TabContent({
             id="showPage"
           >
             <div>
-              <label>
+              <label className="text-[#687182]">
                 {t("Rows per page:")}
                 <select
                   value={rowsPerPage}
-                  className="outline-none cursor-pointer"
+                  className="outline-none cursor-pointer "
                   onChange={(e) => setRowsPerPage(e.target.value)}
                 >
                   {rowsPerPageDaata?.map((el, idx) => (
@@ -417,8 +420,9 @@ export default function TabContent({
               >
                 <img className="h-[30px] w-[30px]" src={left} alt="" />
               </div>
-              <div className="flex items-center">
-                {countPage}/{maxRecord}
+              <div className="flex items-center ">
+                <span className="text-[#00000"> {countPage}</span>{" "}
+                <span className="text-[#687182]">/{maxRecord} </span>
               </div>
               <div
                 onClick={NextPage}
