@@ -44,7 +44,7 @@ export default function TabContent({
     if (record !== undefined && record !== null) {
       setMaxRecord(Math.ceil(record / rowsPerPage))
     }
-  }, [record])
+  }, [record, rowsPerPage])
   const formatDate = (timestamp) => {
     const date = new Date(timestamp)
     const language = localStorage.getItem("Language")
@@ -54,16 +54,13 @@ export default function TabContent({
         month: "long",
         year: "numeric",
       })
-    }
-    else{
+    } else {
       return date.toLocaleDateString("en-GB", {
         day: "numeric",
         month: "long",
         year: "numeric",
       })
     }
-
-
   }
   const SystemAlert = (codes) => {
     const language = localStorage.getItem("Language")
