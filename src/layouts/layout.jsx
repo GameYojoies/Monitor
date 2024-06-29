@@ -12,6 +12,7 @@ const Layout = () => {
       navigate("/monitor")
     }
   }, [navigate])
+  
   return (
     <>
       <Header />
