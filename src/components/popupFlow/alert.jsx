@@ -7,8 +7,7 @@ const TabContent = ({ content, datanotity, record, statusCounts }) => {
   console.log(datanotity, record, "datanotity");
   const [detail, setDetail] = useState([]);
   const [status, setStatus] = useState();
-  const [maxRecord, setMaxRecord] = useState(null);
-  const { countPage, setCountPage, setShowPage, showPage } = useAuth();
+  const { countPage, setCountPage, setShowPage, showPage ,setMaxRecord, maxRecord } = useAuth();
   if (
     content === "1" &&
     statusCounts.Active +
