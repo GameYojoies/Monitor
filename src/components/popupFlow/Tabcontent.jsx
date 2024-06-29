@@ -1,9 +1,9 @@
 /** @format */
 
-import {useEffect, useRef, useState} from "react"
-import useAuth from "../../hook/useAuth"
-import {useTranslation} from "react-i18next"
-import {err, warning, reset, left} from "../../images"
+import { useEffect, useRef, useState } from "react";
+import useAuth from "../../hook/useAuth";
+import { useTranslation } from "react-i18next";
+import { err, warning, reset, left } from "../../images";
 
 export default function TabContent({
   content,
@@ -14,12 +14,12 @@ export default function TabContent({
   rowsPerPage,
 }) {
   //   console.log("datanotity--", datanotity)
-  const [detail, setDetail] = useState([])
-  const [status, setStatus] = useState()
-  const [maxRecord, setMaxRecord] = useState(null)
-  const {countPage, setCountPage, setShowPage, showPage} = useAuth()
-  const {t} = useTranslation()
-  const rowsPerPageDaata = ["5", "10", "15", "20", "30", "40", "50"]
+  const [detail, setDetail] = useState([]);
+  const [status, setStatus] = useState();
+  const [maxRecord, setMaxRecord] = useState(null);
+  const { countPage, setCountPage, setShowPage, showPage } = useAuth();
+  const { t } = useTranslation();
+  const rowsPerPageDaata = ["5", "10", "15", "20", "30", "40", "50"];
 
   if (
     content === "1" &&
@@ -30,44 +30,44 @@ export default function TabContent({
       statusCounts.Error !=
       0
   ) {
-    setShowPage(true)
+    setShowPage(true);
   } else if (content === "2" && statusCounts.Error != 0) {
-    setShowPage(true)
+    setShowPage(true);
   } else if (content === "3" && statusCounts.Warning != 0) {
-    setShowPage(true)
+    setShowPage(true);
   } else if (content === "4" && statusCounts.Normal != 0) {
-    setShowPage(true)
+    setShowPage(true);
   } else {
-    setShowPage(false)
+    setShowPage(false);
   }
   useEffect(() => {
     if (record !== undefined && record !== null) {
-      setMaxRecord(Math.ceil(record / 10))
+      setMaxRecord(Math.ceil(record / 10));
     }
-  }, [record])
+  }, [record]);
   const formatDate = (timestamp) => {
-    const date = new Date(timestamp)
-    const language = localStorage.getItem("Language")
+    
+    const date = new Date(timestamp);
+    const language = localStorage.getItem("Language");
     if (language === "TH") {
       return date.toLocaleDateString("th-TH", {
         day: "numeric",
         month: "long",
         year: "numeric",
-      })
-    }
-    else{
+      });
+    } else {
       return date.toLocaleDateString("en-GB", {
         day: "numeric",
         month: "long",
         year: "numeric",
-      })
+      });
     }
 
+  };
 
-  }
   const SystemAlert = (codes) => {
-    const language = localStorage.getItem("Language")
-    var statusCodesNotification
+    const language = localStorage.getItem("Language");
+    var statusCodesNotification;
     if (language === "TH") {
       statusCodesNotification = {
         4500: "ข้อผิดพลาดในการเริ่มต้นทำงาน",
@@ -126,7 +126,7 @@ export default function TabContent({
         4716: "โอเวอร์โหลด",
         4717: "ความถี่หลักหายไป",
         4718: "แรงดันไฟฟ้าหลักหายไป",
-      }
+      };
     } else {
       statusCodesNotification = {
         4500: "Error Starting Work",
@@ -185,27 +185,27 @@ export default function TabContent({
         4716: "Overload",
         4717: "Main Frequency is Absent",
         4718: "Mains Voltage has Disappeared",
-      }
+      };
     }
 
     const alerts = codes.codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
-    }))
+    }));
 
-    setDetail(alerts)
-    setStatus(codes)
+    setDetail(alerts);
+    setStatus(codes);
     // console.log("Alerts:", detail, status.status)
-  }
+  };
   const PrevPage = () => {
-    setCountPage((prevCount) => Math.max(prevCount - 1, 1))
-  }
+    setCountPage((prevCount) => Math.max(prevCount - 1, 1));
+  };
   const NextPage = () => {
-    setCountPage((prevCount) => Math.min(prevCount + 1, maxRecord))
-  }
+    setCountPage((prevCount) => Math.min(prevCount + 1, maxRecord));
+  };
   const Rest = () => {
-    setCountPage(1)
-  }
+    setCountPage(1);
+  };
 
   return (
     <>
@@ -226,14 +226,8 @@ export default function TabContent({
             </span>
           </div>
           <div className="w-[30%] flex justify-end mr-[5%]">
-            <div
-              className="flex items-center gap-2"
-              onClick={Rest}>
-              <img
-                className="h-[20px] "
-                src={reset}
-                alt=""
-              />
+            <div className="flex items-center gap-2" onClick={Rest}>
+              <img className="h-[20px] " src={reset} alt="" />
               <span className="cursor-pointer"> {t("Reset")} </span>
             </div>
           </div>
@@ -265,8 +259,9 @@ export default function TabContent({
                     <div
                       key={item.id}
                       className="flex items-center py-2 w-[90%] mb-1"
-                      style={{boxShadow: "0px 1px 13px 0px #00000014"}}
-                      onClick={() => SystemAlert(item)}>
+                      style={{ boxShadow: "0px 1px 13px 0px #00000014" }}
+                      onClick={() => SystemAlert(item)}
+                    >
                       <div className="flex ml-[10px] w-[100%] justify-between">
                         <span className="w-[px] text-sm flex mr-[10px]">
                           {index + 1} .
@@ -283,7 +278,8 @@ export default function TabContent({
                               : item.status === 30
                               ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
                               : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
-                          }   rounded`}>
+                          }   rounded`}
+                        >
                           <span>
                             {item.status === 10
                               ? `${t("Active")}`
@@ -309,9 +305,9 @@ export default function TabContent({
                       </div>
                       <div className="h-[40px]"></div>
                     </div>
-                  )
+                  );
                 } else {
-                  return null
+                  return null;
                 }
               })
             ) : (
@@ -327,7 +323,8 @@ export default function TabContent({
               style={{
                 borderRadius: "15px 15px 0px 0px",
                 boxShadow: "0px 4px 4px 0px #00000040",
-              }}>
+              }}
+            >
               <span>{t("System Alert")}</span>
             </div>
 
@@ -336,7 +333,8 @@ export default function TabContent({
               style={{
                 borderRadius: "0px 0px 0px 0px",
                 boxShadow: "0px 4px 4px 0px #00000040",
-              }}>
+              }}
+            >
               {detail[0]?.message ? (
                 <div>
                   <div className="flex items-center justify-center gap-5 mt-4">
@@ -349,7 +347,8 @@ export default function TabContent({
                           ? err
                           : warning
                       }
-                      alt=""></img>
+                      alt=""
+                    ></img>
 
                     <span className="text-base font-medium">
                       {status.status == 40
@@ -368,9 +367,7 @@ export default function TabContent({
                     {detail[0]?.message ? (
                       <div>
                         {detail.map((msg, index) => (
-                          <li
-                            className="text-[#F44336]"
-                            key={index}>
+                          <li className="text-[#F44336]" key={index}>
                             {" "}
                             <span className="text-[#001647]">
                               {msg.message}
@@ -394,18 +391,18 @@ export default function TabContent({
         {datanotity == null || datanotity.length === 0 ? null : showPage ? (
           <div
             className="h-[50px] w-[70%] justify-end flex items-center gap-5"
-            id="showPage">
+            id="showPage"
+          >
             <div>
               <label>
                 {t("Rows per page:")}
                 <select
                   value={rowsPerPage}
                   className="outline-none cursor-pointer"
-                  onChange={(e) => setRowsPerPage(e.target.value)}>
+                  onChange={(e) => setRowsPerPage(e.target.value)}
+                >
                   {rowsPerPageDaata?.map((el, idx) => (
-                    <option
-                      key={idx}
-                      value={el}>
+                    <option key={idx} value={el}>
                       {el}
                     </option>
                   ))}
@@ -416,19 +413,17 @@ export default function TabContent({
             <div className="flex gap-5">
               <div
                 onClick={PrevPage}
-                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center">
-                <img
-                  className="h-[30px] w-[30px]"
-                  src={left}
-                  alt=""
-                />
+                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center"
+              >
+                <img className="h-[30px] w-[30px]" src={left} alt="" />
               </div>
               <div className="flex items-center">
                 {countPage}/{maxRecord}
               </div>
               <div
                 onClick={NextPage}
-                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center">
+                className="h-[30px] w-[40px] bg-[#F7F9FC] shadow border border-[#464F603D] rounded-[6px] flex justify-center items-center"
+              >
                 <img
                   className="h-[30px] w-[30px] transform scale-x-[-1]"
                   src={left}
@@ -442,5 +437,5 @@ export default function TabContent({
         <div className="h-[200px]"></div>
       </div>
     </>
-  )
+  );
 }
