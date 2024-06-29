@@ -374,7 +374,6 @@ export default function TabContent({
                   </div>
                 </div>
                 <div className="h-[40px]"></div>
-
               </div>
             </div>
           </div>
@@ -384,18 +383,17 @@ export default function TabContent({
           <div
             className="h-[50px] w-[70%] justify-end flex items-center gap-5"
             id="showPage">
-            <div className="">
+            <div>
               <label>
                 {t("Rows per page:")}
                 <select
                   value={rowsPerPage}
-                  className="outline-none"
+                  className="outline-none cursor-pointer"
                   onChange={(e) => setRowsPerPage(e.target.value)}>
                   {rowsPerPageDaata?.map((el, idx) => (
                     <option
                       key={idx}
-                      value={el}
-                      className="cursor-pointer">
+                      value={el}>
                       {el}
                     </option>
                   ))}

@@ -14,7 +14,7 @@ const Alert = () => {
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
   const {t} = useTranslation()
   const [rowsPerPage, setRowsPerPage] = useState(5)
-  console.log("rowsPerPage", rowsPerPage)
+  // console.log("rowsPerPage", rowsPerPage)
 
   let statusCounts = {
     Active: 0,
