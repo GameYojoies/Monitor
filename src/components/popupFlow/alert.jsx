@@ -5,14 +5,16 @@ import {getAccessToken} from "../../utils/local-storage"
 import useAuth from "../../hook/useAuth"
 import axios from "axios"
 import TabContent from "./Tabcontent"
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next"
 const Alert = () => {
   const token = getAccessToken()
   const [activeTab, setActiveTab] = useState(0)
   const [datanotity, setDatanotity] = useState(null)
   const [record, setRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
-  const { t } = useTranslation();
+  const {t} = useTranslation()
+  const [rowsPerPage, setRowsPerPage] = useState(5)
+  console.log("rowsPerPage", rowsPerPage)
 
   let statusCounts = {
     Active: 0,
@@ -54,7 +56,7 @@ const Alert = () => {
         const response = await axios.get(
           `${
             import.meta.env.VITE_API_TEST
-          }/solarDevice/deviceAlert?page=${countPage}&limit=10`,
+          }/solarDevice/deviceAlert?page=${countPage}&limit=${rowsPerPage}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -62,7 +64,6 @@ const Alert = () => {
             },
           }
         )
-
         if (response.data.result != null) {
           setDatanotity(response.data.result)
           setRecord(response.data.records)
@@ -76,7 +77,7 @@ const Alert = () => {
     }
 
     fetchData()
-  }, [token, countPage])
+  }, [token, countPage, rowsPerPage])
   const handleTabClick = (index) => {
     setActiveTab(index)
   }
@@ -100,7 +101,7 @@ const Alert = () => {
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(0)}>
-               {t("Show All")} 
+                {t("Show All")}
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Active +
                     statusCounts.Inactive +
@@ -115,8 +116,8 @@ const Alert = () => {
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(1)}>
-                  {t("Error")} 
-                
+                {t("Error")}
+
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Error}
                 </span>
@@ -127,7 +128,7 @@ const Alert = () => {
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(2)}>
-                                   {t("Warning")} 
+                {t("Warning")}
 
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Warning}
@@ -139,7 +140,7 @@ const Alert = () => {
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(3)}>
-                {t("Trouble Solved")} 
+                {t("Trouble Solved")}
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Normal}
                 </span>
@@ -157,6 +158,8 @@ const Alert = () => {
                 datanotity={datanotity}
                 record={record}
                 statusCounts={statusCounts}
+                setRowsPerPage={setRowsPerPage}
+                rowsPerPage={rowsPerPage}
               />
             )}
             {activeTab === 1 && (
@@ -165,6 +168,8 @@ const Alert = () => {
                 datanotity={datanotity}
                 record={record}
                 statusCounts={statusCounts}
+                setRowsPerPage={setRowsPerPage}
+                rowsPerPage={rowsPerPage}
               />
             )}
             {activeTab === 2 && (
@@ -173,6 +178,8 @@ const Alert = () => {
                 datanotity={datanotity}
                 record={record}
                 statusCounts={statusCounts}
+                setRowsPerPage={setRowsPerPage}
+                rowsPerPage={rowsPerPage}
               />
             )}
             {activeTab === 3 && (
@@ -181,6 +188,8 @@ const Alert = () => {
                 datanotity={datanotity}
                 record={record}
                 statusCounts={statusCounts}
+                setRowsPerPage={setRowsPerPage}
+                rowsPerPage={rowsPerPage}
               />
             )}
           </div>

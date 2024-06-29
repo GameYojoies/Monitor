@@ -3,21 +3,24 @@
 import {useEffect, useRef, useState} from "react"
 import useAuth from "../../hook/useAuth"
 import {useTranslation} from "react-i18next"
-import {err, warning, reset, left, icondown} from "../../images"
+import {err, warning, reset, left} from "../../images"
 
 export default function TabContent({
   content,
   datanotity,
   record,
   statusCounts,
+  setRowsPerPage,
+  rowsPerPage,
 }) {
-  console.log("datanotity--", datanotity)
+  //   console.log("datanotity--", datanotity)
   const [detail, setDetail] = useState([])
   const [status, setStatus] = useState()
   const [maxRecord, setMaxRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
-  const [open, setOpen] = useState(false)
   const {t} = useTranslation()
+  const rowsPerPageDaata = ["5", "10", "15", "20", "30", "40", "50"]
+
   if (
     content === "1" &&
     statusCounts.Active +
@@ -180,7 +183,7 @@ export default function TabContent({
 
     setDetail(alerts)
     setStatus(codes)
-    console.log("Alerts:", detail, status.status)
+    // console.log("Alerts:", detail, status.status)
   }
   const PrevPage = () => {
     setCountPage((prevCount) => Math.max(prevCount - 1, 1))
@@ -191,6 +194,7 @@ export default function TabContent({
   const Rest = () => {
     setCountPage(1)
   }
+
   return (
     <>
       <div>
@@ -379,15 +383,22 @@ export default function TabContent({
             className="h-[50px] w-[70%] justify-end flex items-center gap-5"
             id="showPage">
             <div className="">
-              <button
-                className="flex items-center gap-1 text-xs text-[#687182]"
-                onClick={() => setOpen(!open)}>
-                Rows per page: 10{" "}
-                <img
-                  src={icondown}
-                  className="w-4 h-4"
-                />
-              </button>
+              <label>
+                {t("Rows per page:")}
+                <select
+                  value={rowsPerPage}
+                  className="outline-none"
+                  onChange={(e) => setRowsPerPage(e.target.value)}>
+                  {rowsPerPageDaata?.map((el, idx) => (
+                    <option
+                      key={idx}
+                      value={el}
+                      className="cursor-pointer">
+                      {el}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
 
             <div className="flex gap-5">
@@ -416,19 +427,6 @@ export default function TabContent({
           </div>
         ) : null}
 
-        {open && (
-          <div className=" bg-red-200 w-full flex justify-center items-center">
-            <div className="bg-red-300 w-[5%]">
-              <p>5</p>
-              <p>10</p>
-              <p>15</p>
-              <p>20</p>
-              <p>30</p>
-              <p>40</p>
-              <p>50</p>
-            </div>
-          </div>
-        )}
         <div className="h-[200px]"></div>
       </div>
     </>
