@@ -21,7 +21,7 @@ export default function AuthContextProvider({children}) {
   const [dataStore, setDataStore] = useState([])
   const [datanotifydeivece, setDatanotifydeivece] = useState([])
   const [countPage, setCountPage] = useState(1)
-  const [showPage, setShowPage] = useState(true);
+  const [showPage, setShowPage] = useState(true)
   const [maxRecord, setMaxRecord] = useState(null);
 
   const [selecteLanguage, setSelecteLanguage] = useState(
@@ -114,7 +114,7 @@ export default function AuthContextProvider({children}) {
         dataStore,
         setDataStore,
         datanotifydeivece,
-        setDatanotifydeivece
+        setDatanotifydeivece,
       }}>
       <div className={languageMain}>{children}</div>
     </AuthContext.Provider>

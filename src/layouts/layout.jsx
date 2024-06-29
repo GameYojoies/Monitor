@@ -1,9 +1,17 @@
 /** @format */
-import {Outlet} from "react-router-dom"
+import {Outlet, useNavigate} from "react-router-dom"
 import Header from "./header"
 import Sidebar from "./sidebar"
+import {useEffect} from "react"
 
 const Layout = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (window.location.pathname !== "/monitor") {
+      navigate("/monitor")
+    }
+  }, [navigate])
   return (
     <>
       <Header />
