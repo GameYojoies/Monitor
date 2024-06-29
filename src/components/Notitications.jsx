@@ -26,13 +26,13 @@ function Notifications() {
   return (
     <>
       <div className="h-5"></div>
-      <div className="w-[90%] m-auto flex items-center">
+      <div className="w-[95%] m-auto flex items-center">
         <img src={notification} className="h-8 "></img>
         <span> {t("Notifications")}</span>
       </div>
       <div className="h-5"></div>
       <div
-        className="w-[90%] m-auto bg-[#FFFFFF] h-[300px] flex"
+        className="w-[95%] m-auto bg-[#FFFFFF] h-[300px] flex"
         style={{ boxShadow: "0px 4px 4px 0px #00000040" }}
       >
         <div className="w-[90%] h-[100%] m-auto  flex">
@@ -97,7 +97,7 @@ function Notifications() {
         </div>
       </div>
       <div className="h-5"></div>
-        <div className="w-[90%] m-auto flex items-center">
+        <div className="w-[95%] m-auto flex items-center">
           <Alert/>
 
         </div>
