@@ -78,7 +78,11 @@ function Notifications() {
                 <img src={icon_notify_2} className="h-6"></img>
                 <span className="w-[200px]">Device Status</span>
                 <div className="w-[80%]">
-                  <div className="text-[#2264E5] bg-[#EBF0FA] w-[100px] rounded-lg h-[80%] flex justify-center items-center">
+                  <div className={ ` ${
+            mainDevice?.status === 10
+              ? "text-[#2264E5] bg-[#EBF0FA] "
+              : "text-[#E52222] bg-[#FFECEF] "
+          }w-[100px] rounded-lg h-[80%] flex justify-center items-center`}>
                     <span>{mainDevice?.status === 10 ? "Active" : "OFF"}</span>
                   </div>{" "}
                   <div className="h-2"></div>
