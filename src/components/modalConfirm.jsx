@@ -1,9 +1,14 @@
 /** @format */
 
-
-
-const ModalConfirm = ({onClose, onSave, text, header, titleButtom, icon, textCancel}) => {
-
+const ModalConfirm = ({
+  onClose,
+  onSave,
+  text,
+  header,
+  titleButtom,
+  icon,
+  textCancel,
+}) => {
   return (
     <>
       <div

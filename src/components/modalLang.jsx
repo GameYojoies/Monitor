@@ -15,7 +15,7 @@ export default function ModalLang({
           className={`w-full flex items-center justify-center gap-5 cursor-pointer p-2 ${
             selecteLanguage === el?.abbreviation
               ? "bg-gray-800"
-              : "hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+              : "hover:bg-gray-500 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
           }`}
           onClick={() => {
             setSelecteLanguage(el?.abbreviation)
