@@ -4,15 +4,15 @@ import React, {useEffect, useState} from "react"
 import {getAccessToken} from "../../utils/local-storage"
 import useAuth from "../../hook/useAuth"
 import axios from "axios"
-
 import TabContent from "./Tabcontent"
-
+import { useTranslation } from "react-i18next";
 const Alert = () => {
   const token = getAccessToken()
   const [activeTab, setActiveTab] = useState(0)
   const [datanotity, setDatanotity] = useState(null)
   const [record, setRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
+  const { t } = useTranslation();
 
   let statusCounts = {
     Active: 0,
@@ -89,18 +89,18 @@ const Alert = () => {
 
           <div className="tab-buttons">
             <div
-              className="w-[80%] h-[50px] text-[#001647]"
+              className="w-[80%] h-[auto] text-[#001647]"
               style={{
                 boxShadow: "0px 4px 4px 0px #00000040",
                 borderRadius: "15px 15px 0 0",
               }}>
               <button
-                className={`h-[100%] w-[150px] ${
+                className={`h-[50px] w-[150px] ${
                   activeTab === 0 ? "bg-[#E4EBFB] active" : "bg-white"
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(0)}>
-                Show All
+               {t("Show All")} 
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Active +
                     statusCounts.Inactive +
@@ -110,34 +110,36 @@ const Alert = () => {
                 </span>
               </button>
               <button
-                className={`h-[100%] w-[150px] ${
+                className={`h-[50px]  w-[150px] ${
                   activeTab === 1 ? "bg-[#E4EBFB] active" : "bg-white"
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(1)}>
-                Error
+                  {t("Error")} 
+                
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Error}
                 </span>
               </button>
               <button
-                className={`h-[100%] w-[150px] ${
+                className={`h-[50px] w-[150px] ${
                   activeTab === 2 ? "bg-[#E4EBFB] active" : "bg-white"
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(2)}>
-                Warning
+                                   {t("Warning")} 
+
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Warning}
                 </span>
               </button>
               <button
-                className={`h-[100%] w-[150px] ${
+                className={`h-[50px]  w-[150px] ${
                   activeTab === 3 ? "bg-[#E4EBFB] active" : "bg-white"
                 }`}
                 style={{borderRadius: "15px 15px 0 0"}}
                 onClick={() => handleTabClick(3)}>
-                Trouble Solved
+                {t("Trouble Solved")} 
                 <span className="bg-[#3B78FE] text-white text-[10px] pl-2 pr-2 pt-1 pb-1 ml-2 rounded-full	">
                   {statusCounts.Normal}
                 </span>

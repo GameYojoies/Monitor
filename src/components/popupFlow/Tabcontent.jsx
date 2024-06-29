@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from "react"
 import useAuth from "../../hook/useAuth"
+import { useTranslation } from "react-i18next";
 import {err, warning, reset, left, icondown} from "../../images"
 
 export default function TabContent({
@@ -15,8 +16,6 @@ export default function TabContent({
   const [status, setStatus] = useState()
   const [maxRecord, setMaxRecord] = useState(null)
   const {countPage, setCountPage, setShowPage, showPage} = useAuth()
-  const [open, setOpen] = useState(false)
-
   if (
     content === "1" &&
     statusCounts.Active +
@@ -50,64 +49,130 @@ export default function TabContent({
     })
   }
   const SystemAlert = (codes) => {
-    const statusCodesNotification = {
-      4500: "Error Starting Work",
-      4501: "High Voltage Input",
-      4502: "Low Voltage Input",
-      4503: "Issue in the DC Circuit",
-      4504: "High Temperature",
-      4505: "High Battery Voltage",
-      4506: "Increasing the Input Voltage Failed",
-      4507: "Problems in the Input Terminal",
-      4508: "Fluid Related Issues at the Start of the Inverter",
-      4509: "High Voltage in the Inverter",
-      4510: "Low Voltage in the Inverter",
-      4511: "Issue in the Inverter Circuit",
-      4512: "Protection Against Negative Influences on the Inverter",
-      4513: "Issue in Exceeding Power Capacity",
-      4514: "Problem in Writing Machine Model Code",
-      4515: "Lack of Boot Programs",
-      4516: "Problem in Writing Machine Programs",
-      4517: "Excessive Current in the Neutral Line",
-      4518: "Identical Product Codes",
-      4519: "CAN Communication Issues",
-      4520: "Significant Differences in Battery Voltage",
-      4521: "Significant Differences in Power Supply Voltage",
-      4522: "Significant Differences in Frequency from the Power Supply",
-      4523: "Incorrect Settings Affecting Collaborative Operation Results",
-      4524: "Loss of Improvement Adjustments",
-      4525: "Issues in BMS Battery",
-      4600: "Chip is Broken",
-      4601: "The Fan is Broken",
-      4602: "High Temperature (Excessive)",
-      4603: "High Charging Voltage",
-      4604: "Failure to Start the Battery in Cold Conditions",
-      4605: "Low State of Charge (SOC)",
-      4606: "Battery Low Turning Off",
-      4607: "Full Charge Cycle",
-      4608: "Battery Not Connected",
-      4609: "Low Battery",
-      4610: "Over Load",
-      4700: "Battery Voltage Drop",
-      4701: "Storage Error",
-      4702: "Low Energy Discharging",
-      4703: "The Fan is Not Working",
-      4704: "The Temperature is Too High",
-      4705: "Charging Over Current",
-      4706: "Lost Communication with BMS",
-      4707: "Phase Sequence Error",
-      4708: "Battery Open Circuit",
-      4709: "Low Battery Voltage",
-      4710: "Parallel Setup Error",
-      4711: "Parallel Synchronization Error",
-      4712: "Parallel Communication Failure",
-      4713: "Parallel Models are Not Compatible",
-      4714: "Main Power Phase in Parallel is Wrong",
-      4715: "Insufficient PV Power",
-      4716: "Overload",
-      4717: "Main Frequency is Absent",
-      4718: "Mains Voltage has Disappeared",
+    const language = localStorage.getItem("Language");
+    var  statusCodesNotification 
+    if (language === "TH") {
+       statusCodesNotification = {
+        4500: "ข้อผิดพลาดในการเริ่มต้นทำงาน",
+        4501: "แรงดันไฟฟ้าขาเข้าสูง",
+        4502: "แรงดันไฟฟ้าขาเข้าต่ำ",
+        4503: "ปัญหาในวงจร DC",
+        4504: "อุณหภูมิสูง",
+        4505: "แรงดันไฟฟ้าของแบตเตอรี่สูง",
+        4506: "การเพิ่มแรงดันไฟฟ้าขาเข้าล้มเหลว",
+        4507: "ปัญหาในขั้วต่ออินพุต",
+        4508: "ปัญหาเกี่ยวกับของเหลวในการเริ่มต้นอินเวอร์เตอร์",
+        4509: "แรงดันไฟฟ้าสูงในอินเวอร์เตอร์",
+        4510: "แรงดันไฟฟ้าต่ำในอินเวอร์เตอร์",
+        4511: "ปัญหาในวงจรอินเวอร์เตอร์",
+        4512: "การป้องกันผลกระทบเชิงลบต่ออินเวอร์เตอร์",
+        4513: "ปัญหาในการเกินขีดความสามารถในการผลิตไฟฟ้า",
+        4514: "ปัญหาในการเขียนรหัสรุ่นเครื่อง",
+        4515: "ไม่มีโปรแกรมบูต",
+        4516: "ปัญหาในการเขียนโปรแกรมเครื่อง",
+        4517: "กระแสไฟฟ้าสูงเกินไปในสายกลาง",
+        4518: "รหัสผลิตภัณฑ์ที่เหมือนกัน",
+        4519: "ปัญหาการสื่อสารของ CAN",
+        4520: "ความแตกต่างแรงดันไฟฟ้าของแบตเตอรี่ที่สำคัญ",
+        4521: "ความแตกต่างแรงดันไฟฟ้าของแหล่งจ่ายไฟที่สำคัญ",
+        4522: "ความแตกต่างความถี่จากแหล่งจ่ายไฟที่สำคัญ",
+        4523: "การตั้งค่าผิดพลาดที่ส่งผลกระทบต่อผลการดำเนินงานร่วมกัน",
+        4524: "การสูญเสียการปรับปรุง",
+        4525: "ปัญหาในแบตเตอรี่ BMS",
+        4600: "ชิปเสีย",
+        4601: "พัดลมเสีย",
+        4602: "อุณหภูมิสูงเกินไป",
+        4603: "แรงดันไฟฟ้าชาร์จสูง",
+        4604: "การเริ่มต้นแบตเตอรี่ในสภาพอากาศเย็นล้มเหลว",
+        4605: "ระดับการชาร์จ (SOC) ต่ำ",
+        4606: "แบตเตอรี่ต่ำ ปิดการทำงาน",
+        4607: "วงจรการชาร์จเต็ม",
+        4608: "แบตเตอรี่ไม่เชื่อมต่อ",
+        4609: "แบตเตอรี่ต่ำ",
+        4610: "โอเวอร์โหลด",
+        4700: "แรงดันไฟฟ้าแบตเตอรี่ลดลง",
+        4701: "ข้อผิดพลาดในการเก็บข้อมูล",
+        4702: "การคายพลังงานต่ำ",
+        4703: "พัดลมไม่ทำงาน",
+        4704: "อุณหภูมิสูงเกินไป",
+        4705: "กระแสไฟฟ้าชาร์จเกิน",
+        4706: "สูญเสียการสื่อสารกับ BMS",
+        4707: "ข้อผิดพลาดลำดับเฟส",
+        4708: "วงจรเปิดแบตเตอรี่",
+        4709: "แรงดันไฟฟ้าแบตเตอรี่ต่ำ",
+        4710: "ข้อผิดพลาดในการตั้งค่าขนาน",
+        4711: "ข้อผิดพลาดการซิงโครไนซ์ขนาน",
+        4712: "การสื่อสารขนานล้มเหลว",
+        4713: "รุ่นขนานไม่เข้ากัน",
+        4714: "เฟสไฟฟ้าหลักในขนานผิด",
+        4715: "พลังงาน PV ไม่เพียงพอ",
+        4716: "โอเวอร์โหลด",
+        4717: "ความถี่หลักหายไป",
+        4718: "แรงดันไฟฟ้าหลักหายไป",
+      };
+
+    }else{
+       statusCodesNotification = {
+        4500: "Error Starting Work",
+        4501: "High Voltage Input",
+        4502: "Low Voltage Input",
+        4503: "Issue in the DC Circuit",
+        4504: "High Temperature",
+        4505: "High Battery Voltage",
+        4506: "Increasing the Input Voltage Failed",
+        4507: "Problems in the Input Terminal",
+        4508: "Fluid Related Issues at the Start of the Inverter",
+        4509: "High Voltage in the Inverter",
+        4510: "Low Voltage in the Inverter",
+        4511: "Issue in the Inverter Circuit",
+        4512: "Protection Against Negative Influences on the Inverter",
+        4513: "Issue in Exceeding Power Capacity",
+        4514: "Problem in Writing Machine Model Code",
+        4515: "Lack of Boot Programs",
+        4516: "Problem in Writing Machine Programs",
+        4517: "Excessive Current in the Neutral Line",
+        4518: "Identical Product Codes",
+        4519: "CAN Communication Issues",
+        4520: "Significant Differences in Battery Voltage",
+        4521: "Significant Differences in Power Supply Voltage",
+        4522: "Significant Differences in Frequency from the Power Supply",
+        4523: "Incorrect Settings Affecting Collaborative Operation Results",
+        4524: "Loss of Improvement Adjustments",
+        4525: "Issues in BMS Battery",
+        4600: "Chip is Broken",
+        4601: "The Fan is Broken",
+        4602: "High Temperature (Excessive)",
+        4603: "High Charging Voltage",
+        4604: "Failure to Start the Battery in Cold Conditions",
+        4605: "Low State of Charge (SOC)",
+        4606: "Battery Low Turning Off",
+        4607: "Full Charge Cycle",
+        4608: "Battery Not Connected",
+        4609: "Low Battery",
+        4610: "Over Load",
+        4700: "Battery Voltage Drop",
+        4701: "Storage Error",
+        4702: "Low Energy Discharging",
+        4703: "The Fan is Not Working",
+        4704: "The Temperature is Too High",
+        4705: "Charging Over Current",
+        4706: "Lost Communication with BMS",
+        4707: "Phase Sequence Error",
+        4708: "Battery Open Circuit",
+        4709: "Low Battery Voltage",
+        4710: "Parallel Setup Error",
+        4711: "Parallel Synchronization Error",
+        4712: "Parallel Communication Failure",
+        4713: "Parallel Models are Not Compatible",
+        4714: "Main Power Phase in Parallel is Wrong",
+        4715: "Insufficient PV Power",
+        4716: "Overload",
+        4717: "Main Frequency is Absent",
+        4718: "Mains Voltage has Disappeared",
+      }
     }
+
+
     const alerts = codes.codes.map((code) => ({
       code,
       message: statusCodesNotification[code] || "Unknown Status Code",
@@ -131,14 +196,16 @@ export default function TabContent({
       <div>
         <div className="w-[100%] h-[50px] bg-[#133261] rounded-md text-white flex items-center">
           <div className="w-[60%] flex ml-[100px] justify-between">
-            <span className="w-[100px] flex justify-center">Date</span>
-            <span className="w-[100px] flex justify-center  ml-[10px]">
-              Status
+            <span className="w-[100px] flex justify-center items-center">{t("Date")}</span>
+            <span className="w-[150px] flex justify-center  items-center ml-[10px]">
+            {t("Status")} 
             </span>
-            <span className="w-[200px] flex justify-center ">
-              Serial number
+            <span className="w-[200px] flex justify-center items-center ">
+            {t("Serial number")} 
+            
             </span>
-            <span className="w-[100px] flex justify-center">Alarm Code</span>
+            <span className="w-[100px] flex justify-center items-center">{t("Alarm Code")} 
+           </span>
           </div>
           <div className="w-[30%] flex justify-end mr-[5%]">
             <div
@@ -149,7 +216,7 @@ export default function TabContent({
                 src={reset}
                 alt=""
               />
-              <span className="cursor-pointer"> Rest</span>
+              <span className="cursor-pointer"> {t("Reset")} </span>
             </div>
           </div>
         </div>
@@ -158,7 +225,7 @@ export default function TabContent({
         <div className="flex">
           <div className="flex justify-center flex-col w-[75%] cursor-pointer relative">
             {datanotity == null || datanotity.length == 0 ? (
-              <div className="absolute flex top-0 right-[50%]">Nodata</div>
+              <div className="absolute flex top-0 right-[50%]"> {t("Nodata")}</div>
             ) : datanotity[0].list.some(
                 (item) =>
                   content === "1" ||
@@ -198,15 +265,15 @@ export default function TabContent({
                           }   rounded`}>
                           <span>
                             {item.status === 10
-                              ? "Active"
+                              ?  `${t("Active")}`
                               : item.status === 20
-                              ? "Inactive"
+                              ?  `${t("Inactive")}`
                               : item.status === 30
-                              ? "Normal"
+                              ?   `${t("Normal")}`
                               : item.status === 40
-                              ? "Warning"
+                              ?  `${t("Warning")}` 
                               : item.status === 50
-                              ? "Error"
+                              ?  `${t("Error")}`  
                               : ""}
                           </span>
                         </span>
@@ -227,7 +294,7 @@ export default function TabContent({
                 }
               })
             ) : (
-              <div className="absolute flex top-0 right-[50%]">Nodata</div>
+              <div className="absolute flex top-0 right-[50%]">{t("Nodata")}</div>
             )}
           </div>
 
@@ -238,7 +305,7 @@ export default function TabContent({
                 borderRadius: "15px 15px 0px 0px",
                 boxShadow: "0px 4px 4px 0px #00000040",
               }}>
-              <span>System Alert</span>
+              <span>{t('System Alert')}</span>
             </div>
 
             <div
@@ -263,10 +330,10 @@ export default function TabContent({
 
                     <span className="text-base font-medium">
                       {status.status == 40
-                        ? "Warning"
+                        ? `${t("Warning")}`
                         : status.status == 50
-                        ? "Error"
-                        : "Trouble Solved"}
+                        ?  `${t("Error")}`
+                        :  `${t("Trouble Solved")}`}
                     </span>
                   </div>
                 </div>
@@ -290,7 +357,7 @@ export default function TabContent({
                       </div>
                     ) : (
                       <p className="mt-2 text-[#001647]">
-                        No messages available
+                        {t("No Messages Available")}
                       </p>
                     )}
                   </div>
