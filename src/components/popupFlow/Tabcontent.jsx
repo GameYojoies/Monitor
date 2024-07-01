@@ -25,11 +25,11 @@ export default function TabContent({
   if (
     content === "1" &&
     statusCounts.Active +
-      statusCounts.Inactive +
-      statusCounts.Normal +
-      statusCounts.Warning +
-      statusCounts.Error !=
-      0
+    statusCounts.Inactive +
+    statusCounts.Normal +
+    statusCounts.Warning +
+    statusCounts.Error !=
+    0
   ) {
     setShowPage(true);
   } else if (content === "2" && statusCounts.Error != 0) {
@@ -242,12 +242,12 @@ export default function TabContent({
                 {t("Nodata")}
               </div>
             ) : datanotity[0].list.some(
-                (item) =>
-                  content === "1" ||
-                  (content === "2" && item.status === 50) ||
-                  (content === "3" && item.status === 40) ||
-                  (content === "4" && item.status === 30)
-              ) ? (
+              (item) =>
+                content === "1" ||
+                (content === "2" && item.status === 50) ||
+                (content === "3" && item.status === 40) ||
+                (content === "4" && item.status === 30)
+            ) ? (
               datanotity[0].list.map((item, index) => {
                 if (
                   content === "1" ||
@@ -262,7 +262,7 @@ export default function TabContent({
                       style={{ boxShadow: "0px 1px 13px 0px #00000014" }}
                       onClick={() => {
                         SystemAlert(item);
-                       
+
                       }}
                     >
                       <div className="flex ml-[10px] w-[100%] justify-between">
@@ -273,28 +273,27 @@ export default function TabContent({
                           {formatDate(item.alertTime)}
                         </span>
                         <span
-                          className={`w-[100px] flex justify-center ${
-                            item.status === 40
+                          className={`w-[100px] flex justify-center ${item.status === 40
                               ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
                               : item.status === 50
-                              ? "bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]"
-                              : item.status === 30
-                              ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
-                              : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
-                          }   rounded`}
+                                ? "bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]"
+                                : item.status === 30
+                                  ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
+                                  : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
+                            }   rounded`}
                         >
                           <span>
                             {item.status === 10
                               ? `${t("Active")}`
                               : item.status === 20
-                              ? `${t("Inactive")}`
-                              : item.status === 30
-                              ? `${t("Normal")}`
-                              : item.status === 40
-                              ? `${t("Warning")}`
-                              : item.status === 50
-                              ? `${t("Error")}`
-                              : ""}
+                                ? `${t("Inactive")}`
+                                : item.status === 30
+                                  ? `${t("Normal")}`
+                                  : item.status === 40
+                                    ? `${t("Warning")}`
+                                    : item.status === 50
+                                      ? `${t("Error")}`
+                                      : ""}
                           </span>
                         </span>
                         <span className="w-[200px] flex justify-center">
@@ -338,7 +337,7 @@ export default function TabContent({
                 boxShadow: "0px 4px 4px 0px #00000040",
               }}
             >
-              {detail? (
+              {status ? (
                 <div>
                   <div className="flex items-center justify-center gap-5 mt-4">
                     <img
@@ -347,8 +346,8 @@ export default function TabContent({
                         status.status == 40
                           ? warning
                           : status.status == 50
-                          ? err
-                          : warning
+                            ? err
+                            : warning
                       }
                       alt=""
                     ></img>
@@ -357,8 +356,8 @@ export default function TabContent({
                       {status.status == 40
                         ? `${t("Warning")}`
                         : status.status == 50
-                        ? `${t("Error")}`
-                        : `${t("Trouble Solved")}`}
+                          ? `${t("Error")}`
+                          : `${t("Trouble Solved")}`}
                     </span>
                   </div>
                 </div>
@@ -367,13 +366,13 @@ export default function TabContent({
               <div className="w-[80%] m-auto flex flex-col">
                 <div className="flex justify-center">
                   <div className="flex-col flex text-sm">
-                    {detail? (
+                    {detail ? (
                       <div>
                         {detail.map((msg, index) => (
                           <li className="text-[#F44336]" key={index}>
                             {" "}
                             <span className="text-[#001647]">
-                            {t(`${msg}`)}
+                              {t(`${msg}`)}
                             </span>
                           </li>
                         ))}

@@ -67,6 +67,7 @@ const Alert = () => {
         if (response.data.result != null) {
           setDatanotity(response.data.result)
           setRecord(response.data.records)
+          console.log(response.data.result);
         } else {
           setDatanotity([])
           setRecord([])
