@@ -274,12 +274,12 @@ export default function TabContent({
                         </span>
                         <span
                           className={`w-[100px] flex justify-center ${item.status === 40
-                              ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
-                              : item.status === 50
-                                ? "bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]"
-                                : item.status === 30
-                                  ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
-                                  : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
+                            ? "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
+                            : item.status === 50
+                              ? "bg-[#FFF0F0]  border border-solid border-[#FF4747] text-[#FF4747]"
+                              : item.status === 30
+                                ? "bg-[#F2FFF7]  border border-solid border-[#00B448] text-[#00B448]"
+                                : "bg-[#FFF6E8]  border border-solid border-[#FFCC81] text-[#ED9B22]"
                             }   rounded`}
                         >
                           <span>
@@ -366,7 +366,7 @@ export default function TabContent({
               <div className="w-[80%] m-auto flex flex-col">
                 <div className="flex justify-center">
                   <div className="flex-col flex text-sm">
-                    {detail ? (
+                    {detail.length != 0 ? (
                       <div>
                         {detail.map((msg, index) => (
                           <li className="text-[#F44336]" key={index}>
