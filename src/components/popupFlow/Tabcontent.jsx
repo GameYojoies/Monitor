@@ -398,7 +398,7 @@ export default function TabContent({
           >
             <div>
               <label className="text-[#687182]">
-                {t("Rows per page:")}
+                {t("Rows per page")}:
                 <select
                   value={rowsPerPage}
                   className="outline-none cursor-pointer "

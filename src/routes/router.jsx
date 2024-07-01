@@ -8,60 +8,57 @@ import UserPage from "../pages/user"
 import LoginPage from "../pages/loginPage"
 import ProtectedRout from "../utils/protectedRout"
 
+const router = createBrowserRouter(
+  [
+    {
+      element: (
+        <ProtectedRout>
+          <Layout />
+        </ProtectedRout>
+      ),
+      path: "/",
+      children: [
+        {
+          path: "/",
+          element: <Navigate to="/monitor" />,
+        },
+        {
+          path: "/monitor",
+          element: <MonitorPage />,
+        },
+        {
+          path: "/report",
+          element: <ReportPage />,
+        },
+        {
+          path: "/notification",
+          element: <NotificationPage />,
+        },
+        {
+          path: "/user",
+          element: <UserPage />,
+        },
+        {
+          path: "*",
+          element: <Navigate to="/login" />,
+        },
+      ],
+    },
 
-const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+    {
+      path: "*",
+      element: <Navigate to="/login" />,
+    },
+  ],
   {
-    element: <Layout />,
-    path: "/",
-    children: [
-      {
-        path: "/",
-        element: <Navigate to="/monitor" />,
-      },
-      {
-        path: "/monitor",
-
-        element: (
-          <ProtectedRout>
-            <MonitorPage />
-          </ProtectedRout>
-        ),
-      },
-      {
-        path: "/report",
-        element: (
-          <ProtectedRout>
-            <ReportPage />
-          </ProtectedRout>
-        ),
-      },
-      {
-        path: "/notification",
-        element: (
-          <ProtectedRout>
-            <NotificationPage />
-          </ProtectedRout>
-        ),
-      },
-      {
-        path: "/user",
-        element: (
-          <ProtectedRout>
-            <UserPage />
-          </ProtectedRout>
-        ),
-      },
-    ],
-  },
-
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-], {
-  basename: import.meta.env.VITE_BASE_URL || "/"
-})
+    basename: import.meta.env.VITE_BASE_URL || "/",
+  }
+)
 
 export default function Router() {
-  return <RouterProvider router={router}  />
+  return <RouterProvider router={router} />
 }

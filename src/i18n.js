@@ -33,6 +33,7 @@ const resources = {
       "Error":"ผิดพลาด",
       "System Alert":"แจ้งเตือนระบบ",
       "No Messages Available":"ไม่มีแจ้งเตือนระบบ",
+      "Rows per page":"แถวต่อหน้า",
 
       
 
@@ -219,6 +220,7 @@ const resources = {
          logOutSpan2 : "ท่านแน่ใจหรือว่าต้องการออกจากระบบ?",
          logOutSpan3 : "ยกเลิก",
          logOutSpan4 : "ยืนยัน",
+
     },
   },
   en: {
@@ -243,6 +245,7 @@ const resources = {
       "Error":"Error",
       "System Alert":"System Alert",
       "No Messages Available":"No Messages Available",
+      "Rows per page":"Rows per page",
 
       
       
