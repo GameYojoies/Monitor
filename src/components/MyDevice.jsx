@@ -11,7 +11,8 @@ const MyDevice = () => {
   const [address, setAddress] = useState("");
   const [deviceOptions, setDeviceOptions] = useState([]);
   const [selectedDeviceId, setSelectedDeviceId] = useState(null);
-  const { fetch, setFetch, datanotifydeivece, setDatanotifydeivece } = useAuth();
+  const { fetch, setFetch, datanotifydeivece, setDatanotifydeivece } =
+    useAuth();
   const { t } = useTranslation();
 
   const token = getAccessToken();
@@ -96,41 +97,54 @@ const MyDevice = () => {
       <div className="w-[95%] ">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-4 mb-4 md:mb-0 md:w-3/4">
-            <h1 className="text-2xl font-bold text-[#001647]">{t("DeviceSpan1")}</h1>
-            <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] py-3 px-2 lg:px-8 lg:py-1 rounded-[30px] shadow-md flex items-center text-white relative">
-              <div className="fexl-col gap-2 lg:flex  justify-center items-center">
+            <h1 className="text-2xl font-bold text-[#001647]">
+              {t("DeviceSpan1")}
+            </h1>
+            <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] py-3 px-2 lg:px-8 lg:py-1 rounded-[30px] shadow-md flex items-center text-white relative ">
+              <div className="fexl-col gap-2 lg:flex  justify-center items-start">
                 <div className="flex flex-col w-[170px] relative">
-                <label className="font-semibold text-xs pl-[1rem]">{t("DeviceSpan2")}</label>
-                  <select
-                    name="device"
-                    id="device"
-                    className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
-                    style={{
-                      backgroundImage: "none",
-                      paddingLeft: "1rem", // เพิ่มพื้นที่ข้างขวาสำหรับไอคอน dropdown
-                      
-                    }}
-                    onChange={(e) => handleDeviceSelect(e.target.value)}
-                  >
-                    {deviceOptions.map((device) => (
-                      <option
-                        className="text-black"
-                        key={device.id}
-                        value={`${device.id},${device.pn},${device.address}`}
-                        selected={device.main === true}
+                  <label className="font-semibold text-xs pl-[1rem]">
+                    {t("DeviceSpan2")}
+                  </label>
+                  {deviceOptions.length > 0 && (
+                    <>
+                      <select
+                        name="device"
+                        id="device"
+                        className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
+                        style={{
+                          backgroundImage: "none",
+                          paddingLeft: "1rem", // เพิ่มพื้นที่ข้างขวาสำหรับไอคอน dropdown
+                        }}
+                        onChange={(e) => handleDeviceSelect(e.target.value)}
                       >
-                        {device.name}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="absolute top-3 flex items-center right-0 pointer-events-none">
-                    <img className="w-[24px]" src={drop} alt="Dropdown Icon" />
-                  </span>
+                        {deviceOptions.map((device) => (
+                          <option
+                            className="text-black"
+                            key={device.id}
+                            value={`${device.id},${device.pn},${device.address}`}
+                            selected={device.main === true}
+                          >
+                            {device.name}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="absolute top-3 flex items-center right-0 pointer-events-none">
+                        <img
+                          className="w-[24px]"
+                          src={drop}
+                          alt="Dropdown Icon"
+                        />
+                      </span>
+                    </>
+                  )}
                 </div>
-              
+
                 <div className="border-r-2 border-gray-300 lg:h-12"></div>
                 <div className="flex flex-col w-[170px]">
-                  <label className="font-semibold text-xs pl-[1rem]">{t("DeviceSpan3")}</label>
+                  <label className="font-semibold text-xs pl-[1rem]">
+                    {t("DeviceSpan3")}
+                  </label>
                   <span className="text-xl pl-[1rem]">{Pn}</span>
                 </div>
               </div>
