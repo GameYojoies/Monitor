@@ -192,8 +192,8 @@ export default function TabContent({
     //   message: statusCodesNotification[code] || "Unknown Status Code",
     // }));
 
-    setDetail(codes.codes);
     setStatus(codes);
+    setDetail(codes.codes);
     console.log("Alerts:", detail, status)
   };
 
@@ -338,7 +338,7 @@ export default function TabContent({
                 boxShadow: "0px 4px 4px 0px #00000040",
               }}
             >
-              {detail[0]?.message ? (
+              {detail? (
                 <div>
                   <div className="flex items-center justify-center gap-5 mt-4">
                     <img
