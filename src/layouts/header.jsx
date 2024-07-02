@@ -105,7 +105,7 @@ function Header() {
               className="w-12 h-12 rounded-full cursor-pointer"
             />
 
-            <div className="flex flex-col items-center">
+            <div className="w-3/4 lg:w-full flex flex-col items-cente break-words">
               <span className="w-full font-bold text-base">
                 {authenticateUser?.name}
               </span>
