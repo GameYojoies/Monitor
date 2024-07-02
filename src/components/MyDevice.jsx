@@ -102,7 +102,7 @@ const MyDevice = () => {
             </h1>
             <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] py-3 px-2 lg:px-8 lg:py-1 rounded-[30px] shadow-md flex items-center text-white relative ">
               <div className="fexl-col gap-2 lg:flex  justify-center items-start">
-                <div className="flex flex-col w-[170px] relative">
+                <div className="flex flex-col w-[180px] relative">
                   <label className="font-semibold text-xs pl-[1rem]">
                     {t("DeviceSpan2")}
                   </label>
@@ -114,7 +114,10 @@ const MyDevice = () => {
                         className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
                         style={{
                           backgroundImage: "none",
-                          paddingLeft: "1rem", // เพิ่มพื้นที่ข้างขวาสำหรับไอคอน dropdown
+                          paddingLeft: "1rem",
+                          overflow: "hidden", // Hide overflow content
+                          textOverflow: "ellipsis", // Show ellipsis if text overflows
+                          whiteSpace: "nowrap", // Prevent text wrapping // เพิ่มพื้นที่ข้างขวาสำหรับไอคอน dropdown
                         }}
                         onChange={(e) => handleDeviceSelect(e.target.value)}
                       >
