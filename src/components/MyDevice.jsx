@@ -1,6 +1,5 @@
 import { drop, map } from "../images/Mydevice";
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { getAccessToken } from "../utils/local-storage";
 import useAuth from "../hook/useAuth";
@@ -17,6 +16,27 @@ const MyDevice = () => {
 
   const token = getAccessToken();
   const API_SERVER = import.meta.env.VITE_API_TEST;
+  const selectRef = useRef(null);
+
+  const calculateWidth = (text) => {
+    const span = document.createElement('span');
+    span.style.fontSize = '1.25rem'; // Match the font size of the select element
+    span.style.visibility = 'hidden';
+    span.style.whiteSpace = 'nowrap';
+    span.textContent = text;
+    document.body.appendChild(span);
+    const width = span.offsetWidth;
+    document.body.removeChild(span);
+    return width;
+  };
+
+  const updateWidth = (value) => {
+    const selectedDevice = deviceOptions.find(device => `${device.id},${device.pn},${device.address}` === value);
+    if (selectedDevice) {
+      const width = calculateWidth(selectedDevice.name) + 82; // Add padding and some extra space
+      selectRef.current.style.width = `${width}px`;
+    }
+  };
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -56,6 +76,7 @@ const MyDevice = () => {
         setAddress(mainDevice.address);
         setFetch(true);
         setDatanotifydeivece(devices);
+        updateWidth(`${mainDevice.id},${mainDevice.pn},${mainDevice.address}`);
       }
     }
   };
@@ -69,6 +90,7 @@ const MyDevice = () => {
     setPn(pn);
     setAddress(addr);
     setSelectedDeviceId(id);
+    updateWidth(deviceId);
 
     try {
       const response = await axios.patch(
@@ -101,23 +123,23 @@ const MyDevice = () => {
               {t("DeviceSpan1")}
             </h1>
             <div className="bg-gradient-to-r from-[#0079e3] to-[#00437d] py-3 px-2 lg:px-8 lg:py-1 rounded-[30px] shadow-md flex items-center text-white relative ">
-              <div className="fexl-col gap-2 lg:flex  justify-center items-start">
-                <div className="flex flex-col w-[180px] relative">
+              <div className="flex-row gap-2 lg:flex justify-center items-start">
+                <div className="flex flex-col relative">
                   <label className="font-semibold text-xs pl-[1rem]">
                     {t("DeviceSpan2")}
                   </label>
                   {deviceOptions.length > 0 && (
                     <>
                       <select
+                        ref={selectRef}
                         name="device"
                         id="device"
-                        className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none"
+                        className="bg-transparent border-none text-white text-xl rounded-md focus:outline-none focus:border-transparent appearance-none z-10"
                         style={{
                           backgroundImage: "none",
                           paddingLeft: "1rem",
-                          overflow: "hidden", // Hide overflow content
-                          textOverflow: "ellipsis", // Show ellipsis if text overflows
-                          whiteSpace: "nowrap", // Prevent text wrapping // เพิ่มพื้นที่ข้างขวาสำหรับไอคอน dropdown
+                        
+                    
                         }}
                         onChange={(e) => handleDeviceSelect(e.target.value)}
                       >
