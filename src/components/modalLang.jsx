@@ -3,9 +3,9 @@
 export default function ModalLang({
   data,
   setSelecteLanguage,
-  setOpenModal,
   selecteLanguage,
   handleClickSelecteLanguage,
+  toggleLanguageModel,
 }) {
   return (
     <div className="w-[183px] h-[105px] flex flex-col items-center justify-center bg-[#001647] z-10 absolute -right-10 top-12 rounded-xl">
@@ -19,7 +19,7 @@ export default function ModalLang({
           }`}
           onClick={() => {
             setSelecteLanguage(el?.abbreviation)
-            setOpenModal(false)
+            toggleLanguageModel()
             handleClickSelecteLanguage(el?.key)
           }}>
           <img

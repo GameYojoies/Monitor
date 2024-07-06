@@ -46,6 +46,7 @@ function Header() {
   // console.log("selecteLanguage", selecteLanguage)
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
+  console.log("iconRotate", iconRotate)
   const [confirmLogout, setConfirmLogout] = useState(false)
   const languageRef = useRef()
   const {t, i18n} = useTranslation()
@@ -123,9 +124,7 @@ function Header() {
               src={iconLanguage}
               className="w-[35px] h-[35px]"
             />
-
             <p className="text-[17px]">{selecteLanguage}</p>
-
             <button
               onClick={toggleLanguageModel}
               className="mb-1 ml-3">
@@ -143,8 +142,8 @@ function Header() {
               <ModalLang
                 data={languageData}
                 setSelecteLanguage={setSelecteLanguage}
-                setOpenModal={setOpenModal}
                 selecteLanguage={selecteLanguage}
+                toggleLanguageModel={toggleLanguageModel}
                 handleClickSelecteLanguage={handleClickSelecteLanguage}
               />
             )}
