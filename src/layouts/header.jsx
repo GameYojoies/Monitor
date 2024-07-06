@@ -46,7 +46,7 @@ function Header() {
   // console.log("selecteLanguage", selecteLanguage)
   const [openModal, setOpenModal] = useState(false)
   const [iconRotate, setIconRotate] = useState(false)
-  console.log("iconRotate", iconRotate)
+  // console.log("iconRotate", iconRotate)
   const [confirmLogout, setConfirmLogout] = useState(false)
   const languageRef = useRef()
   const {t, i18n} = useTranslation()
