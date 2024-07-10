@@ -1,17 +1,16 @@
 /** @format */
 
-import { useTranslation } from "react-i18next"
+import {useTranslation} from "react-i18next"
 import UserInfoSection from "../components/UserInfoSection"
 import useAuth from "../hook/useAuth"
-import { iconUser, iconThailand } from "../images"
+import {iconUser, iconThailand} from "../images"
 
 export default function UserPage() {
-  const { authenticateUser, viteApiTest } = useAuth()
+  const {authenticateUser, viteApiTest} = useAuth()
   // console.log("authenticateUser", authenticateUser)
-  const { t } = useTranslation()
+  const {t} = useTranslation()
 
   return (
-
     <div className="w-full h-[calc(100vh-98px)] overflow-auto">
       <div className="w-[95%] h-screen m-auto flex flex-col gap-12">
         <div className="flex items-center gap-4 border-b-2 border-[#001647] p-4">
@@ -28,7 +27,11 @@ export default function UserPage() {
         <div className="flex-none lg:flex items-center bg-white py-14 px-8 rounded-xl shadow-[2px_2px_15px_0px_#00000026]">
           <div className="w-full lg:w-[30%]  flex flex-col items-center">
             <img
-              src={authenticateUser?.avatar ? viteApiTest + authenticateUser.avatar : iconUser}
+              src={
+                authenticateUser?.avatar
+                  ? viteApiTest + authenticateUser.avatar
+                  : iconUser
+              }
               className="w-[242px] h-[242px] border-2 border-white rounded-full cursor-pointer shadow-2xl"
             />
 
@@ -90,6 +93,5 @@ export default function UserPage() {
         </div>
       </div>
     </div>
-
   )
 }
