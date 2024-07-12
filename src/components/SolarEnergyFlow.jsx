@@ -169,11 +169,11 @@ const SolarEnergyFlow = () => {
         <div className="h-2"></div>
         <div
         
-          className="w-[100%] flex flex-row items-center justify-center gap-14 flex-wrap lg:flex-row h-auto  m-auto p-10 bg-white rounded-lg"
+          className="w-[100%] flex flex-row items-center justify-around gap-15 flex-wrap lg:flex-row h-auto  m-auto  bg-white rounded-lg"
           style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
         >
-          <div className="flex justify-center items-center h-[400px] w-[400px] relative">
-            <div className="lg:h-[400px] lg:w-[400px] absolute">
+          <div className="flex justify-center items-center h-[600px] w-[600px] relative">
+            <div className="lg:h-[600px] lg:w-[600px] absolute">
               <img src={flowEnergy} className="h-[100%] w-[100%]" />
             </div>
         
