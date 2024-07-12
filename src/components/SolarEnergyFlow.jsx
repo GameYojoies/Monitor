@@ -140,7 +140,7 @@ const SolarEnergyFlow = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+console.log(data?.batCapacity);
   const width = windowWidth <= 1500 ? '1500px' : '100%';
   return (
     <div>
@@ -215,7 +215,7 @@ const SolarEnergyFlow = () => {
               className="h-[20%] w-[130px] absolute bottom-10 left-[20px] cursor-pointer flex justify-center items-center"
               onClick={() => handleClick("Battery")}
             >
-              <div className=" flex justify-center items-center">
+              <div className=" flex justify-center items-center mr-[24px]">
                 <img
                   src={battery}
                   alt=""
@@ -235,7 +235,7 @@ const SolarEnergyFlow = () => {
                       : bg_red
                   }
                   alt=""
-                  className="w-[35%] h-[25%] m-auto pointer-events-none absolute"
+                  className="w-[35%] h-[25%] m-auto pointer-events-none absolute mr-[2px]"
                 />
 
                 <img
@@ -258,20 +258,21 @@ const SolarEnergyFlow = () => {
                       ? "30%"
                       : dataFlow?.batteryCapacity > 10 &&
                         dataFlow?.batteryCapacity < 40
-                      ? "10%"
+                      ? "20%"
                       : "30%"
-                  }] h-[18%] m-auto pointer-events-none absolute`}
+                  }] h-[18%] m-auto pointer-events-none absolute mr-[4px]`}
                   style={{
                     right:
-                      data?.batteryCapacity >= 40 &&
-                      data?.batteryCapacity <= 100
-                        ? "0%"
-                        : data?.batteryCapacity > 10 &&
-                          data?.batteryCapacity < 40
+                      data?.batteryCapacity <= 100 && data?.batteryCapacity >= 40
+                        ? "4px"
+                        : data?.batteryCapacity < 40 && data?.batteryCapacity >= 10
                         ? "45%"
-                        : "",
+                        : data?.batteryCapacity < 10 && data?.batteryCapacity >= 0
+                        ? "85px"
+                        : data?.batteryCapacity == undefined ? "" : "" // Default value, can be changed if needed
                   }}
                 />
+
                 <div className="w-[30%] h-[18%]  pointer-events-none text-[#FFF]  text-xs absolute flex justify-center items-center">
                   <span> {dataFlow?.batteryCapacity || 0} %</span>
                 </div>
