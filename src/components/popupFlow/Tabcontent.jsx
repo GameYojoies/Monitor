@@ -63,7 +63,24 @@ export default function TabContent({
       });
     }
   };
-
+  const formatDateTime = (timestamp) => {
+    const date = new Date(timestamp);
+    const language = selecteLanguage;
+  
+    if (language === "TH") {
+      return date.toLocaleTimeString("th-TH", {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+    } else {
+      return date.toLocaleTimeString("en-GB", {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+    }
+  };
   const SystemAlert = (codes) => {
     // const language = selecteLanguage;
     // var statusCodesNotification = {};
@@ -211,9 +228,12 @@ export default function TabContent({
     <>
       <div>
         <div className="w-[100%] h-[50px] bg-[#133261] rounded-md text-white flex items-center">
-          <div className="w-[60%] flex ml-[100px] justify-between">
+          <div className="w-[60%] flex ml-[50px] justify-between">
             <span className="w-[100px] flex justify-center items-center">
               {t("Date")}
+            </span>
+            <span className="w-[100px] flex justify-center items-center">
+              {t("Time")}
             </span>
             <span className="w-[150px] flex justify-center  items-center ml-[10px]">
               {t("Status")}
@@ -271,6 +291,9 @@ export default function TabContent({
                         </span>
                         <span className="w-[100px] text-sm flex">
                           {formatDate(item.alertTime)}
+                        </span>
+                        <span className="w-[100px] text-sm flex">
+                          {formatDateTime(item.alertTime)}
                         </span>
                         <span
                           className={`w-[100px] flex justify-center ${item.status === 40
