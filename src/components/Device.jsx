@@ -82,9 +82,9 @@ const Device = () => {
   };
 
   return (
-    <div className=" items-center justify-center flex mt-8 mb-8">
+    <div className=" items-center justify-center flex mt-8 mb-8 h-[560px]">
       <div className="w-[90%]">
-        <div className="grid grid-cols-1   gap-4">
+        <div className="grid grid-cols-1   gap-[7px]">
           {devices.map((device) => (
             <div
               key={device.id}
@@ -92,7 +92,7 @@ const Device = () => {
               className="flex flex-col bg-white shadow-md rounded-md"
             >
               <div
-                className={`rounded-[5px] py-2 text-center cursor-pointer font-bold ${
+                className={`rounded-[5px]  text-center cursor-pointer font-bold ${
                   device.id === 1
                     ? "bg-[#BBD6EE]"
                     : device.id === 2
@@ -107,7 +107,7 @@ const Device = () => {
                 {device.name}
               </div>
 
-              <div className="p-5 flex items-center justify-center gap-3 h-full relative">
+              <div className="p-4 flex items-center justify-center gap-3 h-full relative">
                 {device.id === 4 ? (
                   <div className="relative  w-full ">
                     <img
