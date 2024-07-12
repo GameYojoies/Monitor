@@ -34,6 +34,8 @@ const SolarEnergyFlow = () => {
   const [formattedDate, setFormattedDate] = useState("-");
   const [countNumber, setCountNumber] = useState(0);
   const [mainDevice, setMainDevice] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const foundDevice = datanotifydeivece.find(
       (device) => device.main === true
@@ -130,6 +132,16 @@ const SolarEnergyFlow = () => {
     }
   }, [textHead, handleClick, count]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const width = windowWidth <= 1650 ? '1650px' : '100%';
   return (
     <div>
       <div className="h-10"></div>
@@ -168,12 +180,14 @@ const SolarEnergyFlow = () => {
         </div>
         <div className="h-2"></div>
         <div
-        
-          className="w-[100%] flex flex-row items-center justify-around gap-15 flex-wrap lg:flex-row h-auto  m-auto  bg-white rounded-lg"
-          style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
-        >
+      className="flex flex-row items-center justify-around gap-15 h-auto m-auto bg-white rounded-lg"
+      style={{ 
+        width: width, 
+        boxShadow: "2px 2px 15px 0px #00000026" 
+      }}
+    >
           <div className="flex justify-center items-center h-[600px] w-[600px] relative">
-            <div className="lg:h-[600px] lg:w-[600px] absolute">
+            <div className="h-[600px] w-[600px] absolute">
               <img src={flowEnergy} className="h-[100%] w-[100%]" />
             </div>
         
@@ -285,7 +299,7 @@ const SolarEnergyFlow = () => {
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
          
           <div
-            className="bg-white w-[90%] lg:w-[450px] h-[560px] rounded-lg"
+            className="bg-white w-[600px] h-[560px] rounded-lg"
             style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
           >
             <div className="h-10"></div>

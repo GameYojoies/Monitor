@@ -84,7 +84,7 @@ const Device = () => {
   return (
     <div className=" items-center justify-center flex mt-8 mb-8">
       <div className="w-[90%]">
-        <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-1  gap-4">
+        <div className="grid grid-cols-1   gap-4">
           {devices.map((device) => (
             <div
               key={device.id}
