@@ -9,7 +9,7 @@ export default function MonitorPage() {
   return (
     <div className="w-[calc(100vw-110px)] h-[calc(100vh-98px)] overflow-auto">
       <MyDevice />
-      <Device/>
+      {/* <Device/> */}
       <SolarEnergyFlow />
       <SolarPowerChart />
     </div>
