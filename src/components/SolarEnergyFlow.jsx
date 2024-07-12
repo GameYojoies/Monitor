@@ -141,7 +141,7 @@ const SolarEnergyFlow = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const width = windowWidth <= 1650 ? '1650px' : '100%';
+  const width = windowWidth <= 1500 ? '1500px' : '100%';
   return (
     <div>
       <div className="h-10"></div>
@@ -186,8 +186,8 @@ const SolarEnergyFlow = () => {
         boxShadow: "2px 2px 15px 0px #00000026" 
       }}
     >
-          <div className="flex justify-center items-center h-[600px] w-[600px] relative">
-            <div className="h-[600px] w-[600px] absolute">
+          <div className="flex justify-center items-center h-[600px] w-[500px] relative">
+            <div className="h-[600px] w-[500px] absolute">
               <img src={flowEnergy} className="h-[100%] w-[100%]" />
             </div>
         
@@ -299,7 +299,7 @@ const SolarEnergyFlow = () => {
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
          
           <div
-            className="bg-white w-[600px] h-[560px] rounded-lg"
+            className="bg-white w-[500px] h-[560px] rounded-lg"
             style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
           >
             <div className="h-10"></div>
