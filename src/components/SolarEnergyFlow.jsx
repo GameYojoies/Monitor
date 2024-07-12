@@ -1,5 +1,5 @@
 /** @format */
-
+import Device from "../components/Device";
 import React from "react";
 import {
   solar1,
@@ -168,13 +168,15 @@ const SolarEnergyFlow = () => {
         </div>
         <div className="h-2"></div>
         <div
-          className="w-[100%] flex flex-col items-center justify-center gap-14 flex-wrap lg:flex-row h-auto  m-auto p-10 bg-white rounded-lg"
+        
+          className="w-[100%] flex flex-row items-center justify-center gap-14 flex-wrap lg:flex-row h-auto  m-auto p-10 bg-white rounded-lg"
           style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
         >
-          <div className="flex justify-center items-center h-[600px] w-[600px] relative">
-            <div className="lg:h-[600px] lg:w-[600px] absolute">
+          <div className="flex justify-center items-center h-[400px] w-[400px] relative">
+            <div className="lg:h-[400px] lg:w-[400px] absolute">
               <img src={flowEnergy} className="h-[100%] w-[100%]" />
             </div>
+        
 
             {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
 
@@ -281,9 +283,9 @@ const SolarEnergyFlow = () => {
             </div>
           </div>
           {/* ///////////////////////////////////////////////////////onclick popup ///////////////////////////////////////////// */}
-
+         
           <div
-            className="bg-white w-[90%] lg:w-[550px] h-[560px] rounded-lg"
+            className="bg-white w-[90%] lg:w-[450px] h-[560px] rounded-lg"
             style={{ boxShadow: "2px 2px 15px 0px #00000026" }}
           >
             <div className="h-10"></div>
@@ -324,6 +326,7 @@ const SolarEnergyFlow = () => {
             <div className="h-2"></div>
             <PopupFlow count={count} data={data} />
           </div>
+          <Device/>
         </div>
       </div>
     </div>
