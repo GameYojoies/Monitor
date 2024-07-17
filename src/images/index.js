@@ -17,6 +17,7 @@ import bgLoginHand from "../images/login/loginBgHand.png"
 import iconEmail from "../images/login/iconEmail.png"
 import defaultProfile from "../images/header/defaultProfile.png"
 import iconLogout from "../images/header/iconLogout.png"
+import iconLogoutRed from "../images/header/iconLogoutRed.png"
 import iconLogout2 from "../images/header/iconLogout2.png"
 import iconUser from "../images/user/logo-user.png"
 import flowEnergy from "../images/Monitor/Flow-Energy-Ad.gif"
@@ -76,6 +77,7 @@ export {
   iconEmail,
   defaultProfile,
   iconLogout,
+  iconLogoutRed,
   iconLogout2,
   solar1,
   energyFlow,

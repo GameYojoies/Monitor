@@ -213,13 +213,11 @@ export default function LoginPage() {
             />
 
             <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 font-bold mb-10">
-              <button className="w-5/6 bg-[#0072D6] text-white h-[50px] rounded-xl">
+              <button className="w-5/6 bg-[#0072D6] hover:bg-[#0066C0] text-white h-[50px] rounded-xl">
                 {t("Login now")}
               </button>
 
-              <Link
-                to="/"
-                className="w-full flex items-center justify-center">
+              <Link className="w-full flex items-center justify-center">
                 <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
                   {t("Visit Monitor Demo")}
                 </button>

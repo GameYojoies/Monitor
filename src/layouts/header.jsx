@@ -11,6 +11,7 @@ import {
   iconThailand,
   iconEng,
   iconLogout2,
+  iconLogoutRed,
 } from "../images"
 import ModalLang from "../components/modalLang"
 import {useTranslation} from "react-i18next"
@@ -50,6 +51,7 @@ function Header() {
   const [confirmLogout, setConfirmLogout] = useState(false)
   const languageRef = useRef()
   const {t, i18n} = useTranslation()
+  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -73,6 +75,14 @@ function Header() {
   const handleClickSelecteLanguage = (name) => {
     // console.log("name", name)
     i18n.changeLanguage(name)
+  }
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
   }
 
   return (
@@ -154,11 +164,10 @@ function Header() {
             onClick={() => {
               setConfirmLogout(!confirmLogout)
             }}
-            className="w-[25px] h-[25px] ">
-            <img
-              src={iconLogout}
-              className="hover:text-red-600"
-            />
+            className="w-[25px] h-[25px]"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
+            <img src={isHovered ? iconLogoutRed : iconLogout} />
           </button>
         </div>
       </header>
