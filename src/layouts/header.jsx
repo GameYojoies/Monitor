@@ -167,7 +167,9 @@ function Header() {
             className="w-[25px] h-[25px]"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}>
-            <img src={isHovered ? iconLogoutRed : iconLogout} />
+            <img
+              src={isHovered || confirmLogout ? iconLogoutRed : iconLogout}
+            />
           </button>
         </div>
       </header>
