@@ -46,7 +46,7 @@ const ModalConfirm = ({
                     onClick={() => {
                       onSave()
                     }}
-                    className="h-[48px] inline-flex justify-center items-center py-2 px-8 bg-[#0072D6] border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-text-red hover:bg-[#0074bd] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
+                    className="h-[48px] inline-flex justify-center items-center py-2 px-8 bg-[#0072D6] hover:bg-[#0066C0] border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-text-red hover:bg-[#0074bd] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
                     {titleButtom}
                   </button>
                 </div>
