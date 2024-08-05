@@ -428,7 +428,7 @@ const resources = {
       grid_voltage_des: "AC Input Voltage: the current flowing between the system and the electrical grid.",
       grid_output_frequency_des: "Short for Grid Frequency, it indicates the frequency of the electrical grid to which the system is connected.",
       grid_current_output_des: "Indicates the amount of current being supplied by the grid to the system.",
-      output_frequency_des: "The frequency of alternating current (AC) electricity produced by a power generation system or electrical device. It is measured in Hertz (Hz) and indicates the id of complete cycles per second.",
+      output_frequency_des2: "The frequency of alternating current (AC) electricity produced by a power generation system or electrical device. It is measured in Hertz (Hz) and indicates the id of complete cycles per second.",
 
       // Bill
       BillSpan1: "Earn Profit Energy Bill",
