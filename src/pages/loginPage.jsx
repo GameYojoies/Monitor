@@ -217,11 +217,11 @@ export default function LoginPage() {
                 {t("Login now")}
               </button>
 
-              <Link className="w-full flex items-center justify-center">
+              {/* <Link className="w-full flex items-center justify-center">
                 <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
                   {t("Visit Monitor Demo")}
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </form>
