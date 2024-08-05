@@ -79,7 +79,7 @@ const SolarDetail = () => {
       id: 2,
       name: t("Load Half Ratio"),
       value: dataStore.loadHalf || 0,
-      unit: "%",
+      unit: "",
       des: t("load_half_ratio_des"),
     },
     {
