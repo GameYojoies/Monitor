@@ -129,7 +129,7 @@ const resources = {
       charging_current_des: "กระแสไฟฟ้าที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นแอมแปร์ (A) หรือกิโลแอมแปร์ (kA)",
       charging_power_des: "พลังงานที่ใช้ในการชาร์จแบตเตอรี่ โดยทั่วไปจะวัดเป็นวัตต์ (W) หรือกิโลวัตต์ (kW)",
       battery_capacity_soc_des: "ความจุของแบตเตอรี่ มักจะแสดงเป็นสถานะการชาร์จ (State of Charge หรือ SOC)",
-      battery_capacity_query_des: "ย่อมาจากสถานะการชาร์จแบตเตอรี่: ความจุที่เหลือของแบตเตอรี่เป็นเปอร์เซ็นต์ของความจุรวมของมัน",
+      battery_capacity_query_des: "ความจุของแบตเตอรี่: หมายถึงปริมาณพลังงานไฟฟ้ารวมที่แบตเตอรี่สามารถเก็บได้ โดยทั่วไปจะวัดเป็นหน่วยเช่น แอมป์-ชั่วโมง (Ah) หรือ วัตต์-ชั่วโมง (Wh)",
       battery_current_des: "การไหลของกระแสไฟฟ้าภายในแบตเตอรี่มักจะวัดเป็นแอมป์ (A)",
 
       // pv data details
@@ -408,7 +408,7 @@ const resources = {
       charging_current_des: "The electric current used to charge the battery, typically measured in amperes (A) or kiloamperes (kA).",
       charging_power_des: "The power used to charge the battery, typically measured in watts (W) or kilowatts (kW).",
       battery_capacity_soc_des: "Capacity of the battery, often expressed as State of Charge (SOC).",
-      battery_capacity_query_des: "Short for Battery State of Charge: the remaining capacity of the battery as a percentage of its total capacity.",
+      battery_capacity_query_des: "Battery capacity refers to the total amount of electrical energy that a battery can store. It is typically measured in units such as ampere-hours (Ah) or watt-hours (Wh).",
       battery_current_des: "The flow of electric charge within the battery is typically measured in amperes (A).",
 
       // pv data details

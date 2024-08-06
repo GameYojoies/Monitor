@@ -220,7 +220,7 @@ const SolarDetail = () => {
       id: 21,
       name: t("Battery Capacity Query"),
       value: dataStore.batCapacityQuery || 0,
-      unit: "Ah",
+      unit: "",
       des: t("battery_capacity_query_des"),
     },
     {
