@@ -287,7 +287,7 @@ const SolarEnergyFlow = () => {
               <span>A</span>
             </div>
             <div className="absolute bottom-[160px] right-[10%] font-bold text-2xl text-[#133261]">
-              <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>Hz</span>
+              <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>kWh</span>
             </div>
             <div className="absolute top-[160px] right-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
@@ -337,7 +337,7 @@ const SolarEnergyFlow = () => {
                     : null}
                 </span>
                 <span className="text-base">
-                  {count === "Battery" ? "%" : "w"}
+                  {count === "Battery" ? "%" : count === "Grid" ? "kWh" : "w"}
                 </span>
               </div>
             </div>
