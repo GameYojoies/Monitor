@@ -287,7 +287,8 @@ const SolarEnergyFlow = () => {
               <span>A</span>
             </div>
             <div className="absolute bottom-[160px] right-[10%] font-bold text-2xl text-[#133261]">
-              <span>{dataFlow?.gridFrequency || 0}</span>&nbsp;<span>kWh</span>
+              <span>{(dataFlow?.tgpGenerationDay || 0) / 100}</span>&nbsp;
+              <span>kWh</span>
             </div>
             <div className="absolute top-[160px] right-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
