@@ -35,6 +35,8 @@ const SolarEnergyFlow = () => {
   const [mainDevice, setMainDevice] = useState(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
+  console.log("dataFlow,", dataFlow)
+
   useEffect(() => {
     const foundDevice = datanotifydeivece.find((device) => device.main === true)
     setMainDevice(foundDevice)
@@ -329,7 +331,7 @@ const SolarEnergyFlow = () => {
                     : count === "Inverter"
                     ? dataFlow?.outputActivePower || 0
                     : count === "Grid"
-                    ? dataFlow?.tgpGenerationDay || 0
+                    ? (dataFlow.tgpGenerationDay || 0) / 100
                     : count === "Battery"
                     ? dataFlow?.batteryCapacity || 0
                     : null}
