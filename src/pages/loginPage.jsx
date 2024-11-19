@@ -87,6 +87,7 @@ export default function LoginPage() {
       await userLogin(name, password)
 
       toast.success("Login Success")
+
       setLogin({
         name: "",
         password: "",

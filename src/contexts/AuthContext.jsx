@@ -22,7 +22,7 @@ export default function AuthContextProvider({children}) {
   const [datanotifydeivece, setDatanotifydeivece] = useState([])
   const [countPage, setCountPage] = useState(1)
   const [showPage, setShowPage] = useState(true)
-  const [maxRecord, setMaxRecord] = useState(null);
+  const [maxRecord, setMaxRecord] = useState(null)
 
   const [selecteLanguage, setSelecteLanguage] = useState(
     localStorage.getItem("Language")
@@ -65,7 +65,7 @@ export default function AuthContextProvider({children}) {
 
   const userLogin = async (name, password) => {
     const res = await login({name, password})
-    // console.log("res", res)
+    console.log("res", res)
     const token = res?.data.result?.token
     // console.log("token", token)
     const code = res?.data.code
