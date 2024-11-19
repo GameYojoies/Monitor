@@ -331,7 +331,7 @@ const SolarEnergyFlow = () => {
                     : count === "Inverter"
                     ? dataFlow?.outputActivePower || 0
                     : count === "Grid"
-                    ? (dataFlow.tgpGenerationDay || 0) / 100
+                    ? (dataFlow?.tgpGenerationDay || 0) / 100
                     : count === "Battery"
                     ? dataFlow?.batteryCapacity || 0
                     : null}
