@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { inverter, load, grid, pv } from "../images/Mydevice";
-import { getAccessToken } from "../utils/local-storage";
-import useAuth from "../hook/useAuth";
-import { useTranslation } from "react-i18next";
+/** @format */
+
+import React, {useState, useEffect} from "react"
+import axios from "axios"
+import {inverter, load, grid, pv} from "../images/Mydevice"
+import {getAccessToken} from "../utils/local-storage"
+import useAuth from "../hook/useAuth"
+import {useTranslation} from "react-i18next"
 import {
   bg_green,
   bg_yellow,
@@ -12,15 +14,15 @@ import {
   bg_green_per,
   bg_yellow_per,
   bg_red_per,
-} from "../images";
+} from "../images"
 
 const Device = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedDevice, setSelectedDevice] = useState(null);
-  const token = getAccessToken();
-  const API_SERVER = import.meta.env.VITE_API_TEST;
-  const { fetch, setFetch, setPin, dataFlow, setDataFlow } = useAuth();
-  const { t } = useTranslation();
+  const [showPopup, setShowPopup] = useState(false)
+  const [selectedDevice, setSelectedDevice] = useState(null)
+  const token = getAccessToken()
+  const API_SERVER = import.meta.env.VITE_API_TEST
+  const {fetch, setFetch, setPin, dataFlow, setDataFlow} = useAuth()
+  const {t} = useTranslation()
 
   const fetchData = async () => {
     try {
@@ -29,20 +31,21 @@ const Device = () => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      });
-      setDataFlow(response.data.result);
-      setFetch(false); // Reset fetch state
-      setPin(response.data.result ? response.data.result : null);
+      })
+
+      setDataFlow(response.data.result)
+      setFetch(false) // Reset fetch state
+      setPin(response.data.result ? response.data.result : null)
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching data:", error)
     }
-  };
+  }
 
   useEffect(() => {
     if (fetch) {
-      fetchData();
+      fetchData()
     }
-  }, [fetch, API_SERVER, token]);
+  }, [fetch, API_SERVER, token])
 
   const devices = [
     {
@@ -74,12 +77,12 @@ const Device = () => {
       power: dataFlow ? `${dataFlow.gridFrequency} Hz` : "0 Hz",
       image: grid,
     },
-  ];
+  ]
 
   const togglePopup = (device) => {
-    setShowPopup(!showPopup);
-    setSelectedDevice(device);
-  };
+    setShowPopup(!showPopup)
+    setSelectedDevice(device)
+  }
 
   return (
     <div className=" items-center justify-center flex mt-8 mb-8 h-[560px]">
@@ -89,8 +92,7 @@ const Device = () => {
             <div
               key={device.id}
               onClick={() => togglePopup(device)}
-              className="flex flex-col bg-white shadow-md rounded-md"
-            >
+              className="flex flex-col bg-white shadow-md rounded-md">
               <div
                 className={`rounded-[5px]  text-center cursor-pointer font-bold ${
                   device.id === 1
@@ -102,8 +104,7 @@ const Device = () => {
                     : device.id === 4
                     ? "bg-[#00C6C6]"
                     : "bg-[#D496FB]"
-                }`}
-              >
+                }`}>
                 {device.name}
               </div>
 
@@ -184,7 +185,9 @@ const Device = () => {
                     </div>
                   </div>
                 ) : (
-                  <span className="block text-center text-xl">{device.power}</span>
+                  <span className="block text-center text-xl">
+                    {device.power}
+                  </span>
                 )}
               </div>
             </div>
@@ -213,7 +216,7 @@ const Device = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Device;
+export default Device
