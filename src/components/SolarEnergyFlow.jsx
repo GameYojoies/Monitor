@@ -336,7 +336,9 @@ const SolarEnergyFlow = () => {
                     ? dataFlow?.batteryCapacity || 0
                     : null}
                 </span>
-                <span className="text-base">w</span>
+                <span className="text-base">
+                  {count === "Battery" ? "%" : "w"}
+                </span>
               </div>
             </div>
             <div className="h-2"></div>
