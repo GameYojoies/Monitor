@@ -60,7 +60,7 @@ const PopupFlow = ({count, data}) => {
       {label: "Charging Current", key: "chargingCurrent", unit: "A"},
       {label: "Charging Power", key: "TotalPower", unit: "W"},
       {label: "Battery Capacity (Battery SOC)", key: "batCapacity", unit: "%"},
-      {label: "Battery Capacity Query", key: "batCapacityQuery", unit: ""},
+      // {label: "Battery Capacity Query", key: "batCapacityQuery", unit: ""},
       {label: "Battery Current", key: "batCurrent", unit: "A"},
     ],
     Grid: [
