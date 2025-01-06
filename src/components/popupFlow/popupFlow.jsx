@@ -1,10 +1,10 @@
 /** @format */
 
-import React from "react"
-import {useTranslation} from "react-i18next"
+import React from "react";
+import {useTranslation} from "react-i18next";
 
 const PopupFlow = ({count, data}) => {
-  const {t} = useTranslation()
+  const {t} = useTranslation();
 
   const dataByCount = {
     Load: [
@@ -77,9 +77,9 @@ const PopupFlow = ({count, data}) => {
       {label: "Grid current output", key: "gridCurrentOutput", unit: "A"},
       {label: "Output frequency", key: "outputFrequency", unit: "Hz"},
     ],
-  }
+  };
 
-  const selectedData = dataByCount[count] || []
+  const selectedData = dataByCount[count] || [];
 
   return (
     <>
@@ -106,7 +106,7 @@ const PopupFlow = ({count, data}) => {
         <div className="h-4"></div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PopupFlow
+export default PopupFlow;

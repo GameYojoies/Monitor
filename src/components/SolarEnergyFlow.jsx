@@ -1,6 +1,6 @@
 /** @format */
-import Device from "../components/Device"
-import React from "react"
+import Device from "../components/Device";
+import React from "react";
 import {
   solar1,
   energyFlow,
@@ -12,35 +12,37 @@ import {
   bg_yellow_per,
   bg_red_per,
   flowEnergy,
-} from "../images"
-import PopupFlow from "./popupFlow/popupFlow"
-import {useState, useEffect} from "react"
-import axios from "axios"
-import {getAccessToken} from "../utils/local-storage"
-import useAuth from "../hook/useAuth"
-import {useTranslation} from "react-i18next"
+} from "../images";
+import PopupFlow from "./popupFlow/popupFlow";
+import {useState, useEffect} from "react";
+import axios from "axios";
+import {getAccessToken} from "../utils/local-storage";
+import useAuth from "../hook/useAuth";
+import {useTranslation} from "react-i18next";
 
 const SolarEnergyFlow = () => {
-  const {t} = useTranslation()
-  const [count, setCount] = useState("Load")
-  const [textHead, setTextHead] = useState(`${t("Load")}`)
-  const [colorText, setColorText] = useState(3)
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-  const token = getAccessToken()
-  const {dataFlow, setDataFlow, solarDate, pin, datanotifydeivece} = useAuth()
-  const [devicePn, setDevicePn] = useState(null)
-  const [formattedDate, setFormattedDate] = useState("-")
-  const [countNumber, setCountNumber] = useState(0)
-  const [mainDevice, setMainDevice] = useState(null)
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const {t} = useTranslation();
+  const [count, setCount] = useState("Load");
+  const [textHead, setTextHead] = useState(`${t("Load")}`);
+  const [colorText, setColorText] = useState(3);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const token = getAccessToken();
+  const {dataFlow, setDataFlow, solarDate, pin, datanotifydeivece} = useAuth();
+  const [devicePn, setDevicePn] = useState(null);
+  const [formattedDate, setFormattedDate] = useState("-");
+  const [countNumber, setCountNumber] = useState(0);
+  const [mainDevice, setMainDevice] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  console.log("dataFlow,", dataFlow)
+  console.log("dataFlow,", dataFlow);
 
   useEffect(() => {
-    const foundDevice = datanotifydeivece.find((device) => device.main === true)
-    setMainDevice(foundDevice)
-  }, [datanotifydeivece])
+    const foundDevice = datanotifydeivece.find(
+      (device) => device.main === true
+    );
+    setMainDevice(foundDevice);
+  }, [datanotifydeivece]);
   const getFormattedDate = () => {
     const options = {
       weekday: "long",
@@ -50,29 +52,29 @@ const SolarEnergyFlow = () => {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
-    }
-    const timestamp = dataFlow?.time
-    const date = new Date(timestamp)
-    const language = localStorage.getItem("Language") || "en-US"
-    let formattedDate = date.toLocaleDateString(language, options)
+    };
+    const timestamp = dataFlow?.time;
+    const date = new Date(timestamp);
+    const language = localStorage.getItem("Language") || "en-US";
+    let formattedDate = date.toLocaleDateString(language, options);
     if (formattedDate === "Invalid Date") {
-      formattedDate = "-"
+      formattedDate = "-";
     }
-    return formattedDate
-  }
+    return formattedDate;
+  };
 
   useEffect(() => {
-    const newFormattedDate = getFormattedDate()
-    setFormattedDate(newFormattedDate)
-  }, [dataFlow?.time, localStorage.getItem("Language")]) // Include dependencies
+    const newFormattedDate = getFormattedDate();
+    setFormattedDate(newFormattedDate);
+  }, [dataFlow?.time, localStorage.getItem("Language")]); // Include dependencies
 
   useEffect(() => {
     const fetchData = async (date, pin) => {
       try {
         if (pin == null) {
-          setDevicePn(null)
+          setDevicePn(null);
         } else {
-          setDevicePn(pin.devicePn)
+          setDevicePn(pin.devicePn);
         }
 
         const response = await axios.get(
@@ -85,62 +87,62 @@ const SolarEnergyFlow = () => {
               "Content-Type": "application/json",
             },
           }
-        )
+        );
         if (response.data.result != null) {
-          setData(response.data.result[0])
+          setData(response.data.result[0]);
         } else {
-          setData(0)
+          setData(0);
         }
-        console.log(response.data.result[0], "response")
+        console.log(response.data.result[0], "response");
       } catch (error) {
-        setError(error)
+        setError(error);
       }
-    }
+    };
 
     if (solarDate && token) {
-      fetchData(solarDate, pin)
+      fetchData(solarDate, pin);
     }
-  }, [solarDate, token, pin])
+  }, [solarDate, token, pin]);
 
   const handleClick = (position) => {
-    setCount(position)
+    setCount(position);
     if (position === "Inverter") {
-      setTextHead(`${t("Output active power")}`)
-      setColorText(1)
+      setTextHead(`${t("Output active power")}`);
+      setColorText(1);
     }
     if (position === "PV") {
-      setTextHead(`${t("Photovoltaic power")}`)
-      setColorText(2)
+      setTextHead(`${t("Photovoltaic power")}`);
+      setColorText(2);
     }
     if (position === "Load") {
-      setTextHead(`${t("Load")}`)
-      setColorText(3)
+      setTextHead(`${t("Load")}`);
+      setColorText(3);
     }
     if (position === "Grid") {
-      setTextHead(`${t("Grid")}`)
-      setColorText(4)
+      setTextHead(`${t("Grid")}`);
+      setColorText(4);
     }
     if (position === "Battery") {
-      setTextHead(`${t("Battery")}`)
-      setColorText(5)
+      setTextHead(`${t("Battery")}`);
+      setColorText(5);
     }
-  }
+  };
   useEffect(() => {
     if (textHead) {
-      handleClick(count)
+      handleClick(count);
     }
-  }, [textHead, handleClick, count])
+  }, [textHead, handleClick, count]);
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
+      setWindowWidth(window.innerWidth);
+    };
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-  console.log(data?.batCapacity)
-  const width = windowWidth <= 1500 ? "1500px" : "100%"
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  console.log(data?.batCapacity);
+  const width = windowWidth <= 1500 ? "1500px" : "100%";
   return (
     <div>
       <div className="h-10"></div>
@@ -328,7 +330,7 @@ const SolarEnergyFlow = () => {
                   {count === "Load"
                     ? dataFlow?.currentLoadPower || 0
                     : count === "PV"
-                    ? dataFlow?.powerCharging || 0
+                    ? data?.tppPower || 0
                     : count === "Inverter"
                     ? dataFlow?.outputActivePower || 0
                     : count === "Grid"
@@ -352,7 +354,7 @@ const SolarEnergyFlow = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SolarEnergyFlow
+export default SolarEnergyFlow;

@@ -1,30 +1,30 @@
 /** @format */
 
-import axios from "axios"
-import {iconsSys, iconsSys1, iconsSys2, iconsSys3} from "../images"
-import {useEffect, useState} from "react"
-import {toast} from "react-toastify"
-import {getAccessToken} from "../utils/local-storage"
-import useAuth from "../hook/useAuth"
-import {useTranslation} from "react-i18next"
+import axios from "axios";
+import {iconsSys, iconsSys1, iconsSys2, iconsSys3} from "../images";
+import {useEffect, useState} from "react";
+import {toast} from "react-toastify";
+import {getAccessToken} from "../utils/local-storage";
+import useAuth from "../hook/useAuth";
+import {useTranslation} from "react-i18next";
 
-import {LocalizationProvider} from "@mui/x-date-pickers"
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs"
-import {DatePicker} from "@mui/x-date-pickers/DatePicker"
-import {TextField} from "@mui/material"
-import dayjs from "dayjs"
-import "dayjs/locale/th"
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
+import {TextField} from "@mui/material";
+import dayjs from "dayjs";
+import "dayjs/locale/th";
 
 const SolarDetail = () => {
-  const [allDay, setAllDay] = useState("")
-  const {pin, setDataStore, dataStore, selecteLanguage} = useAuth()
-  const [currentDay, setCurrentDay] = useState(dayjs())
-  const [selectdate, setSelectdate] = useState(dayjs().format("YYYY-MM-DD"))
-  const getPin = pin ? pin.devicePn : "402A8FD7707C"
-  const {t} = useTranslation()
+  const [allDay, setAllDay] = useState("");
+  const {pin, setDataStore, dataStore, selecteLanguage} = useAuth();
+  const [currentDay, setCurrentDay] = useState(dayjs());
+  const [selectdate, setSelectdate] = useState(dayjs().format("YYYY-MM-DD"));
+  const getPin = pin ? pin.devicePn : "402A8FD7707C";
+  const {t} = useTranslation();
 
   const getDataAPI = async () => {
-    if (!allDay) return
+    if (!allDay) return;
     try {
       const response = await axios({
         method: "get",
@@ -33,39 +33,39 @@ const SolarDetail = () => {
           "Content-Type": "application/json",
           Authorization: "Bearer " + getAccessToken(),
         },
-      })
+      });
 
-      const getData = response.data
+      const getData = response.data;
 
       if (getData.code === 0) {
         const allData =
           response.data.result && response.data.result[0]
             ? response.data.result[0]
-            : 0
-        setDataStore(allData)
+            : 0;
+        setDataStore(allData);
       } else {
-        toast.error(getData.code)
+        toast.error(getData.code);
       }
     } catch (err) {
-      toast.error(err.response?.data.message)
+      toast.error(err.response?.data.message);
     }
-  }
+  };
 
   useEffect(() => {
-    setAllDay(`/reportData/detail?devicePn=${getPin}&date=${selectdate}`)
-  }, [pin, pin])
+    setAllDay(`/reportData/detail?devicePn=${getPin}&date=${selectdate}`);
+  }, [pin, pin]);
 
   useEffect(() => {
-    getDataAPI()
-  }, [allDay])
+    getDataAPI();
+  }, [allDay]);
 
   const handleSelectDay = (e) => {
     const date = `${e.$y}-${(e.$M + 1).toString().padStart(2, "0")}-${e.$D
       .toString()
-      .padStart(2, "0")}`
-    setSelectdate(date)
-    setAllDay(`/reportData/detail?devicePn=${getPin}&date=${date}`)
-  }
+      .padStart(2, "0")}`;
+    setSelectdate(date);
+    setAllDay(`/reportData/detail?devicePn=${getPin}&date=${date}`);
+  };
 
   const loadData = [
     {
@@ -138,7 +138,7 @@ const SolarDetail = () => {
       unit: "kWh",
       des: t("total_power_output_day_des"),
     },
-  ]
+  ];
 
   const inverterData = [
     {
@@ -162,7 +162,7 @@ const SolarDetail = () => {
       unit: "A",
       des: t("inverter_current_des"),
     },
-  ]
+  ];
 
   const batteryData = [
     {
@@ -230,7 +230,7 @@ const SolarDetail = () => {
       unit: "A",
       des: t("battery_current_des"),
     },
-  ]
+  ];
 
   const photovolData = [
     {
@@ -282,7 +282,7 @@ const SolarDetail = () => {
       unit: "kWh",
       des: t("total_pv_power_generation_des"),
     },
-  ]
+  ];
 
   const gridData = [
     {
@@ -331,7 +331,7 @@ const SolarDetail = () => {
       id: 36,
       name: t("Grid current output"),
       value: dataStore.gridCurrentOutput || 0,
-      unit: "V",
+      unit: "A",
       des: t("grid_current_output_des"),
     },
     {
@@ -341,7 +341,7 @@ const SolarDetail = () => {
       unit: "HZ",
       des: t("output_frequency_des2"),
     },
-  ]
+  ];
 
   return (
     <div>
@@ -405,106 +405,117 @@ const SolarDetail = () => {
           {t("DeviceSpan4")}
         </div>
         {loadData.map((data) => (
-          <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
-            <div className="w-[35%]">
-              <span>{data.id}.</span>
-              <span className="pl-4">{data.name}</span>
-            </div>
+          <>
+            <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
+              <div className="w-[35%]">
+                <span>{data.id}.</span>
+                <span className="pl-4">{data.name}</span>
+              </div>
 
-            <div className="w-[65%] flex items-center">
-              <div className="w-[25%]">
-                <span>{data.value}</span>
-                <span className="pl-1">{data.unit}</span>
-              </div>
-              <div className="w-[75%]">
-                <span>{data.des}</span>
+              <div className="w-[65%] flex items-center">
+                <div className="w-[25%]">
+                  <span>{data.value}</span>
+                  <span className="pl-1">{data.unit}</span>
+                </div>
+                <div className="w-[75%]">
+                  <span>{data.des}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
         <div className="w-[95%] h-[65px] bg-[#F1F1F1] flex pl-[50px] items-center font-semibold">
           {t("DeviceSpan5")}
         </div>
         {inverterData.map((data) => (
-          <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
-            <div className="w-[35%]">
-              <span>{data.id}.</span>
-              <span className="pl-4">{data.name}</span>
-            </div>
+          <>
+            <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
+              <div className="w-[35%]">
+                <span>{data.id}.</span>
+                <span className="pl-4">{data.name}</span>
+              </div>
 
-            <div className="w-[65%] flex items-center">
-              <div className="w-[25%]">
-                <span>{data.value}</span>
-                <span className="pl-1">{data.unit}</span>
-              </div>
-              <div className="w-[75%]">
-                <span>{data.des}</span>
+              <div className="w-[65%] flex items-center">
+                <div className="w-[25%]">
+                  <span>{data.value}</span>
+                  <span className="pl-1">{data.unit}</span>
+                </div>
+                <div className="w-[75%]">
+                  <span>{data.des}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
         <div className="w-[95%] h-[65px] bg-[#F1F1F1] flex pl-[50px] items-center font-semibold">
           {t("DeviceSpan7")}
         </div>
         {batteryData.map((data) => (
-          <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
-            <div className="w-[35%]">
-              <span>{data.id}.</span>
-              <span className="pl-4">{data.name}</span>
-            </div>
+          <>
+            <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
+              <div className="w-[35%]">
+                <span>{data.id}.</span>
+                <span className="pl-4">{data.name}</span>
+              </div>
 
-            <div className="w-[65%] flex items-center">
-              <div className="w-[25%]">
-                <span>{data.value}</span>
-                <span className="pl-1">{data.unit}</span>
-              </div>
-              <div className="w-[75%]">
-                <span>{data.des}</span>
+              <div className="w-[65%] flex items-center">
+                <div className="w-[25%]">
+                  <span>{data.value}</span>
+                  <span className="pl-1">{data.unit}</span>
+                </div>
+                <div className="w-[75%]">
+                  <span>{data.des}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
+
         <div className="w-[95%] h-[65px] bg-[#F1F1F1] flex pl-[50px] items-center font-semibold">
           {t("SystemDetailsSpan4")}
         </div>
         {photovolData.map((data) => (
-          <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
-            <div className="w-[35%]">
-              <span>{data.id}.</span>
-              <span className="pl-4">{data.name}</span>
-            </div>
+          <>
+            <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
+              <div className="w-[35%]">
+                <span>{data.id}.</span>
+                <span className="pl-4">{data.name}</span>
+              </div>
 
-            <div className="w-[65%] flex items-center">
-              <div className="w-[25%]">
-                <span>{data.value}</span>
-                <span className="pl-1">{data.unit}</span>
-              </div>
-              <div className="w-[75%]">
-                <span>{data.des}</span>
+              <div className="w-[65%] flex items-center">
+                <div className="w-[25%]">
+                  <span>{data.value}</span>
+                  <span className="pl-1">{data.unit}</span>
+                </div>
+                <div className="w-[75%]">
+                  <span>{data.des}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
         <div className="w-[95%] h-[65px] bg-[#F1F1F1] flex pl-[50px] items-center font-semibold">
           {t("DeviceSpan8")}
         </div>
         {gridData.map((data) => (
-          <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
-            <div className="w-[35%]">
-              <span>{data.id}.</span>
-              <span className="pl-4">{data.name}</span>
-            </div>
+          <>
+            <div className="py-2 w-[95%] h-auto flex items-center pl-[10px] hover:bg-[#BFD7F8] border-b-2">
+              <div className="w-[35%]">
+                <span>{data.id}.</span>
+                <span className="pl-4">{data.name}</span>
+              </div>
 
-            <div className="w-[65%] flex items-center">
-              <div className="w-[25%]">
-                <span>{data.value}</span>
-                <span className="pl-1">{data.unit}</span>
-              </div>
-              <div className="w-[75%]">
-                <span>{data.des}</span>
+              <div className="w-[65%] flex items-center">
+                <div className="w-[25%]">
+                  <span>{data.value}</span>
+                  <span className="pl-1">{data.unit}</span>
+                </div>
+                <div className="w-[75%]">
+                  <span>{data.des}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
 
         <div className="h-[30px]"></div>
@@ -512,7 +523,7 @@ const SolarDetail = () => {
 
       <div className="h-[20px]"></div>
     </div>
-  )
-}
+  );
+};
 
-export default SolarDetail
+export default SolarDetail;

@@ -13,7 +13,7 @@ import {
   bgLoginHand,
 } from "../images"
 import InputLogin from "../components/inputLogin"
-import {Link, useNavigate} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import {useEffect, useRef, useState} from "react"
 import useAuth from "../hook/useAuth"
 import {toast} from "react-toastify"
@@ -45,7 +45,7 @@ export default function LoginPage() {
   })
   // console.log("login", login)
 
-  const {userLogin, selecteLanguage, setSelecteLanguage, languageMain} =
+  const {userLogin, selecteLanguage, setSelecteLanguage} =
     useAuth()
 
   const navigate = useNavigate()
@@ -217,12 +217,6 @@ export default function LoginPage() {
               <button className="w-5/6 bg-[#0072D6] hover:bg-[#0066C0] text-white h-[50px] rounded-xl">
                 {t("Login now")}
               </button>
-
-              {/* <Link className="w-full flex items-center justify-center">
-                <button className="w-3/5 border-[1px] border-[#0072D6] text-[#0072D6] h-[50px] rounded-xl">
-                  {t("Visit Monitor Demo")}
-                </button>
-              </Link> */}
             </div>
           </div>
         </form>
