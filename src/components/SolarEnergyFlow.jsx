@@ -36,7 +36,7 @@ const SolarEnergyFlow = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   console.log("----,", dataFlow);
-  console.log("data:", data);
+  // console.log("data:", data);
 
   useEffect(() => {
     const foundDevice = datanotifydeivece.find(
