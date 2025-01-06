@@ -31,7 +31,7 @@ const PopupFlow = ({count, data}) => {
         unit: "A",
       },
       {label: "Photovoltaic current", key: "pvCurrent", unit: "A"},
-      {label: "Total photovoltaic power", key: "tppPower", unit: "W"},
+      {label: "Total photovoltaic power", key: "tppGenerationDay", unit: "W"},
       {
         label: "Total photovoltaic power generation on that day",
         key: "tppGenerationDay",

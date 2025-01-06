@@ -7,22 +7,24 @@ import {
   icon_notify_3,
   icon_notify_4,
   img_device,
-} from "../images"
-import useAuth from "../hook/useAuth"
-import React, {useState, useEffect} from "react"
-import Alert from "./popupFlow/alert"
-import {useTranslation} from "react-i18next"
+} from "../images";
+import useAuth from "../hook/useAuth";
+import React, {useState, useEffect} from "react";
+import Alert from "./popupFlow/alert";
+import {useTranslation} from "react-i18next";
 
 function Notifications() {
-  const {pin, datanotifydeivece} = useAuth()
-  const [mainDevice, setMainDevice] = useState(null)
-  const {t} = useTranslation()
+  const {pin, datanotifydeivece} = useAuth();
+  const [mainDevice, setMainDevice] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
-    const foundDevice = datanotifydeivece.find((device) => device.main === true)
-    setMainDevice(foundDevice)
-  }, [datanotifydeivece])
-  console.log(mainDevice)
+    const foundDevice = datanotifydeivece.find(
+      (device) => device.main === true
+    );
+    setMainDevice(foundDevice);
+  }, [datanotifydeivece]);
+  console.log(mainDevice);
   return (
     <>
       <div className="h-5"></div>
@@ -117,7 +119,7 @@ function Notifications() {
         <Alert />
       </div>
     </>
-  )
+  );
 }
 
-export default Notifications
+export default Notifications;

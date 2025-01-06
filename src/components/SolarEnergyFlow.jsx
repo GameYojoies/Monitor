@@ -35,7 +35,8 @@ const SolarEnergyFlow = () => {
   const [mainDevice, setMainDevice] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  console.log("dataFlow,", dataFlow);
+  console.log("----,", dataFlow);
+  console.log("data:", data);
 
   useEffect(() => {
     const foundDevice = datanotifydeivece.find(
@@ -293,7 +294,8 @@ const SolarEnergyFlow = () => {
               <span>kWh</span>
             </div>
             <div className="absolute top-[160px] right-[10%] font-bold text-2xl text-[#133261]">
-              <span>{dataFlow?.powerCharging || 0}</span>&nbsp;<span>W</span>
+              <span>{data?.tppGenerationDay || 0}</span>&nbsp;
+              <span>W</span>
             </div>
             <div className="absolute top-[160px] left-[10%] font-bold text-2xl text-[#133261]">
               <span>{dataFlow?.outputActivePower || 0}</span>&nbsp;
@@ -330,7 +332,7 @@ const SolarEnergyFlow = () => {
                   {count === "Load"
                     ? dataFlow?.currentLoadPower || 0
                     : count === "PV"
-                    ? data?.tppPower || 0
+                    ? data?.tppGenerationDay || 0
                     : count === "Inverter"
                     ? dataFlow?.outputActivePower || 0
                     : count === "Grid"
